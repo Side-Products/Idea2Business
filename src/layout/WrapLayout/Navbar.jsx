@@ -1,0 +1,161 @@
+import Link from "next/link";
+import { useState, useEffect, Fragment } from "react";
+const { Transition } = require("@headlessui/react");
+import { useRouter } from "next/router";
+import Image from "next/image";
+import logoBlack from "../../../public/site_logo.png";
+import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
+import { useSession, signOut } from "next-auth/react";
+
+const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
+	const { data: session, status } = useSession();
+
+	const router = useRouter();
+
+	let truncatedName;
+	if (session && session.user && session.user.name) {
+		truncatedName = session.user.name ?? "";
+		if (session.user.name && session.user.name.length > 10) {
+			truncatedName = truncatedName.substring(0, 8) + "...";
+		}
+	}
+
+	let avatarUrl = session && session.user && session.user.image;
+
+	let truncatedEmail;
+	if (session && session.user && session.user.email) {
+		truncatedEmail = session.user.email.substring(0, 16) + "...";
+	}
+
+	const [clientWindowHeight, setClientWindowHeight] = useState("");
+	var customStyles = "lg:top-0 lg:rounded-b-[50px]";
+	const handleScroll = () => {
+		setClientWindowHeight(window.scrollY);
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	});
+	if (clientWindowHeight > 50) {
+		customStyles = "lg:rounded-full lg:mt-2 lg:shadow-lg";
+	}
+
+	return (
+		<div className="absolute flex justify-center w-screen">
+			<div className="w-full fixed z-40 max-w-[1920px] lg:px-16 xl:px-20 2xl:px-36">
+				<nav className={"navbar duration-500 ease-in mx-auto " + customStyles}>
+					<div className="flex flex-wrap items-center justify-start w-full pl-7 sm:pl-9 pr-16 lg:px-16 py-2">
+						<Link href="/">
+							<span href="#" className="flex">
+								<Image src={logoBlack} alt="MXV Logo" width="50" className="rounded-md" />
+							</span>
+						</Link>
+
+						{/* Internal links */}
+						<div className="hidden ml-10 lg:block">
+							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
+								<li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+									<Link href="/generate">Generate</Link>
+								</li>
+							</ul>
+						</div>
+
+						<div className="ml-auto hidden md:block">
+							<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
+								{/* Dropdown Menu */}
+								<li className="hidden md:block">
+									<ul className="relative group dropdown">
+										<a
+											className="flex items-center dropdown-toggle hidden-arrow"
+											href="#"
+											id="dropdownMenuButton2"
+											role="button"
+											data-bs-toggle="dropdown"
+											aria-expanded="false"
+										>
+											{status === "authenticated" ? (
+												<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
+													<span className="mr-4">{truncatedName}</span>
+													{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
+												</div>
+											) : (
+												<div
+													onClick={() => setAuthModalOpen(true)}
+													className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-dark-500 dark:hover:bg-dark-700 transition duration-300"
+												>
+													Sign In
+												</div>
+											)}
+										</a>
+
+										{status === "authenticated" && (
+											<ul
+												className="absolute right-0 left-auto z-10 hidden text-sm font-medium float-left m-0 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
+											backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255)] dark:bg-[rgba(19,19,19)] dark:backdrop-blur-[24px] dark:backdrop-brightness-105
+											bg-clip-padding group-hover:block"
+												aria-labelledby="dropdownMenuButton2"
+											>
+												<li>
+													{status === "authenticated" && (
+														<div className="flex flex-col px-4 py-3 cursor-pointer rounded-t-xl">
+															<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:dark:text-light-100">
+																<div>
+																	<p>Email</p>
+																	<p>{truncatedEmail}</p>
+																</div>
+																{avatarUrl ? (
+																	<Image
+																		src={avatarUrl}
+																		alt={"avatar"}
+																		width={40}
+																		height={40}
+																		objectFit="contain"
+																		className="rounded-lg"
+																	/>
+																) : null}
+															</div>
+														</div>
+													)}
+												</li>
+												{/* {status === "authenticated" && (
+													<li>
+														<Link href={`/profile`} passHref={true}>
+															<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																Profile
+															</div>
+														</Link>
+													</li>
+												)}
+												 */}
+
+												{/* Logout Button */}
+												<li>
+													{status === "authenticated" ? (
+														<button
+															className="w-full px-4 pt-2 pb-3 font-medium transition-all bg-transparent cursor-pointer rounded-b-xl dark:border-light-300 hover:bg-gray-100 dark:hover:bg-error-600/30"
+															onClick={() => signOut()}
+														>
+															Sign out
+														</button>
+													) : (
+														<span></span>
+													)}
+												</li>
+											</ul>
+										)}
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+						{/* Hamburger Menu */}
+						<HamburgerMenu avatarUrl={session && session.user.image} truncatedName={session && session.user.name} />
+					</div>
+				</nav>
+			</div>
+		</div>
+	);
+};
+
+export default Navbar;

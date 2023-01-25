@@ -6,7 +6,10 @@
             "@/components/*": ["src/components/*"],
             "@/layout/*": ["src/layout/*"],
             "@/config/*": ["src/config/*"],
-            "@/styles/*": ["styles/*"]
+            "@/lib/*": ["src/lib/*"],
+            "@/utils/*": ["src/utils/*"],
+            "@/styles/*": ["styles/*"],
+            "@/store/*": ["store/*"]
         }
     }
 }

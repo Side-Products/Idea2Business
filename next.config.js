@@ -6,7 +6,7 @@ const nextConfig = {
 // module.exports = nextConfig
 module.exports = {
 	images: {
-		domains: ["lexica.art"],
+		domains: ["lexica.art", "lh3.googleusercontent.com"],
 	},
 	webpack: (config, { isServer }) => {
 		if (!isServer) {

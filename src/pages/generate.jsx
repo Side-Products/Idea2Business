@@ -2,7 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import pptxgen from "pptxgenjs";
-import redBG from "../../themes/redbg";
+import redBG from "../../public/themes/redbg";
 import Loading from "../components/loading";
 
 import { GoogleSpreadsheet } from "google-spreadsheet";
@@ -693,6 +693,7 @@ const Home = () => {
 				<Head>
 					<title>Project2Product</title>
 				</Head>
+
 				<div className="container">
 					<div className="header">
 						<div className="header-title">
@@ -707,7 +708,8 @@ const Home = () => {
 					</div>
 					<div className="prompt-container">
 						<form>
-							<input className="email-field" placeholder="Product Name" value={productName} onChange={onUserChangedProductName} required />;
+							<input className="email-field" placeholder="Product Name" value={productName} onChange={onUserChangedProductName} required />
+							<br />
 							<textarea
 								className="prompt-box"
 								placeholder="Product Description"
@@ -715,7 +717,7 @@ const Home = () => {
 								onChange={onUserChangedProductDescription}
 								required
 							/>
-							;
+							<br />
 							<input
 								className="email-field"
 								placeholder="Your Email"
@@ -740,7 +742,9 @@ const Home = () => {
 								<button
 									type="button"
 									className={isGenerating ? "generate-button loading" : "generate-button"}
-									onClick={callGenerateEndpoint}
+									onClick={() => {
+										callGenerateEndpoint();
+									}}
 									disabled={!validateInput()}
 								>
 									<div className="generate">{isGenerating ? <span className="loader"></span> : <p>Generate</p>}</div>
