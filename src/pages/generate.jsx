@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import pptxgen from "pptxgenjs";
 import redBG from "../../public/themes/redbg";
 import Loading from "../components/loading";
-
-import { GoogleSpreadsheet } from "google-spreadsheet";
-import PromptCard from "../components/PromptCard";
-
 import { create } from "ipfs-http-client";
+import { GoogleSpreadsheet } from "google-spreadsheet";
+import PromptCard from "@/components/PromptCard";
+import { title_main_page, meta_description } from "@/config/constants";
+import CustomButton from "@/layout/CustomButton";
+import StatusContext from "@/store/status-context";
+import { sleep } from "@/utils/Sleep";
 
 const Home = () => {
+	const [error, , , setError] = useContext(StatusContext);
+
 	const [userInput, setUserInput] = useState("");
 	const [productName, setProductName] = useState("");
 	const [productDescription, setProductDescription] = useState("");
@@ -21,6 +25,7 @@ const Home = () => {
 	const [apiMarketingAdvisorOutput, setMarketingAdvisorApiOutput] = useState([]);
 
 	const [isGenerating, setIsGenerating] = useState(false);
+	const [cardsAvailable, setCardsAvailable] = useState(false);
 	const [isGeneratingVCPitch, setIsGeneratingVCPitch] = useState(false);
 	const [isGeneratingCoFounderPitch, setIsGeneratingCoFounderPitch] = useState(false);
 	const [isGeneratingMomTestPitch, setIsGeneratingMomTestPitch] = useState(false);
@@ -34,8 +39,6 @@ const Home = () => {
 	const [isGeneratingGrant, setIsGeneratingGrant] = useState(false);
 	const [isGeneratingTwitter, setIsGeneratingTwitter] = useState(false);
 	const [isGeneratingInstagram, setIsGeneratingInstagram] = useState(false);
-
-	const [email, setEmail] = useState("");
 
 	// Config variables
 	const SPREADSHEET_ID = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
@@ -78,45 +81,51 @@ const Home = () => {
 	};
 
 	const callGenerateEndpoint = async () => {
-		setIsGenerating(true);
-		console.log("User Input: " + userInput);
-		console.log("Doing Magic...");
+		if (productName.length && productDescription.length) {
+			setIsGenerating("pitchdeck");
 
-		// Getting pitch deck content from OpenAI
-		const response = await fetch("/api/generate", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ userInput }),
-		});
-		const data = await response.json();
-		const { output } = data;
-		let outputArray = output.text.split(/\r?\n/);
-		setApiOutput([...outputArray]);
+			// Getting pitch deck content from OpenAI
+			const response = await fetch("/api/generate", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ userInput }),
+			});
+			const data = await response.json();
+			const { output } = data;
+			let outputArray = output.text.split(/\r?\n/);
+			setApiOutput([...outputArray]);
 
-		setIsGenerating(false);
+			setIsGenerating(false);
 
-		console.log("Email:", email);
-		let currentdate = new Date();
-		let datetime =
-			currentdate.getDate() +
-			"/" +
-			(currentdate.getMonth() + 1) +
-			"/" +
-			currentdate.getFullYear() +
-			" @ " +
-			currentdate.getHours() +
-			":" +
-			currentdate.getMinutes() +
-			":" +
-			currentdate.getSeconds();
-		const newRow = {
-			DateTime: datetime,
-			Email: email,
-			UserPrompt: userInput,
-		};
-		appendSpreadsheet(newRow);
+			let currentdate = new Date();
+			let datetime =
+				currentdate.getDate() +
+				"/" +
+				(currentdate.getMonth() + 1) +
+				"/" +
+				currentdate.getFullYear() +
+				" @ " +
+				currentdate.getHours() +
+				":" +
+				currentdate.getMinutes() +
+				":" +
+				currentdate.getSeconds();
+			const newRow = {
+				DateTime: datetime,
+				UserPrompt: userInput,
+			};
+			appendSpreadsheet(newRow);
+
+			return outputArray;
+		} else {
+			setError({
+				title: "Missing information",
+				message: "Please enter project name and description",
+				showErrorBox: true,
+			});
+		}
 	};
 
 	const callGenerateVCPitchEndpoint = async () => {
@@ -242,6 +251,7 @@ const Home = () => {
 		setMarketingAdvisorApiOutput([...marketingAdvisorOutputArray]);
 		setIsGeneratingMarketingAdvisorPitch(false);
 	};
+
 	const callGenerateUserPersonaEndpoint = async () => {
 		setIsGeneratingUserPersona(true);
 		console.log("Doing Magic Again...");
@@ -265,6 +275,7 @@ const Home = () => {
 		document.body.removeChild(a);
 		setIsGeneratingUserPersona(false);
 	};
+
 	const callGeneratePotentialCustomerEndpoint = async () => {
 		setIsGeneratingPotentialCustomers(true);
 		console.log("Doing Magic Again...");
@@ -441,17 +452,6 @@ const Home = () => {
 	const onUserChangedProductDescription = (event) => {
 		setProductDescription(event.target.value);
 		setUserInput(productName + ": " + event.target.value);
-	};
-
-	const onUserChangedEmail = (event) => {
-		// console.log(event.target.value);
-		setEmail(event.target.value);
-	};
-
-	const validateInput = () => {
-		return (
-			productName.length && productDescription.length && email.length && email.split("").filter((x) => x === "@").length == 1 && email.indexOf(".") !== -1
-		);
 	};
 
 	async function runDemo(apiOutput, method) {
@@ -687,183 +687,155 @@ const Home = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (cardsAvailable) {
+			const cardContainer = document.getElementById("cardContainer");
+			cardContainer.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+		}
+	}, [cardsAvailable]);
+
 	return (
 		<>
-			<div className="root">
-				<Head>
-					<title>Project2Product</title>
-				</Head>
+			<Head>
+				<title>{title_main_page}</title>
+				<meta name="description" content={meta_description} />
+			</Head>
 
-				<div className="container">
-					<div className="header">
-						<div className="header-title">
-							<h1>Project2Product</h1>
-						</div>
-						<div className="header-subtitle">
-							<h2>
-								Transforming your side-projects and hackathon-projects into profitable products. <br />
-								Just enter your project name and project description, Project2Product will help you turn it into a successful venture.
-							</h2>
-						</div>
+			<div className="flex justify-center items-center bg-[url('/hero-3.jpg')] bg-cover bg-no-repeat h-screen">
+				<div className="flex flex-col justify-center items-center">
+					<div className="flex flex-col">
+						<h1 className="text-center text-[80px] tracking-[-2px] font-semibold leading-[1.2em]">Project~Product</h1>
+						<h2 className="mt-4 text-center text-lg leading-[1.4em] text-light-400">
+							Transforming your side-projects and hackathon-projects into profitable products. <br />
+							Just enter your project name and project description, Project2Product will help you turn it into a successful venture.
+						</h2>
 					</div>
-					<div className="prompt-container">
-						<form>
-							<input className="email-field" placeholder="Product Name" value={productName} onChange={onUserChangedProductName} required />
-							<br />
-							<textarea
-								className="prompt-box"
-								placeholder="Product Description"
-								value={productDescription}
-								onChange={onUserChangedProductDescription}
-								required
+
+					<form className="w-1/2 h-min flex flex-col items-center justify-center mt-14">
+						<input
+							className="w-full bg-light-700/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-12 p-3 normal-case"
+							placeholder="Project Name"
+							value={productName}
+							onChange={onUserChangedProductName}
+							required
+						/>
+						<br />
+						<textarea
+							className="w-full bg-light-700/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-40 p-3 normal-case resize-none"
+							placeholder="Project Description"
+							value={productDescription}
+							onChange={onUserChangedProductDescription}
+							required
+						/>
+						<br />
+						<div className="w-1/3 flex items-center justify-center">
+							<CustomButton
+								type="button"
+								onClick={() => {
+									if (isGenerating !== "generating") {
+										setCardsAvailable(false);
+										setIsGenerating("generating");
+										sleep(2000).then(() => {
+											setIsGenerating(false);
+											setCardsAvailable(true);
+										});
+									}
+								}}
+								isLoading={isGenerating === "generating"}
+								primary={true}
+								rounded={true}
+								classes="text-lg px-8 py-3"
+							>
+								Generate
+							</CustomButton>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			{/* apiOutput.length > 0 */}
+			{cardsAvailable && (
+				<div className="flex justify-center items-center py-28 bg-gradient-to-r from-zinc-500 via-zinc-600 to-zinc-700" id="cardContainer">
+					<div className="w-4/6 flex flex-col justify-center items-center">
+						<div className="w-6/12 flex gap-10 justify-between items-between mb-10">
+							<CustomButton
+								type="button"
+								onClick={async (_ev) => {
+									const _apiOutput = await callGenerateEndpoint();
+									runDemo(_apiOutput, "download");
+								}}
+								isLoading={isGenerating === "pitchdeck"}
+								outline={true}
+								classes="w-full text-lg px-8 py-3"
+							>
+								Download PitchDeck
+							</CustomButton>
+							<CustomButton
+								type="button"
+								onClick={async (_ev) => {
+									if (!apiOutput) {
+										const _apiOutput = await callGenerateEndpoint();
+										runDemo(_apiOutput, "getLink");
+									} else {
+										runDemo(apiOutput, "getLink");
+									}
+								}}
+								isLoading={isPitchdeckLinkGenerating}
+								outline={true}
+								classes="w-full text-lg px-8 py-3"
+							>
+								Get PitchDeck Link
+							</CustomButton>
+						</div>
+
+						{ipfsUrl && (
+							<a href={ipfsUrl} target="_blank" rel="noopener noreferrer" className="mb-12 underline hover:text-primary-400">
+								{ipfsUrl}
+							</a>
+						)}
+
+						<div className="w-full grid grid-cols-3 place-items-center gap-y-6 gap-x-20">
+							<PromptCard
+								handleCardClick={callGenerateMomTestEndpoint}
+								cardInfo="Mom Test: How to talk to initial customers"
+								isLoading={isGeneratingMomTestPitch}
 							/>
-							<br />
-							<input
-								className="email-field"
-								placeholder="Your Email"
-								value={email}
-								onChange={onUserChangedEmail}
-								pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-								required
+							<PromptCard handleCardClick={callGenerateVCPitchEndpoint} cardInfo="Email Pitch to VC" isLoading={isGeneratingVCPitch} />
+							<PromptCard handleCardClick={callGenerateUserPersonaEndpoint} cardInfo="User Persona" isLoading={isGeneratingUserPersona} />
+							<PromptCard
+								handleCardClick={callGeneratePotentialCustomerEndpoint}
+								cardInfo="Type of Potential Customers"
+								isLoading={isGeneratingPotentialCustomers}
 							/>
-							<div className="prompt-buttons">
-								{/* <a 
-            className={isGenerating ? 'generate-button loading' : 'generate-button'}
-            onClick={callGenerateEndpoint}
-          >
-            <div 
-              className="generate"
-              disabled={!validateInput()}
-            >
-              {isGenerating ? <span className="loader"></span> : <p>Generate</p>}
-            </div>
-          </a> */}
+							<PromptCard
+								handleCardClick={callLeanStartupEndpoint}
+								cardInfo="Advice from the book: The Lean Startup"
+								isLoading={isGeneratingLeanStartup}
+							/>
+							<PromptCard
+								handleCardClick={callSPMEEndpoint}
+								cardInfo="SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs"
+								isLoading={isGeneratingSPME}
+							/>
+							<PromptCard handleCardClick={callMVPEndpoint} cardInfo="MVP Launch Checklist" isLoading={isGeneratingMVP} />
+							<PromptCard handleCardClick={callGrantEndpoint} cardInfo="Grant Proposal" isLoading={isGeneratingGrant} />
 
-								<button
-									type="button"
-									className={isGenerating ? "generate-button loading" : "generate-button"}
-									onClick={() => {
-										callGenerateEndpoint();
-									}}
-									disabled={!validateInput()}
-								>
-									<div className="generate">{isGenerating ? <span className="loader"></span> : <p>Generate</p>}</div>
-								</button>
-							</div>
-						</form>
-
-						<div className="output">
-							{apiOutput.length > 0 && (
-								<div className="output-content">
-									<div className="output-content-btns">
-										<button type="button" className="botn first" onClick={(_ev) => runDemo(apiOutput, "download")}>
-											Download PitchDeck <br />
-										</button>
-										<button type="button" className="botn first" onClick={(_ev) => runDemo(apiOutput, "getLink")}>
-											{isPitchdeckLinkGenerating ? <span className="loader"></span> : "Get PitchDeck Link"} <br />
-										</button>
-									</div>
-
-									{ipfsUrl && (
-										<a href={ipfsUrl} target="_blank" rel="noopener noreferrer" className="ipfs-url">
-											{ipfsUrl}
-										</a>
-									)}
-
-									<div className=" w-full grid grid-cols-3 place-items-center gap-y-6 gap-x-20">
-										<PromptCard
-											handleCardClick={callGenerateMomTestEndpoint}
-											cardInfo="Mom Test: How to talk to initial customers"
-											isLoading={isGeneratingMomTestPitch}
-										/>
-										<PromptCard
-											handleCardClick={callGenerateVCPitchEndpoint}
-											cardInfo="Email Pitch to VC"
-											isLoading={isGeneratingVCPitch}
-										/>
-										<PromptCard
-											handleCardClick={callGenerateUserPersonaEndpoint}
-											cardInfo="User Persona"
-											isLoading={isGeneratingUserPersona}
-										/>
-										<PromptCard
-											handleCardClick={callGeneratePotentialCustomerEndpoint}
-											cardInfo="Type of Potential Customers"
-											isLoading={isGeneratingPotentialCustomers}
-										/>
-										<PromptCard
-											handleCardClick={callLeanStartupEndpoint}
-											cardInfo="Advice from the book: The Lean Startup"
-											isLoading={isGeneratingLeanStartup}
-										/>
-										<PromptCard
-											handleCardClick={callSPMEEndpoint}
-											cardInfo="SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs"
-											isLoading={isGeneratingSPME}
-										/>
-										<PromptCard handleCardClick={callMVPEndpoint} cardInfo="MVP Launch Checklist" isLoading={isGeneratingMVP} />
-										<PromptCard handleCardClick={callGrantEndpoint} cardInfo="Grant Proposal" isLoading={isGeneratingGrant} />
-
-										<PromptCard
-											handleCardClick={callGenerateCoFounderPitchEndpoint}
-											cardInfo="Pitch to Onboard Potential Co-Founder"
-											isLoading={isGeneratingCoFounderPitch}
-										/>
-										<PromptCard
-											handleCardClick={callGenerateMarketingAdvisorEndpoint}
-											cardInfo="Pitch to Onboard Potential Advisor (Marketing)"
-											isLoading={isGeneratingMarketingAdvisorPitch}
-										/>
-										<PromptCard handleCardClick={callTwitterEndpoint} cardInfo="Initial Twitter Strategy" isLoading={isGeneratingTwitter} />
-										<PromptCard
-											handleCardClick={callInstagramEndpoint}
-											cardInfo="Initial Instagram Strategy"
-											isLoading={isGeneratingInstagram}
-										/>
-									</div>
-									{/* <button 
-              type="button" 
-              className={isGeneratingVCPitch ? 'botn first loading' : 'botn first'} 
-              onClick={callGenerateVCPitchEndpoint}>	
-                <div className="">
-                  {isGeneratingVCPitch ? <span className="loader"></span> : <p>Generate Pitch to VC</p>}
-                </div>
-							</button> */}
-
-									{/* <button 
-              type="button" 
-              className={isGeneratingMomTestPitch ? 'botn first loading' : 'botn first'} 
-              onClick={callGenerateMomTestEndpoint}>	
-                <div className="">
-                  {isGeneratingMomTestPitch ? <span className="loader"></span> : <p>Generate Pitch for Mom Test</p>}
-                </div>
-							</button> */}
-
-									{/* <button 
-              type="button" 
-              className={isGeneratingCoFounderPitch ? 'botn first loading' : 'botn first'} 
-              onClick={callGenerateCoFounderPitchEndpoint}>	
-                <div className="">
-                  {isGeneratingCoFounderPitch ? <span className="loader"></span> : <p>Generate Pitch to Potential Co-Founder</p>}
-                </div>
-							</button> */}
-
-									{/* <button 
-              type="button" 
-              className={isGeneratingMarketingAdvisorPitch ? 'botn first loading' : 'botn first'} 
-              onClick={callGenerateMarketingAdvisorEndpoint}>	
-                <div className="">
-                  {isGeneratingMarketingAdvisorPitch ? <span className="loader"></span> : <p>Generate Pitch to Potential Advisor (Marketing)</p>}
-                </div>
-							</button> */}
-								</div>
-							)}
-							{/* <PromptCard/> */}
+							<PromptCard
+								handleCardClick={callGenerateCoFounderPitchEndpoint}
+								cardInfo="Pitch to Onboard Potential Co-Founder"
+								isLoading={isGeneratingCoFounderPitch}
+							/>
+							<PromptCard
+								handleCardClick={callGenerateMarketingAdvisorEndpoint}
+								cardInfo="Pitch to Onboard Potential Advisor (Marketing)"
+								isLoading={isGeneratingMarketingAdvisorPitch}
+							/>
+							<PromptCard handleCardClick={callTwitterEndpoint} cardInfo="Initial Twitter Strategy" isLoading={isGeneratingTwitter} />
+							<PromptCard handleCardClick={callInstagramEndpoint} cardInfo="Initial Instagram Strategy" isLoading={isGeneratingInstagram} />
 						</div>
 					</div>
 				</div>
-			</div>
-			{/* } */}
+			)}
 		</>
 	);
 };
