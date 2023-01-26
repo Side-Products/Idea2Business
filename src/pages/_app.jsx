@@ -31,7 +31,24 @@ function App({ Component, pageProps, session }) {
 	return (
 		<>
 			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
-
+			<Script 
+            strategy="afterInteractive" 
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+            onError={(err) => {
+              console.error("Google Tag Manager Script Error:", err);
+            }}
+          	></Script>
+			<Script id="google-analytics" strategy="afterInteractive" onError={(err) => {}}>
+				{`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+			</Script>
+			
 			<SessionProvider session={session}>
 				<LoadingContext.Provider value={[isLoading, setLoading]}>
 					<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
