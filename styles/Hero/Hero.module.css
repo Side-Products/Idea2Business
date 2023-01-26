@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Paytone+One&display=swap');
 /* body{
     padding: 0;
@@ -20,18 +20,26 @@
     height: 100vh;
     background: url('/hero-3.jpg') center;
     background-size: cover;
+    /* margin: auto;
+    text-align: center;
+    vertical-align: middle; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .heroText{
     text-align: center;
     color: #fff;
-    padding-top: 250px;
+    /* padding-top: 250px; */
     /* font-family: 'Paytone One', sans-serif; */
     font-family: 'Fjalla One', sans-serif;
 }
 
 .heroText h1{
     font-size: 5em;
+    /* font-size: calc(5em + 1vmin); */
     margin: 0;
     /* font-family: 'Paytone One', sans-serif; */
     font-family: 'Fjalla One', sans-serif;
@@ -71,4 +79,11 @@ button.joinNow:hover{
     color: #fff;
     background: rgb(1, 168, 76);
     border: solid 2px rgb(1, 168, 76);
+}
+
+@media only screen and (max-width: 730px) {
+
+    .heroText h1 {
+        font-size: 3em;
+    }
 }
