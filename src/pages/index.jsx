@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { title_main_page, meta_description } from "@/config/constants";
+import styles from "../../styles/Hero/Hero.module.css";
 
 export default function HomePage() {
 	return (
@@ -11,7 +12,7 @@ export default function HomePage() {
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			<div className="w-screen h-screen flex flex-col relative items-center justify-center">
+			{/* <div className="w-screen h-screen flex flex-col relative items-center justify-center">
 				<div className="absolute w-full h-full">
 					<Image src={"/bg-4.jpg"} alt="bg env" priority fill style={{ objectFit: "cover" }}></Image>
 				</div>
@@ -23,7 +24,16 @@ export default function HomePage() {
 						</button>
 					</Link>
 				</div>
-			</div>
+			</div> */}
+			<div className={styles.heroSection}>
+				<div className={styles.heroText}>
+					<h1 className={styles.heroTitle}>Get Your Side-Project Guided By AI!</h1>
+					<p className={styles.heroSubTitle}>Get personalized advice to accelerate the growth and success of your project in minutes.</p>
+					<Link href={"/generate"} passHref>
+						<button className={styles.joinNow}>Take your project to moon!</button>
+					</Link>
+				</div>
+    		</div>
 		</>
 	);
 }
