@@ -55,7 +55,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex justify-center items-center h-full w-full fixed">
-						<div className="max-w-[26rem] w-11/12 p-4 pl-10 pb-12 bg-dark-600 rounded-lg">
+						<div className="max-w-[26rem] w-11/12 p-4 pl-10 pb-12 bg-dark-500 rounded-lg">
 							<div className="w-full flex justify-start">
 								<div className="w-full flex flex-col justify-center items-center mt-4">
 									<Image src={logoBlack} alt="MXV Logo" width="60" height="60" className="rounded-md" />

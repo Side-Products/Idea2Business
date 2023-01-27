@@ -1,17 +1,62 @@
-import Image from "next/image";
-import styles from "./styles/PromptCard.module.css";
+import CustomButton from "@/layout/CustomButton";
 
-export default function PromptCard({ handleCardClick, cardInfo, bgImg, isLoading }) {
+export default function PromptCard({ cardsAvailable, handleCardClick, cardText, isLoading, promptEnterProjectInfo }) {
 	return (
-		<div className="cursor-pointer w-[240px] aspect-square relative rounded-2xl overflow-hidden bg-white" onClick={handleCardClick}>
-			{<Image sizes="100%" src={"/card-2.jpg"} fill alt="cover" priority style={{ objectFit: "cover" }} />}
-			<div className={"w-full h-full absolute flex items-center justify-center " + styles["card-info"]}>
-				{!isLoading ? (
-					<h3 className="font-tertiary uppercase font-semibold text-xl text-center text-white">{cardInfo ? cardInfo : "Test"}</h3>
+		<div
+			className="w-full relative flex flex-col group cursor-pointer aspect-square rounded-2xl h-fit sm:h-full bg-gradient-to-r from-[#0E0E0E] to-[#202020] shadow hover:shadow-primary-500 overflow-hidden transition-all duration-500"
+			onClick={() => {
+				if (!cardsAvailable) {
+					promptEnterProjectInfo();
+				}
+			}}
+		>
+			<>
+				<div
+					className={
+						"relative w-full h-full flex flex-col justify-center items-center p-4 transition-all " +
+						(!cardsAvailable && "duration-500 group-hover:opacity-0")
+					}
+				>
+					<h3 className="font-secondary font-medium text-md text-center">{cardText}</h3>
+					{!cardsAvailable && (
+						<span className="absolute bottom-3 right-4">
+							<i className="fa-solid fa-lock"></i>
+						</span>
+					)}
+				</div>
+
+				{cardsAvailable ? (
+					<div className="w-full absolute bottom-4 flex space-x-2 px-4 py-1 justify-center items-center">
+						<CustomButton
+							type="button"
+							onClick={() => {
+								handleCardClick("view", cardText);
+							}}
+							light={true}
+							rounded={true}
+							classes="text-xs px-1 py-1 gap-x-1"
+						>
+							<i className="fa-solid fa-eye"></i>&nbsp;View
+						</CustomButton>
+						<CustomButton
+							type="button"
+							onClick={() => {
+								handleCardClick("download", cardText);
+							}}
+							light={true}
+							rounded={true}
+							classes="text-xs px-3 py-1 gap-x-1"
+						>
+							<i class="fa-solid fa-download"></i>&nbsp;Download
+						</CustomButton>
+					</div>
 				) : (
-					<span className="loader"></span>
+					<div className="absolute flex flex-col w-full h-full justify-center items-center transition-all duration-700 opacity-0 group-hover:opacity-100">
+						<i className="fa-solid fa-lock text-4xl"></i>
+						<p className="px-8 mt-2 text-xs text-center">Please enter project details first</p>
+					</div>
 				)}
-			</div>
+			</>
 		</div>
 	);
 }

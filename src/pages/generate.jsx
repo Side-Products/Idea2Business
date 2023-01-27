@@ -1,51 +1,38 @@
 import { useState, useContext, useEffect } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import pptxgen from "pptxgenjs";
 import redBG from "../../public/themes/redbg";
-import Loading from "../components/loading";
+import { useSession } from "next-auth/react";
 import { create } from "ipfs-http-client";
 import { GoogleSpreadsheet } from "google-spreadsheet";
+import dynamic from "next/dynamic";
+const ContentModal = dynamic(() => import("@/components/ContentModal"));
 import PromptCard from "@/components/PromptCard";
 import { title_main_page, meta_description } from "@/config/constants";
 import CustomButton from "@/layout/CustomButton";
 import StatusContext from "@/store/status-context";
+import LoadingContext from "@/store/loading-context";
+import AuthModalContext from "@/store/authModal-context";
 import { sleep } from "@/utils/Sleep";
 
 const Home = () => {
-	const [error, , , setError] = useContext(StatusContext);
+	const { data: session, status } = useSession();
+
+	const [, , , setError] = useContext(StatusContext);
+	const [, setLoading] = useContext(LoadingContext);
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
 	const [userInput, setUserInput] = useState("");
 	const [productName, setProductName] = useState("");
 	const [productDescription, setProductDescription] = useState("");
-	const [apiOutput, setApiOutput] = useState([]);
-	const [apiVCOutput, setVCApiOutput] = useState([]);
-	const [apiCoFounderOutput, setCoFounderApiOutput] = useState([]);
-	const [apiMomTestOutput, setMomTestApiOutput] = useState([]);
-	const [apiMarketingAdvisorOutput, setMarketingAdvisorApiOutput] = useState([]);
+	const [apiOutput, setApiOutput] = useState(false);
+	const [modalText, setModalText] = useState({ heading: "", content: "" });
+	const [isContentModalOpen, setContentModalOpen] = useState(false);
 
 	const [isGenerating, setIsGenerating] = useState(false);
 	const [cardsAvailable, setCardsAvailable] = useState(false);
-	const [isGeneratingVCPitch, setIsGeneratingVCPitch] = useState(false);
-	const [isGeneratingCoFounderPitch, setIsGeneratingCoFounderPitch] = useState(false);
-	const [isGeneratingMomTestPitch, setIsGeneratingMomTestPitch] = useState(false);
-	const [isGeneratingMarketingAdvisorPitch, setIsGeneratingMarketingAdvisorPitch] = useState(false);
 
-	const [isGeneratingUserPersona, setIsGeneratingUserPersona] = useState(false);
-	const [isGeneratingPotentialCustomers, setIsGeneratingPotentialCustomers] = useState(false);
-	const [isGeneratingLeanStartup, setIsGeneratingLeanStartup] = useState(false);
-	const [isGeneratingSPME, setIsGeneratingSPME] = useState(false);
-	const [isGeneratingMVP, setIsGeneratingMVP] = useState(false);
-	const [isGeneratingGrant, setIsGeneratingGrant] = useState(false);
-	const [isGeneratingTwitter, setIsGeneratingTwitter] = useState(false);
-	const [isGeneratingInstagram, setIsGeneratingInstagram] = useState(false);
-
-	// Config variables
-	const SPREADSHEET_ID = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
-	const SHEET_ID = process.env.NEXT_PUBLIC_SHEET_ID;
-	const GOOGLE_CLIENT_EMAIL = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_EMAIL;
-	const GOOGLE_SERVICE_PRIVATE_KEY = process.env.NEXT_PUBLIC_GOOGLE_SERVICE_PRIVATE_KEY;
-
+	// IPFS Initialize
 	const projectId = process.env.NEXT_PUBLIC_INFURA_PROJECT_ID;
 	const projectSecret = process.env.NEXT_PUBLIC_INFURA_PROJECT_SECRET;
 	const auth = `Basic ` + Buffer.from(projectId + `:` + projectSecret).toString(`base64`);
@@ -58,7 +45,12 @@ const Home = () => {
 		},
 	});
 	const [ipfsUrl, setIpfsUrl] = useState("");
-	const [isPitchdeckLinkGenerating, setPitchdeckLinkGenerating] = useState(false);
+
+	// Config variables
+	const SPREADSHEET_ID = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
+	const SHEET_ID = process.env.NEXT_PUBLIC_SHEET_ID;
+	const GOOGLE_CLIENT_EMAIL = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_EMAIL;
+	const GOOGLE_SERVICE_PRIVATE_KEY = process.env.NEXT_PUBLIC_GOOGLE_SERVICE_PRIVATE_KEY;
 
 	// GoogleSpreadsheet Initialize
 	const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
@@ -81,9 +73,7 @@ const Home = () => {
 	};
 
 	const callGenerateEndpoint = async () => {
-		if (productName.length && productDescription.length) {
-			setIsGenerating("pitchdeck");
-
+		if (productName.length > 0 && productDescription.length > 0) {
 			// Getting pitch deck content from OpenAI
 			const response = await fetch("/api/generate", {
 				method: "POST",
@@ -96,8 +86,6 @@ const Home = () => {
 			const { output } = data;
 			let outputArray = output.text.split(/\r?\n/);
 			setApiOutput([...outputArray]);
-
-			setIsGenerating(false);
 
 			let currentdate = new Date();
 			let datetime =
@@ -120,49 +108,16 @@ const Home = () => {
 
 			return outputArray;
 		} else {
-			setError({
-				title: "Missing information",
-				message: "Please enter project name and description",
-				showErrorBox: true,
-			});
+			promptEnterProjectInfo();
 		}
 	};
 
-	const callGenerateVCPitchEndpoint = async () => {
-		setIsGeneratingVCPitch(true);
-		console.log("Doing Magic Again...");
-
-		// Getting VC Pitch Content from OpenAI
-		const response = await fetch("/api/vcpitch", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ userInput }),
+	const callGenerateMomTestEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Mom Test for your project is being generated...",
 		});
-		// console.log("Response", response)
-		const data = await response.json();
-		const { output } = data;
-		// console.log("API VC OUTPUT:", output);
-		// let vcOutputArray = output.text.split(/\r?\n/);
-		let vcOutputArray = output.text;
-
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([vcOutputArray], { type: "text/plain" }));
-		a.download = "EmailPitchToVC.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-
-		setVCApiOutput([...vcOutputArray]);
-		setIsGeneratingVCPitch(false);
-	};
-
-	const callGenerateMomTestEndpoint = async () => {
-		setIsGeneratingMomTestPitch(true);
-		console.log("Doing Magic Again...");
-
 		// Getting Mom Test Content from OpenAI
 		const response = await fetch("/api/momtest", {
 			method: "POST",
@@ -171,29 +126,72 @@ const Home = () => {
 			},
 			body: JSON.stringify({ userInput }),
 		});
-		// console.log("Response", response)
 		const data = await response.json();
 		const { output } = data;
-		// console.log("API VC OUTPUT:", output);
-		// let vcOutputArray = output.text.split(/\r?\n/);
 		let momTestOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([momTestOutputArray], { type: "text/plain" }));
-		a.download = "MomTest.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-
-		setMomTestApiOutput([...momTestOutputArray]);
-		setIsGeneratingMomTestPitch(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([momTestOutputArray], { type: "text/plain" }));
+			a.download = "MomTest.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callGenerateCoFounderPitchEndpoint = async () => {
-		setIsGeneratingCoFounderPitch(true);
-		console.log("Doing Magic Again...");
+	const callGenerateVCPitchEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "VC Pitch for your project is being generated...",
+		});
+		// Getting VC Pitch Content from OpenAI
+		const response = await fetch("/api/vcpitch", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let vcOutputArray = output.text;
 
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([vcOutputArray], { type: "text/plain" }));
+			a.download = "EmailPitchToVC.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callGenerateCoFounderPitchEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Co-Founder pitch for your project is being generated...",
+		});
 		// Getting Pitch to Co Founder Content from OpenAI
 		const response = await fetch("/api/cofounderpitch", {
 			method: "POST",
@@ -202,29 +200,35 @@ const Home = () => {
 			},
 			body: JSON.stringify({ userInput }),
 		});
-		// console.log("Response", response)
 		const data = await response.json();
 		const { output } = data;
-		// console.log("API VC OUTPUT:", output);
-		// let vcOutputArray = output.text.split(/\r?\n/);
 		let cofounderOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([cofounderOutputArray], { type: "text/plain" }));
-		a.download = "PitchToCoFounder.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-
-		setCoFounderApiOutput([...cofounderOutputArray]);
-		setIsGeneratingCoFounderPitch(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([cofounderOutputArray], { type: "text/plain" }));
+			a.download = "PitchToCoFounder.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callGenerateMarketingAdvisorEndpoint = async () => {
-		setIsGeneratingMarketingAdvisorPitch(true);
-		console.log("Doing Magic Again...");
-
+	const callGenerateMarketingAdvisorEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Pitch to Marketing Advisor for your project is being generated...",
+		});
 		// Getting Pitch to Marketing Advisor Content from OpenAI
 		const response = await fetch("/api/marketingadvisor", {
 			method: "POST",
@@ -233,28 +237,35 @@ const Home = () => {
 			},
 			body: JSON.stringify({ userInput }),
 		});
-		// console.log("Response", response)
 		const data = await response.json();
 		const { output } = data;
-		// console.log("API VC OUTPUT:", output);
-		// let vcOutputArray = output.text.split(/\r?\n/);
 		let marketingAdvisorOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([marketingAdvisorOutputArray], { type: "text/plain" }));
-		a.download = "PitchToMarketingAdvisor.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-
-		setMarketingAdvisorApiOutput([...marketingAdvisorOutputArray]);
-		setIsGeneratingMarketingAdvisorPitch(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([marketingAdvisorOutputArray], { type: "text/plain" }));
+			a.download = "PitchToMarketingAdvisor.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callGenerateUserPersonaEndpoint = async () => {
-		setIsGeneratingUserPersona(true);
-		console.log("Doing Magic Again...");
+	const callGenerateUserPersonaEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "User Personas for your project is being generated...",
+		});
 		const response = await fetch("/api/userpersona", {
 			method: "POST",
 			headers: {
@@ -266,19 +277,31 @@ const Home = () => {
 		const { output } = data;
 		let userPersonaOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userPersonaOutputArray], { type: "text/plain" }));
-		a.download = "UserPersona.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingUserPersona(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userPersonaOutputArray], { type: "text/plain" }));
+			a.download = "UserPersona.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callGeneratePotentialCustomerEndpoint = async () => {
-		setIsGeneratingPotentialCustomers(true);
-		console.log("Doing Magic Again...");
+	const callGeneratePotentialCustomerEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "List of Potential Customers for your project is being generated...",
+		});
 		const response = await fetch("/api/potentialcustomer", {
 			method: "POST",
 			headers: {
@@ -290,19 +313,31 @@ const Home = () => {
 		const { output } = data;
 		let userCusOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-		a.download = "PotentialCustomer.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingPotentialCustomers(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "PotentialCustomer.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callLeanStartupEndpoint = async () => {
-		setIsGeneratingLeanStartup(true);
-		console.log("Doing Magic Again...");
+	const callLeanStartupEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Advice from the Lean Startup for your project is being generated...",
+		});
 		const response = await fetch("/api/leanstartup", {
 			method: "POST",
 			headers: {
@@ -314,19 +349,31 @@ const Home = () => {
 		const { output } = data;
 		let userCusOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-		a.download = "AdviceFromLeanStartup.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingLeanStartup(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "AdviceFromLeanStartup.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callSPMEEndpoint = async () => {
-		setIsGeneratingSPME(true);
-		console.log("Doing Magic Again...");
+	const callSPMEEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "SPME for your project is being generated...",
+		});
 		const response = await fetch("/api/spme", {
 			method: "POST",
 			headers: {
@@ -338,19 +385,31 @@ const Home = () => {
 		const { output } = data;
 		let userCusOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-		a.download = "SPMEforSolopreneurs.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingSPME(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "SPMEforSolopreneurs.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callMVPEndpoint = async () => {
-		setIsGeneratingMVP(true);
-		console.log("Doing Magic Again...");
+	const callMVPEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "MVP Launch checklist for your project is being generated...",
+		});
 		const response = await fetch("/api/mvp", {
 			method: "POST",
 			headers: {
@@ -362,19 +421,31 @@ const Home = () => {
 		const { output } = data;
 		let userCusOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-		a.download = "MVPLaunchChecklist.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingMVP(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "MVPLaunchChecklist.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callGrantEndpoint = async () => {
-		setIsGeneratingGrant(true);
-		console.log("Doing Magic Again...");
+	const callGrantEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Grant Proposal for your project is being generated...",
+		});
 		const response = await fetch("/api/grant", {
 			method: "POST",
 			headers: {
@@ -386,19 +457,31 @@ const Home = () => {
 		const { output } = data;
 		let userCusOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-		a.download = "GrantProposal.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingGrant(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "GrantProposal.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callTwitterEndpoint = async () => {
-		setIsGeneratingTwitter(true);
-		console.log("Doing Magic Again...");
+	const callTwitterEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Twitter Strategy for your project is being generated...",
+		});
 		const response = await fetch("/api/twitter", {
 			method: "POST",
 			headers: {
@@ -410,19 +493,31 @@ const Home = () => {
 		const { output } = data;
 		let userCusOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-		a.download = "TwitterStrategy.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingTwitter(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "TwitterStrategy.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
-	const callInstagramEndpoint = async () => {
-		setIsGeneratingInstagram(true);
-		console.log("Doing Magic Again...");
+	const callInstagramEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Instagram Strategy for your project is being generated...",
+		});
 		const response = await fetch("/api/instagram", {
 			method: "POST",
 			headers: {
@@ -434,14 +529,23 @@ const Home = () => {
 		const { output } = data;
 		let userCusOutputArray = output.text;
 
-		// Downloading a text file
-		var a = window.document.createElement("a");
-		a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-		a.download = "InstagramStrategy.txt";
-		document.body.appendChild(a);
-		a.click();
-		document.body.removeChild(a);
-		setIsGeneratingInstagram(false);
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "InstagramStrategy.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
 	};
 
 	const onUserChangedProductName = (event) => {
@@ -454,7 +558,7 @@ const Home = () => {
 		setUserInput(productName + ": " + event.target.value);
 	};
 
-	async function runDemo(apiOutput, method) {
+	async function generatePitchdeck(apiOutput, method) {
 		// Initialization
 		let pptx = new pptxgen();
 
@@ -675,13 +779,11 @@ const Home = () => {
 		});
 
 		if (method == "getLink") {
-			setPitchdeckLinkGenerating(true);
 			const _file = await pptx.stream();
 			const ipfsFile = await ipfs.add(_file);
 
 			setIpfsUrl("https://project2product.infura-ipfs.io/ipfs/" + ipfsFile.path);
 			console.log("https://project2product.infura-ipfs.io/ipfs/" + ipfsFile.path);
-			setPitchdeckLinkGenerating(false);
 		} else {
 			pptx.writeFile({ fileName: "Project2Product.pptx" });
 		}
@@ -694,6 +796,16 @@ const Home = () => {
 		}
 	}, [cardsAvailable]);
 
+	const promptEnterProjectInfo = () => {
+		setError({
+			title: "Missing information",
+			message: "Please enter project name and description first",
+			showErrorBox: true,
+		});
+		const projectInfoContainer = document.getElementById("projectInfo");
+		projectInfoContainer.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+	};
+
 	return (
 		<>
 			<Head>
@@ -701,17 +813,17 @@ const Home = () => {
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			<div className="flex justify-center items-center bg-[url('/hero-3.jpg')] bg-cover bg-no-repeat h-screen">
+			<div className="flex justify-center items-center bg-[url('/hero-3.jpg')] bg-cover bg-no-repeat h-screen" id="projectInfo">
 				<div className="flex flex-col justify-center items-center">
 					<div className="flex flex-col">
-						<h1 className="text-center text-[80px] tracking-[-2px] font-semibold leading-[1.2em]">Project~Product</h1>
-						<h2 className="mt-4 text-center text-lg leading-[1.4em] text-light-400">
+						<h1 className="text-center text-[44px] sm:text-[80px] tracking-[-2px] font-semibold leading-[1.2em]">Project~Product</h1>
+						<h2 className="mt-4 px-4 text-center text-sm sm:text-lg leading-[1.4em] text-light-400">
 							Transforming your side-projects and hackathon-projects into profitable products. <br />
 							Just enter your project name and project description, Project2Product will help you turn it into a successful venture.
 						</h2>
 					</div>
 
-					<form className="w-1/2 h-min flex flex-col items-center justify-center mt-14">
+					<form className="w-full p-4 sm:p-0 sm:w-1/2 h-min flex flex-col items-center justify-center mt-4 sm:mt-14">
 						<input
 							className="w-full bg-light-700/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-12 p-3 normal-case"
 							placeholder="Project Name"
@@ -721,24 +833,32 @@ const Home = () => {
 						/>
 						<br />
 						<textarea
-							className="w-full bg-light-700/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-40 p-3 normal-case resize-none"
+							className="w-full bg-light-700/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-60 p-3 normal-case resize-none"
 							placeholder="Project Description"
 							value={productDescription}
 							onChange={onUserChangedProductDescription}
 							required
 						/>
 						<br />
-						<div className="w-1/3 flex items-center justify-center">
+						<div className="w-2/3 sm:w-1/3 flex items-center justify-center">
 							<CustomButton
 								type="button"
 								onClick={() => {
-									if (isGenerating !== "generating") {
-										setCardsAvailable(false);
-										setIsGenerating("generating");
-										sleep(2000).then(() => {
-											setIsGenerating(false);
-											setCardsAvailable(true);
-										});
+									if (status === "authenticated" && session && session.user) {
+										if (productName.length > 0 && productDescription.length > 0) {
+											if (isGenerating !== "generating") {
+												setCardsAvailable(false);
+												setIsGenerating("generating");
+												sleep(1000).then(() => {
+													setIsGenerating(false);
+													setCardsAvailable(true);
+												});
+											}
+										} else {
+											promptEnterProjectInfo();
+										}
+									} else {
+										setAuthModalOpen(true);
 									}
 								}}
 								isLoading={isGenerating === "generating"}
@@ -753,89 +873,195 @@ const Home = () => {
 				</div>
 			</div>
 
-			{/* apiOutput.length > 0 */}
-			{cardsAvailable && (
-				<div className="flex justify-center items-center py-28 bg-gradient-to-r from-zinc-500 via-zinc-600 to-zinc-700" id="cardContainer">
-					<div className="w-4/6 flex flex-col justify-center items-center">
-						<div className="w-6/12 flex gap-10 justify-between items-between mb-10">
-							<CustomButton
-								type="button"
-								onClick={async (_ev) => {
+			<div className="w-full flex justify-center items-center py-28 bg-gradient-to-r from-[#828282] via-[#5C5C5C] to-[#424242]" id="cardContainer">
+				<div className="w-full md:w-5/6 xl:w-4/6 flex flex-col justify-center items-center md:p-0 p-10">
+					<div className="w-full md:w-6/12 flex sm:flex-row flex-col gap-10 justify-between items-between mb-10">
+						<CustomButton
+							type="button"
+							onClick={async (_ev) => {
+								if (cardsAvailable) {
+									setIsGenerating("pitchdeck");
 									const _apiOutput = await callGenerateEndpoint();
-									runDemo(_apiOutput, "download");
-								}}
-								isLoading={isGenerating === "pitchdeck"}
-								outline={true}
-								classes="w-full text-lg px-8 py-3"
-							>
-								Download PitchDeck
-							</CustomButton>
-							<CustomButton
-								type="button"
-								onClick={async (_ev) => {
+									setIsGenerating(false);
+									generatePitchdeck(_apiOutput, "download");
+								} else {
+									promptEnterProjectInfo();
+								}
+							}}
+							isLoading={isGenerating === "pitchdeck"}
+							outline={true}
+							classes="w-full text-lg px-8 py-3"
+						>
+							Download PitchDeck
+						</CustomButton>
+						<CustomButton
+							type="button"
+							onClick={async (_ev) => {
+								if (cardsAvailable) {
+									setIsGenerating("pitchdeckLink");
 									if (!apiOutput) {
 										const _apiOutput = await callGenerateEndpoint();
-										runDemo(_apiOutput, "getLink");
+										await generatePitchdeck(_apiOutput, "getLink");
 									} else {
-										runDemo(apiOutput, "getLink");
+										await generatePitchdeck(apiOutput, "getLink");
 									}
-								}}
-								isLoading={isPitchdeckLinkGenerating}
-								outline={true}
-								classes="w-full text-lg px-8 py-3"
-							>
-								Get PitchDeck Link
-							</CustomButton>
-						</div>
+									setIsGenerating(false);
+								} else {
+									promptEnterProjectInfo();
+								}
+							}}
+							isLoading={isGenerating === "pitchdeckLink"}
+							outline={true}
+							classes="w-full text-lg px-8 py-3"
+						>
+							Get PitchDeck Link
+						</CustomButton>
+					</div>
 
-						{ipfsUrl && (
-							<a href={ipfsUrl} target="_blank" rel="noopener noreferrer" className="mb-12 underline hover:text-primary-400">
-								{ipfsUrl}
-							</a>
-						)}
+					{ipfsUrl && (
+						<a href={ipfsUrl} target="_blank" rel="noopener noreferrer" className="mb-12 underline hover:text-primary-400">
+							{ipfsUrl}
+						</a>
+					)}
 
-						<div className="w-full grid grid-cols-3 place-items-center gap-y-6 gap-x-20">
-							<PromptCard
-								handleCardClick={callGenerateMomTestEndpoint}
-								cardInfo="Mom Test: How to talk to initial customers"
-								isLoading={isGeneratingMomTestPitch}
-							/>
-							<PromptCard handleCardClick={callGenerateVCPitchEndpoint} cardInfo="Email Pitch to VC" isLoading={isGeneratingVCPitch} />
-							<PromptCard handleCardClick={callGenerateUserPersonaEndpoint} cardInfo="User Persona" isLoading={isGeneratingUserPersona} />
-							<PromptCard
-								handleCardClick={callGeneratePotentialCustomerEndpoint}
-								cardInfo="Type of Potential Customers"
-								isLoading={isGeneratingPotentialCustomers}
-							/>
-							<PromptCard
-								handleCardClick={callLeanStartupEndpoint}
-								cardInfo="Advice from the book: The Lean Startup"
-								isLoading={isGeneratingLeanStartup}
-							/>
-							<PromptCard
-								handleCardClick={callSPMEEndpoint}
-								cardInfo="SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs"
-								isLoading={isGeneratingSPME}
-							/>
-							<PromptCard handleCardClick={callMVPEndpoint} cardInfo="MVP Launch Checklist" isLoading={isGeneratingMVP} />
-							<PromptCard handleCardClick={callGrantEndpoint} cardInfo="Grant Proposal" isLoading={isGeneratingGrant} />
-
-							<PromptCard
-								handleCardClick={callGenerateCoFounderPitchEndpoint}
-								cardInfo="Pitch to Onboard Potential Co-Founder"
-								isLoading={isGeneratingCoFounderPitch}
-							/>
-							<PromptCard
-								handleCardClick={callGenerateMarketingAdvisorEndpoint}
-								cardInfo="Pitch to Onboard Potential Advisor (Marketing)"
-								isLoading={isGeneratingMarketingAdvisorPitch}
-							/>
-							<PromptCard handleCardClick={callTwitterEndpoint} cardInfo="Initial Twitter Strategy" isLoading={isGeneratingTwitter} />
-							<PromptCard handleCardClick={callInstagramEndpoint} cardInfo="Initial Instagram Strategy" isLoading={isGeneratingInstagram} />
-						</div>
+					<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+						<PromptCard
+							cardText="Mom Test: How to talk to initial customers"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("momTest");
+								await callGenerateMomTestEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "momTest"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Email Pitch to VC"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("vcPitch");
+								await callGenerateVCPitchEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "vcPitch"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="User Persona"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("userPersona");
+								await callGenerateUserPersonaEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "userPersona"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Type of Potential Customers"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("potentialCustomers");
+								await callGeneratePotentialCustomerEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "potentialCustomers"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Advice from the book: The Lean Startup"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("leanStartup");
+								await callLeanStartupEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "leanStartup"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("spme");
+								await callSPMEEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "spme"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="MVP Launch Checklist"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("mvpLaunchChecklist");
+								await callMVPEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "mvpLaunchChecklist"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Grant Proposal"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("grantProposal");
+								await callGrantEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "grantProposal"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Pitch to Onboard Potential Co-Founder"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("coFounderPitch");
+								await callGenerateCoFounderPitchEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "coFounderPitch"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Pitch to Onboard Potential Advisor (Marketing)"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("marketingAdvisorPitch");
+								await callGenerateMarketingAdvisorEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "marketingAdvisorPitch"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Initial Twitter Strategy"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("twitterStrategy");
+								await callTwitterEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "twitterStrategy"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Initial Instagram Strategy"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("instagramStrategy");
+								await callInstagramEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "instagramStrategy"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
 					</div>
 				</div>
-			)}
+			</div>
+
+			<ContentModal isOpen={isContentModalOpen} setOpen={setContentModalOpen} heading={modalText.heading} content={modalText.content} />
 		</>
 	);
 };

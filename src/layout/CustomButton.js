@@ -1,7 +1,7 @@
 export default function CustomButton({
 	primary = false,
 	outline = false,
-	light200 = false,
+	light = false,
 	error = false,
 	onClick,
 	children,
@@ -31,9 +31,9 @@ export default function CustomButton({
 					  ` bg-error-400 hover:bg-error-500 font-primary font-semibold text-light-100 transition duration-300 cursor-pointer ${
 							classes ? classes : "text-lg px-8 py-2"
 					  }`
-					: light200
+					: light
 					? (rounded ? ` rounded-full` : ` rounded-lg`) +
-					  ` bg-light-300/60 hover:bg-light-300/80 font-primary font-semibold text-dark-600 transition duration-300 cursor-pointer ${
+					  ` bg-light-300/70 hover:bg-primary-500 font-primary font-semibold text-dark-600 hover:text-light-100 transition duration-200 cursor-pointer ${
 							classes ? classes : "text-lg px-8 py-2"
 					  }`
 					: (rounded ? ` rounded-full` : ` rounded-lg`) +
