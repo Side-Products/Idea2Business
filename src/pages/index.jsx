@@ -59,7 +59,7 @@ export default function HomePage() {
 					<div className="lg:max-w-[80%]">
 						<p className=" number flex items-end text-5xl font-bold">3<span className="inline-block bg-red-400 h-1.5 rounded-full w-1.5 "></span></p>
 
-						<h2 className="text-xl lg:text-2xl font-bold mt-4 mb-3">It's not rocket science</h2>
+						<h2 className="text-xl lg:text-2xl font-bold mt-4 mb-3">Get everything you need to succeed</h2>
 						<p className="text-white-700 text-lg">Just provide your project details. From getting the <span className="text-red-700 font-bold">first initial users</span> to <span className="text-red-700 font-bold">drafting email pitch to a VC</span>, our platform will handle everything for you.</p>
 					</div>
 					<div className="lg:max-w-[80%]">
