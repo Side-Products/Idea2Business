@@ -816,7 +816,7 @@ const Home = () => {
 			<div className="flex justify-center items-center bg-[url('/hero-3.jpg')] bg-cover bg-no-repeat h-screen" id="projectInfo">
 				<div className="flex flex-col justify-center items-center">
 					<div className="flex flex-col">
-						<h1 className="text-center text-[44px] sm:text-[80px] tracking-[-2px] font-semibold leading-[1.2em]">Project~Product</h1>
+						<h1 className="text-center text-[44px] sm:text-[80px] tracking-[-1.5px] font-semibold leading-[1.2em]">Project~Product</h1>
 						<h2 className="mt-4 px-4 text-center text-sm sm:text-lg leading-[1.4em] text-light-400">
 							Transforming your side-projects and hackathon-projects into profitable products. <br />
 							Just enter your project name and project description, Project2Product will help you turn it into a successful venture.
@@ -873,9 +873,11 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="w-full flex justify-center items-center py-28 bg-gradient-to-r from-[#828282] via-[#5C5C5C] to-[#424242]" id="cardContainer">
+			<div className="w-full flex justify-center items-center pt-20 pb-32 bg-gradient-to-r from-[#828282] via-[#5C5C5C] to-[#424242]" id="cardContainer">
 				<div className="w-full md:w-5/6 xl:w-4/6 flex flex-col justify-center items-center md:p-0 p-10">
-					<div className="w-full md:w-6/12 flex sm:flex-row flex-col gap-10 justify-between items-between mb-10">
+					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-16 mb-10">Pitches</h2>
+
+					<div className="w-full md:w-6/12 flex sm:flex-row flex-col gap-10 justify-between items-between">
 						<CustomButton
 							type="button"
 							onClick={async (_ev) => {
@@ -917,25 +919,12 @@ const Home = () => {
 							Get PitchDeck Link
 						</CustomButton> */}
 					</div>
-
-					{ipfsUrl && (
+					{/* {ipfsUrl && (
 						<a href={ipfsUrl} target="_blank" rel="noopener noreferrer" className="mb-12 underline hover:text-primary-400">
 							{ipfsUrl}
 						</a>
-					)}
-
-					<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
-						<PromptCard
-							cardText="Mom Test: How to talk to initial customers"
-							handleCardClick={async (choice, cardText) => {
-								setIsGenerating("momTest");
-								await callGenerateMomTestEndpoint(choice, cardText);
-								setIsGenerating(false);
-							}}
-							isLoading={isGenerating === "momTest"}
-							cardsAvailable={cardsAvailable}
-							promptEnterProjectInfo={promptEnterProjectInfo}
-						/>
+					)} */}
+					<div className="mt-8 w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 						<PromptCard
 							cardText="Email Pitch to VC"
 							handleCardClick={async (choice, cardText) => {
@@ -948,6 +937,34 @@ const Home = () => {
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
 						<PromptCard
+							cardText="Pitch to Onboard Potential Co-Founder"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("coFounderPitch");
+								await callGenerateCoFounderPitchEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "coFounderPitch"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Pitch to Onboard Potential Advisor (Marketing)"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("marketingAdvisorPitch");
+								await callGenerateMarketingAdvisorEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "marketingAdvisorPitch"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+					</div>
+
+					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10">
+						Understanding Potential Users
+					</h2>
+					<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+						<PromptCard
 							cardText="User Persona"
 							handleCardClick={async (choice, cardText) => {
 								setIsGenerating("userPersona");
@@ -955,6 +972,17 @@ const Home = () => {
 								setIsGenerating(false);
 							}}
 							isLoading={isGenerating === "userPersona"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Mom Test: How to talk to initial customers"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("momTest");
+								await callGenerateMomTestEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "momTest"}
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
@@ -969,6 +997,38 @@ const Home = () => {
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
+					</div>
+
+					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10">
+						Social Media Strategy
+					</h2>
+					<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+						<PromptCard
+							cardText="Initial Twitter Strategy"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("twitterStrategy");
+								await callTwitterEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "twitterStrategy"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Initial Instagram Strategy"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("instagramStrategy");
+								await callInstagramEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "instagramStrategy"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+					</div>
+
+					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10">Advice from books</h2>
+					<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 						<PromptCard
 							cardText="Advice from the book: The Lean Startup"
 							handleCardClick={async (choice, cardText) => {
@@ -980,6 +1040,10 @@ const Home = () => {
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
+					</div>
+
+					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10">Bonus</h2>
+					<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 						<PromptCard
 							cardText="SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs"
 							handleCardClick={async (choice, cardText) => {
@@ -1010,50 +1074,6 @@ const Home = () => {
 								setIsGenerating(false);
 							}}
 							isLoading={isGenerating === "grantProposal"}
-							cardsAvailable={cardsAvailable}
-							promptEnterProjectInfo={promptEnterProjectInfo}
-						/>
-						<PromptCard
-							cardText="Pitch to Onboard Potential Co-Founder"
-							handleCardClick={async (choice, cardText) => {
-								setIsGenerating("coFounderPitch");
-								await callGenerateCoFounderPitchEndpoint(choice, cardText);
-								setIsGenerating(false);
-							}}
-							isLoading={isGenerating === "coFounderPitch"}
-							cardsAvailable={cardsAvailable}
-							promptEnterProjectInfo={promptEnterProjectInfo}
-						/>
-						<PromptCard
-							cardText="Pitch to Onboard Potential Advisor (Marketing)"
-							handleCardClick={async (choice, cardText) => {
-								setIsGenerating("marketingAdvisorPitch");
-								await callGenerateMarketingAdvisorEndpoint(choice, cardText);
-								setIsGenerating(false);
-							}}
-							isLoading={isGenerating === "marketingAdvisorPitch"}
-							cardsAvailable={cardsAvailable}
-							promptEnterProjectInfo={promptEnterProjectInfo}
-						/>
-						<PromptCard
-							cardText="Initial Twitter Strategy"
-							handleCardClick={async (choice, cardText) => {
-								setIsGenerating("twitterStrategy");
-								await callTwitterEndpoint(choice, cardText);
-								setIsGenerating(false);
-							}}
-							isLoading={isGenerating === "twitterStrategy"}
-							cardsAvailable={cardsAvailable}
-							promptEnterProjectInfo={promptEnterProjectInfo}
-						/>
-						<PromptCard
-							cardText="Initial Instagram Strategy"
-							handleCardClick={async (choice, cardText) => {
-								setIsGenerating("instagramStrategy");
-								await callInstagramEndpoint(choice, cardText);
-								setIsGenerating(false);
-							}}
-							isLoading={isGenerating === "instagramStrategy"}
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
