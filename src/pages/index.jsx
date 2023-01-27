@@ -20,7 +20,7 @@ export default function HomePage() {
 			</Head>
 
 			<div className="flex flex-col justify-center items-center bg-[url('/hero-3.jpg')] bg-cover bg-no-repeat h-screen">
-				<h1 className="px-8 text-[40px] sm:text-[50px] md:text-[80px] text-center font-semibold">
+				<h1 className="px-2 sm:px-8 md:px-16 text-[40px] sm:text-[50px] md:text-[80px] text-center font-semibold tracking-[-2.5px]">
 					Transforming Your Projects Into Profitable Products!
 				</h1>
 				<p className="mt-8 text-center">Just provide your project details, Project2Product will help you turn it into a successful venture</p>

@@ -87,25 +87,6 @@ const Home = () => {
 			let outputArray = output.text.split(/\r?\n/);
 			setApiOutput([...outputArray]);
 
-			let currentdate = new Date();
-			let datetime =
-				currentdate.getDate() +
-				"/" +
-				(currentdate.getMonth() + 1) +
-				"/" +
-				currentdate.getFullYear() +
-				" @ " +
-				currentdate.getHours() +
-				":" +
-				currentdate.getMinutes() +
-				":" +
-				currentdate.getSeconds();
-			const newRow = {
-				DateTime: datetime,
-				UserPrompt: userInput,
-			};
-			appendSpreadsheet(newRow);
-
 			return outputArray;
 		} else {
 			promptEnterProjectInfo();
@@ -852,6 +833,25 @@ const Home = () => {
 												sleep(1000).then(() => {
 													setIsGenerating(false);
 													setCardsAvailable(true);
+													let currentdate = new Date();
+													let datetime =
+														currentdate.getDate() +
+														"/" +
+														(currentdate.getMonth() + 1) +
+														"/" +
+														currentdate.getFullYear() +
+														" @ " +
+														currentdate.getHours() +
+														":" +
+														currentdate.getMinutes() +
+														":" +
+														currentdate.getSeconds();
+													const newRow = {
+														DateTime: datetime,
+														UserPrompt: userInput,
+														Email: session.user.email,
+													};
+													appendSpreadsheet(newRow);
 												});
 											}
 										} else {
