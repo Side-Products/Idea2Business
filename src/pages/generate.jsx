@@ -894,7 +894,7 @@ const Home = () => {
 						>
 							Download PitchDeck
 						</CustomButton>
-						<CustomButton
+						{/* <CustomButton
 							type="button"
 							onClick={async (_ev) => {
 								if (cardsAvailable) {
@@ -915,7 +915,7 @@ const Home = () => {
 							classes="w-full text-lg px-8 py-3"
 						>
 							Get PitchDeck Link
-						</CustomButton>
+						</CustomButton> */}
 					</div>
 
 					{ipfsUrl && (
