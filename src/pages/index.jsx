@@ -33,7 +33,7 @@ export default function HomePage() {
 					<p className={styles.heroSubTitle}>Just provide your project details, Project2Product will help you turn it into a successful venture.</p>
 					<br />
 					<Link href={"/generate"} passHref>
-						<button className={styles.joinNow}>Take your project to moon!</button>
+						<button className={styles.joinNow}>Get Started</button>
 					</Link>
 				</div>
     		</div>
