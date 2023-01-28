@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import AuthModalContext from "@/store/authModal-context";
 import logoBlack from "../../../../public/site_logo.png";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 	const { data: session, status } = useSession();
@@ -28,18 +28,26 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 								<div className="md:mx-1/6 md:w-1/5 px-4 offset-0 w-full flex justify-center sm:block logo_div_anim">
 									<Link href={"/"} passHref={true}>
 										<span href="#" onClick={closeNavbar} className="flex">
-											<Image src={logoBlack} alt="MXV Logo" width="75" />
+											<Image src={logoBlack} alt="MXV Logo" width="60" className="rounded-md" />
 										</span>
 									</Link>
 								</div>
-								<div className="w-full xs:w-2/3 md:w-2/5 sm:w-3/5 px-4 mt-1 create_left_anim self-center sm:self-end flex items-center justify-between space-x-6">
+								<div className="w-full xs:w-2/3 md:w-2/5 sm:w-3/5 px-4 mt-4 create_left_anim self-center sm:self-end flex items-center justify-between space-x-6">
 									<div className="quick_hamburger_nav_div w-full">
 										{status === "authenticated" ? (
-											<div className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200">
-												<span className="mr-4">{truncatedName}</span>
-												{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
-											</div>
-										) : !status === "authenticated" ? (
+											<>
+												<div className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200">
+													<span className="mr-4">{truncatedName}</span>
+													{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
+												</div>
+												<button
+													className="w-full mt-2 px-4 py-2 font-medium transition-all cursor-pointer rounded-full bg-error-600/30"
+													onClick={() => signOut()}
+												>
+													Sign out
+												</button>
+											</>
+										) : (
 											<div
 												onClick={() => {
 													closeNavbar();
@@ -49,17 +57,12 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 											>
 												Sign up / Login
 											</div>
-										) : (
-											<div className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200">
-												<span className="mr-4">User</span>
-												{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
-											</div>
 										)}
 									</div>
 								</div>
 							</div>
 
-							<div className="hamburger_menu justify-center">
+							{/* <div className="hamburger_menu justify-center">
 								<div className="flex flex-wrap justify-center">
 									<div className="lg:w-full md:w-4/5 px-4 offset-0 w-full md:mt-0">
 										<div className="flex flex-wrap justify-center">
@@ -266,7 +269,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 										</a>
 									</div>
 								</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

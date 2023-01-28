@@ -38,7 +38,7 @@ export default function HomePage() {
 						rounded={true}
 						classes="text-lg px-8 py-3"
 					>
-						Get Started
+						{session && session.user && status === "authenticated" ? "Generate Now" : "Get Started"}
 					</CustomButton>
 				</div>
 			</div>
