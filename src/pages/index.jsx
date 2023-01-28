@@ -185,7 +185,7 @@ export default function HomePage() {
 				<div className="bottom-bar bg-slate-800 py-8 px-7 rounded-2xl flex flex-col gap-[20px] text-center items-center justify-center">
 				<span className="text-4xl">Why we built this?</span>
 				<p className="text-gray-200 text-2xl">
-					We spent weeks to research and figure out all these for our previous product, so we built a tool that does the job within minutes!
+					We spent weeks to research and draft all these for our previous product, so we built a tool that does the job within minutes!
 				</p>
 				{/* <button className="py-3 px-7 w-fit border border-solid border-gray-300 rounded-lg bg-white text-gray-700 hover:bg-gray-100 active:bg-gray-200 transition">
 					Get in touch
