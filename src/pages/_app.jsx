@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
+import * as ga from "../../lib/google-analytics";
 import "@/styles/styles.css";
 import ScrollToPageTop from "@/utils/ScrollToPageTop";
 import Layout from "@/layout/WrapLayout/Layout";
@@ -8,7 +9,18 @@ import StatusContext from "@/store/status-context";
 import LoadingContext from "@/store/loading-context";
 import AuthModalContext from "@/store/authModal-context";
 
-function App({ Component, pageProps, session }) {
+function App({ Component, pageProps, session, router }) {
+	useEffect(() => {
+		const handleRouteChange = (url) => {
+			ga.pageview(url);
+		};
+
+		router.events.on("routeChangeComplete", handleRouteChange);
+		return () => {
+			router.events.off("routeChangeComplete");
+		};
+	}, [router.events]);
+
 	const [isLoading, setLoading] = useState({
 		status: false,
 		title: "",
@@ -30,14 +42,12 @@ function App({ Component, pageProps, session }) {
 
 	return (
 		<>
-			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
-			<Script 
-            strategy="afterInteractive" 
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-            onError={(err) => {
-              console.error("Google Tag Manager Script Error:", err);
-            }}
-          	></Script>
+			{/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+			<Script
+				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+				strategy="afterInteractive"
+				onError={(err) => {}}
+			/>
 			<Script id="google-analytics" strategy="afterInteractive" onError={(err) => {}}>
 				{`
                     window.dataLayer = window.dataLayer || [];
@@ -48,7 +58,9 @@ function App({ Component, pageProps, session }) {
                     });
                 `}
 			</Script>
-			
+
+			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
+
 			<SessionProvider session={session}>
 				<LoadingContext.Provider value={[isLoading, setLoading]}>
 					<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
