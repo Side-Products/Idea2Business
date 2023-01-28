@@ -1455,6 +1455,8 @@ const Home = () => {
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
 					</div>
+
+					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10">More coming soon...</h2>
 				</div>
 			</div>
 
