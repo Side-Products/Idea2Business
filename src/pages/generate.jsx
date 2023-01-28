@@ -241,6 +241,43 @@ const Home = () => {
 		});
 	};
 
+	const callGenerateMentorPitch = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Pitch to Mentor for your project is being generated...",
+		});
+		// Getting Pitch to Marketing Advisor Content from OpenAI
+		const response = await fetch("/api/mentorpitch", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let mentorpitchOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([mentorpitchOutputArray], { type: "text/plain" }));
+			a.download = "MentorPitch.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
 	const callGenerateUserPersonaEndpoint = async (choice, cardText) => {
 		setLoading({
 			status: true,
@@ -313,6 +350,186 @@ const Home = () => {
 		});
 	};
 
+	const callGenerateCustomerPainPoints = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "List of Customer Pain Points for your project is being generated...",
+		});
+		const response = await fetch("/api/customer-pain-points", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let painPointsOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([painPointsOutputArray], { type: "text/plain" }));
+			a.download = "CustomerPainPoints.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callTwitterEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Twitter Strategy for your project is being generated...",
+		});
+		const response = await fetch("/api/twitter", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let userCusOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "TwitterStrategy.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callInstagramEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Instagram Strategy for your project is being generated...",
+		});
+		const response = await fetch("/api/instagram", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let userCusOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "InstagramStrategy.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callLinkedInEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "LinkedIn Strategy for your project is being generated...",
+		});
+		const response = await fetch("/api/linkedin", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let userCusOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "LinkedInStrategy.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callTikTokEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "TikTok/Reels/Shorts Strategy for your project is being generated...",
+		});
+		const response = await fetch("/api/tiktok", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let userCusOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "TikTokStrategy.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
 	const callLeanStartupEndpoint = async (choice, cardText) => {
 		setLoading({
 			status: true,
@@ -335,6 +552,114 @@ const Home = () => {
 			var a = window.document.createElement("a");
 			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
 			a.download = "AdviceFromLeanStartup.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callHookedEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Advice from Hooked for your project is being generated...",
+		});
+		const response = await fetch("/api/hooked", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let userCusOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "AdviceFromHooked.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callHardThingsAboutHardThingsEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Advice from The Hard Thing About Hard Things for your project is being generated...",
+		});
+		const response = await fetch("/api/the-hard-thing-about-hard-things", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let userCusOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "AdviceFromTheHardThing.txt";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		} else if (choice === "view") {
+			setModalText({ heading: cardText, content: output.text });
+			setContentModalOpen(true);
+		}
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callStartupOwnersManualEndpoint = async (choice, cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Advice from The Startup Owner's Manual for your project is being generated...",
+		});
+		const response = await fetch("/api/startup-owners-manual", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput }),
+		});
+		const data = await response.json();
+		const { output } = data;
+		let userCusOutputArray = output.text;
+
+		if (choice === "download") {
+			// Downloading a text file
+			var a = window.document.createElement("a");
+			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
+			a.download = "AdviceFromStartupOwnersManual.txt";
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);
@@ -457,13 +782,13 @@ const Home = () => {
 		});
 	};
 
-	const callTwitterEndpoint = async (choice, cardText) => {
+	const callLegalAdviceEndpoint = async (choice, cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Twitter Strategy for your project is being generated...",
+			message: "Legal Advice for your project is being generated...",
 		});
-		const response = await fetch("/api/twitter", {
+		const response = await fetch("/api/legal-advice", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -478,43 +803,7 @@ const Home = () => {
 			// Downloading a text file
 			var a = window.document.createElement("a");
 			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "TwitterStrategy.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
-		setLoading({
-			status: false,
-			title: "",
-			message: "",
-		});
-	};
-
-	const callInstagramEndpoint = async (choice, cardText) => {
-		setLoading({
-			status: true,
-			title: "Hang on for a moment",
-			message: "Instagram Strategy for your project is being generated...",
-		});
-		const response = await fetch("/api/instagram", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ userInput }),
-		});
-		const data = await response.json();
-		const { output } = data;
-		let userCusOutputArray = output.text;
-
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "InstagramStrategy.txt";
+			a.download = "LegalAdvice.txt";
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);
@@ -958,6 +1247,17 @@ const Home = () => {
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
+						<PromptCard
+							cardText="Pitch to Get Yourself a Mentor"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("mentorPitch");
+								await callGenerateMentorPitch(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "mentorPitch"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
 					</div>
 
 					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10">
@@ -997,6 +1297,17 @@ const Home = () => {
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
+						<PromptCard
+							cardText="Customer Pain Points"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("customerPainPoints");
+								await callGenerateCustomerPainPoints(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "customerPainPoints"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
 					</div>
 
 					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10">
@@ -1004,7 +1315,7 @@ const Home = () => {
 					</h2>
 					<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 						<PromptCard
-							cardText="Initial Twitter Strategy"
+							cardText="Twitter Strategy"
 							handleCardClick={async (choice, cardText) => {
 								setIsGenerating("twitterStrategy");
 								await callTwitterEndpoint(choice, cardText);
@@ -1015,13 +1326,35 @@ const Home = () => {
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
 						<PromptCard
-							cardText="Initial Instagram Strategy"
+							cardText="Instagram Strategy"
 							handleCardClick={async (choice, cardText) => {
 								setIsGenerating("instagramStrategy");
 								await callInstagramEndpoint(choice, cardText);
 								setIsGenerating(false);
 							}}
 							isLoading={isGenerating === "instagramStrategy"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="LinkedIn Strategy"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("linkedinStrategy");
+								await callLinkedInEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "linkedinStrategy"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="TikTok/Reels/Shorts Strategy"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("tiktokStrategy");
+								await callTikTokEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "tiktokStrategy"}
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
@@ -1037,6 +1370,39 @@ const Home = () => {
 								setIsGenerating(false);
 							}}
 							isLoading={isGenerating === "leanStartup"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Advice from the book: Hooked"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("hooked");
+								await callHookedEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "hooked"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Advice from the book: The Hard Thing About Hard Things"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("hardThingAboutHardThings");
+								await callHardThingsAboutHardThingsEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "hardThingAboutHardThings"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Advice from the book: The Startup Owner’s Manual"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("startupOwnersManual");
+								await callStartupOwnersManualEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "startupOwnersManual"}
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>
@@ -1074,6 +1440,17 @@ const Home = () => {
 								setIsGenerating(false);
 							}}
 							isLoading={isGenerating === "grantProposal"}
+							cardsAvailable={cardsAvailable}
+							promptEnterProjectInfo={promptEnterProjectInfo}
+						/>
+						<PromptCard
+							cardText="Legal Advice"
+							handleCardClick={async (choice, cardText) => {
+								setIsGenerating("legalAdvice");
+								await callLegalAdviceEndpoint(choice, cardText);
+								setIsGenerating(false);
+							}}
+							isLoading={isGenerating === "legalAdvice"}
 							cardsAvailable={cardsAvailable}
 							promptEnterProjectInfo={promptEnterProjectInfo}
 						/>

@@ -47,7 +47,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 				<nav className={"navbar duration-500 ease-in mx-auto " + customStyles}>
 					<div className="flex flex-wrap items-center justify-start w-full pl-7 sm:pl-9 pr-16 lg:px-16 py-2">
 						<Link href="/">
-							<span href="#" className="flex">
+							<span className="flex">
 								<Image src={logoBlack} alt="MXV Logo" width="50" className="rounded-md" />
 							</span>
 						</Link>
@@ -68,7 +68,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 									<ul className="relative group dropdown">
 										<a
 											className="flex items-center dropdown-toggle hidden-arrow"
-											href="#"
 											id="dropdownMenuButton2"
 											role="button"
 											data-bs-toggle="dropdown"

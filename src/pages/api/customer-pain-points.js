@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const pitchDeckPromptPrefix = `Generate advice from the book "The  Lean Startup" specifically for the following startup:
+const pitchDeckPromptPrefix = `Generate the pain points that a potential customer could have for the following startup:
 `;
 
 const generateAction = async (req, res) => {
