@@ -25,6 +25,7 @@ function App({ Component, pageProps, session, router }) {
 		status: false,
 		title: "",
 		message: "",
+		waitMessage: "",
 		showProgressBar: false,
 		progress: 0,
 	});

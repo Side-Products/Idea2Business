@@ -97,7 +97,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Mom Test for your project is being generated...",
+			message: "Mom Test for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Mom Test Content from OpenAI
 		const response = await fetch("/api/momtest", {
@@ -134,7 +135,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "VC Pitch for your project is being generated...",
+			message: "VC Pitch for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting VC Pitch Content from OpenAI
 		const response = await fetch("/api/vcpitch", {
@@ -171,7 +173,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Co-Founder pitch for your project is being generated...",
+			message: "Co-Founder pitch for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Co Founder Content from OpenAI
 		const response = await fetch("/api/cofounderpitch", {
@@ -208,7 +211,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Pitch to Marketing Advisor for your project is being generated...",
+			message: "Pitch to Marketing Advisor for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Marketing Advisor Content from OpenAI
 		const response = await fetch("/api/marketingadvisor", {
@@ -245,7 +249,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Pitch to Mentor for your project is being generated...",
+			message: "Pitch to Mentor for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Marketing Advisor Content from OpenAI
 		const response = await fetch("/api/mentorpitch", {
@@ -282,7 +287,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "User Personas for your project is being generated...",
+			message: "User Personas for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/userpersona", {
 			method: "POST",
@@ -318,7 +324,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "List of Potential Customers for your project is being generated...",
+			message: "List of Potential Customers for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/potentialcustomer", {
 			method: "POST",
@@ -354,7 +361,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "List of Customer Pain Points for your project is being generated...",
+			message: "List of Customer Pain Points for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/customer-pain-points", {
 			method: "POST",
@@ -390,7 +398,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Twitter Strategy for your project is being generated...",
+			message: "Twitter Strategy for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/twitter", {
 			method: "POST",
@@ -426,7 +435,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Instagram Strategy for your project is being generated...",
+			message: "Instagram Strategy for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/instagram", {
 			method: "POST",
@@ -462,7 +472,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "LinkedIn Strategy for your project is being generated...",
+			message: "LinkedIn Strategy for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/linkedin", {
 			method: "POST",
@@ -498,7 +509,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "TikTok/Reels/Shorts Strategy for your project is being generated...",
+			message: "TikTok/Reels/Shorts Strategy for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/tiktok", {
 			method: "POST",
@@ -534,7 +546,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from the Lean Startup for your project is being generated...",
+			message: "Advice from the Lean Startup for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/leanstartup", {
 			method: "POST",
@@ -570,7 +583,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from Hooked for your project is being generated...",
+			message: "Advice from Hooked for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/hooked", {
 			method: "POST",
@@ -606,7 +620,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from The Hard Thing About Hard Things for your project is being generated...",
+			message: "Advice from The Hard Thing About Hard Things for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/the-hard-thing-about-hard-things", {
 			method: "POST",
@@ -642,7 +657,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from The Startup Owner's Manual for your project is being generated...",
+			message: "Advice from The Startup Owner's Manual for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/startup-owners-manual", {
 			method: "POST",
@@ -678,7 +694,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "SPME for your project is being generated...",
+			message: "SPME for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/spme", {
 			method: "POST",
@@ -714,7 +731,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "MVP Launch checklist for your project is being generated...",
+			message: "MVP Launch checklist for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/mvp", {
 			method: "POST",
@@ -750,7 +768,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Grant Proposal for your project is being generated...",
+			message: "Grant Proposal for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/grant", {
 			method: "POST",
@@ -786,7 +805,8 @@ const Home = () => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Legal Advice for your project is being generated...",
+			message: "Legal Advice for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/legal-advice", {
 			method: "POST",
@@ -1095,7 +1115,7 @@ const Home = () => {
 
 					<form className="w-full p-4 sm:p-0 sm:w-1/2 h-min flex flex-col items-center justify-center mt-4 sm:mt-14">
 						<input
-							className="w-full bg-light-700/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-12 p-3 normal-case"
+							className="w-full bg-dark-600/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-12 p-3 normal-case"
 							placeholder="Project Name"
 							value={productName}
 							onChange={onUserChangedProductName}
@@ -1103,7 +1123,7 @@ const Home = () => {
 						/>
 						<br />
 						<textarea
-							className="w-full bg-light-700/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-60 p-3 normal-case resize-none"
+							className="w-full bg-dark-600/40 border border-light-700 focus:border-light-500 transform duration-300 outline-0 rounded-xl h-60 p-3 normal-case resize-none"
 							placeholder="Project Description"
 							value={productDescription}
 							onChange={onUserChangedProductDescription}

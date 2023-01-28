@@ -30,6 +30,12 @@ export default function Loading() {
 						<span>{isLoading.message}</span>
 					</p>
 				)}
+
+				{isLoading.waitMessage && (
+					<p>
+						<span>{isLoading.waitMessage}</span>
+					</p>
+				)}
 			</div>
 		)
 	);
