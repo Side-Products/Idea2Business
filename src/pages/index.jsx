@@ -102,7 +102,7 @@ export default function HomePage() {
 
 			<div className="container mx-auto flex flex-col gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px] py-[30px] sm:py-[35px] md:py-[40px] lg:py-[45px] xl:py-[50px] px-[15px] sm:px-[30px] md:px-[45px] lg:px-[60px] xl:px-[75px]">
 				<div className="top-bar flex flex-col gap-[30px] text-center">
-				<span className="text-3xl md:text-4xl">How will Project2Product unlock your project's potential?</span>
+				<span className="text-3xl md:text-4xl font-bold lg:text-6xl">How will Project2Product unlock your project's potential?</span>
 				<p className="text-lg md:text-xl text-gray-200">
 					Get all these for your project using our tool
 				</p>
