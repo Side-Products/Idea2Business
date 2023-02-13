@@ -1,25 +1,25 @@
 import ProjectSearch from "../models/projectSearch";
-import ErrorHandler from "@/utils/errorHandler";
-import APIFeatures from "@/utils/apiFeatures";
+import ErrorHandler from "@/backend/utils/errorHandler";
+import APIFeatures from "@/backend/utils/apiFeatures";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 
 const allSearches = catchAsyncErrors(async (req, res) => {
-	const resultsPerPage = 1;
-	const projectSearchCount = await ProjectSearch.countDocuments();
+	const resultsPerPage = 8;
+	const projectsCount = await ProjectSearch.countDocuments();
 
 	const apiFeatures = new APIFeatures(ProjectSearch.find(), req.query).search().filter();
-	let projectSearches = await apiFeatures.query;
-	let filteredProjectSearchCount = projectSearches.length;
+	let projects = await apiFeatures.query;
+	let filteredProjectsCount = projects.length;
 
 	apiFeatures.pagination(resultsPerPage);
-	projectSearches = await apiFeatures.query.clone();
+	projects = await apiFeatures.query.clone();
 
 	res.status(200).json({
 		success: true,
-		projectSearchCount,
+		projectsCount,
 		resultsPerPage,
-		filteredProjectSearchCount,
-		projectSearches,
+		filteredProjectsCount,
+		projects,
 	});
 });
 

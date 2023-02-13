@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { title_main_page, meta_description } from "@/config/constants";
 import CustomButton from "@/layout/CustomButton";
 import AuthModalContext from "@/store/authModal-context";
+import { HeroSection } from "@/components/Home/HeroSection";
 
 export default function HomePage() {
 	const router = useRouter();
@@ -19,29 +20,7 @@ export default function HomePage() {
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			<div className="flex flex-col justify-center items-center bg-[url('/hero-3.jpg')] bg-cover bg-no-repeat h-screen">
-				<h1 className="px-2 sm:px-8 md:px-16 text-[40px] sm:text-[50px] md:text-[80px] text-center font-semibold tracking-[-2.5px]">
-					Transforming Your Projects Into Profitable Products!
-				</h1>
-				<p className="mt-8 text-center">Just provide your project details, Project2Product will help you turn it into a successful venture</p>
-				<div className="w-2/3 sm:w-1/4 md:w-1/5 xl:w-1/6 mt-32">
-					<CustomButton
-						type="button"
-						onClick={() => {
-							if (session && session.user && status === "authenticated") {
-								router.push("/generate");
-							} else {
-								setAuthModalOpen(true);
-							}
-						}}
-						primary={true}
-						rounded={true}
-						classes="text-lg px-8 py-3"
-					>
-						{session && session.user && status === "authenticated" ? "Generate Now" : "Get Started"}
-					</CustomButton>
-				</div>
-			</div>
+			<HeroSection />
 
 			<main className="min-h-screen grid grid-cols-12 container mx-auto px-10 py-14 gap-x-5 place-content-center">
 				<h1 className="col-span-12 lg:col-span-7 font-bold text-3xl md:text-5xl lg:text-6xl self-center leading-7">

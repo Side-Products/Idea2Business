@@ -10,7 +10,8 @@
             "@/lib/*": ["src/lib/*"],
             "@/utils/*": ["src/utils/*"],
             "@/styles/*": ["styles/*"],
-            "@/store/*": ["store/*"]
+            "@/store/*": ["src/store/*"],
+            "@/redux/*": ["src/redux/*"]
         }
     }
 }

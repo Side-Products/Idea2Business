@@ -104,20 +104,13 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 																	<p>{truncatedEmail}</p>
 																</div>
 																{avatarUrl ? (
-																	<Image
-																		src={avatarUrl}
-																		alt={"avatar"}
-																		width={40}
-																		height={40}
-																		objectFit="contain"
-																		className="rounded-lg"
-																	/>
+																	<Image src={avatarUrl} alt={"avatar"} width={40} height={40} className="rounded-lg" />
 																) : null}
 															</div>
 														</div>
 													)}
 												</li>
-												{/* {status === "authenticated" && (
+												{status === "authenticated" && (
 													<li>
 														<Link href={`/profile`} passHref={true}>
 															<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
@@ -126,7 +119,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 														</Link>
 													</li>
 												)}
-												 */}
 
 												{/* Logout Button */}
 												<li>
