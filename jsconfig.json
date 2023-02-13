@@ -3,6 +3,7 @@
         "target": "esnext",
         "baseUrl": ".",
         "paths": {
+            "@/backend/*": ["src/backend/*"],
             "@/components/*": ["src/components/*"],
             "@/layout/*": ["src/layout/*"],
             "@/config/*": ["src/config/*"],
