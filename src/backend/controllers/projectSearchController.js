@@ -4,7 +4,7 @@ import APIFeatures from "@/backend/utils/apiFeatures";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 
 const allSearches = catchAsyncErrors(async (req, res) => {
-	const resultsPerPage = 8;
+	const resultsPerPage = 4;
 	const projectsCount = await ProjectSearch.countDocuments();
 
 	const apiFeatures = new APIFeatures(ProjectSearch.find(), req.query).search().filter();
@@ -23,13 +23,13 @@ const allSearches = catchAsyncErrors(async (req, res) => {
 	});
 });
 
-// add to db => /api/project-search
+// add to db => /api/projects
 const newProjectSearch = catchAsyncErrors(async (req, res) => {
 	const projectSearch = await ProjectSearch.create(req.body);
 	res.status(200).json({ success: true, projectSearch });
 });
 
-// get project details => /api/project-search/:id
+// get project details => /api/projects/:id
 const getSearchedProject = catchAsyncErrors(async (req, res, next) => {
 	const projectSearch = await ProjectSearch.findById(req.query.id);
 	if (!projectSearch) {
@@ -38,7 +38,7 @@ const getSearchedProject = catchAsyncErrors(async (req, res, next) => {
 	res.status(200).json({ success: true, projectSearch });
 });
 
-// update project details => /api/project-search/:id
+// update project details => /api/projects/:id
 const updateSearchedProject = catchAsyncErrors(async (req, res, next) => {
 	let projectSearch = await ProjectSearch.findById(req.query.id);
 	if (!projectSearch) {
@@ -53,7 +53,7 @@ const updateSearchedProject = catchAsyncErrors(async (req, res, next) => {
 	res.status(200).json({ success: true, projectSearch });
 });
 
-// delete project => /api/project-search/:id
+// delete project => /api/projects/:id
 const deleteSearchedProject = catchAsyncErrors(async (req, res, next) => {
 	const projectSearch = await ProjectSearch.findById(req.query.id);
 	if (!projectSearch) {

@@ -4,8 +4,8 @@ import { getProjects } from "@/redux/actions/projectActions";
 import { wrapper } from "@/redux/redux-store";
 import { Projects } from "@/components/Profile/Projects";
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
-	await store.dispatch(getProjects(req));
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
+	await store.dispatch(getProjects(req, query.page, query.search));
 });
 
 export default function Profile() {

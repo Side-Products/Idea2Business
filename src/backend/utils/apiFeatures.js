@@ -5,16 +5,16 @@ class APIFeatures {
 	}
 
 	search() {
-		const name = this.queryString.name
+		const search = this.queryString.search
 			? {
 					name: {
-						$regex: this.queryString.name,
+						$regex: this.queryString.search,
 						$options: "i",
 					},
 			  }
 			: {};
 
-		this.query = this.query.find({ ...name });
+		this.query = this.query.find({ ...search });
 		return this;
 	}
 

@@ -4,6 +4,32 @@ module.exports = {
 	content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
+			animation: {
+				text: "text 5s ease infinite",
+				bg: "text 3s ease infinite",
+			},
+			keyframes: {
+				text: {
+					"0%, 100%": {
+						"background-size": "200% 200%",
+						"background-position": "left center",
+					},
+					"50%": {
+						"background-size": "200% 200%",
+						"background-position": "right center",
+					},
+				},
+				bg: {
+					"0%, 100%": {
+						"background-size": "200% 200%",
+						"background-position": "left center",
+					},
+					"50%": {
+						"background-size": "200% 200%",
+						"background-position": "right center",
+					},
+				},
+			},
 			colors: {
 				primary: {
 					100: "#e0f2f1",

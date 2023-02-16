@@ -18,7 +18,7 @@ export default function CustomButton({
 			className={
 				`w-full flex items-center justify-center ` +
 				(primary
-					? (isLoading ? `bg-primary-800` : `bg-primary-500 hover:bg-primary-600`) +
+					? (isLoading ? `bg-primary-800` : `bg-gradient-to-r from-rose-500 to-orange-500 animate-bg`) +
 					  (rounded ? ` rounded-full` : ` rounded-lg`) +
 					  ` font-primary font-semibold text-light-100 transition duration-300 cursor-pointer ${classes ? classes : "text-lg px-8 py-2"}`
 					: outline
