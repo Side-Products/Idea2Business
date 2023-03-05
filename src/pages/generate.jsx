@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("@/components/ContentModal"));
 import PromptCard from "@/components/PromptCard";
 import { title_main_page, meta_description } from "@/config/constants";
-import CustomButton from "@/layout/CustomButton";
+import Button from "@/components/ui/Button";
 import StatusContext from "@/store/status-context";
 import LoadingContext from "@/store/loading-context";
 import AuthModalContext from "@/store/authModal-context";
@@ -1131,52 +1131,52 @@ const Home = () => {
 						/>
 						<br />
 						<div className="w-2/3 sm:w-1/3 flex items-center justify-center">
-							<CustomButton
+							<Button
 								type="button"
+								variant={"primary"}
 								onClick={() => {
-									if (status === "authenticated" && session && session.user) {
-										if (productName.length > 0 && productDescription.length > 0) {
-											if (isGenerating !== "generating") {
-												setCardsAvailable(false);
-												setIsGenerating("generating");
-												sleep(1000).then(() => {
-													setIsGenerating(false);
-													setCardsAvailable(true);
-													let currentdate = new Date();
-													let datetime =
-														currentdate.getDate() +
-														"/" +
-														(currentdate.getMonth() + 1) +
-														"/" +
-														currentdate.getFullYear() +
-														" @ " +
-														currentdate.getHours() +
-														":" +
-														currentdate.getMinutes() +
-														":" +
-														currentdate.getSeconds();
-													const newRow = {
-														DateTime: datetime,
-														UserPrompt: userInput,
-														Email: session.user.email,
-													};
-													appendSpreadsheet(newRow);
-												});
-											}
-										} else {
-											promptEnterProjectInfo();
+									// if (status === "authenticated" && session && session.user) {
+									if (productName.length > 0 && productDescription.length > 0) {
+										if (isGenerating !== "generating") {
+											setCardsAvailable(false);
+											setIsGenerating("generating");
+											sleep(1000).then(() => {
+												setIsGenerating(false);
+												setCardsAvailable(true);
+												let currentdate = new Date();
+												let datetime =
+													currentdate.getDate() +
+													"/" +
+													(currentdate.getMonth() + 1) +
+													"/" +
+													currentdate.getFullYear() +
+													" @ " +
+													currentdate.getHours() +
+													":" +
+													currentdate.getMinutes() +
+													":" +
+													currentdate.getSeconds();
+												const newRow = {
+													DateTime: datetime,
+													UserPrompt: userInput,
+													Email: session.user.email,
+												};
+												appendSpreadsheet(newRow);
+											});
 										}
 									} else {
-										setAuthModalOpen(true);
+										promptEnterProjectInfo();
 									}
+									// } else {
+									// 	setAuthModalOpen(true);
+									// }
 								}}
 								isLoading={isGenerating === "generating"}
-								primary={true}
 								rounded={true}
 								classes="text-lg px-8 py-3"
 							>
 								Generate
-							</CustomButton>
+							</Button>
 						</div>
 					</form>
 				</div>
@@ -1187,8 +1187,10 @@ const Home = () => {
 					<h2 className="text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-16 mb-10">Pitches</h2>
 
 					<div className="w-full md:w-6/12 flex sm:flex-row flex-col gap-10 justify-between items-between">
-						<CustomButton
+						<Button
 							type="button"
+							variant={"primary"}
+							outline={true}
 							onClick={async (_ev) => {
 								if (cardsAvailable) {
 									setIsGenerating("pitchdeck");
@@ -1200,12 +1202,11 @@ const Home = () => {
 								}
 							}}
 							isLoading={isGenerating === "pitchdeck"}
-							outline={true}
 							classes="w-full text-lg px-8 py-3"
 						>
 							Download PitchDeck
-						</CustomButton>
-						{/* <CustomButton
+						</Button>
+						{/* <Button
 							type="button"
 							onClick={async (_ev) => {
 								if (cardsAvailable) {
@@ -1226,7 +1227,7 @@ const Home = () => {
 							classes="w-full text-lg px-8 py-3"
 						>
 							Get PitchDeck Link
-						</CustomButton> */}
+						</Button> */}
 					</div>
 					{/* {ipfsUrl && (
 						<a href={ipfsUrl} target="_blank" rel="noopener noreferrer" className="mb-12 underline hover:text-primary-400">

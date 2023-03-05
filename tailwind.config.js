@@ -134,6 +134,7 @@ module.exports = {
 				// primary: ["Cal Sans", "sans-serif"],
 				secondary: ["Poppins", "sans-serif"],
 				tertiary: ["Roboto", "sans-serif"],
+				plaster: ["Plaster", "sans-serif"],
 				ter2: ["Manrope", "sans-serif"],
 			},
 		},

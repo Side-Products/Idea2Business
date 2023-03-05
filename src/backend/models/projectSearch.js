@@ -5,7 +5,7 @@ const projectSearchSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "Please enter a name"],
 		trim: true,
-		maxlength: [100, "Name cannot exceed 100 characters"],
+		maxLength: [100, "Name cannot exceed 100 characters"],
 	},
 	description: {
 		type: String,

@@ -1,4 +1,4 @@
-import CustomButton from "@/layout/CustomButton";
+import Button from "@/components/ui/Button";
 
 export default function PromptCard({ cardsAvailable, handleCardClick, cardText, isLoading, promptEnterProjectInfo }) {
 	return (
@@ -27,28 +27,28 @@ export default function PromptCard({ cardsAvailable, handleCardClick, cardText, 
 
 				{cardsAvailable ? (
 					<div className="w-full absolute bottom-4 flex space-x-2 px-4 py-1 justify-center items-center">
-						<CustomButton
+						<Button
 							type="button"
+							variant={"secondary"}
 							onClick={() => {
 								handleCardClick("view", cardText);
 							}}
-							light={true}
 							rounded={true}
 							classes="text-xs px-1 py-1 gap-x-1"
 						>
 							<i className="fa-solid fa-eye"></i>&nbsp;View
-						</CustomButton>
-						<CustomButton
+						</Button>
+						<Button
 							type="button"
+							variant={"secondary"}
 							onClick={() => {
 								handleCardClick("download", cardText);
 							}}
-							light={true}
 							rounded={true}
 							classes="text-xs px-3 py-1 gap-x-1"
 						>
-							<i class="fa-solid fa-download"></i>&nbsp;Download
-						</CustomButton>
+							<i className="fa-solid fa-download"></i>&nbsp;Download
+						</Button>
 					</div>
 				) : (
 					<div className="absolute flex flex-col w-full h-full justify-center items-center transition-all duration-700 opacity-0 group-hover:opacity-100">

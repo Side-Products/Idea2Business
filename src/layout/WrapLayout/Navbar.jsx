@@ -1,16 +1,20 @@
 import Link from "next/link";
-import { useState, useEffect, Fragment } from "react";
-const { Transition } = require("@headlessui/react");
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import logoBlack from "../../../public/site_logo.png";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 import { useSession, signOut } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "@/redux/actions/userActions";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { data: session, status } = useSession();
-
-	const router = useRouter();
+	// Load User
+	const dispatch = useDispatch();
+	const { user, loading } = useSelector((state) => state.auth);
+	useEffect(() => {
+		dispatch(loadUser());
+	}, [dispatch]);
 
 	let truncatedName;
 	if (session && session.user && session.user.name) {
@@ -75,8 +79,12 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										>
 											{status === "authenticated" ? (
 												<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
-													<span className="mr-4">{truncatedName}</span>
-													{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
+													<span className="mr-3">{truncatedName}</span>
+													{avatarUrl ? (
+														<Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" />
+													) : (
+														<Image src={"/avatar.jpg"} alt="avatar" width="24" height="24" className="rounded-full" />
+													)}
 												</div>
 											) : (
 												<div
@@ -105,7 +113,9 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 																</div>
 																{avatarUrl ? (
 																	<Image src={avatarUrl} alt={"avatar"} width={40} height={40} className="rounded-lg" />
-																) : null}
+																) : (
+																	<Image src={"/avatar.jpg"} alt="avatar" width="40" height="40" className="rounded-lg" />
+																)}
 															</div>
 														</div>
 													)}

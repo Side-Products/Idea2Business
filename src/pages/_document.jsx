@@ -30,6 +30,9 @@ export default function Document() {
 
 				<meta property="og:title" content="Project2Product" key="title" />
 				<meta property="og:description" content="Transforming your side-projects and hackathon-projects into profitable products" key="description" />
+
+				{/* Parallax Text */}
+				<link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet" />
 			</Head>
 			<DefaultSeo {...SEO} />
 

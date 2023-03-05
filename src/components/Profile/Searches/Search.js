@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import CustomButton from "@/layout/CustomButton";
+import Button from "@/components/ui/Button";
 
 export default function Search() {
 	const [searchText, setSearchText] = useState("");
@@ -34,9 +34,9 @@ export default function Search() {
 			</div>
 
 			<div>
-				<CustomButton type="submit" primary={true} rounded={true} classes="text-md px-6 h-full">
+				<Button type="submit" variant={"primary"} rounded={true} classes="text-md px-6 h-full">
 					Search
-				</CustomButton>
+				</Button>
 			</div>
 		</form>
 	);

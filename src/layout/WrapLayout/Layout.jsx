@@ -23,6 +23,16 @@ const Layout = ({ children }) => {
 		}
 	}, [router.events, setLoading]);
 
+	useEffect(() => {
+		if (router.query && "login" in router.query) {
+			setAuthModalOpen(true);
+		} else if (router.query && "signup" in router.query) {
+			setAuthModalOpen(true);
+		} else {
+			setAuthModalOpen(false);
+		}
+	}, [router.query]);
+
 	return (
 		<>
 			<Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />
