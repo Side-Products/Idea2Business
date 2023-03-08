@@ -2,7 +2,7 @@ export default function Button({ variant = "primary", outline = false, type, dis
 	return (
 		<button
 			type={type ? type : "submit"}
-			disabled={disabled ? disabled : false}
+			disabled={disabled || isLoading ? disabled : false}
 			onClick={() => (onClick ? onClick() : {})}
 			className={
 				`w-full flex items-center justify-center ` +
@@ -21,8 +21,10 @@ export default function Button({ variant = "primary", outline = false, type, dis
 									? isLoading
 										? `border-2 border-transparent bg-secondary-200 `
 										: ` `
-									: (isLoading ? `bg-secondary-300 ` : `bg-light-300/70 hover:bg-primary-500 text-dark-600 `) + `text-light-100 `) +
-							  `font-primary font-semibold transition duration-300 `
+									: (isLoading
+											? `bg-gradient-to-r from-green-600 to-blue-600 animate-bg `
+											: `bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 animate-bg hover:bg-gradient-to-r hover:animate-bg hover:from-green-600 hover:to-blue-600 `) +
+									  `text-light-100 `) + `font-primary font-semibold transition duration-300 `
 							: ` `)) +
 				(rounded ? `rounded-full ` : `rounded-lg `) +
 				(classes ? classes : `text-lg px-8 py-2`)

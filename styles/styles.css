@@ -25,12 +25,20 @@ a {
 /**************************************************************************/
 /**************************    Text Colors   ******************************/
 /**************************************************************************/
-.text-primary-tr {
+.text-gradient-primary-tr {
 	@apply text-transparent bg-clip-text bg-gradient-to-tr animate-text from-green-400 via-teal-400 to-blue-500;
 }
 
-.text-primary-bl {
+.text-gradient-primary-tr-group {
+	@apply group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-tr group-hover:animate-text group-hover:from-green-400 group-hover:via-teal-400 group-hover:to-blue-500;
+}
+
+.text-gradient-primary-bl {
 	@apply text-transparent bg-clip-text bg-gradient-to-bl animate-text from-green-400 via-teal-400 to-blue-500;
+}
+
+.text-gradient-secondary-tr {
+	@apply text-transparent bg-clip-text bg-gradient-to-tr animate-text from-orange-500 to-rose-500;
 }
 
 /**************************************************************************/
@@ -421,7 +429,7 @@ a:hover {
 /**************************************************************************/
 
 .footer {
-	@apply w-full max-w-[1920px] pt-20 pb-10 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+	@apply w-full max-w-[1920px] pt-12 pb-4 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
 }
 
 .footer__social {
@@ -443,8 +451,8 @@ input[type="radio"]:checked + label > span {
 
 /* Loading ring animation */
 .loader {
-	width: 28px;
-	height: 28px;
+	width: 24px;
+	height: 24px;
 	border-radius: 50%;
 	display: inline-block;
 	border-top: 2px solid #fff;

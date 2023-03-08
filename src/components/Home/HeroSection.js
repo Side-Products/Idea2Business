@@ -12,10 +12,10 @@ export const HeroSection = () => {
 
 	return (
 		<div className="flex flex-col justify-center items-center bg-dark-1000 h-screen">
-			<h1 className="pt-16 px-2 sm:px-8 md:px-16 text-[40px] sm:text-[50px] md:text-[100px] text-center font-extrabold tracking-[-2.5px] text-primary-tr">
+			<h1 className="pt-20 px-2 sm:px-8 md:px-16 text-[40px] sm:text-[50px] md:text-[100px] text-center font-extrabold tracking-[-2.5px] text-gradient-primary-tr">
 				Transform Your Projects
 			</h1>
-			<h1 className="px-2 sm:px-8 md:px-16 text-[40px] sm:text-[50px] md:text-[90px] text-center font-extrabold tracking-[-2.5px] text-primary-bl">
+			<h1 className="px-2 sm:px-8 md:px-16 text-[40px] sm:text-[50px] md:text-[90px] text-center font-extrabold tracking-[-2.5px] text-gradient-primary-bl">
 				Into Profitable Products
 			</h1>
 

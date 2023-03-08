@@ -2,7 +2,6 @@ const { Fragment, useState, useEffect, useContext } = require("react");
 const { Transition } = require("@headlessui/react");
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, clearErrors } from "@/redux/actions/userActions";
@@ -10,6 +9,7 @@ import logoBlack from "/public/site_logo.png";
 import LoadingContext from "@/store/loading-context";
 import StatusContext from "@/store/status-context";
 import Button from "@/components/ui/Button";
+import ForgotPassword from "@/components/Profile/ForgotPassword";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
@@ -19,6 +19,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 
 	const [authState, setAuthState] = useState("signup");
+	const [forgotPassword, setForgotPassword] = useState(false);
 
 	useEffect(() => {
 		setIsModalOpen(isModalOpen);
@@ -38,6 +39,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	};
 
 	const closeModal = () => {
+		if (forgotPassword) {
+			setForgotPassword(false);
+			return;
+		}
 		handleChange();
 		router.push(`/`, undefined, { shallow: true });
 		onClose();
@@ -61,6 +66,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				message: error,
 				showErrorBox: true,
 			});
+			setLoading({ status: false });
 			dispatch(clearErrors());
 		}
 	}, [dispatch, success, error]);
@@ -90,8 +96,9 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				message: result.error,
 				showErrorBox: true,
 			});
+			setLoading({ status: false });
 		} else {
-			window.location.href = "/generate";
+			router.push("/generate");
 			setLoading({ status: false });
 		}
 	};
@@ -127,26 +134,28 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 						<div className="max-w-[26rem] w-11/12 p-4 pl-10 pb-12 bg-dark-500 rounded-lg">
 							<div className="w-full flex justify-start">
 								<div className="w-full flex flex-col justify-center items-center mt-4">
-									<div className="w-full flex justify-between px-12 mb-8">
-										<button
-											onClick={() => setAuthState("signup")}
-											className={
-												"py-2 px-8 hover:bg-dark-600 rounded text-sm font-semibold " +
-												(authState === "signup" && "border-2 border-transparent border-b-primary-500")
-											}
-										>
-											Sign Up
-										</button>
-										<button
-											onClick={() => setAuthState("login")}
-											className={
-												"py-2 px-8 hover:bg-dark-600 rounded text-sm font-semibold " +
-												(authState === "login" && "border-2 border-transparent border-b-primary-500")
-											}
-										>
-											Log In
-										</button>
-									</div>
+									{!forgotPassword && (
+										<div className="w-full flex justify-between px-12 mb-8">
+											<button
+												onClick={() => setAuthState("signup")}
+												className={
+													"py-2 px-8 hover:bg-dark-600 rounded text-sm font-semibold " +
+													(authState === "signup" && "border-2 border-transparent border-b-primary-500")
+												}
+											>
+												Sign Up
+											</button>
+											<button
+												onClick={() => setAuthState("login")}
+												className={
+													"py-2 px-8 hover:bg-dark-600 rounded text-sm font-semibold " +
+													(authState === "login" && "border-2 border-transparent border-b-primary-500")
+												}
+											>
+												Log In
+											</button>
+										</div>
+									)}
 									<Image src={logoBlack} alt="MXV Logo" width="60" height="60" className="rounded-md" />
 								</div>
 								<div
@@ -157,107 +166,124 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								</div>
 							</div>
 
-							<div className="w-full flex flex-col mt-4 pr-4">
-								<div className="text-center">
-									<div className="text-xl font-semibold font-primary">
-										{authState === "signup" ? "Get Started" : "Welcome Back"}&nbsp;&nbsp;&nbsp;
+							{forgotPassword ? (
+								<div className="w-full flex flex-col mt-4 pr-4">
+									<div className="text-center">
+										<div className="text-xl font-semibold font-primary">Forgot Password&nbsp;&nbsp;&nbsp;</div>
+										<p className="text-sm mt-4">Please enter your email address to get the password reset link</p>
 									</div>
-									<p className="text-sm mt-4">Let us help you make your dream of creating a profitable product a reality!</p>
+									<div className="mt-8">
+										<div className="w-full space-y-4">
+											<ForgotPassword email={email} onFieldChange={onFieldChange} />
+										</div>
+									</div>
 								</div>
-								<div className="mt-8">
-									<div className="w-full space-y-4">
-										<form
-											onSubmit={(e) => {
-												e.preventDefault();
-												if (authState === "signup") registerHandler();
-												else loginCredentialsSubmitHandler();
-											}}
-										>
-											{authState === "signup" && (
-												<div className="flex flex-col">
+							) : (
+								<div className="w-full flex flex-col mt-4 pr-4">
+									<div className="text-center">
+										<div className="text-xl font-semibold font-primary">
+											{authState === "signup" ? "Get Started" : "Welcome Back"}&nbsp;&nbsp;&nbsp;
+										</div>
+										<p className="text-sm mt-4">Let us help you make your dream of creating a profitable product a reality!</p>
+									</div>
+									<div className="mt-8">
+										<div className="w-full space-y-4">
+											<form
+												onSubmit={(e) => {
+													e.preventDefault();
+													if (authState === "signup") registerHandler();
+													else loginCredentialsSubmitHandler();
+												}}
+											>
+												{authState === "signup" && (
+													<div className="flex flex-col">
+														<label htmlFor="email_field" className="text-sm text-light-500">
+															Name
+														</label>
+														<input
+															type="text"
+															id="name_field"
+															className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+															value={name}
+															name="name"
+															onChange={onFieldChange}
+															required
+														/>
+													</div>
+												)}
+
+												<div className="flex flex-col mt-2">
 													<label htmlFor="email_field" className="text-sm text-light-500">
-														Name
+														Email
 													</label>
 													<input
-														type="text"
-														id="name_field"
+														type="email"
+														id="email_field"
 														className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
-														value={name}
-														name="name"
+														value={email}
+														name="email"
 														onChange={onFieldChange}
 														required
 													/>
 												</div>
-											)}
 
-											<div className="flex flex-col mt-2">
-												<label htmlFor="email_field" className="text-sm text-light-500">
-													Email
-												</label>
-												<input
-													type="email"
-													id="email_field"
-													className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
-													value={email}
-													name="email"
-													onChange={onFieldChange}
-													required
-												/>
+												<div className="flex flex-col mt-2">
+													<label htmlFor="password_field" className="text-sm text-light-500">
+														Password
+													</label>
+													<input
+														type="password"
+														id="password_field"
+														className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+														value={password}
+														name="password"
+														onChange={onFieldChange}
+														required
+													/>
+												</div>
+
+												{authState === "login" && (
+													<span
+														onClick={() => setForgotPassword(true)}
+														className="float-right mt-2 mb-4 text-xs text-light-500 hover:text-light-300 cursor-pointer"
+													>
+														Forgot Password?
+													</span>
+												)}
+
+												<div className="mt-6">
+													<Button variant={"primary"} rounded={true} classes="text-md px-8 py-3">
+														{authState === "login" ? "Log In" : "Sign Up"}
+													</Button>
+												</div>
+											</form>
+
+											<p className="my-4 text-center text-sm text-light-500">or</p>
+
+											<div className="w-full flex gap-x-4 justify-center items-center">
+												<button
+													onClick={() => {
+														setLoading({ status: true });
+														signIn("google");
+													}}
+													className=" flex justify-center items-center bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-full p-4 text-sm"
+												>
+													<Image src="/google.png" alt="Metamask Logo" width="28" height="28" />
+												</button>
+												<button
+													onClick={() => {
+														setLoading({ status: true });
+														signIn("github");
+													}}
+													className=" flex justify-center items-center bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-full p-4 text-sm"
+												>
+													<Image src="/github.png" alt="Metamask Logo" width="28" height="28" />
+												</button>
 											</div>
-
-											<div className="flex flex-col mt-2">
-												<label htmlFor="password_field" className="text-sm text-light-500">
-													Password
-												</label>
-												<input
-													type="password"
-													id="password_field"
-													className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
-													value={password}
-													name="password"
-													onChange={onFieldChange}
-													required
-												/>
-											</div>
-
-											{authState === "login" && (
-												<Link href="/password/forgot" className="float-right mt-1 mb-4 text-xs text-light-500">
-													Forgot Password?
-												</Link>
-											)}
-
-											<div className="mt-6">
-												<Button variant={"primary"} rounded={true} classes="text-md px-8 py-3">
-													{authState === "login" ? "Log In" : "Sign Up"}
-												</Button>
-											</div>
-										</form>
-
-										<p className="my-4 text-center text-sm text-light-500">or</p>
-
-										<div className="w-full flex gap-x-4 justify-center items-center">
-											<button
-												onClick={() => {
-													setLoading({ status: true });
-													signIn("google");
-												}}
-												className=" flex justify-center items-center bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-full p-4 text-sm"
-											>
-												<Image src="/google.png" alt="Metamask Logo" width="28" height="28" />
-											</button>
-											<button
-												onClick={() => {
-													setLoading({ status: true });
-													signIn("github");
-												}}
-												className=" flex justify-center items-center bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-full p-4 text-sm"
-											>
-												<Image src="/github.png" alt="Metamask Logo" width="28" height="28" />
-											</button>
 										</div>
 									</div>
 								</div>
-							</div>
+							)}
 						</div>
 					</div>
 				</Transition.Child>

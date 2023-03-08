@@ -13,9 +13,9 @@ const projectSearchSchema = new mongoose.Schema({
 		trim: true,
 	},
 	user: {
-		type: mongoose.Schema.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: "users",
-		required: false,
+		required: true,
 	},
 	createdAt: {
 		type: Date,

@@ -1,6 +1,10 @@
 import cloudinary from "cloudinary";
+import crypto from "crypto";
 import User from "../models/user";
+import ErrorHandler from "@/backend/utils/errorHandler";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
+import absoluteUrl from "next-absolute-url";
+import sendEmail from "@/backend/utils/sendEmail";
 
 // Setting up cloudinary config
 // cloudinary.config({
@@ -61,4 +65,70 @@ const updateUserProfile = catchAsyncErrors(async (req, res) => {
 	});
 });
 
-export { registerUser, currentUserProfile, updateUserProfile };
+// forgot password => /api/password/forgot
+const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findOne({ email: req.body.email });
+
+	if (!user) {
+		return next(new ErrorHandler("User not found with this email", 404));
+	}
+
+	// Get reset token
+	const resetToken = user.getResetPasswordToken();
+	await user.save({ validateBeforeSave: false });
+
+	// Get origin
+	const { origin } = absoluteUrl(req);
+
+	// Create reset password url
+	const resetUrl = `${origin}/password/reset/${resetToken}`;
+	const message = `Your password reset url is:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
+
+	try {
+		await sendEmail({
+			email: user.email,
+			subject: "Project2Product Password Recovery",
+			message,
+		});
+		res.status(200).json({
+			success: true,
+			message: `Email sent to: ${user.email}`,
+		});
+	} catch (error) {
+		user.resetPasswordToken = undefined;
+		user.resetPasswordExpire = undefined;
+		await user.save({ validateBeforeSave: false });
+		return next(new ErrorHandler(error.message, 500));
+	}
+});
+
+// reset password => /api/password/reset/:token
+const resetPassword = catchAsyncErrors(async (req, res, next) => {
+	// Hash url token
+	const resetPasswordToken = crypto.createHash("sha256").update(req.query.token).digest("hex");
+
+	const user = await User.findOne({ resetPasswordToken, resetPasswordExpire: { $gt: Date.now() } });
+
+	if (!user) {
+		return next(new ErrorHandler("Password reset token has been expired", 400));
+	}
+
+	if (req.body.password !== req.body.confirmPassword) {
+		return next(new ErrorHandler("Password does not match", 400));
+	}
+
+	// Setup new password
+	user.password = req.body.password;
+
+	user.resetPasswordToken = undefined;
+	user.resetPasswordExpire = undefined;
+
+	await user.save();
+
+	res.status(200).json({
+		success: true,
+		message: "Password updated successfully",
+	});
+});
+
+export { registerUser, currentUserProfile, updateUserProfile, forgotPassword, resetPassword };

@@ -5,19 +5,11 @@ import StatusContext from "@/store/status-context";
 const ErrorBox = () => {
 	const [error, , , setError] = useContext(StatusContext);
 
-	if (error.message == "Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet ") {
-		window.location.reload();
-	}
-
 	const handleClose = () => {
 		setError((prevState) => ({
 			...prevState,
 			showErrorBox: false,
 		}));
-
-		if (error.message == "Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet ") {
-			window.location.reload();
-		}
 	};
 
 	useEffect(() => {

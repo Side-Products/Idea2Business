@@ -52,7 +52,7 @@ export const Projects = () => {
 	return (
 		<>
 			<div className="w-full flex flex-col">
-				<h1 className="text-6xl font-bold text-center tracking-[-2.5px] text-primary-tr">Past Searches</h1>
+				<h1 className="text-6xl font-bold text-center tracking-[-2.5px] text-gradient-primary-tr">Past Searches</h1>
 
 				<div className="flex flex-col xl:w-1/3 lg:w-9/12 md:w-1/2 mt-8">
 					<Search />
