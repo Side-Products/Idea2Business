@@ -93,7 +93,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 											data-bs-toggle="dropdown"
 											aria-expanded="false"
 										>
-											{user && status === "authenticated" ? (
+											{status === "authenticated" ? (
 												<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
 													<span className="mr-3">{truncatedName}</span>
 													{avatarUrl ? (
@@ -103,14 +103,12 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													)}
 												</div>
 											) : (
-												!loading && (
-													<div
-														onClick={() => setAuthModalOpen(true)}
-														className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-dark-500 dark:hover:bg-dark-700 transition duration-300"
-													>
-														Sign In
-													</div>
-												)
+												<div
+													onClick={() => setAuthModalOpen(true)}
+													className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-dark-500 dark:hover:bg-dark-700 transition duration-300"
+												>
+													Sign In
+												</div>
 											)}
 										</a>
 

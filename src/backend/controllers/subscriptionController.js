@@ -14,7 +14,10 @@ const newSubscription = catchAsyncErrors(async (req, res) => {
 
 // get subscription status of current user => /api/subscriptions/me
 const mySubscription = catchAsyncErrors(async (req, res) => {
-	const subscription = await Subscription.find({ user: req.user._id });
+	const subscription = await Subscription.find({ user: req.user._id }).populate({
+		path: "user",
+		select: "name email",
+	});
 
 	res.status(200).json({
 		success: true,

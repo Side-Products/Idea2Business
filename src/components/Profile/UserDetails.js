@@ -6,8 +6,8 @@ import { useSession } from "next-auth/react";
 import { updateUserProfile, clearErrors } from "@/redux/actions/userActions";
 import { UPDATE_PROFILE_RESET } from "@/redux/constants/userConstants";
 import StatusContext from "@/store/status-context";
-import Loader from "@/components/ui/Loader";
 import UpdateUserProfileModal from "./UpdateUserProfileModal";
+import MySubscription from "./MySubscription";
 
 export default function UserDetails() {
 	const { data: session } = useSession();
@@ -21,8 +21,8 @@ export default function UserDetails() {
 	const [user, setUser] = useState({ name: "", email: "", password: "" });
 	const { name, email, password } = user;
 
-	const { user: loadedUser, loading } = useSelector((state) => state.auth);
-	const { error, isUpdated, loading: updateLoading } = useSelector((state) => state.user);
+	const { user: loadedUser } = useSelector((state) => state.loadedUser);
+	const { error, isUpdated } = useSelector((state) => state.user);
 
 	const [isUpdateUserProfileModalOpen, setUpdateUserProfileModalOpen] = useState(false);
 
@@ -57,14 +57,12 @@ export default function UserDetails() {
 		setUpdateUserProfileModalOpen(false);
 	};
 
-	return loading ? (
-		<Loader />
-	) : (
+	return (
 		<>
 			<div className="w-full grid grid-flow-col auto-cols-auto gap-4 mb-20">
 				<div
 					onClick={() => setUpdateUserProfileModalOpen(true)}
-					className="group w-full flex justify-between items-start bg-dark-800 px-8 pt-6 pb-8 rounded-lg cursor-pointer"
+					className="group w-full flex justify-between items-start bg-dark-800 px-8 pt-6 pb-8 rounded-2xl cursor-pointer"
 				>
 					<div className="flex gap-x-8">
 						<div className="mt-2">
@@ -82,9 +80,14 @@ export default function UserDetails() {
 					<i className="fa-regular fa-pen-to-square text-xl text-light-400 transition duration-300 text-gradient-primary-tr-group"></i>
 				</div>
 
-				<div className="w-full flex flex-col items-end bg-dark-800 px-8 pt-6 pb-8 rounded-lg">
-					<p className="text-3xl font-semibold text-light-300">Total searches</p>
-					<div className="mt-1 text-4xl font-bold text-gradient-primary-tr">{projectsCount}</div>
+				<div className="w-full grid grid-cols-2 bg-dark-800 px-8 pt-6 pb-8 rounded-2xl">
+					<div className="flex flex-col items-end">
+						<p className="text-3xl font-semibold text-light-300">Total searches</p>
+						<p className="mt-1 text-4xl font-bold text-gradient-primary-tr">{projectsCount}</p>
+					</div>
+					<div className="flex flex-col items-end">
+						<MySubscription />
+					</div>
 				</div>
 			</div>
 

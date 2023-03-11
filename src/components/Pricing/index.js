@@ -1,8 +1,17 @@
+import { useContext } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import Tick from "./Tick";
 import Button from "@/components/ui/Button";
+import getStripe from "@/utils/getStripe";
+import LoadingContext from "@/store/loading-context";
+import StatusContext from "@/store/status-context";
 
 const Pricing = () => {
+	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
+	const router = useRouter();
+
 	const subscriptionHandler = async (_planChosen) => {
 		const subscriptionData = {
 			amountPaid: _planChosen,
@@ -24,6 +33,30 @@ const Pricing = () => {
 			console.log(data);
 		} catch (error) {
 			console.log(error.response);
+		}
+	};
+
+	const buySubscription = async (_planChosen) => {
+		setLoading({ status: true });
+
+		const amount = _planChosen;
+
+		try {
+			const link = `/api/stripe/checkout-session`;
+			const { data } = await axios.get(link, { params: { amount: amount } });
+
+			const stripe = await getStripe();
+
+			// Redirect to Stripe Checkout
+			await stripe.redirectToCheckout({ sessionId: data.id });
+			setLoading({ status: false });
+		} catch (error) {
+			setLoading({ status: false });
+			setError({
+				title: "Something went wrong",
+				message: error.message,
+				showErrorBox: true,
+			});
 		}
 	};
 
@@ -79,7 +112,14 @@ const Pricing = () => {
 							</li>
 						</ul>
 
-						<Button type="button" variant={"primary"} onClick={() => {}} classes="text-lg px-8 py-3">
+						<Button
+							type="button"
+							variant={"primary"}
+							onClick={() => {
+								router.push("/generate");
+							}}
+							classes="text-lg px-8 py-3"
+						>
 							Get Started Now
 						</Button>
 					</div>
@@ -127,7 +167,7 @@ const Pricing = () => {
 							type="button"
 							variant={"secondary"}
 							onClick={() => {
-								subscriptionHandler(5);
+								buySubscription(5);
 							}}
 							classes="text-lg px-8 py-3"
 						>
@@ -178,7 +218,7 @@ const Pricing = () => {
 							type="button"
 							variant={"secondary"}
 							onClick={() => {
-								subscriptionHandler(10);
+								buySubscription(10);
 							}}
 							classes="text-lg px-8 py-3"
 						>
