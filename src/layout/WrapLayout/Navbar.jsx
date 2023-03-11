@@ -146,6 +146,32 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</li>
 												)}
 
+												{status === "authenticated" && session.user.role == "admin" && (
+													<>
+														<li>
+															<div className="block w-full text-center px-4 pb-2 pt-3 border-t border-zinc-700 bg-transparent dropdown-item whitespace-nowrap text-light-700">
+																Admin Routes
+															</div>
+														</li>
+
+														<li>
+															<Link href={`/admin/subscriptions`} passHref={true}>
+																<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																	All Subscriptions
+																</div>
+															</Link>
+														</li>
+
+														<li>
+															<Link href={`/admin/users`} passHref={true}>
+																<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																	All Users
+																</div>
+															</Link>
+														</li>
+													</>
+												)}
+
 												{/* Logout Button */}
 												<li>
 													{status === "authenticated" ? (

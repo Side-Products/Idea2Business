@@ -12,30 +12,6 @@ const Pricing = () => {
 	const [, , , setError] = useContext(StatusContext);
 	const router = useRouter();
 
-	const subscriptionHandler = async (_planChosen) => {
-		const subscriptionData = {
-			amountPaid: _planChosen,
-			paymentInfo: {
-				id: "STRIPE_PAYMENT_ID",
-				status: "STRIPE_PAYMENT_STATUS",
-			},
-			paidOn: Date.now(),
-			subscriptionValidUntil: Date.now() + (_planChosen == 5 ? 7 : 30) * 24 * 60 * 60 * 1000,
-		};
-		try {
-			const config = {
-				headers: {
-					"Content-Type": "application/json",
-				},
-			};
-			const { data } = await axios.post("/api/subscriptions", subscriptionData, config);
-
-			console.log(data);
-		} catch (error) {
-			console.log(error.response);
-		}
-	};
-
 	const buySubscription = async (_planChosen) => {
 		setLoading({ status: true });
 

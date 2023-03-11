@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
 import * as ga from "../../lib/google-analytics";
-import "@/styles/styles.css";
+import "@/styles/globals.css";
 import "cal-sans";
 import ScrollToPageTop from "@/utils/ScrollToPageTop";
 import Layout from "@/layout/WrapLayout/Layout";

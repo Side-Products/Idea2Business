@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
 			{isLoading.status && <LoadingDark />}
 			<ErrorBox />
 			<SuccessBox />
-			<Footer />
+			{router.pathname !== "/404" && <Footer />}
 		</>
 	);
 };
