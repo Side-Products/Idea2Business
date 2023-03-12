@@ -5,7 +5,7 @@ import AuthModalContext from "@/store/authModal-context";
 import Button from "@/components/ui/Button";
 import ParallaxTextSection from "./ParallaxTextSection";
 
-export const HeroSection = () => {
+export default function HeroSection() {
 	const router = useRouter();
 	const { data: session, status } = useSession();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
@@ -47,4 +47,4 @@ export const HeroSection = () => {
 			</div>
 		</div>
 	);
-};
+}

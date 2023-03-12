@@ -41,6 +41,14 @@ a {
 	@apply text-transparent bg-clip-text bg-gradient-to-tr animate-text from-orange-500 to-rose-500;
 }
 
+.bg-gradient-primary-r {
+	@apply bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 animate-bg;
+}
+
+.bg-gradient-secondary-tr {
+	@apply bg-gradient-to-tr from-orange-500 to-rose-500 animate-bg hover:bg-gradient-to-tr hover:animate-bg hover:from-orange-600 hover:to-rose-600;
+}
+
 /**************************************************************************/
 /*****************************    Navbar   ********************************/
 /**************************************************************************/
@@ -429,7 +437,7 @@ a:hover {
 /**************************************************************************/
 
 .footer {
-	@apply w-full max-w-[1920px] pt-12 pb-4 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+	@apply w-full max-w-[1920px] pt-12 pb-4 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36;
 }
 
 .footer__social {
@@ -638,10 +646,6 @@ input[type="radio"]:checked + label > span {
 
 .table {
 	border-spacing: 0 15px;
-}
-
-i {
-	font-size: 1rem !important;
 }
 
 .table tr {

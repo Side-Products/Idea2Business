@@ -1,9 +1,9 @@
 import Button from "@/components/ui/Button";
 
-export default function PromptCard({ cardsAvailable, handleCardClick, cardText, isLoading, promptEnterProjectInfo }) {
+export default function PromptCard({ cardsAvailable, handleCardClick, cardText, promptEnterProjectInfo }) {
 	return (
 		<div
-			className="w-full relative flex flex-col group cursor-pointer aspect-square rounded-2xl h-fit sm:h-full bg-gradient-to-r from-[#0E0E0E] to-[#202020] shadow hover:shadow-primary-500 overflow-hidden transition-all duration-500"
+			className="w-full relative flex flex-col group cursor-pointer aspect-square rounded-2xl h-fit sm:h-full bg-gradient-to-r from-[#161616] to-[#202020] shadow hover:shadow-primary-500 overflow-hidden transition-all duration-500"
 			onClick={() => {
 				if (!cardsAvailable) {
 					promptEnterProjectInfo();

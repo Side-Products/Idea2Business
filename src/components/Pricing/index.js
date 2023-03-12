@@ -6,17 +6,26 @@ import Button from "@/components/ui/Button";
 import getStripe from "@/utils/getStripe";
 import LoadingContext from "@/store/loading-context";
 import StatusContext from "@/store/status-context";
+import { useSelector } from "react-redux";
 
 const Pricing = () => {
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 	const router = useRouter();
 
+	const { subscription } = useSelector((state) => state.subscription);
+	// Check for which plan the user is subscribed to
+	const subscriptionPlan =
+		subscription && subscription.amountPaid == 10 && new Date(subscription.subscriptionValidUntil) > Date.now()
+			? "Pro Plus"
+			: subscription && subscription.amountPaid == 5 && new Date(subscription.subscriptionValidUntil) > Date.now()
+			? "Standard"
+			: "Free";
+
 	const buySubscription = async (_planChosen) => {
 		setLoading({ status: true });
 
 		const amount = _planChosen;
-
 		try {
 			const link = `/api/stripe/checkout-session`;
 			const { data } = await axios.get(link, { params: { amount: amount } });
@@ -88,16 +97,18 @@ const Pricing = () => {
 							</li>
 						</ul>
 
-						<Button
-							type="button"
-							variant={"primary"}
-							onClick={() => {
-								router.push("/generate");
-							}}
-							classes="text-lg px-8 py-3"
-						>
-							Get Started Now
-						</Button>
+						{subscriptionPlan == "Free" ? (
+							<Button
+								type="button"
+								variant={"primary"}
+								onClick={() => {
+									router.push("/generate");
+								}}
+								classes="text-lg px-8 py-3"
+							>
+								Get Started Now
+							</Button>
+						) : null}
 					</div>
 
 					<div className="flex flex-col p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
@@ -139,16 +150,29 @@ const Pricing = () => {
 							</li>
 						</ul>
 
-						<Button
-							type="button"
-							variant={"secondary"}
-							onClick={() => {
-								buySubscription(5);
-							}}
-							classes="text-lg px-8 py-3"
-						>
-							Choose Plan
-						</Button>
+						{subscriptionPlan == "Standard" ? (
+							<Button
+								type="button"
+								variant={"primary"}
+								onClick={() => {
+									router.push("/generate");
+								}}
+								classes="text-lg px-8 py-3"
+							>
+								Current Plan
+							</Button>
+						) : subscriptionPlan && subscriptionPlan === "Free" ? (
+							<Button
+								type="button"
+								variant={"secondary"}
+								onClick={() => {
+									buySubscription(5);
+								}}
+								classes="text-lg px-8 py-3"
+							>
+								Choose Plan
+							</Button>
+						) : null}
 					</div>
 
 					<div className="flex flex-col p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
@@ -190,16 +214,29 @@ const Pricing = () => {
 							</li>
 						</ul>
 
-						<Button
-							type="button"
-							variant={"secondary"}
-							onClick={() => {
-								buySubscription(10);
-							}}
-							classes="text-lg px-8 py-3"
-						>
-							Choose Plan
-						</Button>
+						{subscriptionPlan == "Pro Plus" ? (
+							<Button
+								type="button"
+								variant={"primary"}
+								onClick={() => {
+									router.push("/generate");
+								}}
+								classes="text-lg px-8 py-3"
+							>
+								Current Plan
+							</Button>
+						) : (
+							<Button
+								type="button"
+								variant={"secondary"}
+								onClick={() => {
+									buySubscription(10);
+								}}
+								classes="text-lg px-8 py-3"
+							>
+								Choose Plan
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>

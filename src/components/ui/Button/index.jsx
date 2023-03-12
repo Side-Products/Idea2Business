@@ -12,15 +12,13 @@ export default function Button({ variant = "primary", outline = false, type, dis
 							? isLoading
 								? `border-2 border-transparent bg-primary-200 `
 								: `border-2 border-primary-500 bg-dark-600 hover:bg-primary-600 hover:text-light-100 text-primary-500 `
-							: (isLoading
-									? `bg-dark-200 `
-									: `bg-gradient-to-r from-rose-500 to-orange-500 animate-bg hover:bg-gradient-to-r hover:animate-bg hover:from-rose-600 hover:to-orange-600 `) +
-							  `text-light-100 `) + `font-primary font-semibold transition duration-300 `
+							: (isLoading ? `bg-dark-200 ` : `bg-gradient-secondary-tr `) + `text-light-100 `) +
+					  `font-primary font-semibold transition duration-300 `
 					: (variant = "secondary"
 							? (outline
 									? isLoading
 										? `border-2 border-transparent bg-secondary-200 `
-										: ` `
+										: `border-2 border-green-500 bg-dark-600 text-primary-400 `
 									: (isLoading
 											? `bg-gradient-to-r from-green-600 to-blue-600 animate-bg `
 											: `bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 animate-bg hover:bg-gradient-to-r hover:animate-bg hover:from-green-600 hover:to-blue-600 `) +

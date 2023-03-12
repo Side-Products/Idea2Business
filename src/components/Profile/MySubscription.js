@@ -85,7 +85,7 @@ export default function MySubscription() {
 	return (
 		<>
 			<p className="text-3xl font-semibold text-light-300">Current Plan</p>
-			{subscription ? (
+			{subscription && new Date(subscription.subscriptionValidUntil) > Date.now() ? (
 				<>
 					<p className="mt-1 text-3xl font-bold text-gradient-primary-tr">
 						{subscription.amountPaid == 5 ? "Standard" : subscription.amountPaid == 10 ? "Pro Plus" : ""}
@@ -96,11 +96,6 @@ export default function MySubscription() {
 							<i className="fa-solid fa-download"></i>
 						</span>
 					</p>
-					{/* <p>{subscription.paymentInfo}</p> */}
-					{/* <p className="text-light-400">
-						<span className="font-semibold">Started On:</span>&nbsp;
-						{new Date(subscription.paidOn).toLocaleDateString()}
-					</p> */}
 					<p className="text-light-400 text-sm mt-2">
 						<span className="font-medium">Valid Until:</span>&nbsp;
 						{new Date(subscription.subscriptionValidUntil).toDateString()}
