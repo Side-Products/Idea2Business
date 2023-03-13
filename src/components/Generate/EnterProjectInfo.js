@@ -1,14 +1,58 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
 import AuthModalContext from "@/store/authModal-context";
+import StatusContext from "@/store/status-context";
 import Button from "@/components/ui/Button";
 import { sleep } from "@/utils/Sleep";
+import { newProjectSearch, clearErrors } from "@/redux/actions/projectActions";
 
 const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnterProjectInfo, setCardsAvailable, setIsGenerating }) => {
 	const { projectName, projectDescription } = projectInfo;
 
 	const { data: session, status } = useSession();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const [, , , setError] = useContext(StatusContext);
+
+	const dispatch = useDispatch();
+	const submitHandler = () => {
+		if (status === "authenticated" && session && session.user) {
+			if (projectName.length > 0 && projectDescription.length > 0) {
+				if (isGenerating !== "generating") {
+					setCardsAvailable(false);
+					setIsGenerating("generating");
+
+					const projectInfo = {
+						name: projectName,
+						description: projectDescription,
+					};
+					// Add to db
+					dispatch(newProjectSearch(projectInfo));
+
+					sleep(1000).then(() => {
+						setIsGenerating(false);
+						setCardsAvailable(true);
+					});
+				}
+			} else {
+				promptEnterProjectInfo();
+			}
+		} else {
+			setAuthModalOpen(true);
+		}
+	};
+
+	const { error, loading } = useSelector((state) => state.newProjectSearch);
+	useEffect(() => {
+		if (error) {
+			setError({
+				title: "Something went wrong",
+				message: error,
+				showErrorBox: true,
+			});
+			dispatch(clearErrors());
+		}
+	}, [dispatch, error]);
 
 	return (
 		<div className="w-full flex flex-col items-center justify-center">
@@ -46,24 +90,9 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 						type="button"
 						variant={"secondary"}
 						onClick={() => {
-							if (status === "authenticated" && session && session.user) {
-								if (projectName.length > 0 && projectDescription.length > 0) {
-									if (isGenerating !== "generating") {
-										setCardsAvailable(false);
-										setIsGenerating("generating");
-										sleep(1000).then(() => {
-											setIsGenerating(false);
-											setCardsAvailable(true);
-										});
-									}
-								} else {
-									promptEnterProjectInfo();
-								}
-							} else {
-								setAuthModalOpen(true);
-							}
+							submitHandler();
 						}}
-						isLoading={isGenerating === "generating"}
+						isLoading={isGenerating === "generating" || loading}
 						rounded={true}
 						classes="text-lg px-8 py-3"
 					>

@@ -7,7 +7,35 @@ const allSearches = catchAsyncErrors(async (req, res) => {
 	const resultsPerPage = 4;
 	const projectsCount = await ProjectSearch.countDocuments();
 
-	const apiFeatures = new APIFeatures(ProjectSearch.find(), req.query).search().filter();
+	const apiFeatures = new APIFeatures(
+		ProjectSearch.find().populate({
+			path: "user",
+			select: "name email",
+		}),
+		req.query
+	)
+		.search()
+		.filter();
+	let projects = await apiFeatures.query;
+	let filteredProjectsCount = projects.length;
+
+	apiFeatures.pagination(resultsPerPage);
+	projects = await apiFeatures.query.clone();
+
+	res.status(200).json({
+		success: true,
+		projectsCount,
+		resultsPerPage,
+		filteredProjectsCount,
+		projects,
+	});
+});
+
+const mySearches = catchAsyncErrors(async (req, res) => {
+	const resultsPerPage = 4;
+	const projectsCount = await ProjectSearch.countDocuments({ user: req.user._id || req.user.id });
+
+	const apiFeatures = new APIFeatures(ProjectSearch.find({ user: req.user._id || req.user.id }), req.query).search().filter();
 	let projects = await apiFeatures.query;
 	let filteredProjectsCount = projects.length;
 
@@ -25,8 +53,11 @@ const allSearches = catchAsyncErrors(async (req, res) => {
 
 // add to db => /api/projects
 const newProjectSearch = catchAsyncErrors(async (req, res) => {
-	const projectSearch = await ProjectSearch.create(req.body);
-	res.status(200).json({ success: true, projectSearch });
+	const { name, description } = req.body;
+	const project = await ProjectSearch.create({ user: req.user._id || req.user.id, name: name, description: description });
+	const searchCount = await ProjectSearch.countDocuments({ user: req.user._id || req.user.id });
+
+	res.status(200).json({ success: true, project, searchCount });
 });
 
 // get project details => /api/projects/:id
@@ -64,4 +95,4 @@ const deleteSearchedProject = catchAsyncErrors(async (req, res, next) => {
 	res.status(200).json({ success: true, message: "Deleted successfully" });
 });
 
-export { allSearches, newProjectSearch, getSearchedProject, updateSearchedProject, deleteSearchedProject };
+export { allSearches, mySearches, newProjectSearch, getSearchedProject, updateSearchedProject, deleteSearchedProject };

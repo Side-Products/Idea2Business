@@ -16,7 +16,7 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 		success_url: `${origin}/profile`,
 		cancel_url: `${origin}/pricing`,
 		customer_email: req.user.email,
-		client_reference_id: req.user._id,
+		client_reference_id: req.user._id || req.user.id,
 		line_items: [
 			{
 				price_data: {

@@ -8,7 +8,7 @@ const ErrorPage = ({}) => {
 	return (
 		<>
 			<Head>
-				<title>{title_main_page} | 404 Page</title>
+				<title>{title_main_page}</title>
 				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

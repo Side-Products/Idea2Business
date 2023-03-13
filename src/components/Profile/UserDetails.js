@@ -9,11 +9,10 @@ import StatusContext from "@/store/status-context";
 import UpdateUserProfileModal from "./UpdateUserProfileModal";
 import MySubscription from "./MySubscription";
 
-export default function UserDetails() {
+export default function UserDetails({ projectsCount }) {
 	const { data: session } = useSession();
 	const [, , , setError] = useContext(StatusContext);
 	const avatarUrl = session && session.user && session.user.image;
-	const { projectsCount } = useSelector((state) => state.allProjects);
 
 	const dispatch = useDispatch();
 	const router = useRouter();

@@ -169,6 +169,14 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 																</div>
 															</Link>
 														</li>
+
+														<li>
+															<Link href={`/admin/searches`} passHref={true}>
+																<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																	All Searches
+																</div>
+															</Link>
+														</li>
 													</>
 												)}
 

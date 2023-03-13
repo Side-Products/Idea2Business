@@ -1,15 +1,14 @@
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import StatusContext from "@/store/status-context";
 import { clearErrors } from "@/redux/actions/projectActions";
 import Pager from "./Pager";
 import ProjectCard from "./ProjectCard";
 import Search from "./Search";
 
-export const Projects = () => {
+export const Projects = ({ projects, resultsPerPage, projectsCount, filteredProjectsCount, error, adminView }) => {
 	const [, , , setError] = useContext(StatusContext);
-	const { projects, resultsPerPage, projectsCount, filteredProjectsCount, error } = useSelector((state) => state.allProjects);
 
 	const router = useRouter();
 	let { search, page = 1 } = router.query;
@@ -51,29 +50,25 @@ export const Projects = () => {
 
 	return (
 		<>
-			<div className="w-full flex flex-col">
-				<h1 className="text-6xl font-bold text-center tracking-[-2.5px] text-gradient-primary-tr">Past Searches</h1>
+			<div className="flex flex-col xl:w-1/3 lg:w-9/12 md:w-1/2 mt-8">
+				<Search />
+				{search && <div className="text-sm mt-2 ml-2">Showing results for: {search}</div>}
+			</div>
 
-				<div className="flex flex-col xl:w-1/3 lg:w-9/12 md:w-1/2 mt-8">
-					<Search />
-					{search && <div className="text-sm mt-2 ml-2">Showing results for: {search}</div>}
-				</div>
+			<div className="w-full flex flex-col items-center justify-center mt-10">
+				{projects && projects.length === 0 ? (
+					<div className="text-2xl font-medium text-light-400 text-center mt-10">No project searches yet</div>
+				) : (
+					<div className="w-full grid grid-cols-4 gap-6">
+						{projects && projects.map((project) => <ProjectCard key={project._id} project={project} adminView={adminView} />)}
+					</div>
+				)}
+			</div>
 
-				<div className="w-full flex flex-col items-center justify-center mt-10">
-					{projects && projects.length === 0 ? (
-						<div className="text-2xl font-bold text-center">No Projects</div>
-					) : (
-						<div className="w-full grid grid-cols-4 gap-6">
-							{projects && projects.map((project) => <ProjectCard key={project._id} project={project} />)}
-						</div>
-					)}
-				</div>
-
-				<div className="mt-12">
-					{resultsPerPage < count && (
-						<Pager activePage={page} onPageChange={handlePagination} itemsCountPerPage={resultsPerPage} totalItemsCount={count} />
-					)}
-				</div>
+			<div className="mt-12">
+				{resultsPerPage < count && (
+					<Pager activePage={page} onPageChange={handlePagination} itemsCountPerPage={resultsPerPage} totalItemsCount={count} />
+				)}
 			</div>
 		</>
 	);

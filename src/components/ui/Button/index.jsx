@@ -1,4 +1,4 @@
-export default function Button({ variant = "primary", outline = false, type, disabled, onClick, children, classes, rounded, isLoading = false }) {
+export default function Button({ variant = "primary", outline = false, rounded, type, disabled, onClick, children, classes, innerClasses, isLoading = false }) {
 	return (
 		<button
 			type={type ? type : "submit"}
@@ -28,14 +28,21 @@ export default function Button({ variant = "primary", outline = false, type, dis
 		>
 			{outline ? (
 				isLoading ? (
-					<span class={`w-full flex items-center justify-center py-2 bg-dark-1000 ` + (rounded ? `rounded-full ` : `rounded-lg `)}>
+					<span
+						class={
+							`w-full flex items-center justify-center bg-dark-1000 ` +
+							(rounded ? `rounded-full ` : `rounded-lg `) +
+							(innerClasses ? innerClasses : `py-2 `)
+						}
+					>
 						<span className="loader"></span>
 					</span>
 				) : (
 					<span
 						class={
-							`w-full flex items-center justify-center py-2 bg-dark-1000 hover:bg-transparent transition duration-300 ` +
-							(rounded ? `rounded-full ` : `rounded-lg `)
+							`w-full flex items-center justify-center bg-dark-1000 hover:bg-transparent transition duration-300 ` +
+							(rounded ? `rounded-full ` : `rounded-lg `) +
+							(innerClasses ? innerClasses : `py-2 `)
 						}
 					>
 						{children}

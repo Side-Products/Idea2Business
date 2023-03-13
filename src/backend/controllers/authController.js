@@ -40,7 +40,7 @@ const registerUser = catchAsyncErrors(async (req, res) => {
 
 // current user profile => /api/me
 const currentUserProfile = catchAsyncErrors(async (req, res) => {
-	const user = await User.findById(req.user._id);
+	const user = await User.findById(req.user._id || req.user.id);
 
 	res.status(200).json({
 		success: true,
@@ -50,7 +50,7 @@ const currentUserProfile = catchAsyncErrors(async (req, res) => {
 
 // update user profile => /api/me/update
 const updateUserProfile = catchAsyncErrors(async (req, res) => {
-	const user = await User.findById(req.user._id);
+	const user = await User.findById(req.user._id || req.user.id);
 	if (user) {
 		user.name = req.body.name;
 		user.email = req.body.email;

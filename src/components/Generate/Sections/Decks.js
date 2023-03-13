@@ -260,25 +260,27 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 			<SectionHeading>Decks</SectionHeading>
 
 			<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
-				<Button
-					type="button"
-					variant={"secondary"}
-					outline={true}
-					onClick={async (_ev) => {
-						if (cardsAvailable) {
-							setIsGenerating("pitchdeck");
-							const _apiOutput = await callGenerateEndpoint();
-							setIsGenerating(false);
-							generatePitchdeck(_apiOutput, "download");
-						} else {
-							promptEnterProjectInfo();
-						}
-					}}
-					isLoading={isGenerating === "pitchdeck"}
-					classes="w-full text-lg px-8 py-3 col-start-2"
-				>
-					Download PitchDeck
-				</Button>
+				<div className="w-full col-start-2">
+					<Button
+						type="button"
+						variant={"primary"}
+						outline={true}
+						onClick={async (_ev) => {
+							if (cardsAvailable) {
+								setIsGenerating("pitchdeck");
+								const _apiOutput = await callGenerateEndpoint();
+								setIsGenerating(false);
+								generatePitchdeck(_apiOutput, "download");
+							} else {
+								promptEnterProjectInfo();
+							}
+						}}
+						isLoading={isGenerating === "pitchdeck"}
+						innerClasses="py-3"
+					>
+						Download PitchDeck
+					</Button>
+				</div>
 			</div>
 		</>
 	);

@@ -5,7 +5,7 @@ import ErrorHandler from "../utils/errorHandler";
 // create new subscription => /api/subscriptions
 const newSubscription = catchAsyncErrors(async (req, res) => {
 	const { amountPaid, paymentInfo, paidOn, subscriptionValidUntil } = req.body;
-	const subscription = await Subscription.create({ user: req.user._id, amountPaid, paymentInfo, paidOn, subscriptionValidUntil });
+	const subscription = await Subscription.create({ user: req.user._id || req.user.id, amountPaid, paymentInfo, paidOn, subscriptionValidUntil });
 
 	res.status(200).json({
 		success: true,
@@ -15,10 +15,12 @@ const newSubscription = catchAsyncErrors(async (req, res) => {
 
 // get subscription status of current user => /api/subscriptions/me
 const mySubscription = catchAsyncErrors(async (req, res) => {
-	const subscription = await Subscription.find({ user: req.user._id }).sort({ paidOn: "desc" }).populate({
-		path: "user",
-		select: "name email",
-	});
+	const subscription = await Subscription.find({ user: req.user._id || req.user.id })
+		.sort({ paidOn: "desc" })
+		.populate({
+			path: "user",
+			select: "name email",
+		});
 
 	res.status(200).json({
 		success: true,

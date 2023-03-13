@@ -9,9 +9,9 @@ export default function Search() {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (searchText.trim()) {
-			router.push(`/profile?search=${searchText}`);
+			router.push(`/${router.pathname}?search=${searchText}`);
 		} else {
-			router.push(`/profile`);
+			router.push(`/${router.pathname}`);
 		}
 	};
 
