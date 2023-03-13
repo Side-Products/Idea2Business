@@ -22,7 +22,7 @@ export default function SocialMediaStrategy({
 			message: "Twitter Strategy for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/twitter", {
+		const response = await fetch("/api/generate/social-media-strategy/twitter", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -59,7 +59,7 @@ export default function SocialMediaStrategy({
 			message: "Instagram Strategy for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/instagram", {
+		const response = await fetch("/api/generate/social-media-strategy/instagram", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -96,7 +96,7 @@ export default function SocialMediaStrategy({
 			message: "LinkedIn Strategy for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/linkedin", {
+		const response = await fetch("/api/generate/social-media-strategy/linkedin", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -133,7 +133,7 @@ export default function SocialMediaStrategy({
 			message: "TikTok/Reels/Shorts Strategy for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/tiktok", {
+		const response = await fetch("/api/generate/social-media-strategy/tiktok", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

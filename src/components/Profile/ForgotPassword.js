@@ -58,7 +58,7 @@ const ForgotPassword = ({ email, onFieldChange }) => {
 			</div>
 
 			<div className="mt-6">
-				<Button variant={"secondary"} rounded={true} isLoading={loading} classes="text-md px-8 py-3">
+				<Button variant={"primary"} rounded={true} isLoading={loading} classes="text-md px-8 py-3">
 					Send Email
 				</Button>
 			</div>

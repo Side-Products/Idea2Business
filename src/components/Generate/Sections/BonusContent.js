@@ -22,7 +22,7 @@ export default function BonusContent({
 			message: "SPME for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/spme", {
+		const response = await fetch("/api/generate/bonus/spme", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -59,7 +59,7 @@ export default function BonusContent({
 			message: "MVP Launch checklist for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/mvp", {
+		const response = await fetch("/api/generate/bonus/mvp-launch-checklist", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -96,7 +96,7 @@ export default function BonusContent({
 			message: "Grant Proposal for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/grant", {
+		const response = await fetch("/api/generate/bonus/grant-proposal", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -133,7 +133,7 @@ export default function BonusContent({
 			message: "Legal Advice for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/legal-advice", {
+		const response = await fetch("/api/generate/bonus/legal-advice", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

@@ -252,7 +252,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 												)}
 
 												<div className="mt-6">
-													<Button variant={"primary"} rounded={true} classes="text-md px-8 py-3">
+													<Button variant={"secondary"} rounded={true} classes="text-md px-8 py-3">
 														{authState === "login" ? "Log In" : "Sign Up"}
 													</Button>
 												</div>

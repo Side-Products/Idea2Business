@@ -26,7 +26,7 @@ export default function HeroSection() {
 			<div className="w-2/3 sm:w-1/4 md:w-1/5 xl:w-1/6 mt-8">
 				<Button
 					type="button"
-					variant={"primary"}
+					variant={"secondary"}
 					onClick={() => {
 						if (session && session.user && status === "authenticated") {
 							router.push("/generate");

@@ -14,7 +14,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 	const callGenerateEndpoint = async () => {
 		if (projectName.length > 0 && projectDescription.length > 0) {
 			// Getting pitch deck content from OpenAI
-			const response = await fetch("/api/generate", {
+			const response = await fetch("/api/generate/decks/pitchdeck", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -262,7 +262,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 			<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<Button
 					type="button"
-					variant={"primary"}
+					variant={"secondary"}
 					outline={true}
 					onClick={async (_ev) => {
 						if (cardsAvailable) {

@@ -44,7 +44,7 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 				<div className="w-2/3 sm:w-1/3 flex items-center justify-center">
 					<Button
 						type="button"
-						variant={"primary"}
+						variant={"secondary"}
 						onClick={() => {
 							if (status === "authenticated" && session && session.user) {
 								if (projectName.length > 0 && projectDescription.length > 0) {

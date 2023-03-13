@@ -19,10 +19,10 @@ export default function AdviceFromBooks({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from the Lean Startup for your project is being generated",
+			message: "Advice from The Lean Startup for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/leanstartup", {
+		const response = await fetch("/api/generate/advice-from-books/the-lean-startup", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -59,7 +59,7 @@ export default function AdviceFromBooks({
 			message: "Advice from Hooked for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/hooked", {
+		const response = await fetch("/api/generate/advice-from-books/hooked", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -96,7 +96,7 @@ export default function AdviceFromBooks({
 			message: "Advice from The Hard Thing About Hard Things for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/the-hard-thing-about-hard-things", {
+		const response = await fetch("/api/generate/advice-from-books/the-hard-thing-about-hard-things", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -133,7 +133,7 @@ export default function AdviceFromBooks({
 			message: "Advice from The Startup Owner's Manual for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/startup-owners-manual", {
+		const response = await fetch("/api/generate/advice-from-books/startup-owners-manual", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

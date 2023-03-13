@@ -12,7 +12,7 @@ export default function Loading() {
 			<div className={styles["loading_container"]}>
 				<div className={styles["loading_container_box"]}>
 					{/* <div className={styles["loadingSpinner"]}></div> */}
-					<Loader width="150" height="150" viewBox="-100 -100 400 400" />
+					<Loader width="150" height="150" viewBox="-100 -100 400 400" classes="pb-0 -mb-4" />
 				</div>
 				{isLoading.title && <p>{isLoading.title}</p>}
 

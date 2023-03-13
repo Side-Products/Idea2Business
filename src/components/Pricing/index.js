@@ -100,7 +100,7 @@ const Pricing = () => {
 						{subscriptionPlan == "Free" ? (
 							<Button
 								type="button"
-								variant={"primary"}
+								variant={"secondary"}
 								onClick={() => {
 									router.push("/generate");
 								}}
@@ -153,7 +153,7 @@ const Pricing = () => {
 						{subscriptionPlan == "Standard" ? (
 							<Button
 								type="button"
-								variant={"primary"}
+								variant={"secondary"}
 								onClick={() => {
 									router.push("/generate");
 								}}
@@ -164,7 +164,7 @@ const Pricing = () => {
 						) : subscriptionPlan && subscriptionPlan === "Free" ? (
 							<Button
 								type="button"
-								variant={"secondary"}
+								variant={"primary"}
 								onClick={() => {
 									buySubscription(5);
 								}}
@@ -217,7 +217,7 @@ const Pricing = () => {
 						{subscriptionPlan == "Pro Plus" ? (
 							<Button
 								type="button"
-								variant={"primary"}
+								variant={"secondary"}
 								onClick={() => {
 									router.push("/generate");
 								}}
@@ -228,7 +228,7 @@ const Pricing = () => {
 						) : (
 							<Button
 								type="button"
-								variant={"secondary"}
+								variant={"primary"}
 								onClick={() => {
 									buySubscription(10);
 								}}

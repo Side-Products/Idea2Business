@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 export default function PromptCard({ cardsAvailable, handleCardClick, cardText, promptEnterProjectInfo }) {
 	return (
 		<div
-			className="w-full relative flex flex-col group cursor-pointer aspect-square rounded-2xl h-fit sm:h-full bg-gradient-to-r from-[#161616] to-[#202020] shadow hover:shadow-primary-500 overflow-hidden transition-all duration-500"
+			className="w-full relative flex flex-col group cursor-pointer aspect-square rounded-2xl h-fit sm:h-full bg-gradient-to-r from-[#161616] to-[#202020] shadow hover:shadow-primary-400 overflow-hidden transition-all duration-500"
 			onClick={() => {
 				if (!cardsAvailable) {
 					promptEnterProjectInfo();
@@ -29,7 +29,7 @@ export default function PromptCard({ cardsAvailable, handleCardClick, cardText, 
 					<div className="w-full absolute bottom-4 flex space-x-2 px-4 py-1 justify-center items-center">
 						<Button
 							type="button"
-							variant={"secondary"}
+							variant={"primary"}
 							onClick={() => {
 								handleCardClick("view", cardText);
 							}}
@@ -40,7 +40,7 @@ export default function PromptCard({ cardsAvailable, handleCardClick, cardText, 
 						</Button>
 						<Button
 							type="button"
-							variant={"secondary"}
+							variant={"primary"}
 							onClick={() => {
 								handleCardClick("download", cardText);
 							}}

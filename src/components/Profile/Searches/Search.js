@@ -34,7 +34,7 @@ export default function Search() {
 			</div>
 
 			<div>
-				<Button type="submit" variant={"primary"} rounded={true} classes="text-md px-6 h-full">
+				<Button type="submit" variant={"secondary"} rounded={true} classes="text-md px-6 h-full">
 					Search
 				</Button>
 			</div>

@@ -15,7 +15,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting VC Pitch Content from OpenAI
-		const response = await fetch("/api/vcpitch", {
+		const response = await fetch("/api/generate/pitches/vc-pitch", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Co Founder Content from OpenAI
-		const response = await fetch("/api/cofounderpitch", {
+		const response = await fetch("/api/generate/pitches/co-founder-pitch", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -91,7 +91,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Marketing Advisor Content from OpenAI
-		const response = await fetch("/api/marketingadvisor", {
+		const response = await fetch("/api/generate/pitches/marketing-advisor", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -129,7 +129,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Marketing Advisor Content from OpenAI
-		const response = await fetch("/api/mentorpitch", {
+		const response = await fetch("/api/generate/pitches/mentor-pitch", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

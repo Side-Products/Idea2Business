@@ -3,32 +3,49 @@ export default function Button({ variant = "primary", outline = false, type, dis
 		<button
 			type={type ? type : "submit"}
 			disabled={disabled || isLoading ? disabled : false}
-			onClick={() => (onClick ? onClick() : {})}
+			onClick={() => (!isLoading && !disabled && onClick ? onClick() : {})}
 			className={
 				`w-full flex items-center justify-center ` +
 				(isLoading ? `cursor-default ` : `cursor-pointer `) +
 				(variant == "primary"
 					? (outline
 							? isLoading
-								? `border-2 border-transparent bg-primary-200 `
-								: `border-2 border-primary-500 bg-dark-600 hover:bg-primary-600 hover:text-light-100 text-primary-500 `
-							: (isLoading ? `bg-dark-200 ` : `bg-gradient-secondary-tr `) + `text-light-100 `) +
+								? `bg-gradient-primary-tr-outline `
+								: `bg-gradient-primary-tr-outline `
+							: (isLoading ? `bg-gradient-primary-tr-loading ` : `bg-gradient-primary-tr `) + `text-light-100 `) +
 					  `font-primary font-semibold transition duration-300 `
 					: (variant = "secondary"
 							? (outline
 									? isLoading
-										? `border-2 border-transparent bg-secondary-200 `
-										: `border-2 border-green-500 bg-dark-600 text-primary-400 `
-									: (isLoading
-											? `bg-gradient-to-r from-green-600 to-blue-600 animate-bg `
-											: `bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 animate-bg hover:bg-gradient-to-r hover:animate-bg hover:from-green-600 hover:to-blue-600 `) +
-									  `text-light-100 `) + `font-primary font-semibold transition duration-300 `
+										? `bg-gradient-secondary-tr-outline `
+										: `bg-gradient-secondary-tr-outline `
+									: (isLoading ? `bg-gradient-secondary-tr-loading ` : `bg-gradient-secondary-tr `) + `text-light-100 `) +
+							  `font-primary font-semibold transition duration-300 `
 							: ` `)) +
 				(rounded ? `rounded-full ` : `rounded-lg `) +
-				(classes ? classes : `text-lg px-8 py-2`)
+				(classes ? classes : `text-lg ` + (outline ? `px-1 py-1` : `px-8 py-2`))
 			}
 		>
-			{isLoading ? <span className="loader"></span> : children}
+			{outline ? (
+				isLoading ? (
+					<span class={`w-full flex items-center justify-center py-2 bg-dark-1000 ` + (rounded ? `rounded-full ` : `rounded-lg `)}>
+						<span className="loader"></span>
+					</span>
+				) : (
+					<span
+						class={
+							`w-full flex items-center justify-center py-2 bg-dark-1000 hover:bg-transparent transition duration-300 ` +
+							(rounded ? `rounded-full ` : `rounded-lg `)
+						}
+					>
+						{children}
+					</span>
+				)
+			) : isLoading ? (
+				<span className="loader"></span>
+			) : (
+				children
+			)}
 		</button>
 	);
 }

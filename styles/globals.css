@@ -41,12 +41,32 @@ a {
 	@apply text-transparent bg-clip-text bg-gradient-to-tr animate-text from-orange-500 to-rose-500;
 }
 
-.bg-gradient-primary-r {
+.bg-gradient-tertiary-r {
 	@apply bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 animate-bg;
 }
 
+/**************************************************************************/
+/*************************    Button Colors   *****************************/
+/**************************************************************************/
+
+.bg-gradient-primary-tr {
+	@apply bg-gradient-to-tr from-green-500 via-teal-500 to-blue-500 animate-bg opacity-100 hover:opacity-90 transition duration-300;
+}
+.bg-gradient-primary-tr-loading {
+	@apply bg-gradient-to-tr from-green-700 via-teal-700 to-blue-700 animate-bg;
+}
+.bg-gradient-primary-tr-outline {
+	@apply bg-gradient-to-tr from-green-500 via-teal-500 to-blue-500 animate-bg;
+}
+
 .bg-gradient-secondary-tr {
-	@apply bg-gradient-to-tr from-orange-500 to-rose-500 animate-bg hover:bg-gradient-to-tr hover:animate-bg hover:from-orange-600 hover:to-rose-600;
+	@apply bg-gradient-to-tr from-orange-500 to-rose-500 animate-bg opacity-100 hover:opacity-90 transition duration-300;
+}
+.bg-gradient-secondary-tr-loading {
+	@apply bg-gradient-to-tr from-orange-600 to-rose-500 animate-bg;
+}
+.bg-gradient-secondary-tr-outline {
+	@apply bg-gradient-to-tr from-orange-500 to-rose-500 animate-bg;
 }
 
 /**************************************************************************/
@@ -459,8 +479,8 @@ input[type="radio"]:checked + label > span {
 
 /* Loading ring animation */
 .loader {
-	width: 24px;
-	height: 24px;
+	width: 26px;
+	height: 26px;
 	border-radius: 50%;
 	display: inline-block;
 	border-top: 2px solid #fff;

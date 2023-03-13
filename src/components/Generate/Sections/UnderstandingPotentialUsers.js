@@ -23,7 +23,7 @@ export default function UnderstandingPotentialUsers({
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 
-		const response = await fetch("/api/userpersona", {
+		const response = await fetch("/api/generate/potential-users/user-persona", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -61,7 +61,7 @@ export default function UnderstandingPotentialUsers({
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Mom Test Content from OpenAI
-		const response = await fetch("/api/momtest", {
+		const response = await fetch("/api/generate/potential-users/mom-test", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -98,7 +98,7 @@ export default function UnderstandingPotentialUsers({
 			message: "List of Potential Customers for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/potentialcustomer", {
+		const response = await fetch("/api/generate/potential-users/type-of-potential-customers", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -135,7 +135,7 @@ export default function UnderstandingPotentialUsers({
 			message: "List of Customer Pain Points for your project is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
-		const response = await fetch("/api/customer-pain-points", {
+		const response = await fetch("/api/generate/potential-users/customer-pain-points", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

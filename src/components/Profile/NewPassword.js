@@ -84,7 +84,7 @@ const NewPassword = () => {
 				</div>
 
 				<div className="mt-6">
-					<Button variant={"primary"} rounded={true} isLoading={loading} classes="text-md px-8 py-3">
+					<Button variant={"secondary"} rounded={true} isLoading={loading} classes="text-md px-8 py-3">
 						Reset Password
 					</Button>
 				</div>

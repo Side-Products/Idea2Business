@@ -75,7 +75,7 @@ const UpdateUserProfileModal = ({ isOpen, setOpen, submitHandler, avatarUrl, use
 							</div>
 
 							<div className="mt-10">
-								<Button variant={"primary"} rounded={true} classes="text-md px-8 py-3">
+								<Button variant={"secondary"} rounded={true} classes="text-md px-8 py-3">
 									Update
 								</Button>
 							</div>

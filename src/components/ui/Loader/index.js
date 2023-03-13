@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { animate, stagger } from "motion";
 
-const Loader = ({ width, height, viewBox }) => {
+const Loader = ({ width, height, viewBox, classes }) => {
 	useEffect(() => {
 		const numSegments = document.querySelectorAll(".segment").length;
 		const elem = document.getElementsByClassName("segment");
@@ -31,7 +31,7 @@ const Loader = ({ width, height, viewBox }) => {
 	}, []);
 
 	return (
-		<div className="w-full py-16 flex justify-center items-center">
+		<div className={"w-full flex justify-center items-center " + (classes ? classes : "py-16")}>
 			<svg align="center" xmlns="http://www.w3.org/2000/svg" width={width ?? "100"} height={height ?? "100"} viewBox={viewBox ?? "-100 -100 400 400"}>
 				<g className="segment">
 					<path

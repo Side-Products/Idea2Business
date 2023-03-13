@@ -107,7 +107,7 @@ export default function MySubscription() {
 					<div className="mt-2">
 						<Button
 							type="button"
-							variant={"primary"}
+							variant={"secondary"}
 							rounded={true}
 							onClick={() => {
 								router.push("/pricing");
