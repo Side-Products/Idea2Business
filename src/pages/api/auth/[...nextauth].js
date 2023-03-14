@@ -53,8 +53,23 @@ export default NextAuth({
 			return Promise.resolve(token);
 		},
 		async session({ session, user, token }) {
-			session.user = token.user;
+			const userFromDatabase = await User.findOne({ email: token.user.email });
+			// session.user = token.user;
+			session.user = userFromDatabase;
 			return Promise.resolve(session);
+		},
+	},
+	events: {
+		async createUser(message) {
+			// Find user in db
+			const user = await User.findOne({ email: message.user.email });
+			if (!user) {
+				throw new Error("Invalid email or password");
+			}
+			user.role = "user";
+			user.credits = 3;
+
+			await user.save();
 		},
 	},
 });

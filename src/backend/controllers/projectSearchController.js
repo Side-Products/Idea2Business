@@ -1,4 +1,6 @@
 import ProjectSearch from "../models/projectSearch";
+import User from "../models/user";
+import Subscription from "../models/subscription";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import APIFeatures from "@/backend/utils/apiFeatures";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
@@ -54,7 +56,45 @@ const mySearches = catchAsyncErrors(async (req, res) => {
 });
 
 // add to db => /api/projects
-const newProjectSearch = catchAsyncErrors(async (req, res) => {
+const newProjectSearch = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findOne({ email: req.user.email });
+	if (user) {
+		if (user.credits > 0) {
+			user.credits -= 1;
+			await user.save();
+		} else {
+			const _subscription = await Subscription.find({ user: req.user._id || req.user.id })
+				.sort({ paidOn: "desc" })
+				.populate({
+					path: "user",
+					select: "name email",
+				});
+			let subscription;
+			if (_subscription && _subscription[0]) subscription = _subscription[0];
+
+			if (subscription) {
+				// Check for which plan the user is subscribed to
+				const subscriptionPlan =
+					subscription && subscription.amountPaid == 10 && new Date(subscription.subscriptionValidUntil) > Date.now()
+						? "Pro Plus"
+						: subscription && subscription.amountPaid == 5 && new Date(subscription.subscriptionValidUntil) > Date.now()
+						? "Standard"
+						: "Free";
+
+				if (subscriptionPlan !== "Free") {
+					// Do nothing
+				} else {
+					return next(new ErrorHandler("You do not have a subscription or enough credits to generate results", 400));
+				}
+			} else {
+				return next(new ErrorHandler("You do not have a subscription or enough credits to generate results", 400));
+			}
+		}
+	} else {
+		return next(new ErrorHandler("User not found with this email", 404));
+	}
+
+	// save project search to db
 	const { name, description } = req.body;
 	const project = await ProjectSearch.create({ user: req.user._id || req.user.id, name: name, description: description });
 	const searchCount = await ProjectSearch.countDocuments({ user: req.user._id || req.user.id });

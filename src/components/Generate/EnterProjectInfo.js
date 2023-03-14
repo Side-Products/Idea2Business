@@ -28,11 +28,6 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 					};
 					// Add to db
 					dispatch(newProjectSearch(projectInfo));
-
-					sleep(1000).then(() => {
-						setIsGenerating(false);
-						setCardsAvailable(true);
-					});
 				}
 			} else {
 				promptEnterProjectInfo();
@@ -42,9 +37,17 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 		}
 	};
 
-	const { error, loading } = useSelector((state) => state.newProjectSearch);
+	const { error, success, loading } = useSelector((state) => state.newProjectSearch);
 	useEffect(() => {
+		if (success) {
+			sleep(1000).then(() => {
+				setIsGenerating(false);
+				setCardsAvailable(true);
+			});
+		}
 		if (error) {
+			setIsGenerating(false);
+			setCardsAvailable(false);
 			setError({
 				title: "Something went wrong",
 				message: error,
@@ -52,12 +55,12 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 			});
 			dispatch(clearErrors());
 		}
-	}, [dispatch, error]);
+	}, [dispatch, error, success]);
 
 	return (
 		<div className="w-full flex flex-col items-center justify-center">
 			<div className="flex flex-col">
-				<h1 className="text-center text-[44px] sm:text-[100px] tracking-[-2.5px] font-bold text-gradient-primary-tr leading-[1.2em]">
+				<h1 className="mt-4 text-center text-[44px] sm:text-[100px] tracking-[-2.5px] font-bold text-gradient-primary-tr leading-[1.2em]">
 					Project~Product
 				</h1>
 				<h3 className="mt-4 px-4 text-center text-sm sm:text-lg leading-[1.4em] text-light-500">

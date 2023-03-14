@@ -677,7 +677,7 @@ tr th:nth-child(1) {
 	border-radius: 0.625rem 0 0 0.625rem;
 }
 
-.allusers-table tr td:nth-child(n + 7),
-.allusers-table tr th:nth-child(n + 7) {
+.allusers-table tr td:nth-child(n + 8),
+.allusers-table tr th:nth-child(n + 8) {
 	border-radius: 0 0.625rem 0.625rem 0;
 }

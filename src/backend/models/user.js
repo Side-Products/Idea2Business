@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
 	image: {
 		type: String,
 	},
+	credits: {
+		type: Number,
+		default: 3,
+		required: true,
+	},
 	role: {
 		type: String,
 		default: "user",

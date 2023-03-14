@@ -162,6 +162,7 @@ const updateAdminUserDetails = catchAsyncErrors(async (req, res) => {
 	const newUserData = {
 		name: req.body.name,
 		email: req.body.email,
+		credits: req.body.credits,
 		role: req.body.role,
 	};
 	const user = await User.findByIdAndUpdate(req.query.id, newUserData, {

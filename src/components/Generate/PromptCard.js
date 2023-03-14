@@ -29,7 +29,7 @@ export default function PromptCard({ cardsAvailable, handleCardClick, cardText, 
 					<div className="w-full absolute bottom-4 flex space-x-2 px-4 py-1 justify-center items-center">
 						<Button
 							type="button"
-							variant={"primary"}
+							variant={"secondary"}
 							onClick={() => {
 								handleCardClick("view", cardText);
 							}}
@@ -40,7 +40,7 @@ export default function PromptCard({ cardsAvailable, handleCardClick, cardText, 
 						</Button>
 						<Button
 							type="button"
-							variant={"primary"}
+							variant={"secondary"}
 							onClick={() => {
 								handleCardClick("download", cardText);
 							}}

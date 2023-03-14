@@ -98,6 +98,7 @@ export default function AllUsers() {
 										<th className="p-3 text-left text-gradient-secondary-tr">User ID</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Name</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Email</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Credits</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Role</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Edit User</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Delete User</th>
@@ -123,6 +124,7 @@ export default function AllUsers() {
 												<span data-info={user.email}>{user.email}</span>{" "}
 												<i className="far fa-copy ml-1 cursor-pointer" onClick={copyToClipboard}></i>
 											</td>
+											<td className="p-3">{user.credits}</td>
 											<td className="p-3">{user.role}</td>
 											<td
 												className="p-3 bg-primary-600 hover:bg-primary-800 transition duration-300 text-light-100 cursor-pointer text-center"
@@ -157,6 +159,7 @@ export default function AllUsers() {
 											<th className="p-3 text-left">User ID</th>
 											<th className="p-3 text-left">Name</th>
 											<th className="p-3 text-left">Email</th>
+											<th className="p-3 text-left">Credits</th>
 											<th className="p-3 text-left">Role</th>
 											<th className="p-3 text-left">Edit User</th>
 											<th className="p-3 text-left">Delete User</th>
@@ -181,6 +184,7 @@ export default function AllUsers() {
 										<th className="p-3 text-left text-gradient-secondary-tr">User ID</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Name</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Email</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Credits</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Role</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Edit User</th>
 										<th className="p-3 text-left text-gradient-secondary-tr">Delete User</th>
@@ -206,6 +210,7 @@ export default function AllUsers() {
 												<span data-info={admin.email}>{admin.email}</span>{" "}
 												<i className="far fa-copy ml-1 cursor-pointer" onClick={copyToClipboard}></i>
 											</td>
+											<td className="p-3">{admin.credits}</td>
 											<td className="p-3">{admin.role}</td>
 											<td
 												className="p-3 bg-primary-600 hover:bg-primary-800 transition duration-300 text-light-100 cursor-pointer text-center"
@@ -240,6 +245,7 @@ export default function AllUsers() {
 											<th className="p-3 text-left">User ID</th>
 											<th className="p-3 text-left">Name</th>
 											<th className="p-3 text-left">Email</th>
+											<th className="p-3 text-left">Credits</th>
 											<th className="p-3 text-left">Role</th>
 											<th className="p-3 text-left">Edit User</th>
 											<th className="p-3 text-left">Delete User</th>

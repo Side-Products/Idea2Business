@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import pptxgen from "pptxgenjs";
 import redBG from "../../../../public/themes/redbg";
 import LoadingContext from "@/store/loading-context";
@@ -8,8 +8,6 @@ import Button from "@/components/ui/Button";
 export default function Decks({ isGenerating, setIsGenerating, promptEnterProjectInfo, projectInfo, cardsAvailable, setModalText, setContentModalOpen }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
-
-	const [apiOutput, setApiOutput] = useState(false);
 
 	const callGenerateEndpoint = async () => {
 		if (projectName.length > 0 && projectDescription.length > 0) {
@@ -24,7 +22,6 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 			const data = await response.json();
 			const { output } = data;
 			let outputArray = output.text.split(/\r?\n/);
-			setApiOutput([...outputArray]);
 
 			return outputArray;
 		} else {
@@ -259,45 +256,39 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 		<>
 			<SectionHeading>Decks</SectionHeading>
 
-			<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 place-items-center items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
-				<Button
-					type="button"
-					variant={"primary"}
-					outline={true}
-					onClick={async (_ev) => {
-						if (cardsAvailable) {
-							setIsGenerating("pitchdeck");
-							const _apiOutput = await callGenerateEndpoint();
-							setIsGenerating(false);
-							generatePitchdeck(_apiOutput, "download");
-						} else {
-							promptEnterProjectInfo();
-						}
-					}}
-					isLoading={isGenerating === "pitchdeck"}
-					innerClasses="py-3"
-				>
-					Download PitchDeck for Investors
-				</Button>
-				<Button
-					type="button"
-					variant={"primary"}
-					outline={true}
-					onClick={async (_ev) => {
-						if (cardsAvailable) {
-							setIsGenerating("pitchdeck");
-							const _apiOutput = await callGenerateEndpoint();
-							setIsGenerating(false);
-							generatePitchdeck(_apiOutput, "download");
-						} else {
-							promptEnterProjectInfo();
-						}
-					}}
-					isLoading={isGenerating === "pitchdeck"}
-					innerClasses="py-3"
-				>
-					Download PitchDeck for Customers
-				</Button>
+			<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+				<div className="w-full col-start-2">
+					<Button
+						type="button"
+						variant={"primary"}
+						outline={true}
+						onClick={async (_ev) => {
+							if (cardsAvailable) {
+								setLoading({
+									status: true,
+									title: "Hang on for a moment",
+									message: "Pitchdeck for your project is being generated",
+									waitMessage: "It may take up to 30 seconds to generate the response...",
+								});
+								setIsGenerating("pitchdeck");
+								const _apiOutput = await callGenerateEndpoint();
+								setIsGenerating(false);
+								generatePitchdeck(_apiOutput, "download");
+								setLoading({
+									status: false,
+									title: "",
+									message: "",
+								});
+							} else {
+								promptEnterProjectInfo();
+							}
+						}}
+						isLoading={isGenerating === "pitchdeck"}
+						innerClasses="py-3"
+					>
+						Download PitchDeck
+					</Button>
+				</div>
 			</div>
 		</>
 	);

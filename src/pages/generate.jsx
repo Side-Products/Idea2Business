@@ -5,6 +5,9 @@ import { title_main_page, meta_description } from "@/config/constants";
 import StatusContext from "@/store/status-context";
 import ContentModal from "@/components/Generate/ContentModal";
 import SectionHeading from "@/components/Generate/SectionHeading";
+import { mySubscription } from "@/redux/actions/subscriptionActions";
+import { wrapper } from "@/redux/redux-store";
+import { getSession } from "next-auth/react";
 // Import sections
 import EnterProjectInfo from "@/components/Generate/EnterProjectInfo";
 import Decks from "@/components/Generate/Sections/Decks";
@@ -13,6 +16,21 @@ import UnderstandingPotentialUsers from "@/components/Generate/Sections/Understa
 import SocialMediaStrategy from "@/components/Generate/Sections/SocialMediaStrategy";
 import AdviceFromBooks from "@/components/Generate/Sections/AdviceFromBooks";
 import BonusContent from "@/components/Generate/Sections/BonusContent";
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
+	const session = await getSession({ req: req });
+	if (!session) {
+		return {
+			props: {},
+		};
+	}
+
+	await store.dispatch(mySubscription(req));
+
+	return {
+		props: { session },
+	};
+});
 
 const Generate = () => {
 	const [, , , setError] = useContext(StatusContext);

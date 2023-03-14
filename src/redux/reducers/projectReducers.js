@@ -21,6 +21,7 @@ export const newProjectSearchReducer = (state = {}, action) => {
 		case NEW_PROJECT_SEARCH_SUCCESS:
 			return {
 				loading: false,
+				success: true,
 				project: action.payload.project,
 				searchCount: action.payload.searchCount,
 			};

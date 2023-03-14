@@ -2,7 +2,7 @@ const { Fragment, useState, useEffect, useContext } = require("react");
 const { Transition } = require("@headlessui/react");
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, clearErrors } from "@/redux/actions/userActions";
 import logoBlack from "/public/site_logo.png";
@@ -55,10 +55,13 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const { name, email, password } = user;
 
 	const { success, error } = useSelector((state) => state.auth);
+	const { data: session } = useSession();
 	useEffect(() => {
 		if (success) {
-			router.push("/generate");
-			closeModal();
+			if (session && session.user) {
+				router.push("/generate");
+				closeModal();
+			} else setAuthState("login");
 		}
 		if (error) {
 			setError({

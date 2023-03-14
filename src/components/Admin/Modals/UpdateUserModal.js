@@ -13,6 +13,7 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [role, setRole] = useState("");
+	const [credits, setCredits] = useState("");
 
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
@@ -38,6 +39,7 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 		if (userToUpdate) {
 			setName(userToUpdate.name);
 			setEmail(userToUpdate.email);
+			setCredits(userToUpdate.credits);
 			setRole(userToUpdate.role);
 		}
 
@@ -55,6 +57,7 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 		const userData = {
 			name,
 			email,
+			credits,
 			role,
 		};
 		dispatch(adminUpdateUserDetails(userToUpdate._id, userData));
@@ -106,6 +109,21 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 								value={email}
 								name="email"
 								onChange={(e) => setEmail(e.target.value)}
+								required
+							/>
+						</div>
+
+						<div className="flex flex-col mt-2">
+							<label htmlFor="email_field" className="text-sm text-start font-semibold text-light-500">
+								Credits
+							</label>
+							<input
+								type="number"
+								id="credits_field"
+								className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+								value={credits}
+								name="credits"
+								onChange={(e) => setCredits(e.target.value)}
 								required
 							/>
 						</div>
