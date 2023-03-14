@@ -12,7 +12,7 @@ export default function WhyWeBuiltThis() {
 
 	return (
 		<div className="w-full flex flex-col items-center bg-light-200 dark:bg-dark-1000">
-			<div className="w-full max-w-[1920px] py-40 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+			<div className="w-full max-w-[1920px] pt-20 pb-40 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<div className="flex flex-col items-center justify-center text-center bg-gradient-tertiary-r py-16 px-32 rounded-3xl">
 					<span className="text-6xl font-bold tracking-[-2.5px]">Why we built this?</span>
 					<p className="mt-10 text-light-300 text-3xl tracking-[-0.5px]">

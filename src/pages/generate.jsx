@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { title_main_page, meta_description } from "@/config/constants";
 import StatusContext from "@/store/status-context";
 import ContentModal from "@/components/Generate/ContentModal";
@@ -21,6 +22,15 @@ const Generate = () => {
 	const onFieldChange = (e) => {
 		setProjectInfo({ ...projectInfo, [e.target.name]: e.target.value });
 	};
+
+	const router = useRouter();
+	const { name, description } = router.query;
+	// If name and description are present in the query string, set the input states
+	useEffect(() => {
+		if (name && description) {
+			setProjectInfo({ projectName: name, projectDescription: description });
+		}
+	}, [name, description]);
 
 	const promptEnterProjectInfo = () => {
 		setError({

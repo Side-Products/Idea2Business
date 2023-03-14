@@ -1,8 +1,10 @@
 import { useContext } from "react";
+import { useRouter } from "next/router";
 import StatusContext from "@/store/status-context";
 import { getTimestamp } from "@/utils/Helpers";
 
 const ProjectCard = ({ project, adminView }) => {
+	const router = useRouter();
 	const [, , setSuccess] = useContext(StatusContext);
 
 	const copyToClipboard = async (event) => {
@@ -17,7 +19,10 @@ const ProjectCard = ({ project, adminView }) => {
 	};
 
 	return (
-		<div className="relative px-6 py-5 bg-dark-700 rounded-md cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
+		<div
+			onClick={() => router.push(`/generate?name=${project.name}&description=${project.description}`)}
+			className="relative px-6 py-5 bg-dark-700 rounded-md cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500"
+		>
 			{adminView && (
 				<div className="mb-4">
 					<p className="text-sm text-dark-100">{project.user.name}</p>
