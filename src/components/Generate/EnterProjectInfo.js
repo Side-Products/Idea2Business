@@ -66,7 +66,7 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 				</h3>
 			</div>
 
-			<form className="w-full p-4 sm:p-0 sm:w-1/2 h-min flex flex-col items-center justify-center mt-4 sm:mt-14">
+			<form className="w-full p-4 sm:p-0 sm:w-6/12 h-min flex flex-col items-center justify-center mt-4 sm:mt-14">
 				<input
 					className="w-full bg-dark-600/40 border border-light-900 focus:border-light-700 transform duration-300 outline-0 rounded-xl h-12 p-4 normal-case"
 					placeholder="Project Name"

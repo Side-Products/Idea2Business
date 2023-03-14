@@ -8,10 +8,12 @@ const allSearches = catchAsyncErrors(async (req, res) => {
 	const projectsCount = await ProjectSearch.countDocuments();
 
 	const apiFeatures = new APIFeatures(
-		ProjectSearch.find().populate({
-			path: "user",
-			select: "name email",
-		}),
+		ProjectSearch.find()
+			.populate({
+				path: "user",
+				select: "name email",
+			})
+			.sort({ createdAt: "desc" }),
 		req.query
 	)
 		.search()
@@ -35,7 +37,7 @@ const mySearches = catchAsyncErrors(async (req, res) => {
 	const resultsPerPage = 4;
 	const projectsCount = await ProjectSearch.countDocuments({ user: req.user._id || req.user.id });
 
-	const apiFeatures = new APIFeatures(ProjectSearch.find({ user: req.user._id || req.user.id }), req.query).search().filter();
+	const apiFeatures = new APIFeatures(ProjectSearch.find({ user: req.user._id || req.user.id }).sort({ createdAt: "desc" }), req.query).search().filter();
 	let projects = await apiFeatures.query;
 	let filteredProjectsCount = projects.length;
 
