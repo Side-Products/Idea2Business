@@ -48,15 +48,20 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
 	const router = useRouter();
 
+	const [showCreditsStrip, setShowCreditsStrip] = useState(true);
+
 	return (
 		<div className="absolute flex justify-center w-screen">
 			<div className="w-full fixed z-40 max-w-[1920px]">
-				{session && session.user && session.user.credits > 0 && (
+				{showCreditsStrip && session && session.user && session.user.credits > 0 && (
 					<div
 						onClick={() => router.push("/generate")}
 						className="p-1 w-full flex items-center justify-center cursor-pointer text-center text-sm text-light-400 bg-gradient-tertiary-r"
 					>
-						You have {session && session.user && session.user.credits > 0 && session.user.credits} free credits. Use them now!
+						You have {session && session.user && session.user.credits} free credits. Use them now!
+						<span className="absolute right-4 cursor-pointer" onClick={() => setShowCreditsStrip(false)}>
+							<i className="fa-solid fa-xmark text-sm"></i>
+						</span>
 					</div>
 				)}
 				<div className="w-full lg:px-16 xl:px-20 2xl:px-36">
@@ -155,7 +160,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 														</li>
 													)}
 
-													{status === "authenticated" && session.user.role == "admin" && (
+													{status === "authenticated" && session.user && session.user.role == "admin" && (
 														<>
 															<li>
 																<div className="block w-full text-center px-4 pb-2 pt-3 border-t border-zinc-700 bg-transparent dropdown-item whitespace-nowrap text-light-700">
@@ -210,7 +215,10 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 							</div>
 
 							{/* Hamburger Menu */}
-							<HamburgerMenu avatarUrl={session && session.user.image} truncatedName={session && session.user.name} />
+							<HamburgerMenu
+								avatarUrl={session && session.user && session.user.image}
+								truncatedName={session && session.user && session.user.name}
+							/>
 						</div>
 					</nav>
 				</div>

@@ -44,7 +44,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			return;
 		}
 		handleChange();
-		router.push(`/`, undefined, { shallow: true });
 		onClose();
 	};
 
@@ -134,7 +133,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex justify-center items-center h-full w-full fixed">
-						<div className="max-w-[26rem] w-11/12 p-4 pl-10 pb-12 bg-dark-500 rounded-lg">
+						<div className="max-w-[26rem] w-11/12 p-4 pl-10 pb-12 bg-dark-600 rounded-lg">
 							<div className="w-full flex justify-start">
 								<div className="w-full flex flex-col justify-center items-center mt-4">
 									{!forgotPassword && (
@@ -206,7 +205,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 														<input
 															type="text"
 															id="name_field"
-															className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+															className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
 															value={name}
 															name="name"
 															onChange={onFieldChange}
@@ -222,7 +221,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 													<input
 														type="email"
 														id="email_field"
-														className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+														className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
 														value={email}
 														name="email"
 														onChange={onFieldChange}
@@ -237,7 +236,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 													<input
 														type="password"
 														id="password_field"
-														className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+														className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
 														value={password}
 														name="password"
 														onChange={onFieldChange}

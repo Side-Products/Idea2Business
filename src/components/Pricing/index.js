@@ -6,7 +6,9 @@ import Button from "@/components/ui/Button";
 import getStripe from "@/utils/getStripe";
 import LoadingContext from "@/store/loading-context";
 import StatusContext from "@/store/status-context";
+import AuthModalContext from "@/store/authModal-context";
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
 
 const Pricing = () => {
 	const [, setLoading] = useContext(LoadingContext);
@@ -22,26 +24,32 @@ const Pricing = () => {
 			? "Standard"
 			: "Free";
 
+	const { data: session, status } = useSession();
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const buySubscription = async (_planChosen) => {
-		setLoading({ status: true });
+		if (status === "authenticated" && session && session.user) {
+			setLoading({ status: true });
 
-		const amount = _planChosen;
-		try {
-			const link = `/api/stripe/checkout-session`;
-			const { data } = await axios.get(link, { params: { amount: amount } });
+			const amount = _planChosen;
+			try {
+				const link = `/api/stripe/checkout-session`;
+				const { data } = await axios.get(link, { params: { amount: amount } });
 
-			const stripe = await getStripe();
+				const stripe = await getStripe();
 
-			// Redirect to Stripe Checkout
-			await stripe.redirectToCheckout({ sessionId: data.id });
-			setLoading({ status: false });
-		} catch (error) {
-			setLoading({ status: false });
-			setError({
-				title: "Something went wrong",
-				message: error.message,
-				showErrorBox: true,
-			});
+				// Redirect to Stripe Checkout
+				await stripe.redirectToCheckout({ sessionId: data.id });
+				setLoading({ status: false });
+			} catch (error) {
+				setLoading({ status: false });
+				setError({
+					title: "Something went wrong",
+					message: error.message,
+					showErrorBox: true,
+				});
+			}
+		} else {
+			setAuthModalOpen(true);
 		}
 	};
 

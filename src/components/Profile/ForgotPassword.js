@@ -49,7 +49,7 @@ const ForgotPassword = ({ email, onFieldChange }) => {
 				<input
 					type="email"
 					id="email_field"
-					className="mt-1 w-full bg-dark-700 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+					className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
 					value={email}
 					name="email"
 					onChange={onFieldChange}
@@ -57,7 +57,7 @@ const ForgotPassword = ({ email, onFieldChange }) => {
 				/>
 			</div>
 
-			<div className="mt-6">
+			<div className="mt-8">
 				<Button variant={"primary"} rounded={true} isLoading={loading} classes="text-md px-8 py-3">
 					Send Email
 				</Button>
