@@ -47,7 +47,7 @@ function App({ Component, pageProps, session, router }) {
 		<>
 			{/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
 			<Script
-				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
 				strategy="afterInteractive"
 				onError={(err) => {}}
 			/>
@@ -56,7 +56,7 @@ function App({ Component, pageProps, session, router }) {
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
                     page_path: window.location.pathname,
                     });
                 `}
