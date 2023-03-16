@@ -6,6 +6,6 @@ https://project2product.vercel.app
 
 `brew services start mongodb-community`
 
-# Stripe
+## Stripe
 
 `stripe listen --events checkout.session.completed --forward-to localhost:3000/api/stripe/webhook/checkout-session-completed`
