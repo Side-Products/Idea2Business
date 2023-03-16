@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import styles from "@/styles/Loading/LoadingDark.module.css";
+import Loader from "@/components/ui/Loader";
 
 export default function Loading() {
 	const [isLoading] = useContext(LoadingContext);
@@ -10,7 +11,8 @@ export default function Loading() {
 		isLoading.status && (
 			<div className={styles["loading_container"]}>
 				<div className={styles["loading_container_box"]}>
-					<div className={styles["loadingSpinner"]}></div>
+					{/* <div className={styles["loadingSpinner"]}></div> */}
+					<Loader width="150" height="150" viewBox="-100 -100 400 400" classes="pb-0 -mb-4" />
 				</div>
 				{isLoading.title && <p>{isLoading.title}</p>}
 

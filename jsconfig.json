@@ -3,13 +3,15 @@
         "target": "esnext",
         "baseUrl": ".",
         "paths": {
+            "@/backend/*": ["src/backend/*"],
             "@/components/*": ["src/components/*"],
             "@/layout/*": ["src/layout/*"],
             "@/config/*": ["src/config/*"],
             "@/lib/*": ["src/lib/*"],
             "@/utils/*": ["src/utils/*"],
             "@/styles/*": ["styles/*"],
-            "@/store/*": ["store/*"]
+            "@/store/*": ["src/store/*"],
+            "@/redux/*": ["src/redux/*"]
         }
     }
 }

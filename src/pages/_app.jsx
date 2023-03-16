@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
 import * as ga from "../../lib/google-analytics";
-import "@/styles/styles.css";
+import "@/styles/globals.css";
+import "cal-sans";
 import ScrollToPageTop from "@/utils/ScrollToPageTop";
 import Layout from "@/layout/WrapLayout/Layout";
 import StatusContext from "@/store/status-context";
 import LoadingContext from "@/store/loading-context";
 import AuthModalContext from "@/store/authModal-context";
+import { wrapper } from "@/redux/redux-store";
 
 function App({ Component, pageProps, session, router }) {
 	useEffect(() => {
@@ -77,4 +79,4 @@ function App({ Component, pageProps, session, router }) {
 		</>
 	);
 }
-export default App;
+export default wrapper.withRedux(App);

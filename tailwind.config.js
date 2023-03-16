@@ -1,9 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	purge: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
-	content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
+	content: [
+		"./src/pages/**/*.{js,ts,jsx,tsx}",
+		"./src/components/**/*.{js,ts,jsx,tsx}",
+		"./src/layout/**/*.{js,ts,jsx,tsx}",
+		"./node_modules/tw-elements/dist/js/**/*.js",
+	],
 	theme: {
 		extend: {
+			animation: {
+				text: "text 5s ease infinite",
+				bg: "text 3s ease infinite",
+			},
+			keyframes: {
+				text: {
+					"0%, 100%": {
+						"background-size": "200% 200%",
+						"background-position": "left center",
+					},
+					"50%": {
+						"background-size": "200% 200%",
+						"background-position": "right center",
+					},
+				},
+				bg: {
+					"0%, 100%": {
+						"background-size": "200% 200%",
+						"background-position": "left center",
+					},
+					"50%": {
+						"background-size": "200% 200%",
+						"background-position": "right center",
+					},
+				},
+			},
 			colors: {
 				primary: {
 					100: "#e0f2f1",
@@ -104,11 +135,14 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				primary: ["Poppins", "sans-serif"],
-				secondary: ["Roboto", "sans-serif"],
-				tertiary: ["Manrope", "sans-serif"],
+				primary: ["Inter", "sans-serif"],
+				// primary: ["Cal Sans", "sans-serif"],
+				secondary: ["Poppins", "sans-serif"],
+				tertiary: ["Roboto", "sans-serif"],
+				plaster: ["Plaster", "sans-serif"],
+				ter2: ["Manrope", "sans-serif"],
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("tw-elements/dist/plugin")],
 };
