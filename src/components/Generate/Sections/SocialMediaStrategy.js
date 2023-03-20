@@ -15,7 +15,7 @@ export default function SocialMediaStrategy({
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
 
-	const callTwitterEndpoint = async (choice, cardText) => {
+	const callTwitterEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -31,20 +31,10 @@ export default function SocialMediaStrategy({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "TwitterStrategy.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -52,7 +42,7 @@ export default function SocialMediaStrategy({
 		});
 	};
 
-	const callInstagramEndpoint = async (choice, cardText) => {
+	const callInstagramEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -68,20 +58,10 @@ export default function SocialMediaStrategy({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "InstagramStrategy.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -89,7 +69,7 @@ export default function SocialMediaStrategy({
 		});
 	};
 
-	const callLinkedInEndpoint = async (choice, cardText) => {
+	const callLinkedInEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -105,20 +85,10 @@ export default function SocialMediaStrategy({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "LinkedInStrategy.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -126,7 +96,7 @@ export default function SocialMediaStrategy({
 		});
 	};
 
-	const callTikTokEndpoint = async (choice, cardText) => {
+	const callTikTokEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -142,20 +112,10 @@ export default function SocialMediaStrategy({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "TikTokStrategy.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -169,9 +129,9 @@ export default function SocialMediaStrategy({
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
 					cardText="Twitter Strategy"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("twitterStrategy");
-						await callTwitterEndpoint(choice, cardText);
+						await callTwitterEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "twitterStrategy"}
@@ -180,9 +140,9 @@ export default function SocialMediaStrategy({
 				/>
 				<PromptCard
 					cardText="Instagram Strategy"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("instagramStrategy");
-						await callInstagramEndpoint(choice, cardText);
+						await callInstagramEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "instagramStrategy"}
@@ -191,9 +151,9 @@ export default function SocialMediaStrategy({
 				/>
 				<PromptCard
 					cardText="LinkedIn Strategy"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("linkedinStrategy");
-						await callLinkedInEndpoint(choice, cardText);
+						await callLinkedInEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "linkedinStrategy"}
@@ -202,9 +162,9 @@ export default function SocialMediaStrategy({
 				/>
 				<PromptCard
 					cardText="TikTok/Reels/Shorts Strategy"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("tiktokStrategy");
-						await callTikTokEndpoint(choice, cardText);
+						await callTikTokEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "tiktokStrategy"}

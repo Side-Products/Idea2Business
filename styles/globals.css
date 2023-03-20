@@ -681,3 +681,35 @@ tr th:nth-child(1) {
 .allusers-table tr th:nth-child(n + 8) {
 	border-radius: 0 0.625rem 0.625rem 0;
 }
+
+/**************************************************************************/
+/***************************    Scrollbar   *******************************/
+/**************************************************************************/
+
+html {
+	overflow: auto !important;
+	overflow-y: scroll !important;
+	overflow-y: overlay !important;
+}
+
+/* Scroll bar width */
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	border-radius: 50px;
+	background: #4db6ac;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #4db6ac;
+}

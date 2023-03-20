@@ -15,7 +15,7 @@ export default function UnderstandingPotentialUsers({
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
 
-	const callGenerateUserPersonaEndpoint = async (choice, cardText) => {
+	const callGenerateUserPersonaEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -32,20 +32,10 @@ export default function UnderstandingPotentialUsers({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userPersonaOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userPersonaOutputArray], { type: "text/plain" }));
-			a.download = "UserPersona.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -53,7 +43,7 @@ export default function UnderstandingPotentialUsers({
 		});
 	};
 
-	const callGenerateMomTestEndpoint = async (choice, cardText) => {
+	const callGenerateMomTestEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -70,20 +60,10 @@ export default function UnderstandingPotentialUsers({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let momTestOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([momTestOutputArray], { type: "text/plain" }));
-			a.download = "MomTest.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -91,7 +71,7 @@ export default function UnderstandingPotentialUsers({
 		});
 	};
 
-	const callGeneratePotentialCustomerEndpoint = async (choice, cardText) => {
+	const callGeneratePotentialCustomerEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -107,20 +87,10 @@ export default function UnderstandingPotentialUsers({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "PotentialCustomer.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -128,7 +98,7 @@ export default function UnderstandingPotentialUsers({
 		});
 	};
 
-	const callGenerateCustomerPainPoints = async (choice, cardText) => {
+	const callGenerateCustomerPainPoints = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -144,20 +114,10 @@ export default function UnderstandingPotentialUsers({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let painPointsOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([painPointsOutputArray], { type: "text/plain" }));
-			a.download = "CustomerPainPoints.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -171,9 +131,9 @@ export default function UnderstandingPotentialUsers({
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
 					cardText="User Persona"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("userPersona");
-						await callGenerateUserPersonaEndpoint(choice, cardText);
+						await callGenerateUserPersonaEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "userPersona"}
@@ -182,9 +142,9 @@ export default function UnderstandingPotentialUsers({
 				/>
 				<PromptCard
 					cardText="Mom Test: How to talk to initial customers"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("momTest");
-						await callGenerateMomTestEndpoint(choice, cardText);
+						await callGenerateMomTestEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "momTest"}
@@ -193,9 +153,9 @@ export default function UnderstandingPotentialUsers({
 				/>
 				<PromptCard
 					cardText="Type of Potential Customers"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("potentialCustomers");
-						await callGeneratePotentialCustomerEndpoint(choice, cardText);
+						await callGeneratePotentialCustomerEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "potentialCustomers"}
@@ -204,9 +164,9 @@ export default function UnderstandingPotentialUsers({
 				/>
 				<PromptCard
 					cardText="Customer Pain Points"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("customerPainPoints");
-						await callGenerateCustomerPainPoints(choice, cardText);
+						await callGenerateCustomerPainPoints(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "customerPainPoints"}

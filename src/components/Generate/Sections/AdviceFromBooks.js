@@ -15,7 +15,7 @@ export default function AdviceFromBooks({
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
 
-	const callLeanStartupEndpoint = async (choice, cardText) => {
+	const callLeanStartupEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -31,20 +31,10 @@ export default function AdviceFromBooks({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "AdviceFromLeanStartup.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -52,7 +42,7 @@ export default function AdviceFromBooks({
 		});
 	};
 
-	const callHookedEndpoint = async (choice, cardText) => {
+	const callHookedEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -68,20 +58,10 @@ export default function AdviceFromBooks({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "AdviceFromHooked.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -89,7 +69,7 @@ export default function AdviceFromBooks({
 		});
 	};
 
-	const callHardThingsAboutHardThingsEndpoint = async (choice, cardText) => {
+	const callHardThingsAboutHardThingsEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -105,20 +85,10 @@ export default function AdviceFromBooks({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "AdviceFromTheHardThing.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -126,7 +96,7 @@ export default function AdviceFromBooks({
 		});
 	};
 
-	const callStartupOwnersManualEndpoint = async (choice, cardText) => {
+	const callStartupOwnersManualEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -142,20 +112,10 @@ export default function AdviceFromBooks({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "AdviceFromStartupOwnersManual.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -170,9 +130,9 @@ export default function AdviceFromBooks({
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
 					cardText="Advice from the book: The Lean Startup"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("leanStartup");
-						await callLeanStartupEndpoint(choice, cardText);
+						await callLeanStartupEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "leanStartup"}
@@ -181,9 +141,9 @@ export default function AdviceFromBooks({
 				/>
 				<PromptCard
 					cardText="Advice from the book: Hooked"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("hooked");
-						await callHookedEndpoint(choice, cardText);
+						await callHookedEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "hooked"}
@@ -192,9 +152,9 @@ export default function AdviceFromBooks({
 				/>
 				<PromptCard
 					cardText="Advice from the book: The Hard Thing About Hard Things"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("hardThingAboutHardThings");
-						await callHardThingsAboutHardThingsEndpoint(choice, cardText);
+						await callHardThingsAboutHardThingsEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "hardThingAboutHardThings"}
@@ -203,9 +163,9 @@ export default function AdviceFromBooks({
 				/>
 				<PromptCard
 					cardText="Advice from the book: The Startup Owner’s Manual"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("startupOwnersManual");
-						await callStartupOwnersManualEndpoint(choice, cardText);
+						await callStartupOwnersManualEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "startupOwnersManual"}

@@ -15,7 +15,7 @@ export default function BonusContent({
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
 
-	const callSPMEEndpoint = async (choice, cardText) => {
+	const callSPMEEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -31,20 +31,10 @@ export default function BonusContent({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "SPMEforSolopreneurs.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -52,7 +42,7 @@ export default function BonusContent({
 		});
 	};
 
-	const callMVPEndpoint = async (choice, cardText) => {
+	const callMVPEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -68,20 +58,10 @@ export default function BonusContent({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "MVPLaunchChecklist.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -89,7 +69,7 @@ export default function BonusContent({
 		});
 	};
 
-	const callGrantEndpoint = async (choice, cardText) => {
+	const callGrantEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -105,20 +85,10 @@ export default function BonusContent({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "GrantProposal.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -126,7 +96,7 @@ export default function BonusContent({
 		});
 	};
 
-	const callLegalAdviceEndpoint = async (choice, cardText) => {
+	const callLegalAdviceEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -142,20 +112,10 @@ export default function BonusContent({
 		});
 		const data = await response.json();
 		const { output } = data;
-		let userCusOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([userCusOutputArray], { type: "text/plain" }));
-			a.download = "LegalAdvice.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -169,9 +129,9 @@ export default function BonusContent({
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
 					cardText="SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("spme");
-						await callSPMEEndpoint(choice, cardText);
+						await callSPMEEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "spme"}
@@ -180,9 +140,9 @@ export default function BonusContent({
 				/>
 				<PromptCard
 					cardText="MVP Launch Checklist"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("mvpLaunchChecklist");
-						await callMVPEndpoint(choice, cardText);
+						await callMVPEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "mvpLaunchChecklist"}
@@ -191,9 +151,9 @@ export default function BonusContent({
 				/>
 				<PromptCard
 					cardText="Grant Proposal"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("grantProposal");
-						await callGrantEndpoint(choice, cardText);
+						await callGrantEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "grantProposal"}
@@ -202,9 +162,9 @@ export default function BonusContent({
 				/>
 				<PromptCard
 					cardText="Legal Advice"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("legalAdvice");
-						await callLegalAdviceEndpoint(choice, cardText);
+						await callLegalAdviceEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "legalAdvice"}

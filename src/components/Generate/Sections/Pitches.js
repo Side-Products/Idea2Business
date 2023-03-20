@@ -7,7 +7,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
 
-	const callGenerateVCPitchEndpoint = async (choice, cardText) => {
+	const callGenerateVCPitchEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -24,20 +24,10 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 		});
 		const data = await response.json();
 		const { output } = data;
-		let vcOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([vcOutputArray], { type: "text/plain" }));
-			a.download = "EmailPitchToVC.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -45,7 +35,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 		});
 	};
 
-	const callGenerateCoFounderPitchEndpoint = async (choice, cardText) => {
+	const callGenerateCoFounderPitchEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -62,20 +52,10 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 		});
 		const data = await response.json();
 		const { output } = data;
-		let cofounderOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([cofounderOutputArray], { type: "text/plain" }));
-			a.download = "PitchToCoFounder.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -83,7 +63,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 		});
 	};
 
-	const callGenerateMarketingAdvisorEndpoint = async (choice, cardText) => {
+	const callGenerateMarketingAdvisorEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -100,20 +80,10 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 		});
 		const data = await response.json();
 		const { output } = data;
-		let marketingAdvisorOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([marketingAdvisorOutputArray], { type: "text/plain" }));
-			a.download = "PitchToMarketingAdvisor.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -121,7 +91,7 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 		});
 	};
 
-	const callGenerateMentorPitch = async (choice, cardText) => {
+	const callGenerateMentorPitch = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
@@ -138,20 +108,10 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 		});
 		const data = await response.json();
 		const { output } = data;
-		let mentorpitchOutputArray = output.text;
 
-		if (choice === "download") {
-			// Downloading a text file
-			var a = window.document.createElement("a");
-			a.href = window.URL.createObjectURL(new Blob([mentorpitchOutputArray], { type: "text/plain" }));
-			a.download = "MentorPitch.txt";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		} else if (choice === "view") {
-			setModalText({ heading: cardText, content: output.text });
-			setContentModalOpen(true);
-		}
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
 		setLoading({
 			status: false,
 			title: "",
@@ -165,9 +125,9 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
 					cardText="Email Pitch to VC"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("vcPitch");
-						await callGenerateVCPitchEndpoint(choice, cardText);
+						await callGenerateVCPitchEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "vcPitch"}
@@ -176,9 +136,9 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 				/>
 				<PromptCard
 					cardText="Pitch to Onboard Potential Co-Founder"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("coFounderPitch");
-						await callGenerateCoFounderPitchEndpoint(choice, cardText);
+						await callGenerateCoFounderPitchEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "coFounderPitch"}
@@ -187,9 +147,9 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 				/>
 				<PromptCard
 					cardText="Pitch to Onboard Potential Advisor (Marketing)"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("marketingAdvisorPitch");
-						await callGenerateMarketingAdvisorEndpoint(choice, cardText);
+						await callGenerateMarketingAdvisorEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "marketingAdvisorPitch"}
@@ -198,9 +158,9 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 				/>
 				<PromptCard
 					cardText="Pitch to Get Yourself a Mentor"
-					handleCardClick={async (choice, cardText) => {
+					handleCardClick={async (cardText) => {
 						setIsGenerating("mentorPitch");
-						await callGenerateMentorPitch(choice, cardText);
+						await callGenerateMentorPitch(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === "mentorPitch"}
