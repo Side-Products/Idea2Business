@@ -19,6 +19,8 @@ export default function WhyWeBuiltThis() {
 						We spent weeks to research and draft all these for our previous product, so we built a tool that does the job within minutes!
 					</p>
 
+					<p className="mt-10 text-light-300 text-3xl tracking-[-0.5px]">Save hours of time getting started 🕔⚡️</p>
+
 					<div className="w-2/3 sm:w-1/4 md:w-1/5 xl:w-1/6 mt-16">
 						<Button
 							type="button"

@@ -62,6 +62,8 @@ export default function GuidedByAI() {
 						className="lg:col-span-5 col-span-12 max-w-full aspect-[3/2] lg:aspect-square object-cover my-10 md:mb-0 md:mt-14 lg:my-0 rounded-2xl shadow-lg lg:h-full order-1"
 					/>
 				</article>
+
+				<p className="col-span-12 mt-20 text-center text-sm self-center text-light-500">Tailored for you. Powered by AI 🪄</p>
 			</div>
 		</div>
 	);

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import { adviceFromBooks } from "@/config/constants";
 
 export default function AdviceFromBooks({
 	isGenerating,
@@ -11,6 +12,7 @@ export default function AdviceFromBooks({
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
+	setSubscriptionRequiredModalOpen,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -126,51 +128,58 @@ export default function AdviceFromBooks({
 	return (
 		<>
 			<SectionHeading>Advice from Books</SectionHeading>
-
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
-					cardText="Advice from the book: The Lean Startup"
+					cardText={adviceFromBooks[0].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("leanStartup");
+						setIsGenerating(adviceFromBooks[0].isGeneratingText);
 						await callLeanStartupEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "leanStartup"}
+					isLoading={isGenerating === adviceFromBooks[0].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={adviceFromBooks[0].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Advice from the book: Hooked"
+					cardText={adviceFromBooks[1].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("hooked");
+						setIsGenerating(adviceFromBooks[1].isGeneratingText);
 						await callHookedEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "hooked"}
+					isLoading={isGenerating === adviceFromBooks[1].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={adviceFromBooks[1].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Advice from the book: The Hard Thing About Hard Things"
+					cardText={adviceFromBooks[2].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("hardThingAboutHardThings");
+						setIsGenerating(adviceFromBooks[2].isGeneratingText);
 						await callHardThingsAboutHardThingsEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "hardThingAboutHardThings"}
+					isLoading={isGenerating === adviceFromBooks[2].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={adviceFromBooks[2].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Advice from the book: The Startup Owner’s Manual"
+					cardText={adviceFromBooks[3].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("startupOwnersManual");
+						setIsGenerating(adviceFromBooks[3].isGeneratingText);
 						await callStartupOwnersManualEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "startupOwnersManual"}
+					isLoading={isGenerating === adviceFromBooks[3].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={adviceFromBooks[3].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</div>
 		</>

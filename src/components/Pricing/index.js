@@ -9,6 +9,7 @@ import StatusContext from "@/store/status-context";
 import AuthModalContext from "@/store/authModal-context";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
+import { pitches, understandingPotentialUsers, socialMediaStrategy, adviceFromBooks, bonusContent, decks } from "@/config/constants";
 
 const Pricing = () => {
 	const [, setLoading] = useContext(LoadingContext);
@@ -66,44 +67,70 @@ const Pricing = () => {
 				</div>
 
 				<div className="mt-10 lg:mt-14 space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
-					<div className="flex flex-col p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
-						<h3 className="mb-4 text-2xl font-semibold">Free</h3>
-						<p className="font-light sm:text-lg text-gray-400">Best option for personal use & for your next project.</p>
-						<div className="flex justify-center items-baseline my-8">
-							<span className="mr-2 text-5xl font-extrabold">$0</span>
-							<span className="text-gray-400">/month</span>
+					<div className="flex flex-col justify-between  p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
+						<div>
+							<h3 className="mb-4 text-2xl font-semibold">Free</h3>
+							<p className="font-light sm:text-lg text-gray-400">Best option for personal use & for your next project.</p>
+							<div className="flex justify-center items-baseline my-8">
+								<span className="mr-2 text-5xl font-extrabold">$0</span>
+								<span className="text-gray-400">forever</span>
+							</div>
+
+							<div className="mb-8 font-bold text-lg text-light-600">WHAT YOU CAN DO</div>
+
+							<ul role="list" className="mb-8 space-y-4 text-left">
+								{pitches.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Free" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{understandingPotentialUsers.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Free" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{socialMediaStrategy.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Free" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{adviceFromBooks.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Free" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{bonusContent.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Free" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+							</ul>
 						</div>
-
-						<div className="mb-8 font-bold text-lg text-light-600">WHAT YOU CAN DO</div>
-
-						<ul role="list" className="mb-8 space-y-4 text-left">
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>Individual configuration</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>No setup, or hidden fees</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Team size: <span className="font-semibold">1 developer</span>
-								</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Premium support: <span className="font-semibold">6 months</span>
-								</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Free updates: <span className="font-semibold">6 months</span>
-								</span>
-							</li>
-						</ul>
 
 						{subscriptionPlan == "Free" ? (
 							<Button
@@ -119,44 +146,70 @@ const Pricing = () => {
 						) : null}
 					</div>
 
-					<div className="flex flex-col p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
-						<h3 className="mb-4 text-2xl font-semibold">Standard</h3>
-						<p className="font-light sm:text-lg dark:text-gray-400">Relevant for multiple users, extended & premium support.</p>
-						<div className="flex justify-center items-baseline my-8">
-							<span className="mr-2 text-5xl font-extrabold">$5</span>
-							<span className="dark:text-gray-400">/week</span>
+					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
+						<div>
+							<h3 className="mb-4 text-2xl font-semibold">Standard</h3>
+							<p className="font-light sm:text-lg dark:text-gray-400">Relevant for multiple users, extended & premium support.</p>
+							<div className="flex justify-center items-baseline my-8">
+								<span className="mr-2 text-5xl font-extrabold">$5</span>
+								<span className="dark:text-gray-400">for a week</span>
+							</div>
+
+							<div className="mb-8 font-bold text-lg text-light-600">ALL OF FREE PLUS</div>
+
+							<ul role="list" className="mb-8 space-y-4 text-left">
+								{pitches.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Standard" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{understandingPotentialUsers.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Standard" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{socialMediaStrategy.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Standard" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{adviceFromBooks.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Standard" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{bonusContent.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Standard" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+							</ul>
 						</div>
-
-						<div className="mb-8 font-bold text-lg text-light-600">ALL OF FREE PLUS</div>
-
-						<ul role="list" className="mb-8 space-y-4 text-left">
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>Individual configuration</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>No setup, or hidden fees</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Team size: <span className="font-semibold">10 developers</span>
-								</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Premium support: <span className="font-semibold">24 months</span>
-								</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Free updates: <span className="font-semibold">24 months</span>
-								</span>
-							</li>
-						</ul>
 
 						{subscriptionPlan == "Standard" ? (
 							<Button
@@ -183,44 +236,80 @@ const Pricing = () => {
 						) : null}
 					</div>
 
-					<div className="flex flex-col p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
-						<h3 className="mb-4 text-2xl font-semibold">Pro Plus</h3>
-						<p className="font-light sm:text-lg dark:text-gray-400">Best for large scale uses and extended redistribution rights.</p>
-						<div className="flex justify-center items-baseline my-8">
-							<span className="mr-2 text-5xl font-extrabold">$10</span>
-							<span className="dark:text-gray-400">/month</span>
+					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
+						<div>
+							<h3 className="mb-4 text-2xl font-semibold">Pro Plus</h3>
+							<p className="font-light sm:text-lg dark:text-gray-400">Best for large scale uses and extended redistribution rights.</p>
+							<div className="flex justify-center items-baseline my-8">
+								<span className="mr-2 text-5xl font-extrabold">$10</span>
+								<span className="dark:text-gray-400">for a month</span>
+							</div>
+
+							<div className="mb-8 font-bold text-lg text-light-600">ALL OF STANDARD PLUS</div>
+
+							<ul role="list" className="mb-8 space-y-4 text-left">
+								{decks.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Pro Plus" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{pitches.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Pro Plus" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{understandingPotentialUsers.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Pro Plus" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{socialMediaStrategy.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Pro Plus" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{adviceFromBooks.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Pro Plus" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{bonusContent.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Pro Plus" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+							</ul>
 						</div>
-
-						<div className="mb-8 font-bold text-lg text-light-600">ALL OF STANDARD PLUS</div>
-
-						<ul role="list" className="mb-8 space-y-4 text-left">
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>Individual configuration</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>No setup, or hidden fees</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Team size: <span className="font-semibold">100+ developers</span>
-								</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Premium support: <span className="font-semibold">36 months</span>
-								</span>
-							</li>
-							<li className="flex items-center space-x-3">
-								<Tick />
-								<span>
-									Free updates: <span className="font-semibold">36 months</span>
-								</span>
-							</li>
-						</ul>
 
 						{subscriptionPlan == "Pro Plus" ? (
 							<Button

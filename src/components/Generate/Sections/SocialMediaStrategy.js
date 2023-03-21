@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import { socialMediaStrategy } from "@/config/constants";
 
 export default function SocialMediaStrategy({
 	isGenerating,
@@ -11,6 +12,7 @@ export default function SocialMediaStrategy({
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
+	setSubscriptionRequiredModalOpen,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -128,48 +130,56 @@ export default function SocialMediaStrategy({
 			<SectionHeading>Social Media Strategy</SectionHeading>
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
-					cardText="Twitter Strategy"
+					cardText={socialMediaStrategy[0].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("twitterStrategy");
+						setIsGenerating(socialMediaStrategy[0].isGeneratingText);
 						await callTwitterEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "twitterStrategy"}
+					isLoading={isGenerating === socialMediaStrategy[0].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={socialMediaStrategy[0].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Instagram Strategy"
+					cardText={socialMediaStrategy[1].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("instagramStrategy");
+						setIsGenerating(socialMediaStrategy[1].isGeneratingText);
 						await callInstagramEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "instagramStrategy"}
+					isLoading={isGenerating === socialMediaStrategy[1].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={socialMediaStrategy[1].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="LinkedIn Strategy"
+					cardText={socialMediaStrategy[2].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("linkedinStrategy");
+						setIsGenerating(socialMediaStrategy[2].isGeneratingText);
 						await callLinkedInEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "linkedinStrategy"}
+					isLoading={isGenerating === socialMediaStrategy[2].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={socialMediaStrategy[2].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="TikTok/Reels/Shorts Strategy"
+					cardText={socialMediaStrategy[3].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("tiktokStrategy");
+						setIsGenerating(socialMediaStrategy[3].isGeneratingText);
 						await callTikTokEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "tiktokStrategy"}
+					isLoading={isGenerating === socialMediaStrategy[3].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={socialMediaStrategy[3].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</div>
 		</>

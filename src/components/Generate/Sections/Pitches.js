@@ -2,8 +2,18 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import { pitches } from "@/config/constants";
 
-export default function Pitches({ isGenerating, setIsGenerating, promptEnterProjectInfo, projectInfo, cardsAvailable, setModalText, setContentModalOpen }) {
+export default function Pitches({
+	isGenerating,
+	setIsGenerating,
+	promptEnterProjectInfo,
+	projectInfo,
+	cardsAvailable,
+	setModalText,
+	setContentModalOpen,
+	setSubscriptionRequiredModalOpen,
+}) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
 
@@ -124,48 +134,56 @@ export default function Pitches({ isGenerating, setIsGenerating, promptEnterProj
 			<SectionHeading>Pitches</SectionHeading>
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
-					cardText="Email Pitch to VC"
+					cardText={pitches[0].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("vcPitch");
-						await callGenerateVCPitchEndpoint(cardText);
-						setIsGenerating(false);
-					}}
-					isLoading={isGenerating === "vcPitch"}
-					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
-				/>
-				<PromptCard
-					cardText="Pitch to Onboard Potential Co-Founder"
-					handleCardClick={async (cardText) => {
-						setIsGenerating("coFounderPitch");
+						setIsGenerating(pitches[0].isGeneratingText);
 						await callGenerateCoFounderPitchEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "coFounderPitch"}
+					isLoading={isGenerating === pitches[0].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={pitches[0].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Pitch to Onboard Potential Advisor (Marketing)"
+					cardText={pitches[1].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("marketingAdvisorPitch");
-						await callGenerateMarketingAdvisorEndpoint(cardText);
-						setIsGenerating(false);
-					}}
-					isLoading={isGenerating === "marketingAdvisorPitch"}
-					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
-				/>
-				<PromptCard
-					cardText="Pitch to Get Yourself a Mentor"
-					handleCardClick={async (cardText) => {
-						setIsGenerating("mentorPitch");
+						setIsGenerating(pitches[1].isGeneratingText);
 						await callGenerateMentorPitch(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "mentorPitch"}
+					isLoading={isGenerating === pitches[1].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={pitches[1].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+				/>
+				<PromptCard
+					cardText={pitches[2].cardText}
+					handleCardClick={async (cardText) => {
+						setIsGenerating(pitches[2].isGeneratingText);
+						await callGenerateVCPitchEndpoint(cardText);
+						setIsGenerating(false);
+					}}
+					isLoading={isGenerating === pitches[2].isGeneratingText}
+					cardsAvailable={cardsAvailable}
+					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={pitches[2].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+				/>
+				<PromptCard
+					cardText={pitches[3].cardText}
+					handleCardClick={async (cardText) => {
+						setIsGenerating(pitches[3].isGeneratingText);
+						await callGenerateMarketingAdvisorEndpoint(cardText);
+						setIsGenerating(false);
+					}}
+					isLoading={isGenerating === pitches[3].isGeneratingText}
+					cardsAvailable={cardsAvailable}
+					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={pitches[3].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</div>
 		</>

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import { understandingPotentialUsers } from "@/config/constants";
 
 export default function UnderstandingPotentialUsers({
 	isGenerating,
@@ -11,6 +12,7 @@ export default function UnderstandingPotentialUsers({
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
+	setSubscriptionRequiredModalOpen,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -130,48 +132,56 @@ export default function UnderstandingPotentialUsers({
 			<SectionHeading>Understanding Potential Users</SectionHeading>
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
-					cardText="User Persona"
+					cardText={understandingPotentialUsers[0].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("userPersona");
+						setIsGenerating(understandingPotentialUsers[0].isGeneratingText);
 						await callGenerateUserPersonaEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "userPersona"}
+					isLoading={isGenerating === understandingPotentialUsers[0].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={understandingPotentialUsers[0].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Mom Test: How to talk to initial customers"
+					cardText={understandingPotentialUsers[1].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("momTest");
+						setIsGenerating(understandingPotentialUsers[1].isGeneratingText);
 						await callGenerateMomTestEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "momTest"}
+					isLoading={isGenerating === understandingPotentialUsers[1].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={understandingPotentialUsers[1].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Type of Potential Customers"
+					cardText={understandingPotentialUsers[2].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("potentialCustomers");
+						setIsGenerating(understandingPotentialUsers[2].isGeneratingText);
 						await callGeneratePotentialCustomerEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "potentialCustomers"}
+					isLoading={isGenerating === understandingPotentialUsers[2].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={understandingPotentialUsers[2].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Customer Pain Points"
+					cardText={understandingPotentialUsers[3].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("customerPainPoints");
+						setIsGenerating(understandingPotentialUsers[3].isGeneratingText);
 						await callGenerateCustomerPainPoints(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "customerPainPoints"}
+					isLoading={isGenerating === understandingPotentialUsers[3].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={understandingPotentialUsers[3].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</div>
 		</>

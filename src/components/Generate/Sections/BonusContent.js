@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import { bonusContent } from "@/config/constants";
 
 export default function BonusContent({
 	isGenerating,
@@ -11,6 +12,7 @@ export default function BonusContent({
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
+	setSubscriptionRequiredModalOpen,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -128,48 +130,56 @@ export default function BonusContent({
 			<SectionHeading>Bonus</SectionHeading>
 			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				<PromptCard
-					cardText="SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs"
+					cardText={bonusContent[0].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("spme");
+						setIsGenerating(bonusContent[0].isGeneratingText);
 						await callSPMEEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "spme"}
+					isLoading={isGenerating === bonusContent[0].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[0].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="MVP Launch Checklist"
+					cardText={bonusContent[1].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("mvpLaunchChecklist");
+						setIsGenerating(bonusContent[1].isGeneratingText);
 						await callMVPEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "mvpLaunchChecklist"}
+					isLoading={isGenerating === bonusContent[1].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[1].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Grant Proposal"
+					cardText={bonusContent[2].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("grantProposal");
+						setIsGenerating(bonusContent[2].isGeneratingText);
 						await callGrantEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "grantProposal"}
+					isLoading={isGenerating === bonusContent[2].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[2].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
-					cardText="Legal Advice"
+					cardText={bonusContent[3].cardText}
 					handleCardClick={async (cardText) => {
-						setIsGenerating("legalAdvice");
+						setIsGenerating(bonusContent[3].isGeneratingText);
 						await callLegalAdviceEndpoint(cardText);
 						setIsGenerating(false);
 					}}
-					isLoading={isGenerating === "legalAdvice"}
+					isLoading={isGenerating === bonusContent[3].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[3].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</div>
 		</>

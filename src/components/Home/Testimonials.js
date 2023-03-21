@@ -1,3 +1,4 @@
+import Image from "next/image";
 import TestimonialCard from "./TestimonialCard";
 
 export default function Testimonials() {
@@ -9,7 +10,7 @@ export default function Testimonials() {
 						<h1 className="px-24 text-3xl lg:text-[70px] tracking-[-2.5px] leading-[5.5rem] font-bold text-gradient-secondary-tr">
 							Don't just take our word for it
 						</h1>
-						<p className="text-lg md:text-xl text-light-300">See what other builders are saying</p>
+						<p className="text-lg md:text-xl text-light-300">See what other people are saying</p>
 
 						<section>
 							<div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-10 lg:px-6">
@@ -27,16 +28,13 @@ export default function Testimonials() {
 									</svg>
 									<blockquote>
 										<p class="text-2xl font-medium text-gray-900 dark:text-white">
-											"Project2Product is just awesome. It helped me to take my project to the next level. Perfect choice to convert your
-											next project into a real world product."
+											"Project2Product was a game-changer for me! I had a passion project that I thought would never see the light of day,
+											but with their help, I turned it into a successful business.
+											<br /> I'm forever grateful!"
 										</p>
 									</blockquote>
 									<figcaption class="flex items-center justify-center mt-6 space-x-3">
-										<img
-											class="w-6 h-6 rounded-full"
-											src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
-											alt="profile picture"
-										/>
+										<Image className="rounded-full" width={24} height={24} src="/testimonials/sparsh.jpg" alt="profile picture" />
 										<div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
 											<div class="pr-3 font-medium text-gray-900 dark:text-white">Sparsh Sharma</div>
 											<div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">TechLead</div>
@@ -50,54 +48,85 @@ export default function Testimonials() {
 							<div class="relative z-10 container px-4 mx-auto">
 								<div class="flex flex-wrap -m-3">
 									<TestimonialCard
-										name={"Jacob Jones"}
-										username={"@brooklysim"}
-										avatar={"https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"}
-										text={`If you haven't tried out Flaro App yet, I would definitely recommend it for both designers and developers 🤙🏻`}
+										name={"Shivansh"}
+										position={"Serial Entrepreneur"}
+										username={"@Shivansh3121"}
+										avatar={"/testimonials/shivansh.jpg"}
+										text={`Project2Product is just awesome. It helped me to take my project to the next level. Perfect choice to convert your
+											next project into a real world product 🤙🏻`}
 										daysAgo={"1 day ago"}
 									/>
 
 									<TestimonialCard
-										name={"Wade Warren"}
-										username={"@wade"}
-										avatar={"https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"}
-										text={`If you are thinking of a design partner to help you convert more customers, Flaro is a great choice.`}
+										name={"Melvin"}
+										position={"Software Engineer"}
+										username={"@itsmelvinmathew"}
+										avatar={"/testimonials/melvin.jpg"}
+										text={`Project2Product is a must-have tool for anyone looking to monetize their side-projects. They make it so easy to bring your ideas to life!`}
 										daysAgo={"3 days ago"}
 									/>
 
 									<TestimonialCard
-										name={"Bessie Cooper"}
-										username={"@bessiecoop"}
-										avatar={"https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"}
-										text={`We have built a few web apps using Flaro. It saves us a lot of time, because we don't have to build
-														design features from scratch.`}
+										name={"Shivam"}
+										position={"Designer"}
+										username={"@Shivamc504"}
+										avatar={"/testimonials/shivam.jpg"}
+										text={`I was skeptical at first, but Project2Product delivered on their promise. They helped me turn my hackathon project into a profitable product in no time!`}
 										daysAgo={"3 days ago"}
 									/>
 
 									<TestimonialCard
-										name={"Esther Howard"}
-										username={"@ehoward"}
-										avatar={"https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"}
-										text={`Wrike is great to make work visible and collaborative. People can pass tasks off as they complete their
-														parts, allowing you to see the flow of work.`}
-										daysAgo={"4 days ago"}
+										name={"Rakshit"}
+										position={"Blockchain Developer"}
+										username={"@rakshit087"}
+										avatar={"/testimonials/rakshit.jpg"}
+										text={`I was dumbfounded when I received the final result. What an insanely powerful tool! I now have a brilliant foundation for my product expansion. This is a no-brainer for startups.`}
+										daysAgo={"1 day ago"}
 									/>
 
 									<TestimonialCard
-										name={"Albert Flores"}
-										username={"@albert"}
-										avatar={"https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"}
-										text={`Ease of use and efficiency of design tools. The ability for the integrated marketing team to see all
-														aspects of a project.`}
+										name={"Aayushi"}
+										position={"Designer"}
+										username={"@Aayushi7765"}
+										avatar={"/testimonials/aayushi.jpg"}
+										text={`I was impressed with how quickly Project2Product was able to help me turn my side-project into a profitable business. Their AI is literally so good!`}
 										daysAgo={"6 days ago"}
 									/>
 
 									<TestimonialCard
-										name={"Jerome Bell"}
-										username={"@belloj"}
-										avatar={"https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"}
-										text={`Very very easy for customer information to get secured if all orders are on one device.`}
+										name={"Akshit"}
+										position={"Marketer"}
+										username={"@aksh_eth"}
+										avatar={"/testimonials/akshit.jpg"}
+										text={`Project2Product is a game-changer for anyone looking to turn their ideas into successful ventures. I would highly recommend it to anyone!`}
+										daysAgo={"4 days ago"}
+									/>
+
+									<TestimonialCard
+										name={"Rishabh"}
+										position={"Software Developer"}
+										username={"@theRishabhSh"}
+										avatar={"/testimonials/rishabh.jpg"}
+										text={`Project2Product is the real deal! They helped me turn my hackathon project into a thriving business. I would recommend them to anyone looking to do the same!`}
 										daysAgo={"1 week ago"}
+									/>
+
+									<TestimonialCard
+										name={"Yuvraj"}
+										position={"Entrepreneur"}
+										username={"@YuvrajChandra21"}
+										avatar={"/testimonials/yuvraj.jpg"}
+										text={`Happy I found this service while trying to build a pitch deck for my company! Great for inspiration in getting started and a huge time saver getting a deck off the ground.`}
+										daysAgo={"1 day ago"}
+									/>
+
+									<TestimonialCard
+										name={"Raghav"}
+										position={"Product Lead"}
+										username={"@RaghavSaraf17"}
+										avatar={"/testimonials/raghav.jpg"}
+										text={`I was blown away by the quality of services that Project2Product provided me. It was so easy to use and the results were amazing!`}
+										daysAgo={"1 day ago"}
 									/>
 								</div>
 							</div>

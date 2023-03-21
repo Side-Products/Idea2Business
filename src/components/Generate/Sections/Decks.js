@@ -1,11 +1,12 @@
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useSelector } from "react-redux";
 import pptxgen from "pptxgenjs";
 import redBG from "../../../../public/themes/redbg";
 import LoadingContext from "@/store/loading-context";
 import SectionHeading from "../SectionHeading";
 import Button from "@/components/ui/Button";
 
-export default function Decks({ isGenerating, setIsGenerating, promptEnterProjectInfo, projectInfo, cardsAvailable, setModalText, setContentModalOpen }) {
+export default function Decks({ isGenerating, setIsGenerating, promptEnterProjectInfo, projectInfo, cardsAvailable, setSubscriptionRequiredModalOpen }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
 
@@ -345,6 +346,27 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 		pptx.writeFile({ fileName: `${projectName}.pptx` });
 	}
 
+	// Subscription state
+	const { subscription } = useSelector((state) => state.subscription);
+	// Check for which plan the user is subscribed to
+	const subscriptionPlan =
+		subscription && subscription.amountPaid == 10 && new Date(subscription.subscriptionValidUntil) > Date.now()
+			? "Pro Plus"
+			: subscription && subscription.amountPaid == 5 && new Date(subscription.subscriptionValidUntil) > Date.now()
+			? "Standard"
+			: "Free";
+
+	const [canAccess, setCanAccess] = useState(false);
+	useEffect(() => {
+		if (subscriptionPlan == "Pro Plus") {
+			setCanAccess(true);
+		} else if (subscriptionPlan == "Standard") {
+			setCanAccess(false);
+		} else {
+			setCanAccess(false);
+		}
+	}, [subscriptionPlan, subscription]);
+
 	return (
 		<>
 			<SectionHeading>Decks</SectionHeading>
@@ -357,21 +379,25 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 						outline={true}
 						onClick={async (_ev) => {
 							if (cardsAvailable) {
-								setLoading({
-									status: true,
-									title: "Hang on for a moment",
-									message: "Pitchdeck for your project is being generated",
-									waitMessage: "It may take up to 30 seconds to generate the response...",
-								});
-								setIsGenerating("pitchdeck");
-								const _apiOutput = await callGenerateEndpoint();
-								setIsGenerating(false);
-								generatePitchdeck(_apiOutput);
-								setLoading({
-									status: false,
-									title: "",
-									message: "",
-								});
+								if (canAccess) {
+									setLoading({
+										status: true,
+										title: "Hang on for a moment",
+										message: "Pitchdeck for your project is being generated",
+										waitMessage: "It may take up to 30 seconds to generate the response...",
+									});
+									setIsGenerating("pitchdeck");
+									const _apiOutput = await callGenerateEndpoint();
+									setIsGenerating(false);
+									generatePitchdeck(_apiOutput);
+									setLoading({
+										status: false,
+										title: "",
+										message: "",
+									});
+								} else {
+									setSubscriptionRequiredModalOpen(true);
+								}
 							} else {
 								promptEnterProjectInfo();
 							}

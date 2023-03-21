@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { title_main_page, meta_description } from "@/config/constants";
 import StatusContext from "@/store/status-context";
 import ContentModal from "@/components/Generate/ContentModal";
+import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
 import SectionHeading from "@/components/Generate/SectionHeading";
 import { mySubscription } from "@/redux/actions/subscriptionActions";
 import { wrapper } from "@/redux/redux-store";
@@ -66,6 +67,7 @@ const Generate = () => {
 	// Modal states
 	const [modalText, setModalText] = useState({ heading: "", content: "" });
 	const [isContentModalOpen, setContentModalOpen] = useState(false);
+	const [isSubscriptionRequiredModalOpen, setSubscriptionRequiredModalOpen] = useState(false);
 
 	// Scroll to cards when they are available
 	useEffect(() => {
@@ -103,8 +105,7 @@ const Generate = () => {
 						promptEnterProjectInfo={promptEnterProjectInfo}
 						projectInfo={projectInfo}
 						cardsAvailable={cardsAvailable}
-						setModalText={setModalText}
-						setContentModalOpen={setContentModalOpen}
+						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
 
 					<Pitches
@@ -115,6 +116,7 @@ const Generate = () => {
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
+						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
 
 					<UnderstandingPotentialUsers
@@ -125,6 +127,7 @@ const Generate = () => {
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
+						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
 
 					<SocialMediaStrategy
@@ -135,6 +138,7 @@ const Generate = () => {
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
+						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
 
 					<AdviceFromBooks
@@ -145,6 +149,7 @@ const Generate = () => {
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
+						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
 
 					<BonusContent
@@ -155,13 +160,19 @@ const Generate = () => {
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
+						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
+
+					<SectionHeading>Investor Meeting Prep</SectionHeading>
+
+					<SectionHeading>Tips & Tricks</SectionHeading>
 
 					<SectionHeading>More coming soon...</SectionHeading>
 				</div>
 			</div>
 
 			<ContentModal isOpen={isContentModalOpen} setOpen={setContentModalOpen} heading={modalText.heading} content={modalText.content} />
+			<SubscriptionRequiredModal isOpen={isSubscriptionRequiredModalOpen} setOpen={setSubscriptionRequiredModalOpen} />
 		</>
 	);
 };
