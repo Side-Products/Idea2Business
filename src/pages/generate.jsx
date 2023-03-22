@@ -16,6 +16,7 @@ import Pitches from "@/components/Generate/Sections/Pitches";
 import UnderstandingPotentialUsers from "@/components/Generate/Sections/UnderstandingPotentialUsers";
 import SocialMediaStrategy from "@/components/Generate/Sections/SocialMediaStrategy";
 import AdviceFromBooks from "@/components/Generate/Sections/AdviceFromBooks";
+import InvestorMeetingPrep from "@/components/Generate/Sections/InvestorMeetingPrep";
 import BonusContent from "@/components/Generate/Sections/BonusContent";
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
@@ -152,7 +153,7 @@ const Generate = () => {
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
 
-					<BonusContent
+					<InvestorMeetingPrep
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
 						promptEnterProjectInfo={promptEnterProjectInfo}
@@ -163,9 +164,16 @@ const Generate = () => {
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
 
-					<SectionHeading>Investor Meeting Prep</SectionHeading>
-
-					<SectionHeading>Tips & Tricks</SectionHeading>
+					<BonusContent
+						isGenerating={isGenerating}
+						setIsGenerating={setIsGenerating}
+						promptEnterProjectInfo={promptEnterProjectInfo}
+						projectInfo={projectInfo}
+						cardsAvailable={cardsAvailable}
+						setModalText={setModalText}
+						setContentModalOpen={setContentModalOpen}
+						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+					/>
 
 					<SectionHeading>More coming soon...</SectionHeading>
 				</div>

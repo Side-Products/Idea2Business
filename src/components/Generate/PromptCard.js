@@ -66,7 +66,7 @@ export default function PromptCard({
 					((!cardsAvailable || !canAccess) && "duration-500 group-hover:opacity-0")
 				}
 			>
-				<h3 className="font-secondary font-medium text-md text-center">{cardText}</h3>
+				<h3 className="font-secondary font-medium text-[16px] text-center">{cardText}</h3>
 				{(!cardsAvailable || !canAccess) && (
 					<span className="absolute bottom-3 right-4">
 						<i className="fa-solid fa-lock"></i>

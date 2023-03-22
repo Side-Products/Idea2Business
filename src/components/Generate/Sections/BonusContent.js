@@ -71,6 +71,114 @@ export default function BonusContent({
 		});
 	};
 
+	const callHowToBuildATeamEndpoint = async (cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "How to build a team for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
+		});
+		const response = await fetch("/api/generate/bonus/how-to-build-a-team", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+		});
+		const data = await response.json();
+		const { output } = data;
+
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callProductRoadmapEndpoint = async (cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Product Roadmap for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
+		});
+		const response = await fetch("/api/generate/bonus/product-roadmap", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+		});
+		const data = await response.json();
+		const { output } = data;
+
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callSocialMediaCalendarEndpoint = async (cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Social Media Calendar for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
+		});
+		const response = await fetch("/api/generate/bonus/social-media-calendar", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+		});
+		const data = await response.json();
+		const { output } = data;
+
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
+	const callIdealCustomerProfileEndpoint = async (cardText) => {
+		setLoading({
+			status: true,
+			title: "Hang on for a moment",
+			message: "Ideal Customer Profile for your project is being generated",
+			waitMessage: "It may take up to 30 seconds to generate the response...",
+		});
+		const response = await fetch("/api/generate/bonus/ideal-customer-profile", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+		});
+		const data = await response.json();
+		const { output } = data;
+
+		setModalText({ heading: cardText, content: output.text });
+		setContentModalOpen(true);
+
+		setLoading({
+			status: false,
+			title: "",
+			message: "",
+		});
+	};
+
 	const callGrantEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
@@ -159,7 +267,7 @@ export default function BonusContent({
 					cardText={bonusContent[2].cardText}
 					handleCardClick={async (cardText) => {
 						setIsGenerating(bonusContent[2].isGeneratingText);
-						await callGrantEndpoint(cardText);
+						await callHowToBuildATeamEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[2].isGeneratingText}
@@ -172,13 +280,65 @@ export default function BonusContent({
 					cardText={bonusContent[3].cardText}
 					handleCardClick={async (cardText) => {
 						setIsGenerating(bonusContent[3].isGeneratingText);
-						await callLegalAdviceEndpoint(cardText);
+						await callProductRoadmapEndpoint(cardText);
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[3].isGeneratingText}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
 					subscriptionPlanRequired={bonusContent[3].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+				/>
+				<PromptCard
+					cardText={bonusContent[4].cardText}
+					handleCardClick={async (cardText) => {
+						setIsGenerating(bonusContent[4].isGeneratingText);
+						await callSocialMediaCalendarEndpoint(cardText);
+						setIsGenerating(false);
+					}}
+					isLoading={isGenerating === bonusContent[4].isGeneratingText}
+					cardsAvailable={cardsAvailable}
+					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[4].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+				/>
+				<PromptCard
+					cardText={bonusContent[5].cardText}
+					handleCardClick={async (cardText) => {
+						setIsGenerating(bonusContent[5].isGeneratingText);
+						await callIdealCustomerProfileEndpoint(cardText);
+						setIsGenerating(false);
+					}}
+					isLoading={isGenerating === bonusContent[5].isGeneratingText}
+					cardsAvailable={cardsAvailable}
+					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[5].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+				/>
+				<PromptCard
+					cardText={bonusContent[6].cardText}
+					handleCardClick={async (cardText) => {
+						setIsGenerating(bonusContent[6].isGeneratingText);
+						await callGrantEndpoint(cardText);
+						setIsGenerating(false);
+					}}
+					isLoading={isGenerating === bonusContent[6].isGeneratingText}
+					cardsAvailable={cardsAvailable}
+					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[6].subscriptionPlanRequired}
+					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+				/>
+				<PromptCard
+					cardText={bonusContent[7].cardText}
+					handleCardClick={async (cardText) => {
+						setIsGenerating(bonusContent[7].isGeneratingText);
+						await callLegalAdviceEndpoint(cardText);
+						setIsGenerating(false);
+					}}
+					isLoading={isGenerating === bonusContent[7].isGeneratingText}
+					cardsAvailable={cardsAvailable}
+					promptEnterProjectInfo={promptEnterProjectInfo}
+					subscriptionPlanRequired={bonusContent[7].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</div>

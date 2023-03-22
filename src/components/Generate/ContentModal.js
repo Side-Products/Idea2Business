@@ -16,7 +16,7 @@ const ContentModal = ({ isOpen, setOpen, heading, content }) => {
 		<Modal
 			isOpen={isOpen}
 			classes="max-w-[48rem]"
-			title={<div className="flex ml-8">{heading}</div>}
+			title={<div className="flex text-start ml-8">{heading}</div>}
 			titleClasses="justify-start text-start"
 			content={
 				<>
@@ -29,7 +29,7 @@ const ContentModal = ({ isOpen, setOpen, heading, content }) => {
 								downloadContent();
 							}}
 							rounded={true}
-							classes="w-1/2 text-md px-8 py-2 mt-8"
+							classes="w-1/2 text-md px-8 py-2 mt-10"
 						>
 							<i className="fa-solid fa-download"></i>&nbsp;Download
 						</Button>

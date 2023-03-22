@@ -9,7 +9,7 @@ import StatusContext from "@/store/status-context";
 import AuthModalContext from "@/store/authModal-context";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
-import { pitches, understandingPotentialUsers, socialMediaStrategy, adviceFromBooks, bonusContent, decks } from "@/config/constants";
+import { pitches, understandingPotentialUsers, socialMediaStrategy, adviceFromBooks, investorMeetingPrep, bonusContent, decks } from "@/config/constants";
 
 const Pricing = () => {
 	const [, setLoading] = useContext(LoadingContext);
@@ -119,6 +119,16 @@ const Pricing = () => {
 										)
 									);
 								})}
+								{investorMeetingPrep.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Free" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
 								{bonusContent.map((item, index) => {
 									return (
 										item.subscriptionPlanRequired == "Free" && (
@@ -189,6 +199,16 @@ const Pricing = () => {
 									);
 								})}
 								{adviceFromBooks.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Standard" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{investorMeetingPrep.map((item, index) => {
 									return (
 										item.subscriptionPlanRequired == "Standard" && (
 											<li className="flex items-center text-sm space-x-3" key={index}>
@@ -289,6 +309,16 @@ const Pricing = () => {
 									);
 								})}
 								{adviceFromBooks.map((item, index) => {
+									return (
+										item.subscriptionPlanRequired == "Pro Plus" && (
+											<li className="flex items-center text-sm space-x-3" key={index}>
+												<Tick />
+												<span>{item.cardText}</span>
+											</li>
+										)
+									);
+								})}
+								{investorMeetingPrep.map((item, index) => {
 									return (
 										item.subscriptionPlanRequired == "Pro Plus" && (
 											<li className="flex items-center text-sm space-x-3" key={index}>

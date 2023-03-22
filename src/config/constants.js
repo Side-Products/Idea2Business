@@ -100,6 +100,35 @@ export const adviceFromBooks = [
 	},
 ];
 
+export const investorMeetingPrep = [
+	{
+		cardText: (
+			<>
+				15 investor questions you can expect
+				<br />
+				(with answers)
+			</>
+		),
+		isGeneratingText: "expectedInvestorQuestions",
+		subscriptionPlanRequired: "Free",
+	},
+	{
+		cardText: "10 personal tips & tricks to nail your pitch",
+		isGeneratingText: "personalTipsAndTricksToNailYourPitch",
+		subscriptionPlanRequired: "Free",
+	},
+	{
+		cardText: "What is your revenue model and how do you plan to generate sustainable revenue over the long term?",
+		isGeneratingText: "revenueModel",
+		subscriptionPlanRequired: "Pro Plus",
+	},
+	{
+		cardText: "What is your exit strategy, and how do you plan to create value for investors?",
+		isGeneratingText: "exitStrategy",
+		subscriptionPlanRequired: "Pro Plus",
+	},
+];
+
 export const bonusContent = [
 	{
 		cardText: "SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs",
@@ -110,6 +139,26 @@ export const bonusContent = [
 		cardText: "MVP Launch Checklist",
 		isGeneratingText: "mvpLaunchChecklist",
 		subscriptionPlanRequired: "Free",
+	},
+	{
+		cardText: "How to build a team",
+		isGeneratingText: "howToBuildATeam",
+		subscriptionPlanRequired: "Standard",
+	},
+	{
+		cardText: "Product Roadmap",
+		isGeneratingText: "productRoadmap",
+		subscriptionPlanRequired: "Standard",
+	},
+	{
+		cardText: "Social Media Calendar",
+		isGeneratingText: "socialMediaCalendar",
+		subscriptionPlanRequired: "Standard",
+	},
+	{
+		cardText: "Ideal Customer Profile (ICP)",
+		isGeneratingText: "idealCustomerProfile",
+		subscriptionPlanRequired: "Standard",
 	},
 	{
 		cardText: "Grant Proposal",
