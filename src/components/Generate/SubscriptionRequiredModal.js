@@ -13,7 +13,7 @@ export default function SubscriptionRequiredModal({ isOpen, setOpen }) {
 			titleClasses="justify-start text-start"
 			content={
 				<>
-					<i class="fa-solid fa-sack-dollar text-6xl text-gradient-primary-tr"></i>
+					<i className="fa-solid fa-sack-dollar text-6xl text-gradient-primary-tr"></i>
 					<div className="mt-4 text-center whitespace-pre-wrap max-h-[400px] overflow-y-scroll text-md">
 						Invest a couple of dollars to make 1000s in profit
 					</div>

@@ -29,7 +29,7 @@ export default function Button({ variant = "primary", outline = false, rounded, 
 			{outline ? (
 				isLoading ? (
 					<span
-						class={
+						className={
 							`w-full flex items-center justify-center bg-dark-1000 ` +
 							(rounded ? `rounded-full ` : `rounded-lg `) +
 							(innerClasses ? innerClasses : `py-2 `)
@@ -39,7 +39,7 @@ export default function Button({ variant = "primary", outline = false, rounded, 
 					</span>
 				) : (
 					<span
-						class={
+						className={
 							`w-full flex items-center justify-center bg-dark-1000 hover:bg-transparent transition duration-300 ` +
 							(rounded ? `rounded-full ` : `rounded-lg `) +
 							(innerClasses ? innerClasses : `py-2 `)

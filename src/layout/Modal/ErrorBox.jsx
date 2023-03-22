@@ -19,7 +19,7 @@ const ErrorBox = () => {
 					...prevState,
 					showErrorBox: false,
 				}));
-			}, 8000);
+			}, 5000);
 		}
 	}, [error.showErrorBox, setError]);
 

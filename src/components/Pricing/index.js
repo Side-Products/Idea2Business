@@ -70,7 +70,7 @@ const Pricing = () => {
 					<div className="flex flex-col justify-between  p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
 							<h3 className="mb-4 text-2xl font-semibold">Free</h3>
-							<p className="font-light sm:text-lg text-gray-400">Best option for personal use & for your next project.</p>
+							<p className="font-light sm:text-lg text-gray-400">Best option to get started and try things out.</p>
 							<div className="flex justify-center items-baseline my-8">
 								<span className="mr-2 text-5xl font-extrabold">$0</span>
 								<span className="text-gray-400">forever</span>
@@ -149,7 +149,7 @@ const Pricing = () => {
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
 							<h3 className="mb-4 text-2xl font-semibold">Standard</h3>
-							<p className="font-light sm:text-lg dark:text-gray-400">Relevant for multiple users, extended & premium support.</p>
+							<p className="font-light sm:text-lg dark:text-gray-400">Begin transforming your projects into real-world products.</p>
 							<div className="flex justify-center items-baseline my-8">
 								<span className="mr-2 text-5xl font-extrabold">$5</span>
 								<span className="dark:text-gray-400">for a week</span>
@@ -239,7 +239,7 @@ const Pricing = () => {
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
 							<h3 className="mb-4 text-2xl font-semibold">Pro Plus</h3>
-							<p className="font-light sm:text-lg dark:text-gray-400">Best for large scale uses and extended redistribution rights.</p>
+							<p className="font-light sm:text-lg dark:text-gray-400">Get all the power you need to build profitable products.</p>
 							<div className="flex justify-center items-baseline my-8">
 								<span className="mr-2 text-5xl font-extrabold">$10</span>
 								<span className="dark:text-gray-400">for a month</span>
