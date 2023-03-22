@@ -9,9 +9,10 @@ import Layout from "@/layout/WrapLayout/Layout";
 import StatusContext from "@/store/status-context";
 import LoadingContext from "@/store/loading-context";
 import AuthModalContext from "@/store/authModal-context";
+import { Provider } from "react-redux";
 import { wrapper } from "@/redux/redux-store";
 
-function App({ Component, pageProps, session, router }) {
+function App({ Component, pageProps, session, router, ...rest }) {
 	useEffect(() => {
 		const handleRouteChange = (url) => {
 			ga.pageview(url);
@@ -43,6 +44,9 @@ function App({ Component, pageProps, session, router }) {
 	});
 	const [authModalOpen, setAuthModalOpen] = useState(false);
 
+	// Redux
+	const { store } = wrapper.useWrappedStore(rest);
+
 	return (
 		<>
 			{/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
@@ -66,19 +70,21 @@ function App({ Component, pageProps, session, router }) {
 
 			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
 
-			<SessionProvider session={session}>
-				<LoadingContext.Provider value={[isLoading, setLoading]}>
-					<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
-						<StatusContext.Provider value={[error, success, setSuccess, setError]}>
-							<Layout>
-								<ScrollToPageTop />
-								<Component {...pageProps} />
-							</Layout>
-						</StatusContext.Provider>
-					</AuthModalContext.Provider>
-				</LoadingContext.Provider>
-			</SessionProvider>
+			<Provider store={store}>
+				<SessionProvider session={session}>
+					<LoadingContext.Provider value={[isLoading, setLoading]}>
+						<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
+							<StatusContext.Provider value={[error, success, setSuccess, setError]}>
+								<Layout>
+									<ScrollToPageTop />
+									<Component {...pageProps} />
+								</Layout>
+							</StatusContext.Provider>
+						</AuthModalContext.Provider>
+					</LoadingContext.Provider>
+				</SessionProvider>
+			</Provider>
 		</>
 	);
 }
-export default wrapper.withRedux(App);
+export default App;
