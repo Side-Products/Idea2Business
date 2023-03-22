@@ -130,3 +130,62 @@ export const decks = [
 		subscriptionPlanRequired: "Pro Plus",
 	},
 ];
+
+/**************************************************************************/
+/******************************    FAQs   *********************************/
+/**************************************************************************/
+import Link from "next/link";
+
+export const Faqs = [
+	{
+		heading: "How can I pay?",
+		body: "We use Stripe's secure checkout which accepts the majority of credit cards and also offers European Debit Card payments. We do not store any of your (credit) card information. If you want to pay via PayPal, please send an email to pushpit@musixverse.com and we'll arrange that!",
+		content_id: "collapseOne",
+		content_heading: "headingOne",
+	},
+	{
+		heading: "Can I see an example of what I am buying?",
+		body: (
+			<p>
+				Yes! Click&nbsp;
+				<span className="font-medium underline underline-offset-2 text-primary-400">
+					<Link href="/example">here</Link>
+				</span>
+				.
+			</p>
+		),
+		content_id: "collapseTwo",
+		content_heading: "headingTwo",
+	},
+	{
+		heading: "Is the template created with a template?",
+		body: "Nope! The pitch deck templates, investor questions, and tips & tricks are written by AI and they are 100% original. That means that the content of every PDF we generate and deliver is unique and tailored specifically for you and the startup you are building. You can use this content any way you want.",
+		content_id: "collapseThree",
+		content_heading: "headingThree",
+	},
+	{
+		heading: "How do you deliver the content?",
+		body: (
+			<p>
+				After your payment, you can go to the Generate page and select the content you want to generate. You can view the content in the browser and
+				download it in .txt format too!
+				<br />
+				<br />
+				Pitch Deck can be downloaded in .pptx format.
+			</p>
+		),
+		content_id: "collapseFour",
+		content_heading: "headingFour",
+	},
+	{
+		heading: "What can I expect?",
+		body: (
+			<p>
+				Our personalized suggestions are very good but we can't promise that you won't have to do more work. That is also not the goal. We aim to get
+				you into action mode and kickstart your pitch deck and funding journey. Go get'em tiger! 🫡
+			</p>
+		),
+		content_id: "collapseFive",
+		content_heading: "headingFive",
+	},
+];

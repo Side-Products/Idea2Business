@@ -64,6 +64,8 @@ function App({ Component, pageProps, session, router }) {
 
 			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
 
+			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
+
 			<SessionProvider session={session}>
 				<LoadingContext.Provider value={[isLoading, setLoading]}>
 					<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>

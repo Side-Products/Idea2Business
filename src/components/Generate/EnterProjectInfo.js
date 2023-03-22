@@ -97,7 +97,7 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 						}}
 						isLoading={isGenerating === "generating" || loading}
 						rounded={true}
-						classes="text-lg px-8 py-3"
+						classes="text-[17px] px-8 py-3"
 					>
 						Generate
 					</Button>

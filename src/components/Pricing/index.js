@@ -336,6 +336,10 @@ const Pricing = () => {
 						)}
 					</div>
 				</div>
+
+				<p className="text-center mt-16 text-light-500">
+					One-time payment. No subscription. Clicking the buy button will redirect you to a secure Stripe hosted checkout page.
+				</p>
 			</div>
 		</section>
 	);

@@ -5,6 +5,7 @@ import GuidedByAI from "@/components/Home/GuidedByAI";
 import OurOfferings from "@/components/Home/OurOfferings";
 import Testimonials from "@/components/Home/Testimonials";
 import WhyWeBuiltThis from "@/components/Home/WhyWeBuiltThis";
+import Faq from "@/components/Home/Faq";
 
 export default function HomePage() {
 	return (
@@ -13,16 +14,12 @@ export default function HomePage() {
 				<title>{title_main_page}</title>
 				<meta name="description" content={meta_description} />
 			</Head>
-
 			<HeroSection />
-
 			<GuidedByAI />
-
 			<OurOfferings />
-
 			<Testimonials />
-
 			<WhyWeBuiltThis />
+			<Faq />
 		</>
 	);
 }

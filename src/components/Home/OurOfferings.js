@@ -1,4 +1,15 @@
+import { useContext } from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import AuthModalContext from "@/store/authModal-context";
+import Button from "@/components/ui/Button";
+
 export default function OurOfferings() {
+	const router = useRouter();
+	const { data: session, status } = useSession();
+
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
+
 	return (
 		<div className="w-full flex flex-col items-center bg-light-200 dark:bg-dark-1000">
 			<div className="w-full max-w-[1920px] py-20 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-40">
@@ -121,6 +132,28 @@ export default function OurOfferings() {
 								Get access to additional resources such as an MVP launch checklist, grant proposal, legal advice, and a SPME marketing strategy
 								for solopreneurs.
 							</div>
+						</div>
+					</div>
+
+					<div className="flex flex-col items-center justify-center text-center bg-gradient-quad-tr py-16 px-32 rounded-3xl">
+						<span className="text-6xl font-bold tracking-[-2.5px]">Kickstart your funding with a custom pitch deck template for your project</span>
+
+						<div className="w-2/3 sm:w-1/4 mt-16">
+							<Button
+								type="button"
+								variant={"primary"}
+								rounded={true}
+								onClick={() => {
+									if (session && session.user && status === "authenticated") {
+										router.push("/generate");
+									} else {
+										setAuthModalOpen(true);
+									}
+								}}
+								classes="text-lg px-8 py-3 shadow-2xl"
+							>
+								Get your deck now
+							</Button>
 						</div>
 					</div>
 				</div>
