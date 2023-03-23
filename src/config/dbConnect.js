@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-const dbConnect = () => {
+const dbConnect = async () => {
 	if (mongoose.connection.readyState >= 1) {
 		return;
 	}
 	try {
-		mongoose
+		await mongoose
 			.connect(process.env.MONGODB_URI, {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
