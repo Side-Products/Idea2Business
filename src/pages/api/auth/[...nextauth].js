@@ -24,7 +24,7 @@ export default NextAuth({
 		CredentialsProvider({
 			name: "Credentials",
 			async authorize(credentials) {
-				dbConnect();
+				await dbConnect();
 				const { email, password } = credentials;
 
 				// Checks
