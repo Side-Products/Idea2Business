@@ -453,7 +453,7 @@ a:hover {
 }
 
 .connect_link {
-	@apply text-white hover:text-primary-500;
+	@apply text-white hover:text-primary-400;
 }
 
 /**************************************************************************/
@@ -461,15 +461,7 @@ a:hover {
 /**************************************************************************/
 
 .footer {
-	@apply w-full max-w-[1920px] pt-12 pb-4 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36;
-}
-
-.footer__social {
-	@apply flex space-x-2 lg:space-x-3 xl:space-x-5 md:justify-end;
-}
-
-.footer__social button {
-	@apply p-2 border-none rounded-md bg-dark-800 hover:bg-dark-600 hover:animate-bounce;
+	@apply w-full max-w-[1920px] pt-12 pb-12 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36;
 }
 
 input[type="radio"]:checked + label > span {

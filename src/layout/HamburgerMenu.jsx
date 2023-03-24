@@ -7,7 +7,7 @@ import logoBlack from "../../public/site_logo.png";
 import { useSession, signOut } from "next-auth/react";
 
 export default function HamburgerMenu({ avatarUrl, truncatedName }) {
-	const { data: session, status } = useSession();
+	const { status } = useSession();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const router = useRouter();
 
@@ -188,7 +188,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 											href="https://twitter.com/musixverse"
 											target="_blank"
 											rel="noopener noreferrer"
-											className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0"
+											className="connect_link text-center relative flex-grow max-w-full flex-1 px-4 p-0"
 										>
 											<i className="fab fa-twitter fa-lg"></i>
 										</a>
@@ -196,7 +196,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 											href="https://www.linkedin.com/company/musixverse"
 											target="_blank"
 											rel="noopener noreferrer"
-											className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0"
+											className="connect_link text-center relative flex-grow max-w-full flex-1 px-4 p-0"
 										>
 											<i className="fab fa-linkedin fa-lg"></i>
 										</a>
