@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
-import styles from "@/styles/Loading/LoadingDark.module.css";
+import styles from "@/styles/Loading/Loading.module.css";
 import Loader from "@/components/ui/Loader";
 
 export default function Loading() {

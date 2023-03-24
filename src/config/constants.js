@@ -193,7 +193,7 @@ export const Faqs = [
 		content_heading: "headingOne",
 	},
 	{
-		heading: "Can I see an example of what I am buying?",
+		heading: "Can I see an example of what I'll be getting?",
 		body: (
 			<p>
 				Yes! Click&nbsp;
@@ -207,7 +207,7 @@ export const Faqs = [
 		content_heading: "headingTwo",
 	},
 	{
-		heading: "Is the template created with a template?",
+		heading: "Are the offerings created with a template?",
 		body: "Nope! The pitch deck templates, investor questions, and tips & tricks are written by AI and they are 100% original. That means that the content of every PDF we generate and deliver is unique and tailored specifically for you and the startup you are building. You can use this content any way you want.",
 		content_id: "collapseThree",
 		content_heading: "headingThree",
