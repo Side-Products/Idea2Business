@@ -45,8 +45,8 @@ export default function AllUsers() {
 	return loading ? (
 		<Loader />
 	) : users && users.length > 0 ? (
-		<div className="grid w-full mt-10">
-			<ul className="items-start nav nav-tabs flex flex-col md:flex-row flex-wrap list-none border-b-0 pl-0 mb-4" id="tabs-tables" role="tablist">
+		<div className="grid w-full mt-10 overflow-scroll">
+			<ul className="items-start nav nav-tabs flex flex-row flex-wrap list-none border-b-0 pl-0 mb-4" id="tabs-tables" role="tablist">
 				<li className="nav-item" role="presentation" onClick={() => setActiveTable("allUsersTable")}>
 					<span
 						className={

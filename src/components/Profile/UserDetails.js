@@ -58,12 +58,12 @@ export default function UserDetails({ projectsCount }) {
 
 	return (
 		<>
-			<div className="w-full grid grid-flow-col auto-cols-auto gap-4 mb-20">
+			<div className="w-full grid lg:grid-flow-col lg:auto-cols-auto grid-cols-1 gap-4 mb-20">
 				<div
 					onClick={() => setUpdateUserProfileModalOpen(true)}
 					className="group w-full flex justify-between items-start bg-dark-800 px-8 pt-6 pb-8 rounded-2xl cursor-pointer"
 				>
-					<div className="flex gap-x-8">
+					<div className="flex sm:flex-row flex-col gap-x-8">
 						<div className="mt-2">
 							{avatarUrl ? (
 								<Image src={avatarUrl} alt="avatar" width="64" height="64" className="rounded-full" />
@@ -71,7 +71,7 @@ export default function UserDetails({ projectsCount }) {
 								<Image src={"/avatar.jpg"} alt="avatar" width="64" height="64" className="rounded-full object-cover" />
 							)}
 						</div>
-						<div className="flex flex-col items-start justify-start text-start">
+						<div className="flex flex-col items-start justify-start text-start sm:mt-0 mt-4">
 							<div className="text-[40px] font-semibold text-light-300">{session && session.user && session.user.name}</div>
 							<div className="-mt-1 text-sm text-dark-100">{session && session.user && session.user.email}</div>
 						</div>
@@ -79,12 +79,12 @@ export default function UserDetails({ projectsCount }) {
 					<i className="fa-regular fa-pen-to-square text-xl text-light-400 transition duration-300 text-gradient-primary-tr-group"></i>
 				</div>
 
-				<div className="w-full grid grid-cols-2 bg-dark-800 px-8 pt-6 pb-8 rounded-2xl">
+				<div className="w-full grid sm:grid-cols-2 bg-dark-800 px-8 pt-6 pb-8 rounded-2xl">
 					<div className="flex flex-col items-end">
 						<p className="text-3xl font-semibold text-light-300">Total searches</p>
 						<p className="mt-1 text-4xl font-bold text-gradient-primary-tr">{projectsCount}</p>
 					</div>
-					<div className="flex flex-col items-end">
+					<div className="flex flex-col items-end sm:mt-0 mt-8">
 						<MySubscription />
 					</div>
 				</div>

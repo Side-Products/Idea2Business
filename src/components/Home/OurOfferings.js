@@ -12,13 +12,13 @@ export default function OurOfferings() {
 
 	return (
 		<div className="w-full flex flex-col items-center bg-dark-1000">
-			<div className="w-full max-w-[1920px] py-20 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-40">
-				<div className="container mx-auto flex flex-col gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px]">
+			<div className="w-full max-w-[1920px] py-20 px-4 md:px-8 lg:px-16 xl:px-20 2xl:px-40">
+				<div className="w-full flex flex-col justify-center items-center m-0 p-0 gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px]">
 					<div className="flex flex-col gap-[30px] text-center">
-						<h1 className="px-24 text-3xl lg:text-[70px] tracking-[-2.5px] leading-[5.5rem] font-bold text-gradient-primary-tr">
+						<h1 className="md:px-24 text-3xl lg:text-[70px] tracking-[-2px] sm:tracking-[-2.5px] sm:leading-[5.5rem] font-bold text-gradient-primary-tr">
 							How will Project2Product unlock your project's potential?
 						</h1>
-						<p className="text-lg md:text-xl text-light-300">Get all these for your project using our tool</p>
+						<p className="text-md md:text-xl text-light-300">Get all these for your project using our tool</p>
 					</div>
 
 					<div className="cards flex flex-col sm:flex-row flex-wrap justify-center gap-y-[35px] sm:gap-y-[40px] md:gap-y-[45px] lg:gap-y-[60px] gap-x-[35px]">
@@ -135,10 +135,12 @@ export default function OurOfferings() {
 						</div>
 					</div>
 
-					<div className="flex flex-col items-center justify-center text-center bg-gradient-quad-tr py-16 px-32 rounded-3xl">
-						<span className="text-6xl font-bold tracking-[-2.5px]">Kickstart your funding with a custom pitch deck template for your project</span>
+					<div className="w-full flex flex-col items-center justify-center lg:text-center bg-gradient-quad-tr sm:py-16 sm:px-14 md:px-16 lg:px-24 xl:px-32 py-8 px-8 rounded-3xl">
+						<span className="text-4xl sm:text-5xl lg:text-[54px] xl:text-6xl font-bold sm:tracking-[-2.5px] tracking-[-1.5px]">
+							Kickstart your funding with a custom pitch deck template for your project
+						</span>
 
-						<div className="w-2/3 sm:w-1/4 mt-16">
+						<div className="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 sm:mt-16 mt-10">
 							<Button
 								type="button"
 								variant={"primary"}

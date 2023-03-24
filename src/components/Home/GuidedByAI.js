@@ -1,9 +1,9 @@
 export default function GuidedByAI() {
 	return (
 		<div className="w-full flex flex-col items-center bg-dark-1000">
-			<div className="w-full max-w-[1920px] py-40 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-48 grid grid-cols-12 container mx-auto gap-x-5 place-content-center">
-				<h1 className="lg:col-span-7 col-span-12 font-bold text-3xl leading-[80px] lg:text-[70px] self-center tracking-[-2.5px] text-gradient-primary-tr">
-					Get your side-project guided by AI
+			<div className="w-full max-w-[1920px] py-36 px-8 md:px-8 lg:px-16 xl:px-20 2xl:px-48 grid grid-cols-12 container mx-auto gap-x-5 place-content-center">
+				<h1 className="lg:col-span-7 col-span-12 font-bold text-[42px] sm:leading-[80px] leading-[50px] lg:text-[70px] self-center tracking-[-2px] sm:tracking-[-2.5px] text-gradient-primary-tr">
+					Get your project guided by AI
 				</h1>
 
 				<p className="lg:col-span-5 col-span-12 lg:mt-0 mt-5 self-center text-light-300 text-lg">
@@ -14,7 +14,7 @@ export default function GuidedByAI() {
 				<article className="col-span-12 grid grid-cols-12 gap-x-5 md:mt-16 xl:mt-10 2xl:mt-6 items-center">
 					<div className="lg:col-span-7 col-span-12 order-2 md:order-1 grid sm:grid-cols-2 gap-7 lg:gap-x-0 md:gap-y-16">
 						<div className="lg:max-w-[80%]">
-							<p className="number flex items-end text-5xl font-bold">
+							<p className="number flex items-end text-4xl sm:text-5xl font-bold">
 								1<span className="inline-block bg-gradient-secondary-tr h-1.5 rounded-full w-1.5 mb-1 ml-1"></span>
 							</p>
 
@@ -22,7 +22,7 @@ export default function GuidedByAI() {
 							<p className="text-white-700 text-md text-light-400">You don't need to spend so much time & money to ship projects.</p>
 						</div>
 						<div className="lg:max-w-[80%]">
-							<p className="number flex items-end text-5xl font-bold">
+							<p className="number flex items-end text-4xl sm:text-5xl font-bold">
 								2<span className="inline-block bg-gradient-secondary-tr h-1.5 rounded-full w-1.5 mb-1 ml-1"></span>
 							</p>
 
@@ -32,7 +32,7 @@ export default function GuidedByAI() {
 							</p>
 						</div>
 						<div className="lg:max-w-[80%]">
-							<p className=" number flex items-end text-5xl font-bold">
+							<p className=" number flex items-end text-4xl sm:text-5xl font-bold">
 								3<span className="inline-block bg-gradient-secondary-tr h-1.5 rounded-full w-1.5 mb-1 ml-1"></span>
 							</p>
 
@@ -45,7 +45,7 @@ export default function GuidedByAI() {
 							</p>
 						</div>
 						<div className="lg:max-w-[80%]">
-							<p className="number flex items-end text-5xl font-bold">
+							<p className="number flex items-end text-4xl sm:text-5xl font-bold">
 								4<span className="inline-block bg-gradient-secondary-tr h-1.5 rounded-full w-1.5 mb-1 ml-1"></span>
 							</p>
 

@@ -4,10 +4,10 @@ import TestimonialCard from "./TestimonialCard";
 export default function Testimonials() {
 	return (
 		<div className="w-full flex flex-col items-center bg-dark-1000">
-			<div className="w-full max-w-[1920px] py-32 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+			<div className="w-full max-w-[1920px] py-32 px-4 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<div className="container mx-auto flex flex-col gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px]">
 					<div className="flex flex-col gap-[20px] text-center">
-						<h1 className="px-24 text-3xl lg:text-[70px] tracking-[-2.5px] leading-[5.5rem] font-bold text-gradient-secondary-tr">
+						<h1 className="md:px-24 text-5xl lg:text-[70px] tracking-[-2.5px] sm:leading-[5.5rem] font-bold text-gradient-secondary-tr">
 							Don't just take our word for it
 						</h1>
 						<p className="text-lg md:text-xl text-light-300">See what other people are saying</p>
@@ -22,7 +22,7 @@ export default function Testimonials() {
 										/>
 									</svg>
 									<blockquote>
-										<p className="text-2xl font-medium text-white">
+										<p className="text-lg sm:text-2xl font-medium text-white">
 											"Project2Product was a game-changer for me! I had a passion project that I thought would never see the light of day,
 											but with their help, I turned it into a successful business.
 											<br /> I'm forever grateful!"
@@ -40,7 +40,7 @@ export default function Testimonials() {
 						</section>
 
 						<section className="relative overflow-hidden">
-							<div className="relative z-10 container px-4 mx-auto">
+							<div className="relative z-10 container sm:px-4 mx-auto">
 								<div className="flex flex-wrap -m-3">
 									<TestimonialCard
 										name={"Shivansh"}

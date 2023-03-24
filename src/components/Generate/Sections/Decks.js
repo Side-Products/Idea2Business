@@ -379,8 +379,8 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 		<>
 			<SectionHeading>Decks</SectionHeading>
 
-			<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
-				<div className="w-full col-start-2">
+			<div className="w-full flex items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+				<div className="w-full sm:w-1/2 md:w-1/3">
 					<Button
 						type="button"
 						variant={"primary"}

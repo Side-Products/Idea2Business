@@ -13,7 +13,7 @@ export default function Subscriptions() {
 			<div className="w-full flex flex-col items-center min-h-screen bg-dark-1000">
 				<div className="w-full max-w-[1920px] py-40 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<div className="w-full flex flex-col items-center justify-center">
-						<h1 className="text-6xl font-bold text-center tracking-[-1px] text-gradient-primary-tr">All Subscriptions</h1>
+						<h1 className="text-[40px] sm:text-6xl font-bold text-center tracking-[-1px] text-gradient-primary-tr">All Subscriptions</h1>
 						<AllSubscriptions />
 					</div>
 				</div>

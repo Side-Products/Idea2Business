@@ -46,7 +46,7 @@ const NewPassword = () => {
 	};
 
 	return (
-		<div className="w-1/3 p-8 bg-dark-500 rounded-lg mt-10">
+		<div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/3 p-8 bg-dark-500 rounded-lg mt-10">
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();

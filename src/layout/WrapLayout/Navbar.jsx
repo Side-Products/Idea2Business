@@ -58,7 +58,9 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						onClick={() => router.push("/generate")}
 						className="p-1 w-full flex items-center justify-center cursor-pointer text-center text-sm text-light-400 bg-gradient-tertiary-r"
 					>
-						You have {session && session.user && session.user.credits} free credits. Use them now!
+						You have {session && session.user && session.user.credits} free{" "}
+						{session && session.user && (session.user.credits == 1 ? "credit" : "credits")}. Use{" "}
+						{session && session.user && (session.user.credits == 1 ? "it" : "them")} now!
 						<span className="absolute right-4 cursor-pointer" onClick={() => setShowCreditsStrip(false)}>
 							<i className="fa-solid fa-xmark text-sm"></i>
 						</span>
@@ -134,7 +136,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 												>
 													<li>
 														{status === "authenticated" && (
-															<div className="flex flex-col px-4 py-3 cursor-pointer rounded-t-xl">
+															<div className="flex flex-col px-4 py-3 rounded-t-xl">
 																<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:text-light-100">
 																	<div>
 																		<p>Email</p>

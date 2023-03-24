@@ -59,7 +59,7 @@ export const Projects = ({ projects, resultsPerPage, projectsCount, filteredProj
 				{projects && projects.length === 0 ? (
 					<div className="text-2xl font-medium text-light-400 text-center mt-10">No project searches yet</div>
 				) : (
-					<div className="w-full grid grid-cols-4 gap-6">
+					<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 						{projects && projects.map((project) => <ProjectCard key={project._id} project={project} adminView={adminView} />)}
 					</div>
 				)}
