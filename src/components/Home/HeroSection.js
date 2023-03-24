@@ -11,7 +11,7 @@ export default function HeroSection() {
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
 	return (
-		<div className="flex flex-col justify-center items-center bg-dark-1000 h-screen">
+		<div className="flex flex-col justify-center items-center bg-dark-1000 min-h-screen py-32">
 			<h1 className="pt-20 px-2 sm:px-8 md:px-16 text-[40px] sm:text-[50px] md:text-[100px] text-center font-extrabold tracking-[-2.5px] text-gradient-primary-tr">
 				Transform Your Projects
 			</h1>
