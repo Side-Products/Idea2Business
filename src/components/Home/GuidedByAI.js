@@ -59,7 +59,7 @@ export default function GuidedByAI() {
 					<img
 						src="https://user-images.githubusercontent.com/53931942/215262507-3dc80479-3f2d-43dc-b412-df2686f10d5e.jpg"
 						alt=""
-						className="lg:col-span-5 col-span-12 max-w-full aspect-[3/2] lg:aspect-square object-cover my-10 md:mb-0 md:mt-14 lg:my-0 rounded-2xl shadow-lg lg:h-full order-1"
+						className="lg:col-span-5 col-span-12 max-w-full aspect-[3/2] lg:aspect-square object-cover my-10 md:mb-0 md:mt-14 lg:my-0 rounded-2xl shadow-lg order-1"
 					/>
 				</article>
 

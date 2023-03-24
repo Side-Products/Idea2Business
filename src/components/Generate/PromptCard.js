@@ -54,7 +54,7 @@ export default function PromptCard({
 
 	return (
 		<form
-			className="w-full relative flex flex-col group cursor-pointer aspect-square rounded-2xl h-fit sm:h-full bg-gradient-to-r from-[#161616] to-[#202020] shadow hover:shadow-primary-400 overflow-hidden transition-all duration-500"
+			className="w-full relative flex flex-col group cursor-pointer aspect-square rounded-2xl h-fit bg-gradient-to-r from-[#161616] to-[#202020] shadow hover:shadow-primary-400 overflow-hidden transition-all duration-500"
 			onSubmit={(e) => {
 				e.preventDefault();
 				formSubmit();

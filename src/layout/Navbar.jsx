@@ -5,17 +5,9 @@ import Image from "next/image";
 import logoBlack from "../../public/site_logo.png";
 import HamburgerMenu from "./HamburgerMenu";
 import { useSession, signOut } from "next-auth/react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "@/redux/actions/userActions";
 
 const Navbar = ({ setAuthModalOpen }) => {
 	const { data: session, status } = useSession();
-	// Load User
-	const dispatch = useDispatch();
-	const { user, loading } = useSelector((state) => state.loadedUser);
-	useEffect(() => {
-		dispatch(loadUser());
-	}, [dispatch]);
 
 	let truncatedName;
 	if (session && session.user && session.user.name) {

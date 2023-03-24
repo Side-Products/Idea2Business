@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
+import { useSession } from "next-auth/react";
 
 const UpdateUserProfileModal = ({ isOpen, setOpen, submitHandler, avatarUrl, user, setUser }) => {
+	const { data: session } = useSession();
+
 	const { name, email, password } = user;
 	const onFieldChange = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value });
@@ -44,35 +47,39 @@ const UpdateUserProfileModal = ({ isOpen, setOpen, submitHandler, avatarUrl, use
 								/>
 							</div>
 
-							<div className="flex flex-col mt-2">
-								<label htmlFor="email_field" className="text-sm text-start font-semibold text-light-500">
-									Email
-								</label>
-								<input
-									type="email"
-									id="email_field"
-									className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
-									value={email}
-									name="email"
-									onChange={onFieldChange}
-									required
-								/>
-							</div>
+							{session && session.user && !session.user.image.includes("google") && (
+								<div className="flex flex-col mt-2">
+									<label htmlFor="email_field" className="text-sm text-start font-semibold text-light-500">
+										Email
+									</label>
+									<input
+										type="email"
+										id="email_field"
+										className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+										value={email}
+										name="email"
+										onChange={onFieldChange}
+										required
+									/>
+								</div>
+							)}
 
-							<div className="flex flex-col mt-2">
-								<label htmlFor="password_field" className="text-sm text-start font-semibold text-light-500">
-									Password
-								</label>
-								<input
-									type="password"
-									id="password_field"
-									className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
-									value={password}
-									name="password"
-									onChange={onFieldChange}
-									required
-								/>
-							</div>
+							{session && session.user && !session.user.image.includes("google") && (
+								<div className="flex flex-col mt-2">
+									<label htmlFor="password_field" className="text-sm text-start font-semibold text-light-500">
+										Password
+									</label>
+									<input
+										type="password"
+										id="password_field"
+										className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+										value={password}
+										name="password"
+										onChange={onFieldChange}
+										required
+									/>
+								</div>
+							)}
 
 							<div className="mt-10">
 								<Button variant={"secondary"} rounded={true} classes="text-md px-8 py-3">
