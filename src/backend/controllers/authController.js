@@ -135,11 +135,13 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
 const getAdminAllUsers = catchAsyncErrors(async (req, res) => {
 	const users = await User.find();
 	const admins = await User.find({ role: "admin" });
+	const allAccessUsers = await User.find({ role: "allAccess" });
 
 	res.status(200).json({
 		success: true,
 		users,
 		admins,
+		allAccessUsers,
 	});
 });
 

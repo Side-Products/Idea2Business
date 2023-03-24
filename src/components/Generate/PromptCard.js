@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "@/components/ui/Button";
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
 
 export default function PromptCard({
 	cardsAvailable,
@@ -20,9 +21,12 @@ export default function PromptCard({
 			? "Standard"
 			: "Free";
 
+	const { data: session } = useSession();
 	const [canAccess, setCanAccess] = useState(false);
 	useEffect(() => {
-		if (subscriptionPlan == "Pro Plus") {
+		if (session && session.user && (session.user.role == "admin" || session.user.role == "allAccess")) {
+			setCanAccess(true);
+		} else if (subscriptionPlan == "Pro Plus") {
 			setCanAccess(true);
 		} else if (subscriptionPlan == "Standard" && subscriptionPlanRequired == "Standard") {
 			setCanAccess(true);
@@ -31,7 +35,7 @@ export default function PromptCard({
 		} else {
 			setCanAccess(false);
 		}
-	}, [subscriptionPlan, subscription]);
+	}, [subscriptionPlan, subscription, session]);
 
 	const formSubmit = () => {
 		if (!cardsAvailable) {

@@ -141,6 +141,7 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 							>
 								<option value="user">user</option>
 								<option value="admin">admin</option>
+								<option value="allAccess">allAccess</option>
 							</select>
 						</div>
 

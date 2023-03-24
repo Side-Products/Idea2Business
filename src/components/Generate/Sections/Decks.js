@@ -5,6 +5,7 @@ import redBG from "../../../../public/themes/redbg";
 import LoadingContext from "@/store/loading-context";
 import SectionHeading from "../SectionHeading";
 import Button from "@/components/ui/Button";
+import { useSession } from "next-auth/react";
 
 export default function Decks({ isGenerating, setIsGenerating, promptEnterProjectInfo, projectInfo, cardsAvailable, setSubscriptionRequiredModalOpen }) {
 	const { projectName, projectDescription } = projectInfo;
@@ -31,9 +32,13 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 	};
 
 	function splitFirstOccurrence(str, separator) {
-		const [first, ...rest] = str.split(separator);
-		const remainder = rest.join("-");
-		return { first, remainder };
+		try {
+			const [first, ...rest] = str.split(separator);
+			const remainder = rest.join("-");
+			return { first, remainder };
+		} catch (error) {
+			console.log("splitFirstOccurrence error:", error);
+		}
 	}
 
 	async function generatePitchdeck(apiOutput) {
@@ -356,16 +361,19 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 			? "Standard"
 			: "Free";
 
+	const { data: session } = useSession();
 	const [canAccess, setCanAccess] = useState(false);
 	useEffect(() => {
-		if (subscriptionPlan == "Pro Plus") {
+		if (session && session.user && (session.user.role == "admin" || session.user.role == "allAccess")) {
+			setCanAccess(true);
+		} else if (subscriptionPlan == "Pro Plus") {
 			setCanAccess(true);
 		} else if (subscriptionPlan == "Standard") {
 			setCanAccess(false);
 		} else {
 			setCanAccess(false);
 		}
-	}, [subscriptionPlan, subscription]);
+	}, [subscriptionPlan, subscription, session]);
 
 	return (
 		<>

@@ -10,7 +10,7 @@ import DeleteUserConfirmModal from "./Modals/DeleteUserConfirmModal";
 
 export default function AllUsers() {
 	const dispatch = useDispatch();
-	const { users, admins, error, loading } = useSelector((state) => state.allUsers);
+	const { users, admins, allAccessUsers, error, loading } = useSelector((state) => state.allUsers);
 
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
@@ -53,11 +53,11 @@ export default function AllUsers() {
 							"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 parent hover:bg-dark-600 transition duration-300 rounded-t " +
 							(activeTable == "allUsersTable" && "border-primary-400 text-primary-400")
 						}
-						id="tabs-artist-verification-table-details"
+						id="tabs-all-users-table"
 						data-bs-toggle="pill"
-						data-bs-target="#tabs-artist-verification-table"
+						data-bs-target="#tabs-all-users"
 						role="tab"
-						aria-controls="tabs-artist-verification-table"
+						aria-controls="tabs-all-users"
 						aria-selected="true"
 					>
 						All Users
@@ -69,14 +69,30 @@ export default function AllUsers() {
 							"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:bg-dark-600 transition duration-300 rounded-t " +
 							(activeTable == "adminsTable" && "border-primary-400 text-primary-400")
 						}
-						id="tabs-verification-in-progress-table"
+						id="tabs-admins-table"
 						data-bs-toggle="pill"
-						data-bs-target="#tabs-verification-in-progress"
+						data-bs-target="#tabs-admins"
 						role="tab"
-						aria-controls="tabs-verification-in-progress"
+						aria-controls="tabs-admins"
 						aria-selected="false"
 					>
 						Admins
+					</span>
+				</li>
+				<li className="nav-item" role="presentation" onClick={() => setActiveTable("allAccessUsersTable")}>
+					<span
+						className={
+							"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:bg-dark-600 transition duration-300 rounded-t " +
+							(activeTable == "allAccessUsersTable" && "border-primary-400 text-primary-400")
+						}
+						id="tabs-all-access-users-table"
+						data-bs-toggle="pill"
+						data-bs-target="#tabs-all-access-users"
+						role="tab"
+						aria-controls="tabs-all-access-users"
+						aria-selected="false"
+					>
+						All Access Users
 					</span>
 				</li>
 			</ul>
@@ -84,12 +100,7 @@ export default function AllUsers() {
 			<div className="tab-content" id="tabs-tabContent3">
 				{/* All Users Table */}
 				{activeTable == "allUsersTable" && (
-					<div
-						className="tab-pane fade show active"
-						id="tabs-artist-verification-table"
-						role="tabpanel"
-						aria-labelledby="tabs-artist-verification-table-details"
-					>
+					<div className="tab-pane fade show active" id="tabs-all-users" role="tabpanel" aria-labelledby="tabs-all-users-details">
 						{users.length !== 0 ? (
 							<table className="w-full table allusers-table table-auto text-gray-400 border-separate space-y-6 text-sm">
 								<thead className="bg-dark-800">
@@ -175,7 +186,7 @@ export default function AllUsers() {
 
 				{/* Admins Table */}
 				{activeTable == "adminsTable" && (
-					<div className="tab-pane fade" id="tabs-verification-in-progress" role="tabpanel" aria-labelledby="tabs-verification-in-progress-table">
+					<div className="tab-pane fade" id="tabs-admins" role="tabpanel" aria-labelledby="tabs-admins-table">
 						{admins.length !== 0 ? (
 							<table className="w-full table allusers-table table-auto text-gray-400 border-separate space-y-6 text-sm">
 								<thead className="bg-dark-800">
@@ -227,6 +238,92 @@ export default function AllUsers() {
 												onClick={(e) => {
 													e.preventDefault();
 													setUserToDelete(admin);
+													setDeleteUserModalOpen(true);
+												}}
+											>
+												Delete
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						) : (
+							<>
+								<table className="w-full table allusers-table table-auto text-gray-400 border-separate space-y-6 text-sm">
+									<thead className="bg-zinc-900 text-zinc-50">
+										<tr>
+											<th className="p-3">Created At (UTC)</th>
+											<th className="p-3 text-left">User ID</th>
+											<th className="p-3 text-left">Name</th>
+											<th className="p-3 text-left">Email</th>
+											<th className="p-3 text-left">Credits</th>
+											<th className="p-3 text-left">Role</th>
+											<th className="p-3 text-left">Edit User</th>
+											<th className="p-3 text-left">Delete User</th>
+										</tr>
+									</thead>
+								</table>
+
+								<NoDataTableRow />
+							</>
+						)}
+					</div>
+				)}
+
+				{/* All Access Users Table */}
+				{activeTable == "allAccessUsersTable" && (
+					<div className="tab-pane fade" id="tabs-all-access-users" role="tabpanel" aria-labelledby="tabs-all-access-users-table">
+						{allAccessUsers.length !== 0 ? (
+							<table className="w-full table allusers-table table-auto text-gray-400 border-separate space-y-6 text-sm">
+								<thead className="bg-dark-800">
+									<tr>
+										<th className="p-3 text-left pl-6 text-gradient-secondary-tr">Created At (UTC)</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">User ID</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Name</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Email</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Credits</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Role</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Edit User</th>
+										<th className="p-3 text-left text-gradient-secondary-tr">Delete User</th>
+									</tr>
+								</thead>
+
+								<tbody className="text-gray-900">
+									{allAccessUsers.map((allAccessUser, index) => (
+										<tr className="bg-dark-600 text-light-200 " key={index}>
+											<td className="p-3">
+												<span className="flex align-items-center">
+													<span className="ml-3">
+														<span className="">{getTimestamp(allAccessUser.createdAt).slice(0, 19)}</span>
+													</span>
+												</span>
+											</td>
+											<td className="p-3">
+												<span data-info={allAccessUser._id}>{allAccessUser._id}</span>{" "}
+												<i className="far fa-copy ml-1 cursor-pointer" onClick={copyToClipboard}></i>
+											</td>
+											<td className="p-3">{allAccessUser.name}</td>
+											<td className="p-3">
+												<span data-info={allAccessUser.email}>{allAccessUser.email}</span>{" "}
+												<i className="far fa-copy ml-1 cursor-pointer" onClick={copyToClipboard}></i>
+											</td>
+											<td className="p-3">{allAccessUser.credits}</td>
+											<td className="p-3">{allAccessUser.role}</td>
+											<td
+												className="p-3 bg-primary-600 hover:bg-primary-800 transition duration-300 text-light-100 cursor-pointer text-center"
+												onClick={(e) => {
+													e.preventDefault();
+													setUserToUpdate(allAccessUser);
+													setUpdateUserModalOpen(true);
+												}}
+											>
+												Edit
+											</td>
+											<td
+												className="p-3 bg-error-600 hover:bg-error-700 transition duration-300 text-light-100 cursor-pointer text-center"
+												onClick={(e) => {
+													e.preventDefault();
+													setUserToDelete(allAccessUser);
 													setDeleteUserModalOpen(true);
 												}}
 											>

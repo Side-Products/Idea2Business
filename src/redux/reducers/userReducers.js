@@ -191,6 +191,7 @@ export const adminGetAllUsersReducer = (state = { users: [] }, action) => {
 				loading: false,
 				users: action.payload.users,
 				admins: action.payload.admins,
+				allAccessUsers: action.payload.allAccessUsers,
 			};
 		case ADMIN_GET_ALL_USERS_FAIL:
 			return {
