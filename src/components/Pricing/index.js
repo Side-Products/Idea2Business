@@ -159,10 +159,10 @@ const Pricing = () => {
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
 							<h3 className="mb-4 text-2xl font-semibold">Standard</h3>
-							<p className="font-light sm:text-lg dark:text-gray-400">Begin transforming your projects into real-world products.</p>
+							<p className="font-light sm:text-lg text-gray-400">Begin transforming your projects into real-world products.</p>
 							<div className="flex justify-center items-baseline my-8">
 								<span className="mr-2 text-5xl font-extrabold">$5</span>
-								<span className="dark:text-gray-400">for a week</span>
+								<span className="text-gray-400">for a week</span>
 							</div>
 
 							<div className="mb-8 font-bold text-lg text-light-600">ALL OF FREE PLUS</div>
@@ -259,10 +259,10 @@ const Pricing = () => {
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
 							<h3 className="mb-4 text-2xl font-semibold">Pro Plus</h3>
-							<p className="font-light sm:text-lg dark:text-gray-400">Get all the power you need to build profitable products.</p>
+							<p className="font-light sm:text-lg text-gray-400">Get all the power you need to build profitable products.</p>
 							<div className="flex justify-center items-baseline my-8">
 								<span className="mr-2 text-5xl font-extrabold">$10</span>
-								<span className="dark:text-gray-400">for a month</span>
+								<span className="text-gray-400">for a month</span>
 							</div>
 
 							<div className="mb-8 font-bold text-lg text-light-600">ALL OF STANDARD PLUS</div>

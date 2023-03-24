@@ -17,7 +17,7 @@ export default function Loading() {
 				{isLoading.title && <p>{isLoading.title}</p>}
 
 				{isLoading.showProgressBar && (
-					<div className="w-11/12 sm:1/2 md:1/4 lg:w-1/5 mt-2 bg-gray-200 rounded-full dark:bg-gray-700">
+					<div className="w-11/12 sm:1/2 md:1/4 lg:w-1/5 mt-2 rounded-full bg-gray-700">
 						<div
 							className={"relative min-w-fit bg-primary-500 text-xs font-medium text-blue-100 text-end p-0.5 leading-none rounded-full"}
 							style={{ width: `${isLoading.progress}%` }}

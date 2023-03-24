@@ -69,7 +69,7 @@ export default function Modal({
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "60" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
-						<div className={`sm:w-full w-11/12 p-4 bg-white dark:bg-dark-600 rounded-lg ${classes ? classes : "max-w-[32rem]"}`}>
+						<div className={`sm:w-full w-11/12 p-4 bg-dark-600 rounded-lg ${classes ? classes : "max-w-[32rem]"}`}>
 							<div className="w-full flex justify-end items-center">
 								<div
 									onClick={() => closeModal()}

@@ -11,7 +11,7 @@ export default function OurOfferings() {
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
 	return (
-		<div className="w-full flex flex-col items-center bg-light-200 dark:bg-dark-1000">
+		<div className="w-full flex flex-col items-center bg-dark-1000">
 			<div className="w-full max-w-[1920px] py-20 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-40">
 				<div className="container mx-auto flex flex-col gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px]">
 					<div className="flex flex-col gap-[30px] text-center">

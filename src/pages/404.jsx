@@ -13,7 +13,7 @@ const ErrorPage = ({}) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="w-full flex flex-col items-center justify-center bg-light-200 dark:bg-dark-800">
+			<div className="w-full flex flex-col items-center justify-center bg-dark-800">
 				<div id="error-404" className="w-full max-w-[1920px]">
 					<div className="noise"></div>
 					<div className="overlay"></div>

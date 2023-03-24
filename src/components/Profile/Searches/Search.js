@@ -28,7 +28,7 @@ export default function Search() {
 						setSearchText(e.target.value);
 					}}
 				/>
-				<span className="flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer dark:text-white w-7 h-7 bg-search-100 dark:bg-dark-600 hover:bg-dark-800 group-hover:text-black group-hover:bg-white">
+				<span className="flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer text-light-200 w-7 h-7 bg-dark-600 hover:bg-dark-800 group-hover:text-black group-hover:bg-white">
 					<i className="fas fa-search"></i>
 				</span>
 			</div>

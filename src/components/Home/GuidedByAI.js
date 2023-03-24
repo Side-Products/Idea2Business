@@ -1,6 +1,6 @@
 export default function GuidedByAI() {
 	return (
-		<div className="w-full flex flex-col items-center bg-light-200 dark:bg-dark-1000">
+		<div className="w-full flex flex-col items-center bg-dark-1000">
 			<div className="w-full max-w-[1920px] py-40 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-48 grid grid-cols-12 container mx-auto gap-x-5 place-content-center">
 				<h1 className="lg:col-span-7 col-span-12 font-bold text-3xl leading-[80px] lg:text-[70px] self-center tracking-[-2.5px] text-gradient-primary-tr">
 					Get your side-project guided by AI

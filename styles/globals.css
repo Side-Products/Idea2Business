@@ -78,7 +78,7 @@ a {
 /**************************************************************************/
 
 .navbar {
-	@apply dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] w-full dark:backdrop-brightness-105 backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
+	@apply bg-[rgba(19,19,19,0.4)] backdrop-blur-[24px] w-full backdrop-brightness-105;
 }
 
 /**************************************************************************/
@@ -161,11 +161,11 @@ a:hover {
 	height: 3px;
 	border-radius: 1.2px;
 	transition: 0.4s;
-	@apply bg-black dark:bg-white;
+	@apply bg-white;
 }
 
 .hamburger > div:before {
-	@apply bg-black dark:bg-white;
+	@apply bg-white;
 	content: "";
 	position: absolute;
 	width: 75%;
@@ -177,7 +177,7 @@ a:hover {
 }
 
 .hamburger > div:after {
-	@apply bg-black dark:bg-white;
+	@apply bg-white;
 	content: "";
 	position: absolute;
 	width: 85%;

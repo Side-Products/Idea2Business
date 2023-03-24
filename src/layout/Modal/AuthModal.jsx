@@ -268,7 +268,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 														setLoading({ status: true });
 														signIn("google");
 													}}
-													className=" flex justify-center items-center bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-full p-4 text-sm"
+													className=" flex justify-center items-center bg-dark-800 hover:bg-[#000] rounded-full p-4 text-sm"
 												>
 													<Image src="/google.png" alt="Metamask Logo" width="28" height="28" />
 												</button>
@@ -277,7 +277,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 														setLoading({ status: true });
 														signIn("github");
 													}}
-													className=" flex justify-center items-center bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-full p-4 text-sm"
+													className=" flex justify-center items-center bg-dark-800 hover:bg-[#000] rounded-full p-4 text-sm"
 												>
 													<Image src="/github.png" alt="Metamask Logo" width="28" height="28" />
 												</button>

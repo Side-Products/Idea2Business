@@ -38,7 +38,7 @@ export default function Profile() {
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			<div className="w-full flex flex-col items-center min-h-screen bg-light-200 dark:bg-dark-1000">
+			<div className="w-full flex flex-col items-center min-h-screen bg-dark-1000">
 				<div className="w-full max-w-[1920px] py-40 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<UserDetails projectsCount={projectsCount} />
 					<div className="w-full flex flex-col">

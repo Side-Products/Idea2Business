@@ -108,7 +108,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 												aria-expanded="false"
 											>
 												{status === "authenticated" ? (
-													<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
+													<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-200">
 														<span className="mr-3">{truncatedName}</span>
 														{avatarUrl ? (
 															<Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" />
@@ -119,7 +119,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 												) : (
 													<div
 														onClick={() => setAuthModalOpen(true)}
-														className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-dark-500 dark:hover:bg-dark-700 transition duration-300"
+														className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-dark-500 hover:bg-dark-700 transition duration-300"
 													>
 														Sign In
 													</div>
@@ -128,15 +128,14 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
 											{status === "authenticated" && (
 												<ul
-													className="absolute right-0 left-auto z-10 hidden text-sm font-medium float-left m-0 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
-											backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255)] dark:bg-[rgba(19,19,19)] dark:backdrop-blur-[24px] dark:backdrop-brightness-105
+													className="absolute right-0 left-auto z-10 hidden text-sm font-medium float-left m-0 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] bg-[rgba(19,19,19)] backdrop-blur-[24px] backdrop-brightness-105
 											bg-clip-padding group-hover:block"
 													aria-labelledby="dropdownMenuButton2"
 												>
 													<li>
 														{status === "authenticated" && (
 															<div className="flex flex-col px-4 py-3 cursor-pointer rounded-t-xl">
-																<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:dark:text-light-100">
+																<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:text-light-100">
 																	<div>
 																		<p>Email</p>
 																		<p>{truncatedEmail}</p>
@@ -153,7 +152,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													{status === "authenticated" && (
 														<li>
 															<Link href={`/profile`} passHref={true}>
-																<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
 																	Profile
 																</div>
 															</Link>
@@ -170,7 +169,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
 															<li>
 																<Link href={`/admin/subscriptions`} passHref={true}>
-																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
 																		All Subscriptions
 																	</div>
 																</Link>
@@ -178,7 +177,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
 															<li>
 																<Link href={`/admin/users`} passHref={true}>
-																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
 																		All Users
 																	</div>
 																</Link>
@@ -186,7 +185,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
 															<li>
 																<Link href={`/admin/searches`} passHref={true}>
-																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
 																		All Searches
 																	</div>
 																</Link>
@@ -198,7 +197,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													<li>
 														{status === "authenticated" ? (
 															<button
-																className="w-full px-4 pt-2 pb-3 font-medium transition-all bg-transparent cursor-pointer rounded-b-xl dark:border-light-300 hover:bg-gray-100 dark:hover:bg-error-600/30"
+																className="w-full px-4 pt-2 pb-3 font-medium transition-all bg-transparent cursor-pointer rounded-b-xl border-light-300 hover:bg-error-600/30"
 																onClick={() => signOut()}
 															>
 																Sign out
