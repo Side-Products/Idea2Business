@@ -1,4 +1,4 @@
-import Modal from "@/layout/Modal/Modal";
+import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 
 const ContentModal = ({ isOpen, setOpen, heading, content }) => {

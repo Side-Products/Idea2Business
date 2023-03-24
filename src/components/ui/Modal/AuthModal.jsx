@@ -133,11 +133,11 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex justify-center items-center h-full w-full fixed">
-						<div className="max-w-[26rem] w-11/12 p-4 pl-10 pb-12 bg-dark-600 rounded-lg">
+						<div className="max-w-[26rem] w-11/12 p-4 pl-9 pb-12 bg-dark-600 rounded-lg">
 							<div className="w-full flex justify-start">
 								<div className="w-full flex flex-col justify-center items-center mt-4">
 									{!forgotPassword && (
-										<div className="w-full flex justify-between px-12 mb-8">
+										<div className="w-full flex justify-between sm:px-12 mb-8">
 											<button
 												onClick={() => setAuthState("signup")}
 												className={

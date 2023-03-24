@@ -5,7 +5,7 @@ import * as ga from "@/lib/google-analytics";
 import "@/styles/globals.css";
 import "cal-sans";
 import ScrollToPageTop from "@/utils/ScrollToPageTop";
-import Layout from "@/layout/WrapLayout/Layout";
+import Layout from "@/layout/Layout";
 import StatusContext from "@/store/status-context";
 import LoadingContext from "@/store/loading-context";
 import AuthModalContext from "@/store/authModal-context";

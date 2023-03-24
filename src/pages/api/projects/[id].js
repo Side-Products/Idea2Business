@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import dbConnect from "@/config/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import { getSearchedProject, updateSearchedProject, deleteSearchedProject } from "@/backend/controllers/projectSearchController";
 import onError from "@/backend/middlewares/errors";
 

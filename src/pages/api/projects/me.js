@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import dbConnect from "@/config/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import { mySearches } from "@/backend/controllers/projectSearchController";
 import { isAuthenticatedUser } from "@/backend/middlewares/auth";
 import onError from "@/backend/middlewares/errors";

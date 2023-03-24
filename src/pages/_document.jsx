@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { DefaultSeo } from "next-seo";
-import SEO from "@/config/next-seo.config";
+import { SEO } from "@/config/next-seo.config";
 
 export default function Document() {
 	return (

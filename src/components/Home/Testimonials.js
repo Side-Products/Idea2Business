@@ -6,7 +6,7 @@ export default function Testimonials() {
 		<div className="w-full flex flex-col items-center bg-dark-1000">
 			<div className="w-full max-w-[1920px] py-32 px-4 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<div className="container mx-auto flex flex-col gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px]">
-					<div className="flex flex-col gap-[20px] text-center">
+					<div className="w-full flex flex-col gap-[20px] text-center">
 						<h1 className="md:px-24 text-5xl lg:text-[70px] tracking-[-2.5px] sm:leading-[5.5rem] font-bold text-gradient-secondary-tr">
 							Don't just take our word for it
 						</h1>

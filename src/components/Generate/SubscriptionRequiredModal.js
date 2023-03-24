@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Modal from "@/layout/Modal/Modal";
+import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 
 export default function SubscriptionRequiredModal({ isOpen, setOpen }) {

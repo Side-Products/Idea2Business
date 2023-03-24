@@ -1,13 +1,15 @@
 import { useContext } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import AuthModalContext from "@/store/authModal-context";
-import logoBlack from "../../../../public/site_logo.png";
+import logoBlack from "../../public/site_logo.png";
 import { useSession, signOut } from "next-auth/react";
 
 export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 	const { data: session, status } = useSession();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const router = useRouter();
 
 	const closeNavbar = () => {
 		document.getElementById("hamburgerToggler").click();
@@ -36,7 +38,13 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 									<div className="quick_hamburger_nav_div w-full">
 										{status === "authenticated" ? (
 											<>
-												<div className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200">
+												<div
+													onClick={() => {
+														router.push("/profile");
+														closeNavbar();
+													}}
+													className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200"
+												>
 													<span className="mr-4">{truncatedName}</span>
 													{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
 												</div>
@@ -62,7 +70,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 								</div>
 							</div>
 
-							{/* <div className="hamburger_menu justify-center">
+							<div className="hamburger_menu justify-center">
 								<div className="flex flex-wrap justify-center">
 									<div className="lg:w-full md:w-4/5 px-4 offset-0 w-full md:mt-0">
 										<div className="flex flex-wrap justify-center">
@@ -76,37 +84,19 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-													<Link
-														href={"/mxcatalog/new-releases"}
-														className="ham_menu_link ham_menu_hover_effect text-center"
-														passHref={true}
-													>
+													<Link href={"/generate"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-															New Releases
+															Generate
 														</span>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-													<Link
-														href={"/mxcatalog/explore"}
-														className="ham_menu_link ham_menu_hover_effect text-center"
-														passHref={true}
-													>
+													<Link href={"/pricing"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-															Explore
+															Pricing
 														</span>
 													</Link>
 												</div>
-
-												{status === "authenticated" && (
-													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-														<Link href={"/create-nft"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-															<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-																Create
-															</span>
-														</Link>
-													</div>
-												)}
 											</div>
 
 											<div className="md:w-1/4 px-4 w-1/2 text-center">
@@ -130,51 +120,15 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														</span>
 													)}
 												</div>
-												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-													{status === "authenticated" ? (
-														<Link
-															href={`/settings/profile-settings`}
-															className="ham_menu_link ham_menu_hover_effect text-center"
-															passHref={true}
-														>
-															<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-																Settings
-															</span>
-														</Link>
-													) : (
-														<span
-															className="ham_menu_link ham_menu_hover_effect text-center"
-															onClick={() => {
-																closeNavbar();
-																setAuthModalOpen(true);
-															}}
-														>
-															Settings
-														</span>
-													)}
-												</div>
 											</div>
 
-											<div className="md:w-1/4 px-4 w-1/2 mt-4 md:mt-0 text-center">
+											<div className="md:w-1/4 px-1 w-1/2 mt-4 md:mt-0 text-center">
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0 justify-center">Support</div>
-												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
-													<Link href={"/help-center"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-															Help Center
-														</span>
-													</Link>
-												</div>
-												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+
+												<div className="md:mt-8 mt-4 flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/contact-us"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															Contact Us
-														</span>
-													</Link>
-												</div>
-												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-													<Link href={"/faq"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-															FAQ
 														</span>
 													</Link>
 												</div>
@@ -185,21 +139,32 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														</span>
 													</Link>
 												</div>
+												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+													<Link
+														href={"/request-a-feature"}
+														className="ham_menu_link ham_menu_hover_effect text-center"
+														passHref={true}
+													>
+														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+															Request Feature
+														</span>
+													</Link>
+												</div>
 											</div>
 
-											<div className="md:w-1/4 px-4 w-1/2 mt-4 md:mt-0 text-center">
+											<div className="md:w-1/4 px-2 w-1/2 mt-4 md:mt-0 text-center">
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0 justify-center">General</div>
-												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
-													<Link href={"/#section_4"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center md:mt-8 mt-4">
+													<Link href={"/#faq"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-															About Us
+															FAQ
 														</span>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-													<Link href={"/cfh/cfb"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+													<Link href={"/example"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
-															Community
+															Example
 														</span>
 													</Link>
 												</div>
@@ -218,39 +183,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 									<div className="flex flex-wrap justify-center">
 										<div className="ham_menu_heading ham_menu_connect_heading text-center">Connect with us</div>
 									</div>
-									<div className="grid grid-cols-3 gap-4 sm:flex sm:flex-wrap sm:justify-center mt-5">
-										<a
-											href="https://t.me/+7e4mG5yhutswNWVl"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0"
-										>
-											<i className="fab fa-telegram fa-lg"></i>
-										</a>
-										<a
-											href="https://www.linkedin.com/company/musixverse"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0"
-										>
-											<i className="fab fa-linkedin fa-lg"></i>
-										</a>
-										<a
-											href="https://discord.com/invite/rXKb7rCqjG"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0"
-										>
-											<i className="fab fa-discord fa-lg"></i>
-										</a>
-										<a
-											href="https://www.facebook.com/musixverse"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0"
-										>
-											<i className="fab fa-meta fa-lg"></i>
-										</a>
+									<div className="grid grid-cols-2 gap-0 px-10 sm:flex sm:flex-wrap sm:justify-center mt-5">
 										<a
 											href="https://twitter.com/musixverse"
 											target="_blank"
@@ -260,16 +193,16 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 											<i className="fab fa-twitter fa-lg"></i>
 										</a>
 										<a
-											href="https://www.instagram.com/musixverse"
+											href="https://www.linkedin.com/company/musixverse"
 											target="_blank"
 											rel="noopener noreferrer"
 											className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0"
 										>
-											<i className="fab fa-instagram fa-lg"></i>
+											<i className="fab fa-linkedin fa-lg"></i>
 										</a>
 									</div>
 								</div>
-							</div> */}
+							</div>
 						</div>
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-import Modal from "@/layout/Modal/Modal";
+import Modal from "@/components/ui/Modal";
 
 const DeleteSubscriptionConfirmModal = ({ isOpen, setOpen, subscriptionToDelete, deleteSubscriptionHandler }) => {
 	return (

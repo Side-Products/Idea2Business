@@ -4,10 +4,10 @@ import LoadingContext from "@/store/loading-context";
 import AuthModalContext from "@/store/authModal-context";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import ErrorBox from "../Modal/ErrorBox";
-import SuccessBox from "../Modal/SuccessBox";
-import LoadingDark from "../Loading/LoadingDark";
-import AuthModal from "../Modal/AuthModal";
+import ErrorBox from "@/components/ui/Toast/ErrorBox";
+import SuccessBox from "@/components/ui/Toast/SuccessBox";
+import Loading from "@/components/ui/Loading";
+import AuthModal from "@/components/ui/Modal/AuthModal";
 
 const Layout = ({ children }) => {
 	const [isLoading, setLoading] = useContext(LoadingContext);
@@ -35,10 +35,10 @@ const Layout = ({ children }) => {
 
 	return (
 		<>
-			<Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />
+			<Navbar setAuthModalOpen={setAuthModalOpen} />
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			{children}
-			{isLoading.status && <LoadingDark />}
+			{isLoading.status && <Loading />}
 			<ErrorBox />
 			<SuccessBox />
 			{router.pathname !== "/404" && <Footer />}

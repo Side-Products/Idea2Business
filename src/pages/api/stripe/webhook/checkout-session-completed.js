@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import dbConnect from "@/config/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import { stripeWebhookCheckoutSessionCompleted } from "@/backend/controllers/paymentController";
 import onError from "@/backend/middlewares/errors";
 

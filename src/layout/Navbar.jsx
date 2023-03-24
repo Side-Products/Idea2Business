@@ -2,13 +2,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logoBlack from "../../../public/site_logo.png";
-import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
+import logoBlack from "../../public/site_logo.png";
+import HamburgerMenu from "./HamburgerMenu";
 import { useSession, signOut } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "@/redux/actions/userActions";
 
-const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
+const Navbar = ({ setAuthModalOpen }) => {
 	const { data: session, status } = useSession();
 	// Load User
 	const dispatch = useDispatch();

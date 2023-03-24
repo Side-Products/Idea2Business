@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import dbConnect from "@/config/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import { registerUser } from "@/backend/controllers/authController";
 import onError from "@/backend/middlewares/errors";
 

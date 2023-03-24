@@ -1,4 +1,4 @@
-import Modal from "@/layout/Modal/Modal";
+import Modal from "@/components/ui/Modal";
 import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";

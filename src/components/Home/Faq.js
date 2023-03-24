@@ -52,7 +52,7 @@ export default function Faq() {
 	});
 
 	return (
-		<div className="w-full flex flex-col items-center bg-dark-1000">
+		<div id="faq" className="w-full flex flex-col items-center bg-dark-1000">
 			<div className="w-full max-w-[1920px] pt-4 pb-40 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<h3 className="text-center font-bold text-[80px] text-gradient-primary-tr">FAQs</h3>
 				<div id="accordionExample" className="mt-10">
