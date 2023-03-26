@@ -184,6 +184,30 @@ const Navbar = ({ setAuthModalOpen }) => {
 																	</div>
 																</Link>
 															</li>
+
+															<li>
+																<Link href={`/admin/bug-reports`} passHref={true}>
+																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
+																		All Bug Reports
+																	</div>
+																</Link>
+															</li>
+
+															<li>
+																<Link href={`/admin/feature-requests`} passHref={true}>
+																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
+																		All Feature Requests
+																	</div>
+																</Link>
+															</li>
+
+															<li>
+																<Link href={`/admin/contact-us-messages`} passHref={true}>
+																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
+																		All Contact Us Messages
+																	</div>
+																</Link>
+															</li>
 														</>
 													)}
 

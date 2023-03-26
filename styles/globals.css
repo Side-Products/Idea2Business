@@ -678,6 +678,21 @@ tr th:nth-child(1) {
 	border-radius: 0 0.625rem 0.625rem 0;
 }
 
+.allContactUsMessages-table tr td:nth-child(n + 5),
+.allContactUsMessages-table tr th:nth-child(n + 5) {
+	border-radius: 0 0.625rem 0.625rem 0;
+}
+
+.allBugReports-table tr td:nth-child(n + 4),
+.allBugReports-table tr th:nth-child(n + 4) {
+	border-radius: 0 0.625rem 0.625rem 0;
+}
+
+.allFeatureRequests-table tr td:nth-child(n + 5),
+.allFeatureRequests-table tr th:nth-child(n + 5) {
+	border-radius: 0 0.625rem 0.625rem 0;
+}
+
 /**************************************************************************/
 /***************************    Scrollbar   *******************************/
 /**************************************************************************/

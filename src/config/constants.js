@@ -1,9 +1,25 @@
 /**************************************************************************/
+/**************************    Product details   **************************/
+/**************************************************************************/
+export const product_name = "Project2Product";
+export const product_website = "https://www.project2product.xyz";
+export const contact_email = "contact@musixverse.com";
+export const company_name = "Musixverse Technologies Pvt. Ltd.";
+
+/**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/
 /**************************************************************************/
 export const title_main_page = "Project2Product";
 export const meta_description =
 	"Transforming your side-projects and hackathon-projects into profitable products. Just enter your project name and project description, Project2Product will help you turn it into a successful venture.";
+export const reportabug_meta_description =
+	"Feedback is vital to make our services even better. With bug reporting forms, email, and discord server, it's easy to report issues you encounter and request enhancements to any services or functionalities on our platform. You'll directly influence the platform's development and building of the future of the music industry.";
+export const contactus_meta_description =
+	"Just send us your questions or concerns by filling out the shortest contact form you've ever seen and we will give you the help you need. Start Here.";
+export const aboutus_meta_description =
+	"Musixverse is how music should be: driven by the relationship between fans and artists. We’re creating a platform for a more collaborative music movement, built on web3 technology and values. On Musixverse, Fans support Artists they love directly and stake their claim on being there before everyone else.";
+export const privacy_meta_description =
+	"This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can update, manage, export, and delete your information.";
 
 /**************************************************************************/
 /************************    Card Information   ***************************/
