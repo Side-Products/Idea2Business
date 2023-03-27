@@ -81,7 +81,7 @@ const DeleteFeatureRequestModal = ({ isOpen, setOpen, featureRequestToDelete }) 
 							</div>
 						</div>
 
-						<p className="text-sm font-semibold text-center mt-10">Are you sure you want to delete this feature description?</p>
+						<p className="text-sm font-semibold text-center mt-10">Are you sure you want to delete this feature request?</p>
 
 						<div className="flex justify-end">
 							<button

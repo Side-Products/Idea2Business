@@ -118,11 +118,43 @@ export default function FeatureRequest() {
 
 	return (
 		<div className="w-full flex flex-col justify-center items-center mt-16">
-			<div className="w-full">
-				<div className="text-md text-light-400">
-					In order to best assist you, please share as many details as you can about your query. If applicable, please include any troubleshooting
-					steps that you have already taken.
+			<div className="w-full text-light-400">
+				<div>
+					Welcome to our "Request a Feature" page! We love hearing from our users and are always looking for ways to improve the website. Your
+					suggestions and ideas can help us provide a better experience for everyone who visits the site. Your feedback is incredibly valuable to us,
+					and we want to hear your ideas and suggestions for new features that you would like to see.
 				</div>
+
+				<div className="mt-10 font-primary font-semibold tracking-[-1px] text-gradient-primary-tr text-2xl">Here&apos;s how to request a feature:</div>
+				<div className="mt-4 font-secondary text-base">
+					<ol className="list-decimal pl-4">
+						<li>
+							<span className="text-gradient-primary-tr">Submit a Request:</span> Use the form below to submit your feature request. Please be as
+							specific and detailed as possible in your description. The more information you can provide, the better we can understand your
+							request.
+						</li>
+						<li>
+							<span className="text-gradient-primary-tr">Follow Up:</span> After you submit your request, you can expect to hear back from us
+							within a reasonable amount of time. We will review all requests and get in touch with you if we need any additional information or
+							clarification.
+						</li>
+					</ol>
+					{/* Not all issues are as clear-cut as a platform crash (But we definitely want to know about those, too!). As you use the platform,
+						anything that strikes you as <span className="text-gradient-primary-tr">weird</span>,{" "}
+						<span className="text-gradient-primary-tr">unexpected</span>, or <span className="text-gradient-primary-tr">broken</span> can be termed
+						as a bug and is important to let us know about.
+						<br />
+						<br />
+						<span className="text-gradient-primary-tr">Report everything</span> that you find. An issue might be glaringly obvious to you, but we
+						may not even know about it if you don&apos;t report it. */}
+				</div>
+
+				<div className="mt-8">
+					Please note that while we appreciate all feature requests, we may not be able to implement every suggestion due to technical limitations or
+					other constraints. However, we promise to carefully consider every request and do our best to make the website the best it can be.
+				</div>
+
+				<div className="mt-4">Thank you for your input, and we look forward to hearing your ideas!</div>
 
 				<div className="mt-10 text-light-600">
 					Email us at:
@@ -132,7 +164,7 @@ export default function FeatureRequest() {
 					</a>
 					<br />
 					<br />
-					Or submit your queries anonymously using the form below.
+					Or submit your requests anonymously using the form below.
 				</div>
 
 				<div className="mt-16">
