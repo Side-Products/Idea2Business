@@ -99,7 +99,7 @@ const Generate = () => {
 			</div>
 
 			<div className="w-full flex justify-center items-center pt-10 pb-32 bg-dark-1000" id="cardContainer">
-				<div className="w-full md:w-5/6 xl:w-4/6 flex flex-col justify-center items-center md:p-0 p-10">
+				<div className="w-full md:w-5/6 xl:w-9/12 flex flex-col justify-center items-center md:p-0 p-10">
 					<Decks
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}

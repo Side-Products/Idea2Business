@@ -132,7 +132,7 @@ export default function Pitches({
 	return (
 		<>
 			<SectionHeading>Pitches</SectionHeading>
-			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-8">
 				<PromptCard
 					cardText={pitches[0].cardText}
 					handleCardClick={async (cardText) => {

@@ -724,3 +724,11 @@ html {
 ::-webkit-scrollbar-thumb:hover {
 	background: #4db6ac;
 }
+
+/**************************************************************************/
+/**************************    Prompt Card   ******************************/
+/**************************************************************************/
+
+.prompt-card::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(50, 168, 82, 0.2), transparent 40%);
+}
