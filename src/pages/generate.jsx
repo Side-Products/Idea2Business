@@ -99,7 +99,7 @@ const Generate = () => {
 			</div>
 
 			<div className="w-full flex justify-center items-center pt-10 pb-32 bg-dark-1000" id="cardContainer">
-				<div className="w-full md:w-5/6 xl:w-9/12 flex flex-col justify-center items-center md:p-0 p-10">
+				<div className="w-full md:w-11/12 xl:w-9/12 flex flex-col justify-center items-center md:p-0 p-4">
 					<Decks
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
@@ -118,6 +118,7 @@ const Generate = () => {
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+						sectionStyle={1}
 					/>
 
 					<UnderstandingPotentialUsers
@@ -129,6 +130,7 @@ const Generate = () => {
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+						sectionStyle={2}
 					/>
 
 					<SocialMediaStrategy
@@ -140,6 +142,7 @@ const Generate = () => {
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+						sectionStyle={3}
 					/>
 
 					<AdviceFromBooks
@@ -151,6 +154,7 @@ const Generate = () => {
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+						sectionStyle={4}
 					/>
 
 					<InvestorMeetingPrep
@@ -162,6 +166,7 @@ const Generate = () => {
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+						sectionStyle={5}
 					/>
 
 					<BonusContent
@@ -173,6 +178,7 @@ const Generate = () => {
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+						sectionStyle={6}
 					/>
 
 					<SectionHeading>More coming soon...</SectionHeading>

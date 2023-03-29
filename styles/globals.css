@@ -73,6 +73,16 @@ a {
 	@apply bg-gradient-to-tr from-orange-500 to-rose-500 animate-bg;
 }
 
+.bg-gradient-default-tr {
+	@apply bg-gradient-to-tr from-gray-500 via-gray-400 to-gray-600 animate-bg opacity-100 hover:opacity-90 transition duration-300;
+}
+.bg-gradient-default-tr-loading {
+	@apply bg-gradient-to-tr from-gray-600 via-gray-600 to-gray-600 animate-bg;
+}
+.bg-gradient-default-tr-outline {
+	@apply bg-gradient-to-tr from-gray-500 via-gray-500 to-gray-500 animate-bg;
+}
+
 /**************************************************************************/
 /*****************************    Navbar   ********************************/
 /**************************************************************************/
@@ -726,9 +736,54 @@ html {
 }
 
 /**************************************************************************/
-/**************************    Prompt Card   ******************************/
+/**********************    Prompt Card Section   **************************/
 /**************************************************************************/
 
-.prompt-card::before {
+.section-heading-1 {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-tr from-green-400 via-teal-400 to-blue-500;
+}
+.prompt-card-1::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(50, 168, 82, 0.2), transparent 40%);
+}
+
+.section-heading-2 {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-tr from-red-200 via-red-300 to-yellow-200;
+}
+.prompt-card-2::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgb(254, 202, 202, 0.2), transparent 40%);
+}
+
+.section-heading-3 {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-tr from-rose-400 via-fuchsia-400 to-indigo-600;
+}
+.prompt-card-3::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgb(217, 70, 239, 0.15), transparent 40%);
+}
+
+.section-heading-4 {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-r from-teal-200 to-lime-200;
+}
+.prompt-card-4::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgb(153, 246, 228, 0.2), transparent 40%);
+}
+
+.section-heading-5 {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-r from-indigo-300 to-purple-400;
+}
+.prompt-card-5::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgb(165, 180, 252, 0.2), transparent 40%);
+}
+
+.section-heading-6 {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-r from-rose-400 to-orange-300;
+}
+.prompt-card-6::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgb(253, 186, 116, 0.15), transparent 40%);
+}
+
+.section-heading-default {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-tr from-gray-200 via-gray-400 to-gray-600;
+}
+.prompt-card-default::before {
 	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(50, 168, 82, 0.2), transparent 40%);
 }

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import SectionGrid from "../SectionGrid";
 import { adviceFromBooks } from "@/config/constants";
 
 export default function AdviceFromBooks({
@@ -13,6 +14,7 @@ export default function AdviceFromBooks({
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
+	sectionStyle,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -127,8 +129,8 @@ export default function AdviceFromBooks({
 
 	return (
 		<>
-			<SectionHeading>Advice from Books</SectionHeading>
-			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+			<SectionHeading sectionStyle={sectionStyle}>Advice from Books</SectionHeading>
+			<SectionGrid>
 				<PromptCard
 					cardText={adviceFromBooks[0].cardText}
 					handleCardClick={async (cardText) => {
@@ -137,9 +139,10 @@ export default function AdviceFromBooks({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === adviceFromBooks[0].isGeneratingText}
+					subscriptionPlanRequired={adviceFromBooks[0].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={adviceFromBooks[0].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -150,9 +153,10 @@ export default function AdviceFromBooks({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === adviceFromBooks[1].isGeneratingText}
+					subscriptionPlanRequired={adviceFromBooks[1].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={adviceFromBooks[1].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -163,9 +167,10 @@ export default function AdviceFromBooks({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === adviceFromBooks[2].isGeneratingText}
+					subscriptionPlanRequired={adviceFromBooks[2].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={adviceFromBooks[2].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -176,12 +181,13 @@ export default function AdviceFromBooks({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === adviceFromBooks[3].isGeneratingText}
+					subscriptionPlanRequired={adviceFromBooks[3].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={adviceFromBooks[3].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
-			</div>
+			</SectionGrid>
 		</>
 	);
 }

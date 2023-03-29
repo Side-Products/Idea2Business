@@ -204,7 +204,10 @@ import Link from "next/link";
 export const Faqs = [
 	{
 		heading: "How can I pay?",
-		body: "We use Stripe's secure checkout which accepts the majority of credit cards and also offers European Debit Card payments. We do not store any of your (credit) card information. If you want to pay via PayPal, please send an email to pushpit@musixverse.com and we'll arrange that!",
+		body:
+			"We use Stripe's secure checkout which accepts the majority of credit cards and also offers European Debit Card payments. We do not store any of your (credit) card information. If you want to pay via PayPal, please send an email to " +
+			contact_email +
+			" and we'll arrange that!",
 		content_id: "collapseOne",
 		content_heading: "headingOne",
 	},

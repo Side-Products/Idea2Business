@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import SectionGrid from "../SectionGrid";
 import { socialMediaStrategy } from "@/config/constants";
 
 export default function SocialMediaStrategy({
@@ -13,6 +14,7 @@ export default function SocialMediaStrategy({
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
+	sectionStyle,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -127,8 +129,8 @@ export default function SocialMediaStrategy({
 
 	return (
 		<>
-			<SectionHeading>Social Media Strategy</SectionHeading>
-			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+			<SectionHeading sectionStyle={sectionStyle}>Social Media Strategy</SectionHeading>
+			<SectionGrid>
 				<PromptCard
 					cardText={socialMediaStrategy[0].cardText}
 					handleCardClick={async (cardText) => {
@@ -137,9 +139,10 @@ export default function SocialMediaStrategy({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === socialMediaStrategy[0].isGeneratingText}
+					subscriptionPlanRequired={socialMediaStrategy[0].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={socialMediaStrategy[0].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -150,9 +153,10 @@ export default function SocialMediaStrategy({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === socialMediaStrategy[1].isGeneratingText}
+					subscriptionPlanRequired={socialMediaStrategy[1].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={socialMediaStrategy[1].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -163,9 +167,10 @@ export default function SocialMediaStrategy({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === socialMediaStrategy[2].isGeneratingText}
+					subscriptionPlanRequired={socialMediaStrategy[2].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={socialMediaStrategy[2].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -176,12 +181,13 @@ export default function SocialMediaStrategy({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === socialMediaStrategy[3].isGeneratingText}
+					subscriptionPlanRequired={socialMediaStrategy[3].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={socialMediaStrategy[3].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
-			</div>
+			</SectionGrid>
 		</>
 	);
 }

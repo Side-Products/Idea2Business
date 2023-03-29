@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import SectionGrid from "../SectionGrid";
 import { bonusContent } from "@/config/constants";
 
 export default function BonusContent({
@@ -13,6 +14,7 @@ export default function BonusContent({
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
+	sectionStyle,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -235,8 +237,8 @@ export default function BonusContent({
 
 	return (
 		<>
-			<SectionHeading>Bonus</SectionHeading>
-			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+			<SectionHeading sectionStyle={sectionStyle}>Bonus</SectionHeading>
+			<SectionGrid>
 				<PromptCard
 					cardText={bonusContent[0].cardText}
 					handleCardClick={async (cardText) => {
@@ -245,9 +247,10 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[0].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[0].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[0].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -258,9 +261,10 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[1].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[1].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[1].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -271,9 +275,10 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[2].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[2].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[2].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -284,9 +289,10 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[3].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[3].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[3].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -297,9 +303,10 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[4].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[4].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[4].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -310,9 +317,10 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[5].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[5].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[5].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -323,9 +331,10 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[6].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[6].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[6].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -336,12 +345,13 @@ export default function BonusContent({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === bonusContent[7].isGeneratingText}
+					subscriptionPlanRequired={bonusContent[7].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={bonusContent[7].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
-			</div>
+			</SectionGrid>
 		</>
 	);
 }

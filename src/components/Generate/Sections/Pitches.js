@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import SectionGrid from "../SectionGrid";
 import { pitches } from "@/config/constants";
 
 export default function Pitches({
@@ -13,6 +14,7 @@ export default function Pitches({
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
+	sectionStyle,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -131,8 +133,8 @@ export default function Pitches({
 
 	return (
 		<>
-			<SectionHeading>Pitches</SectionHeading>
-			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-8">
+			<SectionHeading sectionStyle={sectionStyle}>Pitches</SectionHeading>
+			<SectionGrid>
 				<PromptCard
 					cardText={pitches[0].cardText}
 					handleCardClick={async (cardText) => {
@@ -141,9 +143,10 @@ export default function Pitches({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === pitches[0].isGeneratingText}
+					subscriptionPlanRequired={pitches[0].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={pitches[0].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -154,9 +157,10 @@ export default function Pitches({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === pitches[1].isGeneratingText}
+					subscriptionPlanRequired={pitches[1].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={pitches[1].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -167,9 +171,10 @@ export default function Pitches({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === pitches[2].isGeneratingText}
+					subscriptionPlanRequired={pitches[2].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={pitches[2].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -180,12 +185,13 @@ export default function Pitches({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === pitches[3].isGeneratingText}
+					subscriptionPlanRequired={pitches[3].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={pitches[3].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
-			</div>
+			</SectionGrid>
 		</>
 	);
 }

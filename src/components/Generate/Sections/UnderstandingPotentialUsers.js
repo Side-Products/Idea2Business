@@ -2,6 +2,7 @@ import { useContext } from "react";
 import LoadingContext from "@/store/loading-context";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
+import SectionGrid from "../SectionGrid";
 import { understandingPotentialUsers } from "@/config/constants";
 
 export default function UnderstandingPotentialUsers({
@@ -13,6 +14,7 @@ export default function UnderstandingPotentialUsers({
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
+	sectionStyle,
 }) {
 	const { projectName, projectDescription } = projectInfo;
 	const [, setLoading] = useContext(LoadingContext);
@@ -129,8 +131,8 @@ export default function UnderstandingPotentialUsers({
 
 	return (
 		<>
-			<SectionHeading>Understanding Potential Users</SectionHeading>
-			<div className="w-full grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
+			<SectionHeading sectionStyle={sectionStyle}>Understanding Potential Users</SectionHeading>
+			<SectionGrid>
 				<PromptCard
 					cardText={understandingPotentialUsers[0].cardText}
 					handleCardClick={async (cardText) => {
@@ -139,9 +141,10 @@ export default function UnderstandingPotentialUsers({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === understandingPotentialUsers[0].isGeneratingText}
+					subscriptionPlanRequired={understandingPotentialUsers[0].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={understandingPotentialUsers[0].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -152,9 +155,10 @@ export default function UnderstandingPotentialUsers({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === understandingPotentialUsers[1].isGeneratingText}
+					subscriptionPlanRequired={understandingPotentialUsers[1].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={understandingPotentialUsers[1].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -165,9 +169,10 @@ export default function UnderstandingPotentialUsers({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === understandingPotentialUsers[2].isGeneratingText}
+					subscriptionPlanRequired={understandingPotentialUsers[2].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={understandingPotentialUsers[2].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -178,12 +183,13 @@ export default function UnderstandingPotentialUsers({
 						setIsGenerating(false);
 					}}
 					isLoading={isGenerating === understandingPotentialUsers[3].isGeneratingText}
+					subscriptionPlanRequired={understandingPotentialUsers[3].subscriptionPlanRequired}
+					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
 					promptEnterProjectInfo={promptEnterProjectInfo}
-					subscriptionPlanRequired={understandingPotentialUsers[3].subscriptionPlanRequired}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
-			</div>
+			</SectionGrid>
 		</>
 	);
 }

@@ -14,14 +14,21 @@ export default function Button({ variant = "primary", outline = false, rounded, 
 								: `bg-gradient-primary-tr-outline `
 							: (isLoading ? `bg-gradient-primary-tr-loading ` : `bg-gradient-primary-tr `) + `text-light-100 `) +
 					  `font-primary font-semibold transition duration-300 `
-					: (variant = "secondary"
-							? (outline
-									? isLoading
-										? `bg-gradient-secondary-tr-outline `
-										: `bg-gradient-secondary-tr-outline `
-									: (isLoading ? `bg-gradient-secondary-tr-loading ` : `bg-gradient-secondary-tr `) + `text-light-100 `) +
-							  `font-primary font-semibold transition duration-300 `
-							: ` `)) +
+					: variant == "secondary"
+					? (outline
+							? isLoading
+								? `bg-gradient-secondary-tr-outline `
+								: `bg-gradient-secondary-tr-outline `
+							: (isLoading ? `bg-gradient-secondary-tr-loading ` : `bg-gradient-secondary-tr `) + `text-light-100 `) +
+					  `font-primary font-semibold transition duration-300 `
+					: variant == "default"
+					? (outline
+							? isLoading
+								? `bg-gradient-default-tr-outline `
+								: `bg-gradient-default-tr-outline `
+							: (isLoading ? `bg-gradient-default-tr-loading ` : `bg-gradient-default-tr `) + `text-light-100 `) +
+					  `font-primary font-semibold transition duration-300 `
+					: ` `) +
 				(rounded ? `rounded-full ` : `rounded-lg `) +
 				(classes ? classes : `text-lg ` + (outline ? `px-1 py-1` : `px-8 py-2`))
 			}
