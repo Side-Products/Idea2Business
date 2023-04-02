@@ -5,6 +5,7 @@ import Link from "next/link";
 import AuthModalContext from "@/store/authModal-context";
 import logoBlack from "../../public/site_logo.png";
 import { useSession, signOut } from "next-auth/react";
+import { twitter_url, linkedin_url } from "@/config/constants";
 
 export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 	const { status } = useSession();
@@ -185,7 +186,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 									</div>
 									<div className="grid grid-cols-2 gap-0 px-10 sm:flex sm:flex-wrap sm:justify-center mt-5">
 										<a
-											href="https://twitter.com/musixverse"
+											href={twitter_url}
 											target="_blank"
 											rel="noopener noreferrer"
 											className="connect_link text-center relative flex-grow max-w-full flex-1 px-4 p-0"
@@ -193,7 +194,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 											<i className="fab fa-twitter fa-lg"></i>
 										</a>
 										<a
-											href="https://www.linkedin.com/company/musixverse"
+											href={linkedin_url}
 											target="_blank"
 											rel="noopener noreferrer"
 											className="connect_link text-center relative flex-grow max-w-full flex-1 px-4 p-0"

@@ -23,7 +23,7 @@ export default function Testimonials() {
 									</svg>
 									<blockquote>
 										<p className="text-lg sm:text-2xl font-medium text-white">
-											"Project2Product was a game-changer for me! I had a passion project that I thought would never see the light of day,
+											"Idea2Business was a game-changer for me! I had a passion project that I thought would never see the light of day,
 											but with their help, I turned it into a successful business.
 											<br /> I'm forever grateful!"
 										</p>
@@ -47,7 +47,7 @@ export default function Testimonials() {
 										position={"Serial Entrepreneur"}
 										username={"@Shivansh3121"}
 										avatar={"/testimonials/shivansh.jpg"}
-										text={`Project2Product is just awesome. It helped me to take my project to the next level. Perfect choice to convert your
+										text={`Idea2Business is just awesome. It helped me to take my project to the next level. Perfect choice to convert your
 											next project into a real world product 🤙🏻`}
 										daysAgo={"1 day ago"}
 									/>
@@ -57,7 +57,7 @@ export default function Testimonials() {
 										position={"Software Engineer"}
 										username={"@itsmelvinmathew"}
 										avatar={"/testimonials/melvin.jpg"}
-										text={`Project2Product is a must-have tool for anyone looking to monetize their side-projects. They make it so easy to bring your ideas to life!`}
+										text={`Idea2Business is a must-have tool for anyone looking to monetize their side-projects. They make it so easy to bring your ideas to life!`}
 										daysAgo={"3 days ago"}
 									/>
 
@@ -66,7 +66,7 @@ export default function Testimonials() {
 										position={"Designer"}
 										username={"@Shivamc504"}
 										avatar={"/testimonials/shivam.jpg"}
-										text={`I was skeptical at first, but Project2Product delivered on their promise. They helped me turn my hackathon project into a profitable product in no time!`}
+										text={`I was skeptical at first, but Idea2Business delivered on their promise. They helped me turn my hackathon project into a profitable product in no time!`}
 										daysAgo={"3 days ago"}
 									/>
 
@@ -84,7 +84,7 @@ export default function Testimonials() {
 										position={"Designer"}
 										username={"@Aayushi7765"}
 										avatar={"/testimonials/aayushi.jpg"}
-										text={`I was impressed with how quickly Project2Product was able to help me turn my side-project into a profitable business. Their AI is literally so good!`}
+										text={`I was impressed with how quickly Idea2Business was able to help me turn my side-project into a profitable business. Their AI is literally so good!`}
 										daysAgo={"6 days ago"}
 									/>
 
@@ -93,7 +93,7 @@ export default function Testimonials() {
 										position={"Marketer"}
 										username={"@aksh_eth"}
 										avatar={"/testimonials/akshit.jpg"}
-										text={`Project2Product is a game-changer for anyone looking to turn their ideas into successful ventures. I would highly recommend it to anyone!`}
+										text={`Idea2Business is a game-changer for anyone looking to turn their ideas into successful ventures. I would highly recommend it to anyone!`}
 										daysAgo={"4 days ago"}
 									/>
 
@@ -102,7 +102,7 @@ export default function Testimonials() {
 										position={"Software Developer"}
 										username={"@theRishabhSh"}
 										avatar={"/testimonials/rishabh.jpg"}
-										text={`Project2Product is the real deal! They helped me turn my hackathon project into a thriving business. I would recommend them to anyone looking to do the same!`}
+										text={`Idea2Business is the real deal! They helped me turn my hackathon project into a thriving business. I would recommend them to anyone looking to do the same!`}
 										daysAgo={"1 week ago"}
 									/>
 
@@ -120,7 +120,7 @@ export default function Testimonials() {
 										position={"Product Lead"}
 										username={"@RaghavSaraf17"}
 										avatar={"/testimonials/raghav.jpg"}
-										text={`I was blown away by the quality of services that Project2Product provided me. It was so easy to use and the results were amazing!`}
+										text={`I was blown away by the quality of services that Idea2Business provided me. It was so easy to use and the results were amazing!`}
 										daysAgo={"1 day ago"}
 									/>
 								</div>

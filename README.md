@@ -1,6 +1,6 @@
-# Project2Product
-https://project2product.xyz
-https://project2product.vercel.app
+# Idea2Business
+https://idea2business.xyz
+https://idea2business.vercel.app
 
 ## Start MongoDB locally
 

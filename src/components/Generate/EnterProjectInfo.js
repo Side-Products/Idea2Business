@@ -60,12 +60,12 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 	return (
 		<div className="w-full flex flex-col items-center justify-center">
 			<div className="flex flex-col">
-				<h1 className="mt-8 text-center text-[44px] sm:text-[80px] md:text-[100px] tracking-[-2.5px] font-bold text-gradient-primary-tr leading-[1.2em]">
-					Project~Product
+				<h1 className="mt-8 text-center text-[44px] sm:text-[80px] md:text-[110px] tracking-[-2.5px] font-bold text-gradient-primary-tr leading-[1.2em]">
+					Idea~Business
 				</h1>
 				<h3 className="mt-4 px-4 text-center text-sm sm:text-lg leading-[1.4em] text-light-500">
-					Transform your side-projects and hackathon-projects into profitable products. <br />
-					Just enter your project name and project description, Project2Product will help you turn it into a successful venture.
+					Transform your idea into a profitable business. <br />
+					Just enter your idea, and Idea2Business will help you turn it into a successful venture.
 				</h3>
 			</div>
 

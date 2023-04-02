@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import easyinvoice from "easyinvoice";
 import StatusContext from "@/store/status-context";
 import LoadingContext from "@/store/loading-context";
+import { product_name } from "@/config/constants";
 
 export default function MySubscription() {
 	const router = useRouter();
@@ -37,7 +38,7 @@ export default function MySubscription() {
 				"margin-bottom": 25,
 			},
 			translate: {
-				invoice: "Project2Product Invoice", // Default to 'INVOICE'
+				invoice: product_name + " Invoice", // Default to 'INVOICE'
 				number: "Invoice Number", // Defaults to 'Number'
 				date: "Invoice Date", // Default to 'Date'
 				"due-date": "Valid Until", // Defaults to 'Due Date'
@@ -48,7 +49,7 @@ export default function MySubscription() {
 				logo: "https://public.easyinvoice.cloud/img/logo_en_original.png",
 			},
 			sender: {
-				company: "Project2Product",
+				company: product_name,
 				address: "KH. No. 23/2, 1st Floor, Gali No. 5, Block-A, Himgiri Enclave, Village - Mukandpur, Delhi, India",
 				zip: "110081",
 				city: "New Delhi",
@@ -74,7 +75,7 @@ export default function MySubscription() {
 					price: `${subscription.amountPaid}`,
 				},
 			],
-			bottomNotice: "This is an auto generated invoice of your subscription on Project2Product.",
+			bottomNotice: "This is an auto generated invoice of your subscription on " + product_name,
 		};
 
 		const result = await easyinvoice.createInvoice(data);

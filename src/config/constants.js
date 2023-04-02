@@ -1,17 +1,20 @@
 /**************************************************************************/
 /**************************    Product details   **************************/
 /**************************************************************************/
-export const product_name = "Project2Product";
-export const product_website = "https://www.project2product.xyz";
-export const contact_email = "contact@musixverse.com";
+export const product_name = "Idea2Business";
+export const product_website = "https://www.idea2business.xyz";
+export const contact_email = "team@idea2business.xyz";
 export const company_name = "Musixverse Technologies Pvt. Ltd.";
+
+export const twitter_url = "https://twitter.com/_idea2business";
+export const linkedin_url = "https://www.linkedin.com/company/idea-2-business";
 
 /**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/
 /**************************************************************************/
-export const title_main_page = "Project2Product";
+export const title_main_page = "Idea2Business";
 export const meta_description =
-	"Transforming your side-projects and hackathon-projects into profitable products. Just enter your project name and project description, Project2Product will help you turn it into a successful venture.";
+	"Transforming your side-projects and hackathon-projects into profitable products. Just enter your project name and project description, Idea2Business will help you turn it into a successful venture.";
 export const reportabug_meta_description =
 	"Feedback is vital to make our services even better. With bug reporting forms, email, and discord server, it's easy to report issues you encounter and request enhancements to any services or functionalities on our platform. You'll directly influence the platform's development and building of the future of the music industry.";
 export const contactus_meta_description =

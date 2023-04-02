@@ -28,7 +28,7 @@ export default function Document() {
 				<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
 				<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&display=swap" rel="stylesheet" />
 
-				<meta property="og:title" content="Project2Product" key="title" />
+				<meta property="og:title" content="Idea2Business" key="title" />
 				<meta property="og:description" content="Transforming your side-projects and hackathon-projects into profitable products" key="description" />
 
 				{/* Parallax Text */}

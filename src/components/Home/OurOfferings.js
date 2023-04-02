@@ -16,9 +16,9 @@ export default function OurOfferings() {
 				<div className="w-full flex flex-col justify-center items-center m-0 p-0 gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px]">
 					<div className="flex flex-col gap-[30px] text-center">
 						<h1 className="md:px-24 text-3xl lg:text-[70px] tracking-[-2px] sm:tracking-[-2.5px] sm:leading-[5.5rem] font-bold text-gradient-primary-tr">
-							How will Project2Product unlock your project's potential?
+							How will Idea2Business unlock your idea's potential?
 						</h1>
-						<p className="text-md md:text-xl text-light-300">Get all these for your project using our tool</p>
+						<p className="text-md md:text-xl text-light-300">Get all these for your idea using our tool</p>
 					</div>
 
 					<div className="cards flex flex-col sm:flex-row flex-wrap justify-center gap-y-[35px] sm:gap-y-[40px] md:gap-y-[45px] lg:gap-y-[60px] gap-x-[35px]">

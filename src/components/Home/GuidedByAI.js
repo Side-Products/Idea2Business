@@ -2,12 +2,12 @@ export default function GuidedByAI() {
 	return (
 		<div className="w-full flex flex-col items-center bg-dark-1000">
 			<div className="w-full max-w-[1920px] py-36 px-8 md:px-8 lg:px-16 xl:px-20 2xl:px-48 grid grid-cols-12 container mx-auto gap-x-5 place-content-center">
-				<h1 className="lg:col-span-7 col-span-12 font-bold text-[42px] sm:leading-[80px] leading-[50px] lg:text-[70px] self-center tracking-[-2px] sm:tracking-[-2.5px] text-gradient-primary-tr">
-					Get your project guided by AI
+				<h1 className="lg:col-span-6 col-span-12 font-bold text-[42px] sm:leading-[80px] leading-[50px] lg:text-[70px] self-center tracking-[-2px] sm:tracking-[-2.5px] text-gradient-primary-tr">
+					Get your idea guided by AI
 				</h1>
 
-				<p className="lg:col-span-5 col-span-12 lg:mt-0 mt-5 self-center text-light-300 text-lg">
-					Project2Product provides a personalized guide to accelerate the growth and success of your project. Use these tools to take your project to
+				<p className="lg:col-start-8 lg:col-span-5 col-span-12 lg:mt-0 mt-5 self-center text-light-300 text-lg">
+					Idea2Business provides a personalized guide to accelerate the growth and success of your project. Use these tools to take your project to
 					the next level and that too in<span className="text-gradient-primary-tr font-bold"> under a minute</span>!
 				</p>
 

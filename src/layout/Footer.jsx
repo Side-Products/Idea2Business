@@ -4,6 +4,7 @@ import Link from "next/link";
 import logo from "../../public/site_logo.png";
 import { useSession } from "next-auth/react";
 import AuthModalContext from "@/store/authModal-context";
+import { twitter_url, linkedin_url } from "@/config/constants";
 
 const Footer = () => {
 	const { data: session } = useSession();
@@ -14,7 +15,7 @@ const Footer = () => {
 			<div className="footer bg-dark-900">
 				<div className="w-full flex justify-between items-center">
 					<Image src={logo} alt="P~P logo" width="60" className="rounded-md" />
-					<p className="font-primary sm:text-lg text-base font-medium text-gradient-primary-tr">Project~Product</p>
+					<p className="font-primary sm:text-lg text-base font-medium text-gradient-primary-tr">Idea~Business</p>
 				</div>
 
 				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-dark-600  w-full py-8 mt-5">
@@ -80,15 +81,10 @@ const Footer = () => {
 					<div className="space-y-2">
 						<p className="font-semibold text-lg text-center sm:text-left">Follow us on</p>
 						<div className="flex justify-center sm:justify-start gap-x-6">
-							<a href="https://twitter.com/musixverse" target="_blank" rel="noopener noreferrer" className="connect_link text-center relative">
+							<a href={twitter_url} target="_blank" rel="noopener noreferrer" className="connect_link text-center relative">
 								<i className="fab fa-twitter fa-lg"></i>
 							</a>
-							<a
-								href="https://www.linkedin.com/company/musixverse"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="connect_link text-center relative"
-							>
+							<a href={linkedin_url} target="_blank" rel="noopener noreferrer" className="connect_link text-center relative">
 								<i className="fab fa-linkedin fa-lg"></i>
 							</a>
 						</div>

@@ -1,17 +1,10 @@
-import cloudinary from "cloudinary";
 import crypto from "crypto";
 import User from "../models/user";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import absoluteUrl from "next-absolute-url";
 import sendEmail from "@/backend/utils/sendEmail";
-
-// Setting up cloudinary config
-// cloudinary.config({
-// 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-// 	api_key: process.env.CLOUDINARY_API_KEY,
-// 	api_secret: process.env.CLOUDINARY_API_SECRET,
-// });
+import { product_name } from "@/config/constants";
 
 // register user => /api/auth/register
 const registerUser = catchAsyncErrors(async (req, res) => {
@@ -23,20 +16,6 @@ const registerUser = catchAsyncErrors(async (req, res) => {
 		message: "Registered successfully",
 	});
 });
-
-// avatar upload => /api/auth/upload-avatar
-// const uploadAvatar = catchAsyncErrors(async (req, res) => {
-// 	const { name, email, password } = req.body;
-
-// 	const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-// 		folder: "project2product/avatars",
-// 	});
-
-// 	res.status(200).json({
-// 		success: true,
-// 		message: "Registered successfully",
-// 	});
-// });
 
 // current user profile => /api/me
 const currentUserProfile = catchAsyncErrors(async (req, res) => {
@@ -87,7 +66,7 @@ const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 	try {
 		await sendEmail({
 			email: user.email,
-			subject: "Project2Product Password Recovery",
+			subject: product_name + " Password Recovery",
 			message,
 		});
 		res.status(200).json({
