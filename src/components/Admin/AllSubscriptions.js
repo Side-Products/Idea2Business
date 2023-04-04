@@ -2,8 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { adminGetSubscriptions, adminDeleteSubscription, clearErrors } from "@/redux/actions/subscriptionActions";
 import { ADMIN_DELETE_SUBSCRIPTION_RESET } from "@/redux/constants/subscriptionConstants";
-import StatusContext from "@/store/status-context";
-import LoadingContext from "@/store/loading-context";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { LoadingContext } from "@/store/LoadingContextProvider";
 import Loader from "@/components/ui/Loader";
 import DeleteSubscriptionConfirmModal from "./Modals/DeleteSubscriptionConfirmModal";
 
@@ -15,8 +15,8 @@ export default function AllSubscriptions() {
 	const [isDeleteSubscriptionConfirmModalOpen, setDeleteSubscriptionConfirmModalOpen] = useState(false);
 	const [subscriptionToDelete, setSubscriptionToDelete] = useState("");
 
-	const [, , setSuccess, setError] = useContext(StatusContext);
-	const [, setLoading] = useContext(LoadingContext);
+	const { setSuccess, setError } = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
 
 	useEffect(() => {
 		if (error) {

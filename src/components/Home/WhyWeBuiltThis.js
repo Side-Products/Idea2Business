@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import AuthModalContext from "@/store/authModal-context";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import Button from "@/components/ui/Button";
 
 export default function WhyWeBuiltThis() {
 	const router = useRouter();
 	const { data: session, status } = useSession();
 
-	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const { setAuthModalOpen } = useContext(AuthModalContext);
 
 	return (
 		<div className="w-full flex flex-col items-center bg-dark-1000">

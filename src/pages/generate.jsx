@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { title_main_page, meta_description } from "@/config/constants";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import ContentModal from "@/components/Generate/ContentModal";
 import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
 import SectionHeading from "@/components/Generate/SectionHeading";
@@ -35,7 +35,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
 });
 
 const Generate = () => {
-	const [, , , setError] = useContext(StatusContext);
+	const { setError } = useContext(StatusContext);
 
 	// Input states
 	const [projectInfo, setProjectInfo] = useState({ projectName: "", projectDescription: "" });

@@ -1,17 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors } from "@/redux/actions/userActions";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import NoDataTableRow from "@/components/ui/Table/NoDataTableRow";
-import { getTimestamp } from "@/utils/Helpers";
+import { getTimestamp } from "@/utils/helpers";
 import DeleteFeatureRequestModal from "./Modals/DeleteFeatureRequestModal";
 
 export default function AllFeatureRequests() {
 	const dispatch = useDispatch();
 	const { featureRequests, error, loading } = useSelector((state) => state.adminGetFeatureRequests);
 
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const [activeTable, setActiveTable] = useState("allFeatureRequestsTable");
 	const [isDeleteFeatureRequestModalOpen, setDeleteFeatureRequestModalOpen] = useState(false);

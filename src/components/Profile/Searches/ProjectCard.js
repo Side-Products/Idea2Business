@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import StatusContext from "@/store/status-context";
-import { getTimestamp } from "@/utils/Helpers";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { getTimestamp } from "@/utils/helpers";
 
 const ProjectCard = ({ project, adminView }) => {
 	const router = useRouter();
-	const [, , setSuccess] = useContext(StatusContext);
+	const { setSuccess } = useContext(StatusContext);
 
 	const copyToClipboard = async (event) => {
 		const reqStr = event.target.parentNode.querySelector("span").dataset.info;

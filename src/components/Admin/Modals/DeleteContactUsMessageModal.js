@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { adminDeleteContactUsMessage, clearErrors } from "@/redux/actions/contactUsActions";
 import { ADMIN_DELETE_CONTACT_US_MESSAGE_RESET } from "@/redux/constants/contactUsConstants";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
-import { sleep } from "@/utils/Sleep";
+import { sleep } from "@/utils/sleep";
 
 const DeleteContactUsMessageModal = ({ isOpen, setOpen, messageToDelete }) => {
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const dispatch = useDispatch();
 	const router = useRouter();

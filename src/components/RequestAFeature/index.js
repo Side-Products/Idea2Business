@@ -1,15 +1,15 @@
 import { useEffect, useRef, useContext } from "react";
-import StatusContext from "@/store/status-context";
-import LoadingContext from "@/store/loading-context";
-import { isEmailValid } from "@/utils/Validate";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { LoadingContext } from "@/store/LoadingContextProvider";
+import { isEmailValid } from "@/utils/validate";
 import { contact_email } from "@/config/constants";
 import Button from "@/components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { newFeatureRequest, clearErrors } from "@/redux/actions/featureRequestActions";
 
 export default function FeatureRequest() {
-	const [, , setSuccess, setError] = useContext(StatusContext);
-	const [, setLoading] = useContext(LoadingContext);
+	const { setSuccess, setError } = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
 
 	const nameRef = useRef("");
 	const emailRef = useRef("");

@@ -1,15 +1,15 @@
 import { useEffect, useRef, useContext } from "react";
-import StatusContext from "@/store/status-context";
-import LoadingContext from "@/store/loading-context";
-import { isEmailValid } from "@/utils/Validate";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { LoadingContext } from "@/store/LoadingContextProvider";
+import { isEmailValid } from "@/utils/validate";
 import { contact_email } from "@/config/constants";
 import Button from "@/components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { newContactUsMessage, clearErrors } from "@/redux/actions/contactUsActions";
 
 export default function ContactUs() {
-	const [, , setSuccess, setError] = useContext(StatusContext);
-	const [, setLoading] = useContext(LoadingContext);
+	const { setSuccess, setError } = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
 
 	const nameRef = useRef("");
 	const emailRef = useRef("");

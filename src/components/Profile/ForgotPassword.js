@@ -1,11 +1,11 @@
 import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword, clearErrors } from "@/redux/actions/userActions";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
 
 const ForgotPassword = ({ email, onFieldChange }) => {
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const dispatch = useDispatch();
 	const { error, loading, message } = useSelector((state) => state.forgotPassword);

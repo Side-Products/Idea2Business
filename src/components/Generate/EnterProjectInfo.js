@@ -1,18 +1,18 @@
 import { useContext, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import AuthModalContext from "@/store/authModal-context";
-import StatusContext from "@/store/status-context";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
-import { sleep } from "@/utils/Sleep";
+import { sleep } from "@/utils/sleep";
 import { newProjectSearch, clearErrors } from "@/redux/actions/projectActions";
 
 const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnterProjectInfo, setCardsAvailable, setIsGenerating }) => {
 	const { projectName, projectDescription } = projectInfo;
 
 	const { data: session, status } = useSession();
-	const [, setAuthModalOpen] = useContext(AuthModalContext);
-	const [, , , setError] = useContext(StatusContext);
+	const { setAuthModalOpen } = useContext(AuthModalContext);
+	const { setError } = useContext(StatusContext);
 
 	const dispatch = useDispatch();
 	const submitHandler = () => {

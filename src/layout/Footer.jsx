@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
 import { useSession } from "next-auth/react";
-import AuthModalContext from "@/store/authModal-context";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { twitter_url, linkedin_url } from "@/config/constants";
 
 const Footer = () => {
 	const { data: session } = useSession();
-	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const { setAuthModalOpen } = useContext(AuthModalContext);
 
 	return (
 		<div className="flex justify-center w-full">

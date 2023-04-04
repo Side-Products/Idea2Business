@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import AuthModalContext from "@/store/authModal-context";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import logo from "../../public/logo.png";
 import { useSession, signOut } from "next-auth/react";
 import { twitter_url, linkedin_url } from "@/config/constants";
 
 export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 	const { status } = useSession();
-	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const { setAuthModalOpen } = useContext(AuthModalContext);
 	const router = useRouter();
 
 	const closeNavbar = () => {

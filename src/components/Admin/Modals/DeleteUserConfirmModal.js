@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { adminDeleteUser, clearErrors } from "@/redux/actions/userActions";
 import { ADMIN_DELETE_USER_RESET } from "@/redux/constants/userConstants";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
-import { sleep } from "@/utils/Sleep";
+import { sleep } from "@/utils/sleep";
 
 const DeleteUserConfirmModal = ({ isOpen, setOpen, userToDelete }) => {
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const dispatch = useDispatch();
 	const router = useRouter();

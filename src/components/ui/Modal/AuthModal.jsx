@@ -6,16 +6,16 @@ import { signIn, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, clearErrors } from "@/redux/actions/userActions";
 import logo from "/public/logo.png";
-import LoadingContext from "@/store/loading-context";
-import StatusContext from "@/store/status-context";
+import { LoadingContext } from "@/store/LoadingContextProvider";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
 import ForgotPassword from "@/components/Profile/ForgotPassword";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
 
-	const [, setLoading] = useContext(LoadingContext);
-	const [, , , setError] = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
+	const { setError } = useContext(StatusContext);
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 
 	const [authState, setAuthState] = useState("signup");

@@ -2,14 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
 import pptxgen from "pptxgenjs";
 import redBG from "../../../../public/themes/redbg";
-import LoadingContext from "@/store/loading-context";
+import { LoadingContext } from "@/store/LoadingContextProvider";
 import SectionHeading from "../SectionHeading";
 import Button from "@/components/ui/Button";
 import { useSession } from "next-auth/react";
 
 export default function Decks({ isGenerating, setIsGenerating, promptEnterProjectInfo, projectInfo, cardsAvailable, setSubscriptionRequiredModalOpen }) {
 	const { projectName, projectDescription } = projectInfo;
-	const [, setLoading] = useContext(LoadingContext);
+	const { setLoading } = useContext(LoadingContext);
 
 	const callGenerateEndpoint = async () => {
 		if (projectName.length > 0 && projectDescription.length > 0) {

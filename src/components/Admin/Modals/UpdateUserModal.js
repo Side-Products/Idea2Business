@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { adminUpdateUserDetails, clearErrors } from "@/redux/actions/userActions";
 import { ADMIN_UPDATE_USER_DETAILS_RESET } from "@/redux/constants/userConstants";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import Button from "@/components/ui/Button";
-import { sleep } from "@/utils/Sleep";
+import { sleep } from "@/utils/sleep";
 
 const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 	const [name, setName] = useState("");
@@ -15,7 +15,7 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 	const [role, setRole] = useState("");
 	const [credits, setCredits] = useState("");
 
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const dispatch = useDispatch();
 	const router = useRouter();

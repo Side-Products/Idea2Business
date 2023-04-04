@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import LoadingContext from "@/store/loading-context";
+import { LoadingContext } from "@/store/LoadingContextProvider";
 import PromptCard from "../PromptCard";
 import SectionHeading from "../SectionHeading";
 import SectionGrid from "../SectionGrid";
@@ -17,7 +17,7 @@ export default function Pitches({
 	sectionStyle,
 }) {
 	const { projectName, projectDescription } = projectInfo;
-	const [, setLoading] = useContext(LoadingContext);
+	const { setLoading } = useContext(LoadingContext);
 
 	const callGenerateVCPitchEndpoint = async (cardText) => {
 		setLoading({

@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { adminDeleteFeatureRequest, clearErrors } from "@/redux/actions/featureRequestActions";
 import { ADMIN_DELETE_FEATURE_REQUEST_RESET } from "@/redux/constants/featureRequestConstants";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
-import { sleep } from "@/utils/Sleep";
+import { sleep } from "@/utils/sleep";
 
 const DeleteFeatureRequestModal = ({ isOpen, setOpen, featureRequestToDelete }) => {
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const dispatch = useDispatch();
 	const router = useRouter();

@@ -2,15 +2,15 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, clearErrors } from "@/redux/actions/userActions";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
-import { sleep } from "@/utils/Sleep";
+import { sleep } from "@/utils/sleep";
 
 const NewPassword = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 	const router = useRouter();
 
 	const dispatch = useDispatch();

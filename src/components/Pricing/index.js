@@ -4,16 +4,16 @@ import { useRouter } from "next/router";
 import Tick from "./Tick";
 import Button from "@/components/ui/Button";
 import getStripe from "@/utils/getStripe";
-import LoadingContext from "@/store/loading-context";
-import StatusContext from "@/store/status-context";
-import AuthModalContext from "@/store/authModal-context";
+import { LoadingContext } from "@/store/LoadingContextProvider";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { pitches, understandingPotentialUsers, socialMediaStrategy, adviceFromBooks, investorMeetingPrep, bonusContent, decks } from "@/config/constants";
 
 const Pricing = () => {
-	const [, setLoading] = useContext(LoadingContext);
-	const [, , , setError] = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
+	const { setError } = useContext(StatusContext);
 	const router = useRouter();
 
 	const { subscription } = useSelector((state) => state.subscription);
@@ -26,7 +26,7 @@ const Pricing = () => {
 			: "Free";
 
 	const { data: session, status } = useSession();
-	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const { setAuthModalOpen } = useContext(AuthModalContext);
 	const buySubscription = async (_planChosen) => {
 		if (status === "authenticated" && session && session.user) {
 			setLoading({ status: true });

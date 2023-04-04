@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import AuthModalContext from "@/store/authModal-context";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import Button from "@/components/ui/Button";
 import ParallaxTextSection from "./ParallaxTextSection";
 
 export default function HeroSection() {
 	const router = useRouter();
 	const { data: session, status } = useSession();
-	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const { setAuthModalOpen } = useContext(AuthModalContext);
 
 	return (
 		<div className="flex flex-col justify-center items-center bg-dark-1000 min-h-screen pt-44 pb-32">

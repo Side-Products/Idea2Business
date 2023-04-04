@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { updateUserProfile, clearErrors } from "@/redux/actions/userActions";
 import { UPDATE_PROFILE_RESET } from "@/redux/constants/userConstants";
-import StatusContext from "@/store/status-context";
-import LoadingContext from "@/store/loading-context";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { LoadingContext } from "@/store/LoadingContextProvider";
 import UpdateUserProfileModal from "./UpdateUserProfileModal";
 import MySubscription from "./MySubscription";
 
 export default function UserDetails({ projectsCount }) {
 	const { data: session } = useSession();
-	const [, , , setError] = useContext(StatusContext);
-	const [, setLoading] = useContext(LoadingContext);
+	const { setError } = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
 	const avatarUrl = session && session.user && session.user.image;
 
 	const dispatch = useDispatch();

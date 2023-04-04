@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Button from "@/components/ui/Button";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 
 export default function PromptCard({
 	cardsAvailable,
@@ -22,7 +23,7 @@ export default function PromptCard({
 			? "Standard"
 			: "Free";
 
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 	const [canAccess, setCanAccess] = useState(false);
 	useEffect(() => {
 		if (session && session.user && (session.user.role == "admin" || session.user.role == "allAccess")) {
@@ -38,18 +39,23 @@ export default function PromptCard({
 		}
 	}, [subscriptionPlan, subscription, session]);
 
+	const { setAuthModalOpen } = useContext(AuthModalContext);
 	const formSubmit = () => {
-		if (!cardsAvailable) {
-			promptEnterProjectInfo();
-			return;
-		}
-		if (cardsAvailable && !canAccess) {
-			setSubscriptionRequiredModalOpen(true);
-			return;
-		}
-		if (cardsAvailable && canAccess) {
-			handleCardClick(cardText);
-			return;
+		if (status === "authenticated" && session && session.user) {
+			if (!cardsAvailable) {
+				promptEnterProjectInfo();
+				return;
+			}
+			if (cardsAvailable && !canAccess) {
+				setSubscriptionRequiredModalOpen(true);
+				return;
+			}
+			if (cardsAvailable && canAccess) {
+				handleCardClick(cardText);
+				return;
+			}
+		} else {
+			setAuthModalOpen(true);
 		}
 	};
 

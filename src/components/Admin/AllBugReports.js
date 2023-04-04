@@ -1,17 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors } from "@/redux/actions/userActions";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import NoDataTableRow from "@/components/ui/Table/NoDataTableRow";
-import { getTimestamp } from "@/utils/Helpers";
+import { getTimestamp } from "@/utils/helpers";
 import DeleteBugReportModal from "./Modals/DeleteBugReportModal";
 
 export default function AllBugReports() {
 	const dispatch = useDispatch();
 	const { bugReports, error, loading } = useSelector((state) => state.adminGetBugReports);
 
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const [activeTable, setActiveTable] = useState("allBugReportsTable");
 	const [isDeleteBugReportModalOpen, setDeleteBugReportModalOpen] = useState(false);

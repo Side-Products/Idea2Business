@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import LoadingContext from "@/store/loading-context";
-import AuthModalContext from "@/store/authModal-context";
+import { LoadingContext } from "@/store/LoadingContextProvider";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ErrorBox from "@/components/ui/Toast/ErrorBox";
@@ -10,8 +10,8 @@ import Loading from "@/components/ui/Loading";
 import AuthModal from "@/components/ui/Modal/AuthModal";
 
 const Layout = ({ children }) => {
-	const [isLoading, setLoading] = useContext(LoadingContext);
-	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
+	const { setLoading } = useContext(LoadingContext);
+	const { authModalOpen, setAuthModalOpen } = useContext(AuthModalContext);
 
 	const router = useRouter();
 
@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
 			<Navbar setAuthModalOpen={setAuthModalOpen} />
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			{children}
-			{isLoading.status && <Loading />}
+			<Loading />
 			<ErrorBox />
 			<SuccessBox />
 			{router.pathname !== "/404" && <Footer />}
