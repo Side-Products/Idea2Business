@@ -12,7 +12,7 @@ const Footer = () => {
 
 	return (
 		<div className="flex justify-center w-full">
-			<div className="footer bg-dark-900">
+			<div className="w-full max-w-[1920px] pt-12 pb-12 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-dark-900">
 				<div className="w-full flex justify-between items-center">
 					<Image src={logo} alt="P~P logo" width="60" className="rounded-md" />
 					<p className="font-primary sm:text-lg text-base font-medium text-gradient-primary-tr">Idea~Business</p>

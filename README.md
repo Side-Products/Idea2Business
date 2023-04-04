@@ -1,6 +1,13 @@
 # Idea2Business
-https://idea2business.xyz
-https://idea2business.vercel.app
+
+<img src="./public/product_image_1.png" alt="Product Image" />
+
+<br />
+
+Production: https://idea2business.xyz
+
+Latest Dev Updates: https://idea2business.vercel.app
+
 
 ## Start MongoDB locally
 
