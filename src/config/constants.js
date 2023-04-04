@@ -14,7 +14,7 @@ export const linkedin_url = "https://www.linkedin.com/company/idea-2-business";
 /**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/
 /**************************************************************************/
-export const title_main_page = "Idea2Business";
+export const title_main_page = "Idea to Business";
 export const meta_description =
 	"Transform your idea into a profitable business. Just enter your idea, and Idea2Business will help you turn it into a successful venture.";
 export const reportabug_meta_description =
