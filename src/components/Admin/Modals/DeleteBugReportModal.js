@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { adminDeleteBugReport, clearErrors } from "@/redux/actions/bugReportActions";
 import { ADMIN_DELETE_BUG_REPORT_RESET } from "@/redux/constants/bugReportConstants";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import { sleep } from "@/utils/Sleep";
 
 const DeleteBugReportModal = ({ isOpen, setOpen, bugReportToDelete }) => {
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const dispatch = useDispatch();
 	const router = useRouter();

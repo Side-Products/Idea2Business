@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors } from "@/redux/actions/userActions";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import NoDataTableRow from "@/components/ui/Table/NoDataTableRow";
 import { getTimestamp } from "@/utils/Helpers";
@@ -12,7 +12,7 @@ export default function AllUsers() {
 	const dispatch = useDispatch();
 	const { users, admins, allAccessUsers, error, loading } = useSelector((state) => state.allUsers);
 
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 
 	const [activeTable, setActiveTable] = useState("allUsersTable");
 	const [isUpdateUserModalOpen, setUpdateUserModalOpen] = useState(false);

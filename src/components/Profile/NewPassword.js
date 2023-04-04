@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, clearErrors } from "@/redux/actions/userActions";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
 import { sleep } from "@/utils/Sleep";
 
@@ -10,7 +10,7 @@ const NewPassword = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { setSuccess, setError } = useContext(StatusContext);
 	const router = useRouter();
 
 	const dispatch = useDispatch();
@@ -53,7 +53,8 @@ const NewPassword = () => {
 					submitHandler();
 				}}
 			>
-				<div className="flex flex-col mt-2">
+				<p className="text-light-400 text-center">Please enter your new password</p>
+				<div className="flex flex-col mt-8">
 					<label htmlFor="password_field" className="text-sm text-light-500">
 						Password
 					</label>
@@ -68,7 +69,7 @@ const NewPassword = () => {
 					/>
 				</div>
 
-				<div className="flex flex-col mt-2">
+				<div className="flex flex-col mt-4">
 					<label htmlFor="password_field" className="text-sm text-light-500">
 						Confirm Password
 					</label>

@@ -1,19 +1,12 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
-import { title_main_page, meta_description } from "@/config/constants";
+import PageLayout from "@/layout/PageLayout";
 
-const ErrorPage = ({}) => {
+const ErrorPage = () => {
 	const router = useRouter();
 
 	return (
-		<>
-			<Head>
-				<title>{title_main_page}</title>
-				<meta name="description" content={meta_description} />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
-			<div className="w-full flex flex-col items-center justify-center bg-dark-800">
+		<PageLayout useDefaultContainer={false}>
+			<div className="w-full flex flex-col items-center justify-center bg-dark-1000">
 				<div id="error-404" className="w-full max-w-[1920px]">
 					<div className="noise"></div>
 					<div className="overlay"></div>
@@ -37,7 +30,7 @@ const ErrorPage = ({}) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</PageLayout>
 	);
 };
 

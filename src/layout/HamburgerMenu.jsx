@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import Link from "next/link";
-import AuthModalContext from "@/store/authModal-context";
-import logoBlack from "../../public/site_logo.png";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "../../public/logo_removedbg.png";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { twitter_url, linkedin_url } from "@/config/constants";
 
 export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 	const { status } = useSession();
-	const [, setAuthModalOpen] = useContext(AuthModalContext);
+	const { setAuthModalOpen } = useContext(AuthModalContext);
 	const router = useRouter();
 
 	const closeNavbar = () => {
@@ -31,7 +31,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 								<div className="md:mx-1/6 md:w-1/5 px-4 offset-0 w-full flex justify-center sm:block logo_div_anim">
 									<Link href={"/"} passHref={true}>
 										<span href="#" onClick={closeNavbar} className="flex">
-											<Image src={logoBlack} alt="MXV Logo" width="60" className="rounded-md" />
+											<Image src={logo} alt="logo" width="60" className="rounded-full" />
 										</span>
 									</Link>
 								</div>
@@ -44,13 +44,13 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														router.push("/profile");
 														closeNavbar();
 													}}
-													className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200"
+													className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200 cursor-pointer"
 												>
 													<span className="mr-4">{truncatedName}</span>
 													{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
 												</div>
 												<button
-													className="w-full mt-2 px-4 py-2 font-medium transition-all cursor-pointer rounded-full bg-error-600/30"
+													className="w-full mt-2 px-4 py-2 font-medium transition-all cursor-pointer rounded-full bg-error-600/30 hover:bg-error-600/50 duration-300"
 													onClick={() => signOut()}
 												>
 													Sign out
@@ -121,6 +121,25 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														</span>
 													)}
 												</div>
+												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+													{status === "authenticated" ? (
+														<Link href={`/profile`} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+															<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+																Past Searches
+															</span>
+														</Link>
+													) : (
+														<span
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															onClick={() => {
+																closeNavbar();
+																setAuthModalOpen(true);
+															}}
+														>
+															Past Searches
+														</span>
+													)}
+												</div>
 											</div>
 
 											<div className="md:w-1/4 px-1 w-1/2 mt-4 md:mt-0 text-center">
@@ -182,7 +201,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 							<div className="flex flex-wrap justify-center mb-5 harmburger_menu_connect">
 								<div className="ham_menu_connect_links_md px-4 offset-0 w-full md:mt-0 mt-5">
 									<div className="flex flex-wrap justify-center">
-										<div className="ham_menu_heading ham_menu_connect_heading text-center">Connect with us</div>
+										<div className="ham_menu_heading ham_menu_connect_heading text-center">See what's new on</div>
 									</div>
 									<div className="grid grid-cols-2 gap-0 px-10 sm:flex sm:flex-wrap sm:justify-center mt-5">
 										<a

@@ -1,9 +1,9 @@
 import { Fragment, useContext, useEffect } from "react";
 import { Transition } from "@headlessui/react";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 
 const ErrorBox = () => {
-	const [error, , , setError] = useContext(StatusContext);
+	const { error, setError } = useContext(StatusContext);
 
 	const handleClose = () => {
 		setError((prevState) => ({

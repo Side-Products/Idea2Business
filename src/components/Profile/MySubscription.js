@@ -4,16 +4,16 @@ import { useRouter } from "next/router";
 import { clearErrors } from "@/redux/actions/subscriptionActions";
 import Button from "@/components/ui/Button";
 import easyinvoice from "easyinvoice";
-import StatusContext from "@/store/status-context";
-import LoadingContext from "@/store/loading-context";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { LoadingContext } from "@/store/LoadingContextProvider";
 import { product_name } from "@/config/constants";
 
 export default function MySubscription() {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const { subscription, error } = useSelector((state) => state.subscription);
-	const [, , , setError] = useContext(StatusContext);
-	const [, setLoading] = useContext(LoadingContext);
+	const { setError } = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
 
 	useEffect(() => {
 		if (error) {

@@ -1,9 +1,9 @@
 import { useState, useRef, useContext } from "react";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 
 export default function Pager(props) {
 	const [currPage, setCurrPage] = useState(1);
-	const [, , , setError] = useContext(StatusContext);
+	const { setError } = useContext(StatusContext);
 
 	const inputRef = useRef(1);
 

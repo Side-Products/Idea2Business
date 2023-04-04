@@ -1,7 +1,7 @@
 import { useEffect, useRef, useContext } from "react";
 import Link from "next/link";
-import StatusContext from "@/store/status-context";
-import LoadingContext from "@/store/loading-context";
+import { StatusContext } from "@/store/StatusContextProvider";
+import { LoadingContext } from "@/store/LoadingContextProvider";
 import { isEmailValid } from "@/utils/Validate";
 import { product_name, contact_email } from "@/config/constants";
 import Button from "@/components/ui/Button";
@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { newBugReport, clearErrors } from "@/redux/actions/bugReportActions";
 
 export default function ReportABug() {
-	const [, , setSuccess, setError] = useContext(StatusContext);
-	const [, setLoading] = useContext(LoadingContext);
+	const { setSuccess, setError } = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
 
 	const nameRef = useRef("");
 	const emailRef = useRef("");
@@ -148,9 +148,9 @@ export default function ReportABug() {
 						</ul>
 						One or more of those may seem stupid or self-explanatory to you, but it&apos;s{" "}
 						<span className="text-gradient-primary-tr">extremely helpful</span> to us if you take the time to write it all out.{" "}
-						<span className="text-gradient-primary-tr">Please don&apos;t assume we know everything! </span> Perhaps you learned how to do something
-						in another application, and we have a totally different way to accomplish the same thing. Simply saying that something “doesn&apos;t
-						work” isn&apos;t very helpful; explain it to us as simply and clearly as possible.
+						<span className="text-gradient-primary-tr">Please don&apos;t assume we know anything! </span> Perhaps you learned how to do something in
+						another application, and we have a totally different way to accomplish the same thing. Simply saying that something “doesn&apos;t work”
+						isn&apos;t very helpful; explain it to us as simply and clearly as possible.
 						<br />
 						<br />
 						Any supporting information you can think of adding will be appreciated.

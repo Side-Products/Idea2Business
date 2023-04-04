@@ -1,4 +1,4 @@
-function getUTCTimestamp(blockTimestamp) {
+const getUTCTimestamp = (blockTimestamp) => {
 	const pad = (n, s = 2) => `${new Array(s).fill(0)}${n}`.slice(-s);
 	const d = new Date(blockTimestamp);
 
@@ -6,12 +6,10 @@ function getUTCTimestamp(blockTimestamp) {
 		d.getMilliseconds(),
 		3
 	)}`;
-}
-function getTimestamp(blockTimestamp) {
+};
+export const getTimestamp = (blockTimestamp) => {
 	var date = new Date(blockTimestamp);
 	var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
 
 	return getUTCTimestamp(new Date(now_utc).toUTCString().toString().slice(0, 25));
-}
-
-module.exports = { getTimestamp };
+};

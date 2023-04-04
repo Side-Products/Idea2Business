@@ -4,12 +4,9 @@ module.exports = {
 	content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
-			backgroundImage: {
-				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-			},
 			animation: {
 				text: "text 5s ease infinite",
-				bg: "text 3s ease infinite",
+				bg: "text 4s ease infinite",
 			},
 			keyframes: {
 				text: {
@@ -134,7 +131,6 @@ module.exports = {
 			},
 			fontFamily: {
 				primary: ["Inter", "sans-serif"],
-				// primary: ["Cal Sans", "sans-serif"],
 				secondary: ["Poppins", "sans-serif"],
 				tertiary: ["Roboto", "sans-serif"],
 				plaster: ["Plaster", "sans-serif"],

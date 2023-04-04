@@ -1,14 +1,14 @@
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import StatusContext from "@/store/status-context";
+import { StatusContext } from "@/store/StatusContextProvider";
 import { clearErrors } from "@/redux/actions/projectActions";
 import Pager from "./Pager";
 import ProjectCard from "./ProjectCard";
 import Search from "./Search";
 
 export const Projects = ({ projects, resultsPerPage, projectsCount, filteredProjectsCount, error, adminView }) => {
-	const [, , , setError] = useContext(StatusContext);
+	const { setError } = useContext(StatusContext);
 
 	const router = useRouter();
 	let { search, page = 1 } = router.query;

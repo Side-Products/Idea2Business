@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import logo from "../../public/site_logo.png";
-import HamburgerMenu from "./HamburgerMenu";
 import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
+import logo from "../../public/logo_removedbg.png";
+import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = ({ setAuthModalOpen }) => {
 	const { data: session, status } = useSession();
@@ -24,12 +24,12 @@ const Navbar = ({ setAuthModalOpen }) => {
 		truncatedEmail = session.user.email.substring(0, 16) + "...";
 	}
 
+	// Navbar scroll effect
 	const [clientWindowHeight, setClientWindowHeight] = useState("");
 	var customStyles = "lg:top-0 lg:rounded-b-[50px]";
 	const handleScroll = () => {
 		setClientWindowHeight(window.scrollY);
 	};
-
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
@@ -40,12 +40,12 @@ const Navbar = ({ setAuthModalOpen }) => {
 
 	const router = useRouter();
 
-	const [showCreditsStrip, setShowCreditsStrip] = useState(true);
+	const [showStrip, setShowStrip] = useState(true);
 
 	return (
 		<div className="absolute flex justify-center w-screen">
 			<div className="w-full fixed z-40 max-w-[1920px]">
-				{showCreditsStrip && session && session.user && session.user.credits > 0 && (
+				{showStrip && session && session.user && session.user.credits > 0 && (
 					<div
 						onClick={() => router.push("/generate")}
 						className="p-1 w-full flex items-center justify-center cursor-pointer text-center text-sm text-light-400 bg-gradient-tertiary-r"
@@ -53,7 +53,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 						You have {session && session.user && session.user.credits} free{" "}
 						{session && session.user && (session.user.credits == 1 ? "credit" : "credits")}. Use{" "}
 						{session && session.user && (session.user.credits == 1 ? "it" : "them")} now!
-						<span className="absolute right-4 cursor-pointer" onClick={() => setShowCreditsStrip(false)}>
+						<span className="absolute right-4 cursor-pointer" onClick={() => setShowStrip(false)}>
 							<i className="fa-solid fa-xmark text-sm"></i>
 						</span>
 					</div>
@@ -107,7 +107,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 														{avatarUrl ? (
 															<Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" />
 														) : (
-															<Image src={"/avatar.jpg"} alt="avatar" width="24" height="24" className="rounded-full" />
+															<Image src={"/default_avatar.jpg"} alt="avatar" width="24" height="24" className="rounded-full" />
 														)}
 													</div>
 												) : (
@@ -137,7 +137,13 @@ const Navbar = ({ setAuthModalOpen }) => {
 																	{avatarUrl ? (
 																		<Image src={avatarUrl} alt={"avatar"} width={40} height={40} className="rounded-lg" />
 																	) : (
-																		<Image src={"/avatar.jpg"} alt="avatar" width="40" height="40" className="rounded-lg" />
+																		<Image
+																			src={"/default_avatar.jpg"}
+																			alt="avatar"
+																			width="40"
+																			height="40"
+																			className="rounded-lg"
+																		/>
 																	)}
 																</div>
 															</div>

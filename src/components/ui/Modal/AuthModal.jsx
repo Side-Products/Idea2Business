@@ -5,17 +5,17 @@ import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, clearErrors } from "@/redux/actions/userActions";
-import logoBlack from "/public/site_logo.png";
-import LoadingContext from "@/store/loading-context";
-import StatusContext from "@/store/status-context";
+import logo from "/public/logo.png";
+import { LoadingContext } from "@/store/LoadingContextProvider";
+import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
 import ForgotPassword from "@/components/Profile/ForgotPassword";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
 
-	const [, setLoading] = useContext(LoadingContext);
-	const [, , , setError] = useContext(StatusContext);
+	const { setLoading } = useContext(LoadingContext);
+	const { setError } = useContext(StatusContext);
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 
 	const [authState, setAuthState] = useState("signup");
@@ -158,7 +158,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											</button>
 										</div>
 									)}
-									<Image src={logoBlack} alt="MXV Logo" width="60" height="60" className="rounded-md" />
+									<Image src={logo} alt="MXV Logo" width="60" height="60" className="rounded-md" />
 								</div>
 								<div
 									onClick={() => closeModal()}
