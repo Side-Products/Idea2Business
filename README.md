@@ -15,10 +15,6 @@ Latest Dev Updates: https://idea2business.vercel.app
 
 On MacOS: `brew services start mongodb-community`
 
-# Musixverse Client
-
-## Using Next.js
-
 ### Environment Variables
 
 ```
