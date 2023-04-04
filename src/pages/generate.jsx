@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
-import Head from "next/head";
+import PageLayout from "@/layout/PageLayout";
 import { useRouter } from "next/router";
-import { title_main_page, meta_description } from "@/config/constants";
 import { StatusContext } from "@/store/StatusContextProvider";
 import ContentModal from "@/components/Generate/ContentModal";
 import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
@@ -79,12 +78,7 @@ const Generate = () => {
 	}, [cardsAvailable]);
 
 	return (
-		<>
-			<Head>
-				<title>{title_main_page}</title>
-				<meta name="description" content={meta_description} />
-			</Head>
-
+		<PageLayout useDefaultContainer={false}>
 			<div className="w-full flex flex-col items-center bg-dark-1000 h-screen" id="projectInfo">
 				<div className="w-full max-w-[1920px] py-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<EnterProjectInfo
@@ -187,7 +181,7 @@ const Generate = () => {
 
 			<ContentModal isOpen={isContentModalOpen} setOpen={setContentModalOpen} heading={modalText.heading} content={modalText.content} />
 			<SubscriptionRequiredModal isOpen={isSubscriptionRequiredModalOpen} setOpen={setSubscriptionRequiredModalOpen} />
-		</>
+		</PageLayout>
 	);
 };
 

@@ -131,7 +131,6 @@ module.exports = {
 			},
 			fontFamily: {
 				primary: ["Inter", "sans-serif"],
-				// primary: ["Cal Sans", "sans-serif"],
 				secondary: ["Poppins", "sans-serif"],
 				tertiary: ["Roboto", "sans-serif"],
 				plaster: ["Plaster", "sans-serif"],

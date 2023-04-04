@@ -148,9 +148,9 @@ export default function ReportABug() {
 						</ul>
 						One or more of those may seem stupid or self-explanatory to you, but it&apos;s{" "}
 						<span className="text-gradient-primary-tr">extremely helpful</span> to us if you take the time to write it all out.{" "}
-						<span className="text-gradient-primary-tr">Please don&apos;t assume we know everything! </span> Perhaps you learned how to do something
-						in another application, and we have a totally different way to accomplish the same thing. Simply saying that something “doesn&apos;t
-						work” isn&apos;t very helpful; explain it to us as simply and clearly as possible.
+						<span className="text-gradient-primary-tr">Please don&apos;t assume we know anything! </span> Perhaps you learned how to do something in
+						another application, and we have a totally different way to accomplish the same thing. Simply saying that something “doesn&apos;t work”
+						isn&apos;t very helpful; explain it to us as simply and clearly as possible.
 						<br />
 						<br />
 						Any supporting information you can think of adding will be appreciated.

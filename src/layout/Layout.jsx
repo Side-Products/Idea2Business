@@ -1,9 +1,9 @@
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { LoadingContext } from "@/store/LoadingContextProvider";
-import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { LoadingContext } from "@/store/LoadingContextProvider";
+import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import ErrorBox from "@/components/ui/Toast/ErrorBox";
 import SuccessBox from "@/components/ui/Toast/SuccessBox";
 import Loading from "@/components/ui/Loading";

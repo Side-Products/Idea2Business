@@ -53,7 +53,8 @@ const NewPassword = () => {
 					submitHandler();
 				}}
 			>
-				<div className="flex flex-col mt-2">
+				<p className="text-light-400 text-center">Please enter your new password</p>
+				<div className="flex flex-col mt-8">
 					<label htmlFor="password_field" className="text-sm text-light-500">
 						Password
 					</label>
@@ -68,7 +69,7 @@ const NewPassword = () => {
 					/>
 				</div>
 
-				<div className="flex flex-col mt-2">
+				<div className="flex flex-col mt-4">
 					<label htmlFor="password_field" className="text-sm text-light-500">
 						Confirm Password
 					</label>

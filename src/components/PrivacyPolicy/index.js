@@ -8,24 +8,24 @@ export default function PrivacyPolicy() {
 				<div className="text-primary-400 text-sm pt-1">(Effective as of Mar 31, 2023)</div>
 
 				<div className="mt-5 font-secondary text-[1em] tracking-[0.5px]">
-					Protecting your private information is our priority. This Statement of Privacy applies to&nbsp;
+					Protecting your private information is our priority. This Statement of Privacy applies to{" "}
 					<Link href={"/"} className="text-gradient-primary-tr">
 						{product_name}
-					</Link>
-					&nbsp;(“{company_name}”) and{" "}
+					</Link>{" "}
+					(“{company_name}”) and{" "}
 					<Link href={"/"} className="text-gradient-primary-tr">
 						{product_website}
-					</Link>
-					&nbsp;and governs data collection and usage. For the purposes of this Privacy Policy, unless otherwise noted, all references to{" "}
-					{product_name} include&nbsp;
+					</Link>{" "}
+					and governs data collection and usage. For the purposes of this Privacy Policy, unless otherwise noted, all references to {product_name}{" "}
+					include{" "}
 					<Link href={"/"} className="text-gradient-primary-tr">
 						{product_website}
-					</Link>
-					&nbsp;and {product_name}. For the purposes of this policy,&nbsp;
+					</Link>{" "}
+					and {product_name}. For the purposes of this policy,{" "}
 					<Link href={"/"} className="text-gradient-primary-tr">
 						{product_website}
-					</Link>
-					&nbsp; will hereinafter be referred to as (“Site”). By using the Site, you consent to the data practices described in this statement.
+					</Link>{" "}
+					will hereinafter be referred to as (“Site”). By using the Site, you consent to the data practices described in this statement.
 				</div>
 
 				<div className="font-semibold text-gradient-primary-tr leading-[30px] text-[1.6em] mt-12">Collection of your Personal Information</div>
@@ -213,15 +213,13 @@ export default function PrivacyPolicy() {
 						rel="noopener noreferrer"
 						className="font-primary font-semibold dark:text-[#afafaf]"
 					>
-						&nbsp;
 						<br />
-						Musixverse Technologies Pvt Ltd.
+						{company_name}
 						<br />
 						KH.No. 23/2,1st Floor,Gali No.5, Block-A, Himgiri Enclave, Village Mukandpur, Delhi, North
 						<br />
 						East, Delhi, India, 110084
 						<br />
-						&nbsp;
 					</a>
 					<br />
 					Email Address:
@@ -231,7 +229,7 @@ export default function PrivacyPolicy() {
 					</a>
 				</div>
 
-				<div className="mt-6 text-gradient-primary-tr">©2023 Musixverse Technologies Pvt. Ltd. All rights reserved.</div>
+				<div className="mt-6 text-gradient-primary-tr">©2023 {company_name} All rights reserved.</div>
 			</div>
 		</div>
 	);

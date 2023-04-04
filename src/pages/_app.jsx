@@ -3,7 +3,6 @@ import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
 import * as ga from "@/lib/google-analytics";
 import "@/styles/globals.css";
-import "cal-sans";
 import ScrollToPageTop from "@/utils/scrollToPageTop";
 import Layout from "@/layout/Layout";
 import { wrapper } from "@/redux/redux-store";
@@ -17,7 +16,6 @@ function App({ Component, pageProps, session, router }) {
 		const handleRouteChange = (url) => {
 			ga.pageview(url);
 		};
-
 		router.events.on("routeChangeComplete", handleRouteChange);
 		return () => {
 			router.events.off("routeChangeComplete");

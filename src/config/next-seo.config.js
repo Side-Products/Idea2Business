@@ -1,22 +1,22 @@
+import { product_name, product_domain_url, meta_description, twitter_handle } from "./constants";
+
 export const SEO = {
 	title: undefined,
-	titleTemplate: "Idea2Business | %s",
-	defaultTitle: "Idea2Business",
-	description:
-		"Transforming your side-projects and hackathon-projects into profitable products. Just enter your project name and project description, Idea2Business will help you turn it into a successful venture.",
-	canonical: "https://idea2business.xyz",
+	titleTemplate: `${product_name} | %s`,
+	defaultTitle: product_name,
+	description: meta_description,
+	canonical: product_domain_url,
 	openGraph: {
-		siteName: "Idea2Business",
-		url: "https://idea2business.xyz",
-		title: "Idea2Business",
-		description:
-			"Transforming your side-projects and hackathon-projects into profitable products. Just enter your project name and project description, Idea2Business will help you turn it into a successful venture.",
+		siteName: product_name,
+		url: product_domain_url,
+		title: product_name,
+		description: meta_description,
 		images: [{ url: "/logo.png", width: 640, height: 640, alt: "Logo" }],
 	},
 	twitter: {
-		handle: "@_idea2business",
-		creator: "@_idea2business",
-		site: "@_idea2business",
+		handle: twitter_handle,
+		creator: twitter_handle,
+		site: twitter_handle,
 		cardType: "summary_large_image",
 	},
 };
