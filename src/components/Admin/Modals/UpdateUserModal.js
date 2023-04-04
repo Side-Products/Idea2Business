@@ -7,7 +7,7 @@ import { ADMIN_UPDATE_USER_DETAILS_RESET } from "@/redux/constants/userConstants
 import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import Button from "@/components/ui/Button";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/Sleep";
 
 const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 	const [name, setName] = useState("");

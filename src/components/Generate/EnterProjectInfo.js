@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/Sleep";
 import { newProjectSearch, clearErrors } from "@/redux/actions/projectActions";
 
 const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnterProjectInfo, setCardsAvailable, setIsGenerating }) => {

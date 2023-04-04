@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, clearErrors } from "@/redux/actions/userActions";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/Sleep";
 
 const NewPassword = () => {
 	const [password, setPassword] = useState("");

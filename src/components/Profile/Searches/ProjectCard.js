@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { StatusContext } from "@/store/StatusContextProvider";
-import { getTimestamp } from "@/utils/helpers";
+import { getTimestamp } from "@/utils/Helpers";
 
 const ProjectCard = ({ project, adminView }) => {
 	const router = useRouter();

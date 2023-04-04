@@ -4,7 +4,7 @@ import { clearErrors } from "@/redux/actions/userActions";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import NoDataTableRow from "@/components/ui/Table/NoDataTableRow";
-import { getTimestamp } from "@/utils/helpers";
+import { getTimestamp } from "@/utils/Helpers";
 import UpdateUserModal from "./Modals/UpdateUserModal";
 import DeleteUserConfirmModal from "./Modals/DeleteUserConfirmModal";
 

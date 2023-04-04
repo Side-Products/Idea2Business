@@ -6,7 +6,7 @@ import { adminDeleteFeatureRequest, clearErrors } from "@/redux/actions/featureR
 import { ADMIN_DELETE_FEATURE_REQUEST_RESET } from "@/redux/constants/featureRequestConstants";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/Sleep";
 
 const DeleteFeatureRequestModal = ({ isOpen, setOpen, featureRequestToDelete }) => {
 	const { setSuccess, setError } = useContext(StatusContext);

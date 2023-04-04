@@ -6,7 +6,7 @@ import { adminDeleteUser, clearErrors } from "@/redux/actions/userActions";
 import { ADMIN_DELETE_USER_RESET } from "@/redux/constants/userConstants";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/Sleep";
 
 const DeleteUserConfirmModal = ({ isOpen, setOpen, userToDelete }) => {
 	const { setSuccess, setError } = useContext(StatusContext);

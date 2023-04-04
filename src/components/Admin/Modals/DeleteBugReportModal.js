@@ -6,7 +6,7 @@ import { adminDeleteBugReport, clearErrors } from "@/redux/actions/bugReportActi
 import { ADMIN_DELETE_BUG_REPORT_RESET } from "@/redux/constants/bugReportConstants";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/Sleep";
 
 const DeleteBugReportModal = ({ isOpen, setOpen, bugReportToDelete }) => {
 	const { setSuccess, setError } = useContext(StatusContext);

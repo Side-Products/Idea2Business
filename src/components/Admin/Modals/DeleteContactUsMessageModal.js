@@ -6,7 +6,7 @@ import { adminDeleteContactUsMessage, clearErrors } from "@/redux/actions/contac
 import { ADMIN_DELETE_CONTACT_US_MESSAGE_RESET } from "@/redux/constants/contactUsConstants";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/Sleep";
 
 const DeleteContactUsMessageModal = ({ isOpen, setOpen, messageToDelete }) => {
 	const { setSuccess, setError } = useContext(StatusContext);
