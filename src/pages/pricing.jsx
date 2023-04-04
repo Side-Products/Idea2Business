@@ -1,4 +1,4 @@
-import PageLayout from "@/layout/PageLayout";
+import PageWrapper from "@/layout/PageWrapper";
 import { mySubscription } from "@/redux/actions/subscriptionActions";
 import { wrapper } from "@/redux/redux-store";
 import { getSession } from "next-auth/react";
@@ -21,9 +21,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
 
 export default function PricingPage() {
 	return (
-		<PageLayout>
+		<PageWrapper>
 			<h1 className="text-[80px] font-bold text-center tracking-[-2.5px] text-gradient-primary-tr">Select, Start, Grow</h1>
 			<Pricing />
-		</PageLayout>
+		</PageWrapper>
 	);
 }

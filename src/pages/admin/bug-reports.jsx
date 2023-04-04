@@ -1,4 +1,4 @@
-import PageLayout from "@/layout/PageLayout";
+import PageWrapper from "@/layout/PageWrapper";
 import AllBugReports from "@/components/Admin/AllBugReports";
 import { wrapper } from "@/redux/redux-store";
 import { getSession } from "next-auth/react";
@@ -25,11 +25,11 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
 
 export default function BugReports() {
 	return (
-		<PageLayout>
+		<PageWrapper>
 			<div className="w-full flex flex-col items-center justify-center">
 				<h1 className="text-[60px] font-bold text-center tracking-[-1px] leading-[70px] text-gradient-primary-tr">All Bug Reports</h1>
 				<AllBugReports />
 			</div>
-		</PageLayout>
+		</PageWrapper>
 	);
 }

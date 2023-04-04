@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import PageLayout from "@/layout/PageLayout";
+import PageWrapper from "@/layout/PageWrapper";
 import { useRouter } from "next/router";
 import { StatusContext } from "@/store/StatusContextProvider";
 import ContentModal from "@/components/Generate/ContentModal";
@@ -78,7 +78,7 @@ const Generate = () => {
 	}, [cardsAvailable]);
 
 	return (
-		<PageLayout useDefaultContainer={false}>
+		<PageWrapper useDefaultContainer={false}>
 			<div className="w-full flex flex-col items-center bg-dark-1000 h-screen" id="projectInfo">
 				<div className="w-full max-w-[1920px] py-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<EnterProjectInfo
@@ -181,7 +181,7 @@ const Generate = () => {
 
 			<ContentModal isOpen={isContentModalOpen} setOpen={setContentModalOpen} heading={modalText.heading} content={modalText.content} />
 			<SubscriptionRequiredModal isOpen={isSubscriptionRequiredModalOpen} setOpen={setSubscriptionRequiredModalOpen} />
-		</PageLayout>
+		</PageWrapper>
 	);
 };
 

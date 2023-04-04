@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { title_main_page, meta_description } from "@/config/constants";
 
-export default function PageLayout({ title = "", description = "", useDefaultContainer = true, classes = "", children }) {
+export default function PageWrapper({ title = "", description = "", useDefaultContainer = true, classes = "", children }) {
 	return (
 		<>
 			<Head>

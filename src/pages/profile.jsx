@@ -1,4 +1,4 @@
-import PageLayout from "@/layout/PageLayout";
+import PageWrapper from "@/layout/PageWrapper";
 import { getSession } from "next-auth/react";
 import { getMyProjects } from "@/redux/actions/projectActions";
 import { mySubscription } from "@/redux/actions/subscriptionActions";
@@ -31,7 +31,7 @@ export default function Profile() {
 	const { projects, resultsPerPage, projectsCount, filteredProjectsCount, error } = useSelector((state) => state.myProjects);
 
 	return (
-		<PageLayout>
+		<PageWrapper>
 			<UserDetails projectsCount={projectsCount} />
 			<div className="w-full flex flex-col">
 				<h1 className="text-6xl font-bold text-center tracking-[-2.5px] text-gradient-primary-tr">Past Searches</h1>
@@ -43,6 +43,6 @@ export default function Profile() {
 					error={error}
 				/>
 			</div>
-		</PageLayout>
+		</PageWrapper>
 	);
 }

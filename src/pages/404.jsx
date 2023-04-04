@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import PageLayout from "@/layout/PageLayout";
+import PageWrapper from "@/layout/PageWrapper";
 
 const ErrorPage = () => {
 	const router = useRouter();
 
 	return (
-		<PageLayout useDefaultContainer={false}>
+		<PageWrapper useDefaultContainer={false}>
 			<div className="w-full flex flex-col items-center justify-center bg-dark-1000">
 				<div id="error-404" className="w-full max-w-[1920px]">
 					<div className="noise"></div>
@@ -30,7 +30,7 @@ const ErrorPage = () => {
 					</div>
 				</div>
 			</div>
-		</PageLayout>
+		</PageWrapper>
 	);
 };
 
