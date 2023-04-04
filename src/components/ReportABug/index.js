@@ -2,7 +2,7 @@ import { useEffect, useRef, useContext } from "react";
 import Link from "next/link";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { LoadingContext } from "@/store/LoadingContextProvider";
-import { isEmailValid } from "@/utils/validate";
+import { isEmailValid } from "@/utils/Validate";
 import { product_name, contact_email } from "@/config/constants";
 import Button from "@/components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";

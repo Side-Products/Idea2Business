@@ -3,7 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
 import * as ga from "@/lib/google-analytics";
 import "@/styles/globals.css";
-import ScrollToPageTop from "@/utils/scrollToPageTop";
+import ScrollToPageTop from "@/utils/ScrollToPageTop";
 import Layout from "@/layout/Layout";
 import { wrapper } from "@/redux/redux-store";
 import StatusContextProvider from "@/store/StatusContextProvider";
