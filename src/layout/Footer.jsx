@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/site_logo.png";
+import logo from "../../public/logo.png";
 import { useSession } from "next-auth/react";
 import AuthModalContext from "@/store/authModal-context";
 import { twitter_url, linkedin_url } from "@/config/constants";

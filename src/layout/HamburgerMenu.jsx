@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import AuthModalContext from "@/store/authModal-context";
-import logoBlack from "../../public/site_logo.png";
+import logo from "../../public/logo.png";
 import { useSession, signOut } from "next-auth/react";
 import { twitter_url, linkedin_url } from "@/config/constants";
 
@@ -31,7 +31,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 								<div className="md:mx-1/6 md:w-1/5 px-4 offset-0 w-full flex justify-center sm:block logo_div_anim">
 									<Link href={"/"} passHref={true}>
 										<span href="#" onClick={closeNavbar} className="flex">
-											<Image src={logoBlack} alt="MXV Logo" width="60" className="rounded-md" />
+											<Image src={logo} alt="MXV Logo" width="60" className="rounded-md" />
 										</span>
 									</Link>
 								</div>

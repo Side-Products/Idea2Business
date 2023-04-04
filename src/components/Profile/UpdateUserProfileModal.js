@@ -22,7 +22,7 @@ const UpdateUserProfileModal = ({ isOpen, setOpen, submitHandler, avatarUrl, use
 							{avatarUrl ? (
 								<Image src={avatarUrl} alt="avatar" width="100" height="100" className="rounded-full" />
 							) : (
-								<Image src={"/avatar.jpg"} alt="avatar" width="100" height="100" className="rounded-full object-cover" />
+								<Image src={"/default_avatar.jpg"} alt="avatar" width="100" height="100" className="rounded-full object-cover" />
 							)}
 						</div>
 						<form

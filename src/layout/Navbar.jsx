@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logo from "../../public/site_logo.png";
+import logo from "../../public/logo.png";
 import HamburgerMenu from "./HamburgerMenu";
 import { useSession, signOut } from "next-auth/react";
 
@@ -107,7 +107,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 														{avatarUrl ? (
 															<Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" />
 														) : (
-															<Image src={"/avatar.jpg"} alt="avatar" width="24" height="24" className="rounded-full" />
+															<Image src={"/default_avatar.jpg"} alt="avatar" width="24" height="24" className="rounded-full" />
 														)}
 													</div>
 												) : (
@@ -137,7 +137,13 @@ const Navbar = ({ setAuthModalOpen }) => {
 																	{avatarUrl ? (
 																		<Image src={avatarUrl} alt={"avatar"} width={40} height={40} className="rounded-lg" />
 																	) : (
-																		<Image src={"/avatar.jpg"} alt="avatar" width="40" height="40" className="rounded-lg" />
+																		<Image
+																			src={"/default_avatar.jpg"}
+																			alt="avatar"
+																			width="40"
+																			height="40"
+																			className="rounded-lg"
+																		/>
 																	)}
 																</div>
 															</div>

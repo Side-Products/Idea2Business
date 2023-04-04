@@ -72,7 +72,7 @@ export default function UserDetails({ projectsCount }) {
 							{avatarUrl ? (
 								<Image src={avatarUrl} alt="avatar" width="64" height="64" className="rounded-full" />
 							) : (
-								<Image src={"/avatar.jpg"} alt="avatar" width="64" height="64" className="rounded-full object-cover" />
+								<Image src={"/default_avatar.jpg"} alt="avatar" width="64" height="64" className="rounded-full object-cover" />
 							)}
 						</div>
 						<div className="flex flex-col items-start justify-start text-start sm:mt-0 mt-4">
