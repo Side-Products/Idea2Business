@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
 	images: {
-		domains: ["lh3.googleusercontent.com"],
+		domains: ["lh3.googleusercontent.com", "miro.medium.com"],
 	},
 	webpack: (config, { isServer }) => {
 		if (!isServer) {

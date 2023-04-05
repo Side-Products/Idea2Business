@@ -1,0 +1,29 @@
+.countdown-container {
+	@apply pb-16 mt-[4.5rem] sm:mt-6 lg:mt-10 z-10 flex flex-col items-center justify-between relative w-full rounded-3xl sm:rounded-[2.5rem] lg:rounded-[4rem] xl:rounded-[5rem] bg-gradient-to-l from-[#408E00] to-[#265004];
+}
+
+.countdown-container__timer-wrapper {
+	@apply flex items-center justify-center space-x-3 sm:space-x-5;
+}
+
+.countdown-container__intro-text {
+	@apply flex flex-col items-center justify-center w-full px-6 sm:px-10 mt-6 sm:mt-10 xl:mt-14;
+}
+
+.countdown-container__intro-text--heading {
+	@apply text-lg font-medium sm:text-2xl xl:text-3xl font-primary;
+}
+
+.countdown-container__intro-text--body-text {
+	@apply text-base text-center xl:text-lg font-primary;
+}
+
+@media (max-width: 425px) {
+	.countdown-container__intro-text--heading {
+		@apply text-base text-center;
+	}
+
+	.countdown-container__intro-text--body-text {
+		@apply mt-1 text-sm;
+	}
+}

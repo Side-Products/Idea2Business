@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
 import * as ga from "@/lib/google-analytics";
 import "@/styles/globals.css";
+import ProtectedRoutes from "@/auth/ProtectedRoutes";
 import ScrollToPageTop from "@/utils/ScrollToPageTop";
 import Layout from "@/layout/Layout";
 import { wrapper } from "@/redux/redux-store";
@@ -45,16 +46,18 @@ function App({ Component, pageProps, session, router }) {
 			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
 
 			<SessionProvider session={session}>
-				<LoadingContextProvider>
-					<AuthModalContextProvider>
-						<StatusContextProvider>
-							<Layout>
-								<ScrollToPageTop />
-								<Component {...pageProps} />
-							</Layout>
-						</StatusContextProvider>
-					</AuthModalContextProvider>
-				</LoadingContextProvider>
+				<ProtectedRoutes router={router}>
+					<LoadingContextProvider>
+						<AuthModalContextProvider>
+							<StatusContextProvider>
+								<Layout>
+									<ScrollToPageTop />
+									<Component {...pageProps} />
+								</Layout>
+							</StatusContextProvider>
+						</AuthModalContextProvider>
+					</LoadingContextProvider>
+				</ProtectedRoutes>
 			</SessionProvider>
 		</>
 	);

@@ -7,6 +7,8 @@ import { product_name, contact_email } from "@/config/constants";
 import Button from "@/components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { newBugReport, clearErrors } from "@/redux/actions/bugReportActions";
+import ReCaptcha from "@/components/ui/ReCaptcha";
+import { validateReCaptcha } from "@/components/ui/ReCaptcha";
 
 export default function ReportABug() {
 	const { setSuccess, setError } = useContext(StatusContext);
@@ -18,11 +20,7 @@ export default function ReportABug() {
 
 	const dispatch = useDispatch();
 
-	const handleFormSubmit = async (e) => {
-		e.preventDefault();
-
-		setLoading({ status: true });
-
+	const formSubmit = async () => {
 		const name = nameRef.current.value;
 		const email = emailRef.current.value;
 		const bugDescription = bugDescriptionRef.current.value;
@@ -75,6 +73,26 @@ export default function ReportABug() {
 		return;
 	};
 
+	// ReCaptcha
+	const recaptchaRef = useRef(null);
+
+	const handleFormSubmit = async (e) => {
+		e.preventDefault();
+		setLoading({ status: true });
+
+		try {
+			await validateReCaptcha(recaptchaRef, formSubmit);
+		} catch (err) {
+			setError({
+				title: "ReCAPTCHA failed",
+				message: `Please click "I'm not a robot" before submitting the form`,
+				showErrorBox: true,
+			});
+		}
+		setLoading({ status: false });
+		recaptchaRef.current.reset();
+	};
+
 	const { error, success } = useSelector((state) => state.newBugReport);
 	useEffect(() => {
 		if (success) {
@@ -82,6 +100,7 @@ export default function ReportABug() {
 			nameRef.current.value = "";
 			emailRef.current.value = "";
 			bugDescriptionRef.current.value = "";
+			recaptchaRef.current.reset();
 			setLoading({ status: false });
 			setSuccess((prevState) => ({
 				...prevState,
@@ -177,10 +196,10 @@ export default function ReportABug() {
 				</div>
 
 				<div className="mt-16">
-					<div className="backdrop-blur-2xl backdrop-brightness-200 max-h-max md:h-[400px] p-8 md:p-12 border-2 border-dark-300 rounded-xl shadow">
+					<div className="backdrop-blur-2xl backdrop-brightness-200 max-h-max p-8 md:p-12 border-2 border-dark-300 rounded-xl shadow">
 						<form onSubmit={handleFormSubmit}>
-							<div className="flex flex-col md:flex-row md:space-x-8 xl:space-x-14">
-								<div className="w-full md:w-1/3">
+							<div className="flex flex-col lg:flex-row lg:space-x-8 xl:space-x-14">
+								<div className="w-full lg:w-1/3">
 									<div className="">
 										<label className="opacity-50 p-2 text-sm font-secondary">Name&nbsp; (Optional)</label>
 										<input
@@ -208,16 +227,20 @@ export default function ReportABug() {
 											If you don&apos;t provide an email, we will not be able to respond to your query!
 										</div>
 									</div>
+
+									<div className="mt-8">
+										<ReCaptcha recaptchaRef={recaptchaRef} />
+									</div>
 								</div>
 
-								<div className="w-full mt-5 md:w-2/3 md:mt-0">
+								<div className="w-full mt-5 lg:w-2/3 lg:mt-0">
 									<div>
 										<label className="text-sm font-primary opacity-50">Bug Description</label>
 										<textarea
 											className="bg-dark-600 mt-1 border-transparent resize-none w-full p-2 border-[2px] focus:border-primary-500 rounded-lg focus:outline-none focus:shadow-none focus:text-gradient-primary-tr"
 											ref={bugDescriptionRef}
 											name="message"
-											rows="8"
+											rows="9"
 											required
 										></textarea>
 									</div>
