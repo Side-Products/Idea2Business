@@ -46,7 +46,8 @@ export default function MySubscription() {
 			},
 			// TODO: change logo url
 			images: {
-				logo: "https://public.easyinvoice.cloud/img/logo_en_original.png",
+				// logo: "https://public.easyinvoice.cloud/img/logo_en_original.png",
+				logo: "https://idea2business.xyz/logo.png",
 			},
 			sender: {
 				company: product_name,

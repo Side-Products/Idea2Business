@@ -8,7 +8,7 @@ import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { twitter_url, linkedin_url } from "@/config/constants";
 
 export default function HamburgerMenu({ avatarUrl, truncatedName }) {
-	const { status } = useSession();
+	const { data: session, status } = useSession();
 	const { setAuthModalOpen } = useContext(AuthModalContext);
 	const router = useRouter();
 
@@ -73,27 +73,27 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 
 							<div className="hamburger_menu justify-center">
 								<div className="flex flex-wrap justify-center">
-									<div className="lg:w-full md:w-4/5 px-4 offset-0 w-full md:mt-0">
+									<div className="lg:w-full md:w-4/5 px-2 offset-0 w-full md:mt-0">
 										<div className="flex flex-wrap justify-center">
 											<div className="md:w-1/4 px-2 w-1/2 text-center">
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0  justify-center">Quick Links</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
 													<Link href={"/"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															Home
 														</span>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/generate"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															Generate
 														</span>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/pricing"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															Pricing
 														</span>
 													</Link>
@@ -105,7 +105,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
 													{status === "authenticated" ? (
 														<Link href={`/profile`} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-															<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 																Profile
 															</span>
 														</Link>
@@ -124,7 +124,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													{status === "authenticated" ? (
 														<Link href={`/profile`} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-															<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 																Past Searches
 															</span>
 														</Link>
@@ -147,14 +147,14 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 
 												<div className="md:mt-8 mt-4 flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/contact-us"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															Contact Us
 														</span>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/report-a-bug"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															Report a Bug
 														</span>
 													</Link>
@@ -165,7 +165,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														className="ham_menu_link ham_menu_hover_effect text-center"
 														passHref={true}
 													>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															Request Feature
 														</span>
 													</Link>
@@ -176,19 +176,93 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0 justify-center">General</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center md:mt-8 mt-4">
 													<Link href={"/#faq"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															FAQ
 														</span>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/example"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<span className="text-white hover:text-primary-500" onClick={closeNavbar}>
+														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 															Example
 														</span>
 													</Link>
 												</div>
 											</div>
+
+											{status === "authenticated" && session.user && session.user.role == "admin" && (
+												<div className="md:w-1/2 px-4 w-10/12 mt-4 md:mt-8 text-center">
+													<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0 justify-center">Admin Routes</div>
+
+													<div className="md:mt-8 mt-4 flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
+															href={`/admin/subscriptions`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Subscriptions
+															</span>
+														</Link>
+													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link href={`/admin/users`} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Users
+															</span>
+														</Link>
+													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
+															href={`/admin/searches`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Searches
+															</span>
+														</Link>
+													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
+															href={`/admin/bug-reports`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Bug Reports
+															</span>
+														</Link>
+													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
+															href={`/admin/feature-requests`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Feature Requests
+															</span>
+														</Link>
+													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
+															href={`/admin/contact-us-messages`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Contact Us Messages
+															</span>
+														</Link>
+													</div>
+												</div>
+											)}
 										</div>
 									</div>
 								</div>
@@ -198,7 +272,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 								<div className="md:mx-1/5 px-4 w-full mt-8 mb-4 horizontal_line_to_right"></div>
 							</div>
 
-							<div className="flex flex-wrap justify-center mb-5 harmburger_menu_connect">
+							<div className="flex flex-wrap justify-center mb-5 harmburger_menu_connect pb-10">
 								<div className="ham_menu_connect_links_md px-4 offset-0 w-full md:mt-0 mt-5">
 									<div className="flex flex-wrap justify-center">
 										<div className="ham_menu_heading ham_menu_connect_heading text-center">See what's new on</div>

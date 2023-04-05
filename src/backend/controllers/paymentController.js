@@ -26,7 +26,8 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 						name: parseInt(req.query.amount) == 5 ? "Standard Subscription" : parseInt(req.query.amount) == 10 ? "Pro Plus Subscription" : "",
 						description: "Subscription to " + product_name,
 						// TODO: change this to a custom image
-						images: ["https://public.easyinvoice.cloud/img/logo_en_original.png"],
+						// images: ["https://public.easyinvoice.cloud/img/logo_en_original.png"],
+						images: ["https://idea2business.xyz/logo.png"],
 					},
 					unit_amount: parseInt(req.query.amount) * 100,
 				},
