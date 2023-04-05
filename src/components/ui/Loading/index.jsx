@@ -27,13 +27,13 @@ export default function Loading() {
 				)}
 
 				{loading.message && (
-					<p>
+					<p className={styles["message"]}>
 						<span>{loading.message}</span>
 					</p>
 				)}
 
 				{loading.waitMessage && (
-					<p>
+					<p className={styles["waitMessage"]}>
 						<span>{loading.waitMessage}</span>
 					</p>
 				)}

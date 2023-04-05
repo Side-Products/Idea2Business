@@ -13,3 +13,7 @@ export const getTimestamp = (blockTimestamp) => {
 
 	return getUTCTimestamp(new Date(now_utc).toUTCString().toString().slice(0, 25));
 };
+
+export const removeAllWhiteSpaces = (str) => {
+	return str.toString().replace(/\s+/g, "");
+};
