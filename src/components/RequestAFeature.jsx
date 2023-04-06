@@ -139,9 +139,9 @@ export default function FeatureRequest() {
 		<div className="w-full flex flex-col justify-center items-center mt-16">
 			<div className="w-full text-light-400">
 				<div>
-					Welcome to our "Request a Feature" page! We love hearing from our users and are always looking for ways to improve the website. Your
-					suggestions and ideas can help us provide a better experience for everyone who visits the site. Your feedback is incredibly valuable to us,
-					and we want to hear your ideas and suggestions for new features that you would like to see.
+					Welcome to our &quot;Request a Feature&quot; page! We love hearing from our users and are always looking for ways to improve the website.
+					Your suggestions and ideas can help us provide a better experience for everyone who visits the site. Your feedback is incredibly valuable to
+					us, and we want to hear your ideas and suggestions for new features that you would like to see.
 				</div>
 
 				<div className="mt-10 font-primary font-semibold tracking-[-1px] text-gradient-primary-tr text-2xl">Here&apos;s how to request a feature:</div>
