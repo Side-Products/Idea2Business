@@ -2,8 +2,9 @@
 /**************************    Product details   **************************/
 /**************************************************************************/
 export const product_name = "Idea2Business";
-export const product_website = "https://www.idea2business.xyz";
-export const product_domain_url = "https://idea2business.xyz";
+export const product_url = "https://idea2business.xyz";
+export const product_website_legal = "https://www.idea2business.xyz";
+export const domain = "idea2business.xyz";
 export const contact_email = "team@idea2business.xyz";
 export const company_name = "Musixverse Technologies Pvt. Ltd.";
 

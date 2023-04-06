@@ -3,7 +3,7 @@ import User from "../models/user";
 import Subscription from "../models/subscription";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import getRawBody from "raw-body";
-import { product_name } from "@/config/constants";
+import { product_name, domain } from "@/config/constants";
 
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
@@ -27,7 +27,7 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 						description: "Subscription to " + product_name,
 						// TODO: change this to a custom image
 						// images: ["https://public.easyinvoice.cloud/img/logo_en_original.png"],
-						images: ["https://idea2business.xyz/logo.png"],
+						images: [`https://${domain}/logo.png`],
 					},
 					unit_amount: parseInt(req.query.amount) * 100,
 				},

@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import easyinvoice from "easyinvoice";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { LoadingContext } from "@/store/LoadingContextProvider";
-import { product_name } from "@/config/constants";
+import { product_name, domain } from "@/config/constants";
 
 export default function MySubscription() {
 	const router = useRouter();
@@ -47,7 +47,7 @@ export default function MySubscription() {
 			// TODO: change logo url
 			images: {
 				// logo: "https://public.easyinvoice.cloud/img/logo_en_original.png",
-				logo: "https://idea2business.xyz/logo.png",
+				logo: `https://${domain}/logo.png`,
 			},
 			sender: {
 				company: product_name,

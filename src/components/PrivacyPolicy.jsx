@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { product_name, product_website, company_name, contact_email } from "@/config/constants";
+import { product_name, product_website_legal, company_name, contact_email } from "@/config/constants";
 
 export default function PrivacyPolicy() {
 	return (
@@ -14,16 +14,16 @@ export default function PrivacyPolicy() {
 					</Link>{" "}
 					(“{company_name}”) and{" "}
 					<Link href={"/"} className="text-gradient-primary-tr">
-						{product_website}
+						{product_website_legal}
 					</Link>{" "}
 					and governs data collection and usage. For the purposes of this Privacy Policy, unless otherwise noted, all references to {product_name}{" "}
 					include{" "}
 					<Link href={"/"} className="text-gradient-primary-tr">
-						{product_website}
+						{product_website_legal}
 					</Link>{" "}
 					and {product_name}. For the purposes of this policy,{" "}
 					<Link href={"/"} className="text-gradient-primary-tr">
-						{product_website}
+						{product_website_legal}
 					</Link>{" "}
 					will hereinafter be referred to as (“Site”). By using the Site, you consent to the data practices described in this statement.
 				</div>
