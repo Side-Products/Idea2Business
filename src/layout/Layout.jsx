@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
 			<Loading />
 			<ErrorBox />
 			<SuccessBox />
-			{router.pathname !== "/404" && <Footer />}
+			{router.pathname !== "/404" && router.pathname !== "/_offline" && <Footer />}
 		</>
 	);
 };

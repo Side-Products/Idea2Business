@@ -252,8 +252,8 @@ export const Faqs = [
 		heading: "What can I expect?",
 		body: (
 			<p>
-				Our personalized suggestions are very good but we can't promise that you won't have to do more work. That is also not the goal. We aim to get
-				you into action mode and kickstart your pitch deck and funding journey. Go get'em tiger! 🫡
+				Our personalized suggestions are very good but we can&apos;t promise that you won&apos;t have to do more work. That is also not the goal. We aim
+				to get you into action mode and kickstart your pitch deck and funding journey. Go get&apos;em tiger! 🫡
 			</p>
 		),
 		content_id: "collapseFive",
