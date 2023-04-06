@@ -275,7 +275,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 							<div className="flex flex-wrap justify-center mb-5 harmburger_menu_connect pb-10">
 								<div className="ham_menu_connect_links_md px-4 offset-0 w-full md:mt-0 mt-5">
 									<div className="flex flex-wrap justify-center">
-										<div className="ham_menu_heading ham_menu_connect_heading text-center">See what's new on</div>
+										<div className="ham_menu_heading ham_menu_connect_heading text-center">See what&apos;s new on</div>
 									</div>
 									<div className="grid grid-cols-2 gap-0 px-10 sm:flex sm:flex-wrap sm:justify-center mt-5">
 										<a

@@ -44,7 +44,7 @@ const DeleteSubscriptionConfirmModal = ({ isOpen, setOpen, subscriptionToDelete,
 							</div>
 
 							<p className="text-sm font-semibold text-center mt-10">
-								Are you sure you want to delete {subscriptionToDelete.user.name}'s Subscription?
+								Are you sure you want to delete {subscriptionToDelete.user.name}&apos;s Subscription?
 							</p>
 
 							<div className="flex justify-end">
