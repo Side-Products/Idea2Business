@@ -270,7 +270,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 													}}
 													className=" flex justify-center items-center bg-dark-800 hover:bg-[#000] rounded-full p-4 text-sm"
 												>
-													<Image src="/google.png" alt="Metamask Logo" width="28" height="28" />
+													<Image src="/auth/google.png" alt="Google Logo" width="28" height="28" />
 												</button>
 												<button
 													onClick={() => {
@@ -279,7 +279,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 													}}
 													className=" flex justify-center items-center bg-dark-800 hover:bg-[#000] rounded-full p-4 text-sm"
 												>
-													<Image src="/github.png" alt="Metamask Logo" width="28" height="28" />
+													<Image src="/auth/github.png" alt="GitHub Logo" width="28" height="28" />
 												</button>
 											</div>
 										</div>

@@ -983,3 +983,44 @@ button.tooltip-button:active {
 .socials button {
 	@apply p-2 border-none rounded-md bg-dark-500 hover:bg-dark-400 hover:animate-bounce;
 }
+
+/**************************************************************************/
+/************************    React Datepicker   ***************************/
+/**************************************************************************/
+.react-datepicker {
+	@apply rounded-md border-2 border-primary-500 overflow-hidden !important;
+}
+
+.react-datepicker__header {
+	@apply rounded-sm;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__time-list-item:hover {
+	@apply bg-primary-600 text-light-100 !important;
+}
+
+.react-datepicker__input-container > input {
+	@apply w-full focus:ring-primary-500 focus:border-primary-500 block pl-10 text-sm border border-gray-300 text-dark-300 rounded-md transition duration-300 cursor-pointer !important;
+}
+
+.react-datepicker__input-container > input:focus {
+	outline: none;
+	border: 2px solid #6cc027;
+}
+
+.react-datepicker__day--selected {
+	@apply bg-primary-600 !important;
+}
+
+.react-datepicker__navigation-icon {
+	@apply text-primary-600 !important;
+}
+
+/**************************************************************************/
+/******************************    Card   *********************************/
+/**************************************************************************/
+
+.bgGradient {
+	background-image: linear-gradient(95.79deg, #a76fff 10.21%, #7445f8 100%);
+}

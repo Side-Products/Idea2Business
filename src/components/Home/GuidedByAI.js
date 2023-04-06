@@ -19,16 +19,16 @@ export default function GuidedByAI() {
 							</p>
 
 							<h2 className="text-xl lg:text-2xl font-bold my-4">Turn your ideas into reality, faster!</h2>
-							<p className="text-white-700 text-md text-light-400">You don't need to spend so much time & money to ship projects.</p>
+							<p className="text-white-700 text-md text-light-400">You don&apos;t need to spend so much time & money to ship projects.</p>
 						</div>
 						<div className="lg:max-w-[80%]">
 							<p className="number flex items-end text-4xl sm:text-5xl font-bold">
 								2<span className="inline-block bg-gradient-secondary-tr h-1.5 rounded-full w-1.5 mb-1 ml-1"></span>
 							</p>
 
-							<h2 className="text-xl lg:text-2xl font-bold mt-4 mb-3">Leverage AI's wisdom</h2>
+							<h2 className="text-xl lg:text-2xl font-bold mt-4 mb-3">Leverage AI&apos;s wisdom</h2>
 							<p className="text-white-700 text-md text-light-400">
-								AI is already here. Leverage it's wisdom to accelerate the growth your product.{" "}
+								AI is already here. Leverage it&apos;s wisdom to accelerate the growth your product.{" "}
 							</p>
 						</div>
 						<div className="lg:max-w-[80%]">

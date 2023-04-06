@@ -17,3 +17,8 @@ export const getTimestamp = (blockTimestamp) => {
 export const removeAllWhiteSpaces = (str) => {
 	return str.toString().replace(/\s+/g, "");
 };
+
+export const padZeros = (num, width) => {
+	num = num + "";
+	return num.length >= width ? num : new Array(width - num.length + 1).join("0") + num;
+};
