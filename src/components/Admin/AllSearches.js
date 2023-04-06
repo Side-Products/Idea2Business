@@ -1,17 +1,10 @@
 import { useSelector } from "react-redux";
-import { Projects } from "@/components/Profile/Searches/Projects";
+import { Ideas } from "@/components/Profile/Searches/Ideas";
 
 export default function AllSearches() {
-	const { projects, resultsPerPage, projectsCount, filteredProjectsCount, error } = useSelector((state) => state.allProjects);
+	const { ideas, resultsPerPage, ideasCount, filteredIdeasCount, error } = useSelector((state) => state.allIdeas);
 
 	return (
-		<Projects
-			adminView={true}
-			projects={projects}
-			resultsPerPage={resultsPerPage}
-			projectsCount={projectsCount}
-			filteredProjectsCount={filteredProjectsCount}
-			error={error}
-		/>
+		<Ideas adminView={true} ideas={ideas} resultsPerPage={resultsPerPage} ideasCount={ideasCount} filteredIdeasCount={filteredIdeasCount} error={error} />
 	);
 }

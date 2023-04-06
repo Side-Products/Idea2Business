@@ -1,0 +1,276 @@
+.traditonal-overlay {
+	/* background: rgb(14,14,14);
+background: linear-gradient(90deg, rgba(14,14,14,1) 33%, rgba(30,30,30,1) 50%); */
+	background: rgb(19, 19, 19);
+	background: linear-gradient(0deg, rgba(19, 19, 19, 0.7805673294708508) 50%, rgba(19, 19, 19, 0) 100%);
+	/* background: linear-gradient(0deg, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%); */
+}
+
+.tradition > span {
+	overflow: visible !important;
+}
+
+.firefly {
+	@apply absolute rounded-full bg-[#d3d3d3] w-[16px] aspect-square blur-sm;
+	transform: translateZ(0);
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+}
+
+.firefly1 {
+	@apply left-7 bottom-7;
+	animation: fly1 10s ease-in infinite;
+}
+
+.firefly2 {
+	@apply opacity-0 left-32 bottom-4 blur-md;
+	animation: fly2 10s ease-in infinite 1s;
+}
+
+.firefly3 {
+	@apply opacity-0 left-64 bottom-16;
+	animation: fly3 12s ease-in infinite;
+}
+
+.firefly4 {
+	@apply opacity-0 left-80 bottom-52 w-[20px] blur-md;
+	animation: fly4 15s ease-in infinite 2.5s;
+}
+
+.firefly5 {
+	@apply opacity-0 left-96 bottom-0 w-[22px] blur-md;
+	animation: fly5 15s ease-in infinite 1.25s;
+}
+
+.firefly6 {
+	@apply left-14 bottom-20 w-[20px] blur-md opacity-0;
+	animation: fly6 20s ease-in infinite 2s;
+}
+
+.firefly7 {
+	@apply left-80 bottom-64 w-[20px] blur-md opacity-0;
+	animation: fly7 10s ease-in infinite 5s;
+}
+
+.fireflyR1 {
+	@apply right-7 bottom-7;
+	animation: flyR1 10s ease-in infinite;
+}
+
+.fireflyR2 {
+	@apply opacity-0 right-32 bottom-4 blur-md;
+	animation: flyR2 10s ease-in infinite 1s;
+}
+
+.fireflyR3 {
+	@apply opacity-0 right-64 bottom-16;
+	animation: flyR3 12s ease-in infinite;
+}
+
+.fireflyR4 {
+	@apply opacity-0 right-80 bottom-52 w-[20px] blur-md;
+	animation: flyR4 15s ease-in infinite 2.5s;
+}
+
+.fireflyR5 {
+	@apply opacity-0 right-96 bottom-0 w-[22px] blur-md;
+	animation: flyR5 15s ease-in infinite 1.25s;
+}
+
+.fireflyR6 {
+	@apply right-14 bottom-20 w-[20px] blur-md opacity-0;
+	animation: flyR6 20s ease-in infinite 2s;
+}
+
+.fireflyR7 {
+	@apply right-80 bottom-64 w-[20px] blur-md opacity-0;
+	animation: flyR7 10s ease-in infinite 5s;
+}
+
+@keyframes flyR1 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1.75) translateX(-10vw) translateY(10vh);
+		opacity: 0;
+	}
+}
+
+@keyframes flyR2 {
+	0% {
+		opacity: 0;
+	}
+	15% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2) translateX(-15vw) translateY(-10vh);
+		opacity: 0;
+	}
+}
+
+@keyframes flyR3 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2) translateX(-30vw) translateY(10vh);
+		opacity: 0;
+	}
+}
+
+@keyframes flyR4 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2.75) translateX(-20vw) translateY(5vh);
+		opacity: 0;
+	}
+}
+
+@keyframes flyR5 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2) translateX(-30vw) translateY(-20vh);
+		opacity: 0;
+	}
+}
+
+@keyframes flyR6 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2.5) translateX(-15vw) translateY(-25vh);
+		opacity: 0;
+	}
+}
+
+@keyframes flyR7 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+		filter: blur(4px);
+	}
+	100% {
+		transform: scale(1.5) translateX(-5vw) translateY(-15vh);
+		opacity: 0;
+		filter: blur(8px);
+	}
+}
+
+/* LEFT PANEL FLIES KEYFRAMES */
+@keyframes fly1 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1.75) translateX(10vw) translateY(-30vh);
+		opacity: 0;
+	}
+}
+
+@keyframes fly2 {
+	0% {
+		opacity: 0;
+	}
+	15% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1.75) translateX(15vw) translateY(10vh);
+		opacity: 0;
+	}
+}
+
+@keyframes fly3 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2) translateX(30vw) translateY(-20vh);
+		opacity: 0;
+	}
+}
+
+@keyframes fly4 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+		/* transform: ; */
+	}
+	100% {
+		transform: scale(2.75) translateX(20vw) translateY(5vh);
+		opacity: 0;
+	}
+}
+
+@keyframes fly5 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2) translateX(30vw) translateY(-20vh);
+		opacity: 0;
+	}
+}
+
+@keyframes fly6 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2.5) translateX(5vw) translateY(-25vh);
+		opacity: 0;
+	}
+}
+
+@keyframes fly7 {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+		filter: blur(4px);
+	}
+	100% {
+		transform: scale(1.5) translateX(-5vw) translateY(15vh);
+		opacity: 0;
+		filter: blur(8px);
+	}
+}

@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const pitchDeckPromptPrefix = `Write me 10 tips and tricks to nail a pitch about my project in front of an investor. Write comprehensive text. Following is my startup:
+const pitchDeckPromptPrefix = `Write me 10 tips and tricks to nail a pitch about my idea in front of an investor. Write comprehensive text. Following is my startup:
 `;
 
 const generateAction = async (req, res) => {

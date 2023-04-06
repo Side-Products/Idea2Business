@@ -1,14 +1,14 @@
-import { product_name, product_domain_url, meta_description, twitter_handle } from "./constants";
+import { product_name, product_url, meta_description, twitter_handle } from "./constants";
 
 export const SEO = {
 	title: undefined,
 	titleTemplate: `${product_name} | %s`,
 	defaultTitle: product_name,
 	description: meta_description,
-	canonical: product_domain_url,
+	canonical: product_url,
 	openGraph: {
 		siteName: product_name,
-		url: product_domain_url,
+		url: product_url,
 		title: product_name,
 		description: meta_description,
 		images: [{ url: "/logo.png", width: 640, height: 640, alt: "Logo" }],

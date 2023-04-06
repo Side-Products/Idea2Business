@@ -67,7 +67,7 @@ export default function AllSubscriptions() {
 	) : subscriptions && subscriptions.length > 0 ? (
 		<div className="mt-16 w-full grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
 			{subscriptions.map((subscription) => (
-				<div className="relative group px-8 py-7 rounded-xl bg-dark-700">
+				<div key={subscription.paymentInfo.id} className="relative group px-8 py-7 rounded-xl bg-dark-700">
 					<div className="flex items-start justify-between">
 						<p className="text-2xl font-semibold text-light-300">{subscription.user.name}</p>
 						<span className="text-3xl font-bold text-gradient-primary-tr">

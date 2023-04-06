@@ -8,22 +8,22 @@ import { understandingPotentialUsers } from "@/config/constants";
 export default function UnderstandingPotentialUsers({
 	isGenerating,
 	setIsGenerating,
-	promptEnterProjectInfo,
-	projectInfo,
+	promptEnterIdeaInfo,
+	ideaInfo,
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
 }) {
-	const { projectName, projectDescription } = projectInfo;
+	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
 
 	const callGenerateUserPersonaEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "User Personas for your project is being generated",
+			message: "User Personas for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 
@@ -32,7 +32,7 @@ export default function UnderstandingPotentialUsers({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -51,7 +51,7 @@ export default function UnderstandingPotentialUsers({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Mom Test for your project is being generated",
+			message: "Mom Test for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Mom Test Content from OpenAI
@@ -60,7 +60,7 @@ export default function UnderstandingPotentialUsers({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -79,7 +79,7 @@ export default function UnderstandingPotentialUsers({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "List of Potential Customers for your project is being generated",
+			message: "List of Potential Customers for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/potential-users/type-of-potential-customers", {
@@ -87,7 +87,7 @@ export default function UnderstandingPotentialUsers({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -106,7 +106,7 @@ export default function UnderstandingPotentialUsers({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "List of Customer Pain Points for your project is being generated",
+			message: "List of Customer Pain Points for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/potential-users/customer-pain-points", {
@@ -114,7 +114,7 @@ export default function UnderstandingPotentialUsers({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -144,7 +144,7 @@ export default function UnderstandingPotentialUsers({
 					subscriptionPlanRequired={understandingPotentialUsers[0].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -158,7 +158,7 @@ export default function UnderstandingPotentialUsers({
 					subscriptionPlanRequired={understandingPotentialUsers[1].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -172,7 +172,7 @@ export default function UnderstandingPotentialUsers({
 					subscriptionPlanRequired={understandingPotentialUsers[2].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -186,7 +186,7 @@ export default function UnderstandingPotentialUsers({
 					subscriptionPlanRequired={understandingPotentialUsers[3].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</SectionGrid>

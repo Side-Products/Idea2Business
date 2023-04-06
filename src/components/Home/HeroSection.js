@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import Button from "@/components/ui/Button";
-import ParallaxTextSection from "./ParallaxTextSection";
+import ParallaxText from "@/components/ui/ParallaxText";
 
 export default function HeroSection() {
 	const router = useRouter();
@@ -43,7 +43,7 @@ export default function HeroSection() {
 
 			<div className="w-full flex flex-col justify-center items-center mt-24">
 				<div className="text-center font-secondary font-bold text-dark-200 mb-2">Trusted By</div>
-				<ParallaxTextSection />
+				<ParallaxText />
 			</div>
 		</div>
 	);

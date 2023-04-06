@@ -8,22 +8,22 @@ import { pitches } from "@/config/constants";
 export default function Pitches({
 	isGenerating,
 	setIsGenerating,
-	promptEnterProjectInfo,
-	projectInfo,
+	promptEnterIdeaInfo,
+	ideaInfo,
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
 }) {
-	const { projectName, projectDescription } = projectInfo;
+	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
 
 	const callGenerateVCPitchEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "VC Pitch for your project is being generated",
+			message: "VC Pitch for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting VC Pitch Content from OpenAI
@@ -32,7 +32,7 @@ export default function Pitches({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -51,7 +51,7 @@ export default function Pitches({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Co-Founder pitch for your project is being generated",
+			message: "Co-Founder pitch for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Co Founder Content from OpenAI
@@ -60,7 +60,7 @@ export default function Pitches({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -79,7 +79,7 @@ export default function Pitches({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Pitch to Marketing Advisor for your project is being generated",
+			message: "Pitch to Marketing Advisor for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Marketing Advisor Content from OpenAI
@@ -88,7 +88,7 @@ export default function Pitches({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -107,7 +107,7 @@ export default function Pitches({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Pitch to Mentor for your project is being generated",
+			message: "Pitch to Mentor for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		// Getting Pitch to Marketing Advisor Content from OpenAI
@@ -116,7 +116,7 @@ export default function Pitches({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -146,7 +146,7 @@ export default function Pitches({
 					subscriptionPlanRequired={pitches[0].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -160,7 +160,7 @@ export default function Pitches({
 					subscriptionPlanRequired={pitches[1].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -174,7 +174,7 @@ export default function Pitches({
 					subscriptionPlanRequired={pitches[2].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -188,7 +188,7 @@ export default function Pitches({
 					subscriptionPlanRequired={pitches[3].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</SectionGrid>

@@ -1,12 +1,23 @@
 /** @type {import('tailwindcss').Config} */
+// const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
+	mode: "jit",
 	purge: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
 	content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
 	theme: {
+		// screens: {
+		// 	xs: "500px",
+		// 	smd: "760px",
+		// 	...defaultTheme.screens,
+		// },
 		extend: {
 			animation: {
 				text: "text 5s ease infinite",
 				bg: "text 4s ease infinite",
+				marquee: "marquee 10s linear infinite",
+				marquee2: "marquee2 10s linear infinite",
+				slowSpin: "slowSpin 100s ease infinite",
 			},
 			keyframes: {
 				text: {
@@ -28,6 +39,17 @@ module.exports = {
 						"background-size": "200% 200%",
 						"background-position": "right center",
 					},
+				},
+				marquee: {
+					"0%": { transform: "translateX(0%)" },
+					"100%": { transform: "translateX(-100%)" },
+				},
+				marquee2: {
+					"0%": { transform: "translateX(100%)" },
+					"100%": { transform: "translateX(0%)" },
+				},
+				slowSpin: {
+					to: { transform: "rotate(360deg)" },
 				},
 			},
 			colors: {
@@ -135,6 +157,9 @@ module.exports = {
 				tertiary: ["Roboto", "sans-serif"],
 				plaster: ["Plaster", "sans-serif"],
 				ter2: ["Manrope", "sans-serif"],
+			},
+			fontSize: {
+				countdownHeroMobileHeading: "clamp(2rem, -0.5rem + 12.5vw, 2.5rem)",
 			},
 		},
 	},

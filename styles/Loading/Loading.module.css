@@ -30,6 +30,7 @@
 	justify-content: center;
 	justify-self: center;
 	align-items: center;
+	padding: 10px;
 }
 
 .loading_container_box {
@@ -86,7 +87,14 @@
 	font-weight: 500;
 }
 
-.loading_container > p > span {
+.loading_container > p.message {
 	margin-top: 20px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.loading_container > p.waitMessage {
+	margin-top: 6px;
 	font-size: 12px;
+	text-align: center;
 }

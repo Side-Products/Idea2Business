@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const pitchDeckPromptPrefix = `Generate a guide for how to build a team for the following project:
+const pitchDeckPromptPrefix = `Generate a guide for how to build a team for the following idea:
 `;
 
 const generateAction = async (req, res) => {

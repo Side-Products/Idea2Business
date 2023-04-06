@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const pitchDeckPromptPrefix = `Generate social media calendar for 30 days for the following project:
+const pitchDeckPromptPrefix = `Generate social media calendar for 30 days for the following idea:
 `;
 
 const generateAction = async (req, res) => {

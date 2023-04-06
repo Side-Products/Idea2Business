@@ -1,19 +1,35 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { DefaultSeo } from "next-seo";
-import { SEO } from "@/config/next-seo.config";
 import { product_name, meta_description } from "@/config/constants";
 
 export default function Document() {
 	return (
 		<Html>
 			<Head>
-				<link rel="apple-touch-icon" href="/favicon.ico" />
-				<link rel="icon" href="/favicon.ico" />
+				<link rel="manifest" href="/manifest.json" />
+				<link rel="icon" href="/icon.png" />
 				<link rel="shortcut icon" href="/favicon.ico" />
-				<meta name="theme-color" content="#fff" />
 
-				<meta property="og:title" content={product_name} key="title" />
-				<meta property="og:description" content={meta_description} key="description" />
+				{/* PWA */}
+				<meta name="application-name" content={product_name} />
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+				<meta name="apple-mobile-web-app-title" content={product_name} />
+				<meta name="description" content={meta_description} />
+				<meta name="format-detection" content="telephone=no" />
+				<meta name="mobile-web-app-capable" content="yes" />
+				<meta name="msapplication-config" content="/icons/browserconfig.xml" />
+				<meta name="msapplication-TileColor" content="#000000" />
+				<meta name="msapplication-tap-highlight" content="no" />
+				<meta name="theme-color" content="#000000" />
+
+				<link rel="apple-touch-icon" href="/icon.png" />
+				<link rel="apple-touch-icon" sizes="152x152" href="/icon.png" />
+				<link rel="apple-touch-icon" sizes="180x180" href="/icon.png" />
+				<link rel="apple-touch-icon" sizes="167x167" href="/icon.png" />
+
+				<link rel="icon" type="image/png" sizes="32x32" href="/icon.png" />
+				<link rel="icon" type="image/png" sizes="16x16" href="/icon.png" />
+				<link rel="mask-icon" href="/icon.png" color="#000000" />
 
 				{/* Tailwind Elements */}
 				<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
@@ -35,7 +51,6 @@ export default function Document() {
 				{/* Font for Parallax Text */}
 				<link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet" />
 			</Head>
-			<DefaultSeo {...SEO} />
 
 			<body>
 				<Main />

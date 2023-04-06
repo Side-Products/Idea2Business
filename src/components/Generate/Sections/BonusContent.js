@@ -8,22 +8,22 @@ import { bonusContent } from "@/config/constants";
 export default function BonusContent({
 	isGenerating,
 	setIsGenerating,
-	promptEnterProjectInfo,
-	projectInfo,
+	promptEnterIdeaInfo,
+	ideaInfo,
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
 }) {
-	const { projectName, projectDescription } = projectInfo;
+	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
 
 	const callSPMEEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "SPME for your project is being generated",
+			message: "SPME for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/spme", {
@@ -31,7 +31,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -50,7 +50,7 @@ export default function BonusContent({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "MVP Launch checklist for your project is being generated",
+			message: "MVP Launch checklist for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/mvp-launch-checklist", {
@@ -58,7 +58,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -77,7 +77,7 @@ export default function BonusContent({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "How to build a team for your project is being generated",
+			message: "How to build a team for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/how-to-build-a-team", {
@@ -85,7 +85,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -104,7 +104,7 @@ export default function BonusContent({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Product Roadmap for your project is being generated",
+			message: "Product Roadmap for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/product-roadmap", {
@@ -112,7 +112,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -131,7 +131,7 @@ export default function BonusContent({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Social Media Calendar for your project is being generated",
+			message: "Social Media Calendar for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/social-media-calendar", {
@@ -139,7 +139,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -158,7 +158,7 @@ export default function BonusContent({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Ideal Customer Profile for your project is being generated",
+			message: "Ideal Customer Profile for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/ideal-customer-profile", {
@@ -166,7 +166,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -185,7 +185,7 @@ export default function BonusContent({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Grant Proposal for your project is being generated",
+			message: "Grant Proposal for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/grant-proposal", {
@@ -193,7 +193,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -212,7 +212,7 @@ export default function BonusContent({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Legal Advice for your project is being generated",
+			message: "Legal Advice for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/bonus/legal-advice", {
@@ -220,7 +220,7 @@ export default function BonusContent({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -250,7 +250,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[0].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -264,7 +264,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[1].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -278,7 +278,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[2].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -292,7 +292,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[3].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -306,7 +306,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[4].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -320,7 +320,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[5].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -334,7 +334,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[6].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -348,7 +348,7 @@ export default function BonusContent({
 					subscriptionPlanRequired={bonusContent[7].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</SectionGrid>

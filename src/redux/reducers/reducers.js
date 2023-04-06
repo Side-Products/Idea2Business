@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { newProjectSearchReducer, allProjectsReducer, myProjectsReducer, projectDetailsReducer } from "./projectReducers";
+import { newIdeaSearchReducer, allIdeasReducer, myIdeasReducer, ideaDetailsReducer } from "./ideaReducers";
 import { authReducer, userReducer, loadedUserReducer, forgotPasswordReducer, adminGetAllUsersReducer, adminGetUserDetailsReducer } from "./userReducers";
 import { mySubscriptionReducer, adminGetSubscriptionsReducer, adminDeleteSubscriptionReducer } from "./subscriptionReducers";
 import { newContactUsMessageReducer, adminGetContactUsMessagesReducer, adminDeleteContactUsMessageReducer } from "./contactUsReducers";
@@ -7,10 +7,10 @@ import { newBugReportReducer, adminGetBugReportsReducer, adminDeleteBugReportRed
 import { newFeatureRequestReducer, adminGetFeatureRequestsReducer, adminDeleteFeatureRequestReducer } from "./featureRequestReducers";
 
 const reducer = combineReducers({
-	newProjectSearch: newProjectSearchReducer,
-	allProjects: allProjectsReducer,
-	myProjects: myProjectsReducer,
-	projectDetails: projectDetailsReducer,
+	newIdeaSearch: newIdeaSearchReducer,
+	allIdeas: allIdeasReducer,
+	myIdeas: myIdeasReducer,
+	ideaDetails: ideaDetailsReducer,
 	auth: authReducer,
 	user: userReducer,
 	loadedUser: loadedUserReducer,

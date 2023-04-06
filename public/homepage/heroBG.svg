@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1059" viewBox="0 0 1920 1059">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.822" cy="0.19" r="1.47" gradientTransform="matrix(0.034, -0.999, 0.431, 0.014, 0.735, 1.051)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#262626"/>
+      <stop offset="1" stop-color="#080808"/>
+    </radialGradient>
+  </defs>
+  <rect id="Rectangle_651" data-name="Rectangle 651" width="1920" height="1059" fill="url(#radial-gradient)"/>
+</svg>

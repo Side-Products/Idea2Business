@@ -7,19 +7,19 @@ import SectionHeading from "../SectionHeading";
 import Button from "@/components/ui/Button";
 import { useSession } from "next-auth/react";
 
-export default function Decks({ isGenerating, setIsGenerating, promptEnterProjectInfo, projectInfo, cardsAvailable, setSubscriptionRequiredModalOpen }) {
-	const { projectName, projectDescription } = projectInfo;
+export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaInfo, ideaInfo, cardsAvailable, setSubscriptionRequiredModalOpen }) {
+	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
 
 	const callGenerateEndpoint = async () => {
-		if (projectName.length > 0 && projectDescription.length > 0) {
+		if (ideaName.length > 0 && ideaDescription.length > 0) {
 			// Getting pitch deck content from OpenAI
 			const response = await fetch("/api/generate/decks/pitchdeck", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+				body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 			});
 			const data = await response.json();
 			const { output } = data;
@@ -27,7 +27,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 
 			return outputArray;
 		} else {
-			promptEnterProjectInfo();
+			promptEnterIdeaInfo();
 		}
 	};
 
@@ -348,7 +348,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 			}
 		);
 
-		pptx.writeFile({ fileName: `${projectName}.pptx` });
+		pptx.writeFile({ fileName: `${ideaName}.pptx` });
 	}
 
 	// Subscription state
@@ -391,7 +391,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 									setLoading({
 										status: true,
 										title: "Hang on for a moment",
-										message: "Pitchdeck for your project is being generated",
+										message: "Pitchdeck for your idea is being generated",
 										waitMessage: "It may take up to 30 seconds to generate the response...",
 									});
 									setIsGenerating("pitchdeck");
@@ -407,7 +407,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterProjec
 									setSubscriptionRequiredModalOpen(true);
 								}
 							} else {
-								promptEnterProjectInfo();
+								promptEnterIdeaInfo();
 							}
 						}}
 						isLoading={isGenerating === "pitchdeck"}

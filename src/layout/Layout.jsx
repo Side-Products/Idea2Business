@@ -7,7 +7,7 @@ import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import ErrorBox from "@/components/ui/Toast/ErrorBox";
 import SuccessBox from "@/components/ui/Toast/SuccessBox";
 import Loading from "@/components/ui/Loading";
-import AuthModal from "@/components/ui/Modal/AuthModal";
+import AuthModal from "@/components/AuthModal";
 
 const Layout = ({ children }) => {
 	const { setLoading } = useContext(LoadingContext);
@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
 			<Loading />
 			<ErrorBox />
 			<SuccessBox />
-			{router.pathname !== "/404" && <Footer />}
+			{router.pathname !== "/404" && router.pathname !== "/_offline" && <Footer />}
 		</>
 	);
 };

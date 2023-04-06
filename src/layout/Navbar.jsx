@@ -39,7 +39,6 @@ const Navbar = ({ setAuthModalOpen }) => {
 	}
 
 	const router = useRouter();
-
 	const [showStrip, setShowStrip] = useState(true);
 
 	return (

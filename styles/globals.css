@@ -239,7 +239,7 @@ a:hover {
 	position: absolute;
 	width: 100vw;
 	margin: -100px 0 0 0;
-	padding: 125px 30px 40px 30px;
+	padding: 125px 20px 40px 30px;
 	right: -120px;
 	background: #0d0d0d;
 	list-style-type: none;
@@ -409,7 +409,7 @@ a:hover {
 
 @keyframes text_glow {
 	to {
-		font-size: 1.05em;
+		font-size: 1.02em;
 		color: #fff;
 		font-weight: 550;
 	}
@@ -448,13 +448,13 @@ a:hover {
 
 @keyframes ham_menu_text_glow {
 	to {
-		font-size: 1.12em;
+		font-size: 1.02em;
 		font-weight: 550;
 	}
 }
 
 .ham_menu_hover_effect:hover {
-	animation: ham_menu_text_glow 0.05s forwards;
+	animation: ham_menu_text_glow 0.16s forwards;
 }
 
 .horizontal_line_to_right {
@@ -768,4 +768,259 @@ html {
 }
 .prompt-card-default::before {
 	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(50, 168, 82, 0.15), transparent 40%);
+}
+
+/**************************************************************************/
+/****************************    Tooltip   ********************************/
+/**************************************************************************/
+
+.tooltip-button {
+	background: none;
+	font-family: "Roboto", "sans-serif";
+	color: #7a7a7a;
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	/* height: fit-content !important; */
+	min-width: fit-content;
+}
+
+.tooltip-button:hover {
+	background: none;
+	border: none;
+	color: #9c9c9c;
+}
+
+button.tooltip-button:focus,
+button.tooltip-button:active {
+	/* Removes the button outline on click */
+	outline: none !important;
+	box-shadow: none !important;
+	background: none;
+	border: none;
+	color: #7a7a7a;
+}
+
+.tooltip-button i {
+	margin-right: 5px;
+}
+
+/* Custom Tooltip */
+
+[data-tooltip] {
+	position: relative;
+}
+
+[data-tooltip]:hover {
+	z-index: 10 !important;
+}
+
+/* Positioning and visibility settings of the tooltip */
+[data-tooltip]:before,
+[data-tooltip]:after {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	left: 50%;
+	bottom: calc(80% + 5px); /* 5px is the size of the arrow */
+	pointer-events: none;
+	transition: 0.12s;
+	will-change: transform;
+}
+
+/* The actual tooltip with a dynamic width */
+[data-tooltip]:before {
+	@apply dark:bg-dark-600 bg-light-100;
+	content: attr(data-tooltip);
+	padding: 10px 18px;
+	min-width: 50px;
+	max-width: 250px;
+	width: max-content;
+	width: -moz-max-content;
+	border: 1.5px solid #6cc027;
+	border-radius: 6px;
+	font-size: 14px;
+	/* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
+	/* box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1); */
+	font-family: "Roboto", "sans-serif";
+	text-align: center;
+	white-space: pre-wrap;
+	transform: translate(-50%, -5px) scale(0.5);
+	@apply text-black dark:text-white;
+}
+
+.sample_based_tooltip > [data-tooltip]:before {
+	max-width: 180px !important;
+}
+
+/* Tooltip arrow */
+[data-tooltip]:after {
+	content: "";
+	border-style: solid;
+	border-width: 5px 5px 0px 5px; /* CSS triangle */
+	border-color: #6cc027 transparent transparent transparent;
+	transition-duration: 0s; /* If the mouse leaves the element, 
+								the transition effects for the 
+								tooltip arrow are "turned off" */
+	transform-origin: top; /* Orientation setting for the
+								slide-down effect */
+	transform: translateX(-50%) scaleY(0);
+}
+
+/* Tooltip becomes visible at hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* Scales from 0.5 to 1 -> grow effect */
+[data-tooltip]:hover:before {
+	transition-delay: 0.1s;
+	transform: translate(-50%, -5px) scale(1);
+}
+
+/* Arrow slide down effect only on mouseenter (NOT on mouseleave) */
+[data-tooltip]:hover:after {
+	transition-delay: 0.1s; /* Starting after the grow effect */
+	transition-duration: 0.1s;
+	transform: translateX(-50%) scaleY(1);
+}
+
+/*
+	That's it for the basic tooltip.
+  
+	If you want some adjustability
+	here are some orientation settings you can use:
+*/
+
+/* LEFT */
+/* Tooltip + arrow */
+[data-tooltip-location="left"]:before,
+[data-tooltip-location="left"]:after {
+	left: auto;
+	right: calc(100% + 5px);
+	bottom: 50%;
+}
+
+/* Tooltip */
+[data-tooltip-location="left"]:before {
+	transform: translate(-5px, 50%) scale(0.5);
+}
+[data-tooltip-location="left"]:hover:before {
+	transform: translate(-5px, 50%) scale(1);
+}
+
+/* Arrow */
+[data-tooltip-location="left"]:after {
+	border-width: 5px 0px 5px 5px;
+	border-color: transparent transparent transparent #6cc027;
+	transform-origin: left;
+	transform: translateY(50%) scaleX(0);
+}
+[data-tooltip-location="left"]:hover:after {
+	transform: translateY(50%) scaleX(1);
+}
+
+/* RIGHT */
+[data-tooltip-location="right"]:before,
+[data-tooltip-location="right"]:after {
+	left: calc(100% + 5px);
+	bottom: 50%;
+}
+
+[data-tooltip-location="right"]:before {
+	transform: translate(5px, 50%) scale(0.5);
+}
+[data-tooltip-location="right"]:hover:before {
+	transform: translate(5px, 50%) scale(1);
+}
+
+[data-tooltip-location="right"]:after {
+	border-width: 5px 5px 5px 0px;
+	border-color: transparent #6cc027 transparent transparent;
+	transform-origin: right;
+	transform: translateY(50%) scaleX(0);
+}
+[data-tooltip-location="right"]:hover:after {
+	transform: translateY(50%) scaleX(1);
+}
+
+/* BOTTOM */
+[data-tooltip-location="bottom"]:before,
+[data-tooltip-location="bottom"]:after {
+	top: calc(80% + 5px);
+	bottom: auto;
+}
+
+[data-tooltip-location="bottom"]:before {
+	transform: translate(-50%, 5px) scale(0.5);
+}
+[data-tooltip-location="bottom"]:hover:before {
+	transform: translate(-50%, 5px) scale(1);
+}
+
+[data-tooltip-location="bottom"]:after {
+	border-width: 0px 5px 5px 5px;
+	border-color: transparent transparent #6cc027 transparent;
+	transform-origin: bottom;
+}
+
+/* Tooltip Theme */
+
+[data-tooltip-theme="glass"]:before {
+	@apply dark:bg-dark-600/80 bg-light-100/10;
+}
+
+/**************************************************************************/
+/****************************    Socials   ********************************/
+/**************************************************************************/
+
+.socials {
+	@apply flex space-x-2 lg:space-x-3 xl:space-x-5 md:justify-end;
+}
+
+.socials button {
+	@apply p-2 border-none rounded-md bg-dark-500 hover:bg-dark-400 hover:animate-bounce;
+}
+
+/**************************************************************************/
+/************************    React Datepicker   ***************************/
+/**************************************************************************/
+.react-datepicker {
+	@apply rounded-md border-2 border-primary-500 overflow-hidden !important;
+}
+
+.react-datepicker__header {
+	@apply rounded-sm;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__time-list-item:hover {
+	@apply bg-primary-600 text-light-100 !important;
+}
+
+.react-datepicker__input-container > input {
+	@apply w-full focus:ring-primary-500 focus:border-primary-500 block pl-10 text-sm border border-gray-300 text-dark-300 rounded-md transition duration-300 cursor-pointer !important;
+}
+
+.react-datepicker__input-container > input:focus {
+	outline: none;
+	border: 2px solid #6cc027;
+}
+
+.react-datepicker__day--selected {
+	@apply bg-primary-600 !important;
+}
+
+.react-datepicker__navigation-icon {
+	@apply text-primary-600 !important;
+}
+
+/**************************************************************************/
+/******************************    Card   *********************************/
+/**************************************************************************/
+
+.bgGradient {
+	background-image: linear-gradient(95.79deg, #a76fff 10.21%, #7445f8 100%);
 }

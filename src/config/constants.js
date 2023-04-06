@@ -2,8 +2,9 @@
 /**************************    Product details   **************************/
 /**************************************************************************/
 export const product_name = "Idea2Business";
-export const product_website = "https://www.idea2business.xyz";
-export const product_domain_url = "https://idea2business.xyz";
+export const product_url = "https://idea2business.xyz";
+export const product_website_legal = "https://www.idea2business.xyz";
+export const domain = "idea2business.xyz";
 export const contact_email = "team@idea2business.xyz";
 export const company_name = "Musixverse Technologies Pvt. Ltd.";
 
@@ -14,7 +15,7 @@ export const linkedin_url = "https://www.linkedin.com/company/idea-2-business";
 /**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/
 /**************************************************************************/
-export const title_main_page = "Idea2Business";
+export const title_main_page = "Idea to Business";
 export const meta_description =
 	"Transform your idea into a profitable business. Just enter your idea, and Idea2Business will help you turn it into a successful venture.";
 export const reportabug_meta_description =
@@ -252,8 +253,8 @@ export const Faqs = [
 		heading: "What can I expect?",
 		body: (
 			<p>
-				Our personalized suggestions are very good but we can't promise that you won't have to do more work. That is also not the goal. We aim to get
-				you into action mode and kickstart your pitch deck and funding journey. Go get'em tiger! 🫡
+				Our personalized suggestions are very good but we can&apos;t promise that you won&apos;t have to do more work. That is also not the goal. We aim
+				to get you into action mode and kickstart your pitch deck and funding journey. Go get&apos;em tiger! 🫡
 			</p>
 		),
 		content_id: "collapseFive",

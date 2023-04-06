@@ -8,22 +8,22 @@ import { investorMeetingPrep } from "@/config/constants";
 export default function InvestorMeetingPrep({
 	isGenerating,
 	setIsGenerating,
-	promptEnterProjectInfo,
-	projectInfo,
+	promptEnterIdeaInfo,
+	ideaInfo,
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
 }) {
-	const { projectName, projectDescription } = projectInfo;
+	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
 
 	const callExpectedInvestorQuestionsEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Expected Investor Questions for your project are being generated",
+			message: "Expected Investor Questions for your idea are being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/investor-meeting-prep/expected-investor-questions", {
@@ -31,7 +31,7 @@ export default function InvestorMeetingPrep({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -50,7 +50,7 @@ export default function InvestorMeetingPrep({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Tips & Tricks to nail the pitch for your project are being generated",
+			message: "Tips & Tricks to nail the pitch for your idea are being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/investor-meeting-prep/tips-and-tricks-to-nail-your-pitch", {
@@ -58,7 +58,7 @@ export default function InvestorMeetingPrep({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -77,7 +77,7 @@ export default function InvestorMeetingPrep({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Revenue Model for your project is being generated",
+			message: "Revenue Model for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/investor-meeting-prep/revenue-model", {
@@ -85,7 +85,7 @@ export default function InvestorMeetingPrep({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -104,7 +104,7 @@ export default function InvestorMeetingPrep({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Exit Strategy for your project is being generated",
+			message: "Exit Strategy for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/investor-meeting-prep/exit-strategy", {
@@ -112,7 +112,7 @@ export default function InvestorMeetingPrep({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -142,7 +142,7 @@ export default function InvestorMeetingPrep({
 					subscriptionPlanRequired={investorMeetingPrep[0].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -156,7 +156,7 @@ export default function InvestorMeetingPrep({
 					subscriptionPlanRequired={investorMeetingPrep[1].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -170,7 +170,7 @@ export default function InvestorMeetingPrep({
 					subscriptionPlanRequired={investorMeetingPrep[2].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -184,7 +184,7 @@ export default function InvestorMeetingPrep({
 					subscriptionPlanRequired={investorMeetingPrep[3].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</SectionGrid>

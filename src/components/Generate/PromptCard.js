@@ -3,12 +3,13 @@ import Button from "@/components/ui/Button";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
+import { removeAllWhiteSpaces } from "@/utils/Helpers";
 
 export default function PromptCard({
 	cardsAvailable,
 	handleCardClick,
 	cardText,
-	promptEnterProjectInfo,
+	promptEnterIdeaInfo,
 	subscriptionPlanRequired,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
@@ -43,7 +44,7 @@ export default function PromptCard({
 	const formSubmit = () => {
 		if (status === "authenticated" && session && session.user) {
 			if (!cardsAvailable) {
-				promptEnterProjectInfo();
+				promptEnterIdeaInfo();
 				return;
 			}
 			if (cardsAvailable && !canAccess) {
@@ -127,6 +128,8 @@ export default function PromptCard({
 				e.preventDefault();
 				formSubmit();
 			}}
+			// Using id to regenerate response when button is clicked in the modal
+			id={removeAllWhiteSpaces(cardText)}
 			onClick={(e) => {
 				e.preventDefault();
 				formSubmit();
@@ -156,7 +159,7 @@ export default function PromptCard({
 				<div className="absolute flex flex-col w-full h-full justify-center items-center transition-all duration-500 opacity-0 group-hover:opacity-100">
 					<i className="fa-solid fa-lock text-4xl"></i>
 					{!cardsAvailable ? (
-						<p className="px-8 mt-2 text-xs text-center">Please enter project details first</p>
+						<p className="px-8 mt-2 text-xs text-center">Please enter idea details first</p>
 					) : (
 						<p className="px-8 mt-2 text-xs text-center">{subscriptionPlanRequired} subscription needed to access this</p>
 					)}

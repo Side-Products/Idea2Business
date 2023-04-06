@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const withPWA = require("next-pwa")({
+	dest: "public",
+	disable: process.env.NODE_ENV === "development",
+	register: true,
+	skipWaiting: true,
+});
+
+module.exports = withPWA({
 	images: {
-		domains: ["lh3.googleusercontent.com"],
+		domains: ["lh3.googleusercontent.com", "miro.medium.com"],
 	},
 	webpack: (config, { isServer }) => {
 		if (!isServer) {
@@ -13,4 +20,4 @@ module.exports = {
 
 		return config;
 	},
-};
+});

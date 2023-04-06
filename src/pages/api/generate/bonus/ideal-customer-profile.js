@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const pitchDeckPromptPrefix = `Generate ideal customer profile for the following project:
+const pitchDeckPromptPrefix = `Generate ideal customer profile for the following idea:
 `;
 
 const generateAction = async (req, res) => {
