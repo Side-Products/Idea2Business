@@ -9,7 +9,7 @@ export default function PromptCard({
 	cardsAvailable,
 	handleCardClick,
 	cardText,
-	promptEnterProjectInfo,
+	promptEnterIdeaInfo,
 	subscriptionPlanRequired,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
@@ -44,7 +44,7 @@ export default function PromptCard({
 	const formSubmit = () => {
 		if (status === "authenticated" && session && session.user) {
 			if (!cardsAvailable) {
-				promptEnterProjectInfo();
+				promptEnterIdeaInfo();
 				return;
 			}
 			if (cardsAvailable && !canAccess) {

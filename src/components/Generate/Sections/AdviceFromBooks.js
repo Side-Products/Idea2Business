@@ -8,22 +8,22 @@ import { adviceFromBooks } from "@/config/constants";
 export default function AdviceFromBooks({
 	isGenerating,
 	setIsGenerating,
-	promptEnterProjectInfo,
-	projectInfo,
+	promptEnterIdeaInfo,
+	ideaInfo,
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
 }) {
-	const { projectName, projectDescription } = projectInfo;
+	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
 
 	const callLeanStartupEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from The Lean Startup for your project is being generated",
+			message: "Advice from The Lean Startup for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/advice-from-books/the-lean-startup", {
@@ -31,7 +31,7 @@ export default function AdviceFromBooks({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -50,7 +50,7 @@ export default function AdviceFromBooks({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from Hooked for your project is being generated",
+			message: "Advice from Hooked for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/advice-from-books/hooked", {
@@ -58,7 +58,7 @@ export default function AdviceFromBooks({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -77,7 +77,7 @@ export default function AdviceFromBooks({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from The Hard Thing About Hard Things for your project is being generated",
+			message: "Advice from The Hard Thing About Hard Things for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/advice-from-books/the-hard-thing-about-hard-things", {
@@ -85,7 +85,7 @@ export default function AdviceFromBooks({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -104,7 +104,7 @@ export default function AdviceFromBooks({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Advice from The Startup Owner's Manual for your project is being generated",
+			message: "Advice from The Startup Owner's Manual for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/advice-from-books/startup-owners-manual", {
@@ -112,7 +112,7 @@ export default function AdviceFromBooks({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -142,7 +142,7 @@ export default function AdviceFromBooks({
 					subscriptionPlanRequired={adviceFromBooks[0].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -156,7 +156,7 @@ export default function AdviceFromBooks({
 					subscriptionPlanRequired={adviceFromBooks[1].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -170,7 +170,7 @@ export default function AdviceFromBooks({
 					subscriptionPlanRequired={adviceFromBooks[2].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -184,7 +184,7 @@ export default function AdviceFromBooks({
 					subscriptionPlanRequired={adviceFromBooks[3].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</SectionGrid>

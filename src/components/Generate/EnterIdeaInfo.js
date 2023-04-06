@@ -5,10 +5,10 @@ import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { StatusContext } from "@/store/StatusContextProvider";
 import Button from "@/components/ui/Button";
 import { sleep } from "@/utils/Sleep";
-import { newProjectSearch, clearErrors } from "@/redux/actions/projectActions";
+import { newIdeaSearch, clearErrors } from "@/redux/actions/ideaActions";
 
-const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnterProjectInfo, setCardsAvailable, setIsGenerating }) => {
-	const { projectName, projectDescription } = projectInfo;
+const EnterIdeaInfo = ({ ideaInfo, onFieldChange, isGenerating, promptEnterIdeaInfo, setCardsAvailable, setIsGenerating }) => {
+	const { ideaName, ideaDescription } = ideaInfo;
 
 	const { data: session, status } = useSession();
 	const { setAuthModalOpen } = useContext(AuthModalContext);
@@ -17,27 +17,27 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 	const dispatch = useDispatch();
 	const submitHandler = () => {
 		if (status === "authenticated" && session && session.user) {
-			if (projectName.length > 0 && projectDescription.length > 0) {
+			if (ideaName.length > 0 && ideaDescription.length > 0) {
 				if (isGenerating !== "generating") {
 					setCardsAvailable(false);
 					setIsGenerating("generating");
 
-					const projectInfo = {
-						name: projectName,
-						description: projectDescription,
+					const ideaInfo = {
+						name: ideaName,
+						description: ideaDescription,
 					};
 					// Add to db
-					dispatch(newProjectSearch(projectInfo));
+					dispatch(newIdeaSearch(ideaInfo));
 				}
 			} else {
-				promptEnterProjectInfo();
+				promptEnterIdeaInfo();
 			}
 		} else {
 			setAuthModalOpen(true);
 		}
 	};
 
-	const { error, success, loading } = useSelector((state) => state.newProjectSearch);
+	const { error, success, loading } = useSelector((state) => state.newIdeaSearch);
 	useEffect(() => {
 		if (success) {
 			sleep(1000).then(() => {
@@ -72,18 +72,18 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 			<form className="w-full p-4 sm:p-0 sm:w-6/12 h-min flex flex-col items-center justify-center mt-4 sm:mt-14">
 				<input
 					className="w-full bg-dark-600/40 border border-light-900 focus:border-light-700 transform duration-300 outline-0 rounded-xl h-12 p-4 normal-case"
-					placeholder="Project Name"
-					name="projectName"
-					value={projectName}
+					placeholder="Idea Name"
+					name="ideaName"
+					value={ideaName}
 					onChange={onFieldChange}
 					required
 				/>
 				<br />
 				<textarea
 					className="w-full bg-dark-600/40 border border-light-900 focus:border-light-700 transform duration-300 outline-0 rounded-xl h-60 p-4 normal-case resize-none"
-					placeholder="Project Description"
-					name="projectDescription"
-					value={projectDescription}
+					placeholder="Idea Description"
+					name="ideaDescription"
+					value={ideaDescription}
 					onChange={onFieldChange}
 					required
 				/>
@@ -107,4 +107,4 @@ const EnterProjectInfo = ({ projectInfo, onFieldChange, isGenerating, promptEnte
 	);
 };
 
-export default EnterProjectInfo;
+export default EnterIdeaInfo;

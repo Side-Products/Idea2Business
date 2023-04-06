@@ -8,22 +8,22 @@ import { socialMediaStrategy } from "@/config/constants";
 export default function SocialMediaStrategy({
 	isGenerating,
 	setIsGenerating,
-	promptEnterProjectInfo,
-	projectInfo,
+	promptEnterIdeaInfo,
+	ideaInfo,
 	cardsAvailable,
 	setModalText,
 	setContentModalOpen,
 	setSubscriptionRequiredModalOpen,
 	sectionStyle,
 }) {
-	const { projectName, projectDescription } = projectInfo;
+	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
 
 	const callTwitterEndpoint = async (cardText) => {
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Twitter Strategy for your project is being generated",
+			message: "Twitter Strategy for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/social-media-strategy/twitter", {
@@ -31,7 +31,7 @@ export default function SocialMediaStrategy({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -50,7 +50,7 @@ export default function SocialMediaStrategy({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "Instagram Strategy for your project is being generated",
+			message: "Instagram Strategy for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/social-media-strategy/instagram", {
@@ -58,7 +58,7 @@ export default function SocialMediaStrategy({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -77,7 +77,7 @@ export default function SocialMediaStrategy({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "LinkedIn Strategy for your project is being generated",
+			message: "LinkedIn Strategy for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/social-media-strategy/linkedin", {
@@ -85,7 +85,7 @@ export default function SocialMediaStrategy({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -104,7 +104,7 @@ export default function SocialMediaStrategy({
 		setLoading({
 			status: true,
 			title: "Hang on for a moment",
-			message: "TikTok/Reels/Shorts Strategy for your project is being generated",
+			message: "TikTok/Reels/Shorts Strategy for your idea is being generated",
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 		const response = await fetch("/api/generate/social-media-strategy/tiktok", {
@@ -112,7 +112,7 @@ export default function SocialMediaStrategy({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ userInput: `${projectName}: ${projectDescription}` }),
+			body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
 		});
 		const data = await response.json();
 		const { output } = data;
@@ -142,7 +142,7 @@ export default function SocialMediaStrategy({
 					subscriptionPlanRequired={socialMediaStrategy[0].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -156,7 +156,7 @@ export default function SocialMediaStrategy({
 					subscriptionPlanRequired={socialMediaStrategy[1].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -170,7 +170,7 @@ export default function SocialMediaStrategy({
 					subscriptionPlanRequired={socialMediaStrategy[2].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 				<PromptCard
@@ -184,7 +184,7 @@ export default function SocialMediaStrategy({
 					subscriptionPlanRequired={socialMediaStrategy[3].subscriptionPlanRequired}
 					sectionStyle={sectionStyle}
 					cardsAvailable={cardsAvailable}
-					promptEnterProjectInfo={promptEnterProjectInfo}
+					promptEnterIdeaInfo={promptEnterIdeaInfo}
 					setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 				/>
 			</SectionGrid>

@@ -7,8 +7,8 @@ export default function GuidedByAI() {
 				</h1>
 
 				<p className="lg:col-start-8 lg:col-span-5 col-span-12 lg:mt-0 mt-5 self-center text-light-300 text-lg">
-					Idea2Business provides a personalized guide to accelerate the growth and success of your project. Use these tools to take your project to
-					the next level and that too in<span className="text-gradient-primary-tr font-bold"> under a minute</span>!
+					Idea2Business provides a personalized guide to accelerate the growth and success of your idea. Use these tools to take your idea to the next
+					level and that too in<span className="text-gradient-primary-tr font-bold"> under a minute</span>!
 				</p>
 
 				<article className="col-span-12 grid grid-cols-12 gap-x-5 md:mt-16 xl:mt-10 2xl:mt-6 items-center">
@@ -19,7 +19,7 @@ export default function GuidedByAI() {
 							</p>
 
 							<h2 className="text-xl lg:text-2xl font-bold my-4">Turn your ideas into reality, faster!</h2>
-							<p className="text-white-700 text-md text-light-400">You don&apos;t need to spend so much time & money to ship projects.</p>
+							<p className="text-white-700 text-md text-light-400">You don&apos;t need to spend so much time & money to ship ideas.</p>
 						</div>
 						<div className="lg:max-w-[80%]">
 							<p className="number flex items-end text-4xl sm:text-5xl font-bold">
@@ -28,7 +28,7 @@ export default function GuidedByAI() {
 
 							<h2 className="text-xl lg:text-2xl font-bold mt-4 mb-3">Leverage AI&apos;s wisdom</h2>
 							<p className="text-white-700 text-md text-light-400">
-								AI is already here. Leverage it&apos;s wisdom to accelerate the growth your product.{" "}
+								AI is already here. Leverage it&apos;s wisdom to accelerate the growth of your business.{" "}
 							</p>
 						</div>
 						<div className="lg:max-w-[80%]">
@@ -38,7 +38,7 @@ export default function GuidedByAI() {
 
 							<h2 className="text-xl lg:text-2xl font-bold mt-4 mb-3">Get everything you need to succeed</h2>
 							<p className="text-white-700 text-md text-light-400">
-								Just provide your project details. From getting the{" "}
+								Just provide some details about your idea. From getting the{" "}
 								<span className="text-gradient-primary-tr font-bold">first initial users</span> to{" "}
 								<span className="text-gradient-primary-tr font-bold">drafting email pitch to a VC</span>, our platform will handle everything
 								for you.

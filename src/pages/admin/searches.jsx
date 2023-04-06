@@ -1,7 +1,7 @@
 import PageWrapper from "@/layout/PageWrapper";
 import { getSession } from "next-auth/react";
 import AllSearches from "@/components/Admin/AllSearches";
-import { getAllProjects } from "@/redux/actions/projectActions";
+import { getAllIdeas } from "@/redux/actions/ideaActions";
 import { wrapper } from "@/redux/redux-store";
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
@@ -15,7 +15,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
 		};
 	}
 
-	await store.dispatch(getAllProjects(req, query.page, query.search));
+	await store.dispatch(getAllIdeas(req, query.page, query.search));
 
 	return {
 		props: { session },

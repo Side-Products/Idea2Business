@@ -8,7 +8,7 @@ export default function Testimonials() {
 				<div className="container mx-auto flex flex-col gap-[50px] sm:gap-[55px] md:gap-[60px] lg:gap-[70px] xl:gap-[75px]">
 					<div className="w-full flex flex-col gap-[20px] text-center">
 						<h1 className="md:px-24 text-5xl lg:text-[70px] tracking-[-2.5px] sm:leading-[5.5rem] font-bold text-gradient-secondary-tr">
-							Don't just take our word for it
+							Don&apos;t just take our word for it
 						</h1>
 						<p className="text-lg md:text-xl text-light-300">See what other people are saying</p>
 
@@ -23,9 +23,9 @@ export default function Testimonials() {
 									</svg>
 									<blockquote>
 										<p className="text-lg sm:text-2xl font-medium text-white">
-											"Idea2Business was a game-changer for me! I had a passion project that I thought would never see the light of day,
-											but with their help, I turned it into a successful business.
-											<br /> I'm forever grateful!"
+											&quot;Idea2Business was a game-changer for me! I had a passion project that I thought would never see the light of
+											day, but with their help, I turned it into a successful business.
+											<br /> I&apos;m forever grateful!&quot;
 										</p>
 									</blockquote>
 									<figcaption className="flex items-center justify-center mt-6 space-x-3">
@@ -47,8 +47,8 @@ export default function Testimonials() {
 										position={"Serial Entrepreneur"}
 										username={"@Shivansh3121"}
 										avatar={"/testimonials/shivansh.jpg"}
-										text={`Idea2Business is just awesome. It helped me to take my project to the next level. Perfect choice to convert your
-											next project into a real world product 🤙🏻`}
+										text={`Idea2Business is just awesome. It helped me to take my idea to the next level. Perfect choice to convert your
+											next idea into a real world product 🤙🏻`}
 										daysAgo={"1 day ago"}
 									/>
 
@@ -84,7 +84,7 @@ export default function Testimonials() {
 										position={"Designer"}
 										username={"@Aayushi7765"}
 										avatar={"/testimonials/aayushi.jpg"}
-										text={`I was impressed with how quickly Idea2Business was able to help me turn my side-project into a profitable business. Their AI is literally so good!`}
+										text={`I was impressed with how quickly Idea2Business was able to help me turn my idea into a profitable business. Their AI is literally so good!`}
 										daysAgo={"6 days ago"}
 									/>
 

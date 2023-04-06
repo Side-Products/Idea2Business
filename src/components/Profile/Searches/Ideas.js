@@ -2,12 +2,13 @@ import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { StatusContext } from "@/store/StatusContextProvider";
-import { clearErrors } from "@/redux/actions/projectActions";
-import Pager from "./Pager";
-import ProjectCard from "./ProjectCard";
+import { clearErrors } from "@/redux/actions/ideaActions";
+import Pager from "@/components/ui/Pagination/Pager";
+import Button from "@/components/ui/Button";
+import IdeaCard from "./IdeaCard";
 import Search from "./Search";
 
-export const Projects = ({ projects, resultsPerPage, projectsCount, filteredProjectsCount, error, adminView }) => {
+export const Ideas = ({ ideas, resultsPerPage, ideasCount, filteredIdeasCount, error, adminView }) => {
 	const { setError } = useContext(StatusContext);
 
 	const router = useRouter();
@@ -43,9 +44,9 @@ export const Projects = ({ projects, resultsPerPage, projectsCount, filteredProj
 		});
 	};
 
-	let count = projectsCount;
+	let count = ideasCount;
 	if (search) {
-		count = filteredProjectsCount;
+		count = filteredIdeasCount;
 	}
 
 	return (
@@ -56,11 +57,31 @@ export const Projects = ({ projects, resultsPerPage, projectsCount, filteredProj
 			</div>
 
 			<div className="w-full flex flex-col items-center justify-center mt-10">
-				{projects && projects.length === 0 ? (
-					<div className="text-2xl font-medium text-light-400 text-center mt-10">No project searches yet</div>
+				{ideas && ideas.length === 0 ? (
+					<div>
+						<p className="text-2xl font-medium text-light-400 text-center mt-10">No idea searches yet</p>
+						<div className="mt-8">
+							<Button
+								variant={"primary"}
+								outline={true}
+								rounded={true}
+								classes="px-[2px] py-[2px]"
+								onClick={() => {
+									router.push("/generate");
+								}}
+							>
+								<div className="px-4 text-sm font-normal">
+									Go search for an idea now
+									<span className="ml-2 text-sm">
+										<i className="fa-solid fa-arrow-right-long"></i>
+									</span>
+								</div>
+							</Button>
+						</div>
+					</div>
 				) : (
 					<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-						{projects && projects.map((project) => <ProjectCard key={project._id} project={project} adminView={adminView} />)}
+						{ideas && ideas.map((idea) => <IdeaCard key={idea._id} idea={idea} adminView={adminView} />)}
 					</div>
 				)}
 			</div>

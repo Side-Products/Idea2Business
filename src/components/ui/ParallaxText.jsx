@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform, useMotionValue, useVelocity, useAnimationFrame } from "framer-motion";
 import { wrap } from "@motionone/utils";
 
-function ParallaxText({ projects, baseVelocity = 100 }) {
+function Parallax({ projects, baseVelocity = 100 }) {
 	const baseX = useMotionValue(0);
 	const { scrollY } = useScroll();
 
@@ -62,11 +62,11 @@ function ParallaxText({ projects, baseVelocity = 100 }) {
 	);
 }
 
-export default function ParallaxTextSection() {
+export default function ParallaxText() {
 	return (
 		<section className="w-screen text-dark-200">
-			<ParallaxText baseVelocity={-3} projects={["Konjer", "Pandora", "Add2Kart", "Edden", "DevKit", "BrideMeUp"]}></ParallaxText>
-			<ParallaxText baseVelocity={3} projects={["Musixverse", "Cluso", "SoundBetter", "Link3", "MiGuru", "ColabLand"]}></ParallaxText>
+			<Parallax baseVelocity={-3} projects={["Konjer", "Pandora", "Add2Kart", "Edden", "DevKit", "BrideMeUp"]}></Parallax>
+			<Parallax baseVelocity={3} projects={["Musixverse", "Cluso", "SoundBetter", "Link3", "MiGuru", "ColabLand"]}></Parallax>
 		</section>
 	);
 }

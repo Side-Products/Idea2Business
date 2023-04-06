@@ -1,13 +1,12 @@
 import nc from "next-connect";
 import dbConnect from "@/lib/dbConnect";
-import { allSearches, newProjectSearch } from "@/backend/controllers/projectSearchController";
+import { mySearches } from "@/backend/controllers/ideaSearchController";
 import { isAuthenticatedUser } from "@/backend/middlewares/auth";
 import onError from "@/backend/middlewares/errors";
 
 const handler = nc({ onError });
 dbConnect();
 
-handler.get(allSearches);
-handler.use(isAuthenticatedUser).post(newProjectSearch);
+handler.use(isAuthenticatedUser).get(mySearches);
 
 export default handler;

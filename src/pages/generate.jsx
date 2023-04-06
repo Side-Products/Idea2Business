@@ -1,15 +1,15 @@
 import { useState, useContext, useEffect } from "react";
 import PageWrapper from "@/layout/PageWrapper";
 import { useRouter } from "next/router";
+import { getSession } from "next-auth/react";
+import { wrapper } from "@/redux/redux-store";
+import { mySubscription } from "@/redux/actions/subscriptionActions";
 import { StatusContext } from "@/store/StatusContextProvider";
 import ContentModal from "@/components/Generate/ContentModal";
 import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
 import SectionHeading from "@/components/Generate/SectionHeading";
-import { mySubscription } from "@/redux/actions/subscriptionActions";
-import { wrapper } from "@/redux/redux-store";
-import { getSession } from "next-auth/react";
 // Import sections
-import EnterProjectInfo from "@/components/Generate/EnterProjectInfo";
+import EnterIdeaInfo from "@/components/Generate/EnterIdeaInfo";
 import Decks from "@/components/Generate/Sections/Decks";
 import Pitches from "@/components/Generate/Sections/Pitches";
 import UnderstandingPotentialUsers from "@/components/Generate/Sections/UnderstandingPotentialUsers";
@@ -37,9 +37,9 @@ const Generate = () => {
 	const { setError } = useContext(StatusContext);
 
 	// Input states
-	const [projectInfo, setProjectInfo] = useState({ projectName: "", projectDescription: "" });
+	const [ideaInfo, setIdeaInfo] = useState({ ideaName: "", ideaDescription: "" });
 	const onFieldChange = (e) => {
-		setProjectInfo({ ...projectInfo, [e.target.name]: e.target.value });
+		setIdeaInfo({ ...ideaInfo, [e.target.name]: e.target.value });
 	};
 
 	const router = useRouter();
@@ -47,18 +47,18 @@ const Generate = () => {
 	// If name and description are present in the query string, set the input states
 	useEffect(() => {
 		if (name && description) {
-			setProjectInfo({ projectName: name, projectDescription: description });
+			setIdeaInfo({ ideaName: name, ideaDescription: description });
 		}
 	}, [name, description]);
 
-	const promptEnterProjectInfo = () => {
+	const promptEnterIdeaInfo = () => {
 		setError({
 			title: "Missing information",
-			message: "Please enter project name and description first",
+			message: "Please enter idea details first",
 			showErrorBox: true,
 		});
-		const projectInfoContainer = document.getElementById("projectInfo");
-		projectInfoContainer.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+		const ideaInfoContainer = document.getElementById("ideaInfo");
+		ideaInfoContainer.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 	};
 
 	const [cardsAvailable, setCardsAvailable] = useState(false);
@@ -79,14 +79,14 @@ const Generate = () => {
 
 	return (
 		<PageWrapper useDefaultContainer={false}>
-			<div className="w-full flex flex-col items-center bg-dark-1000 h-screen" id="projectInfo">
+			<div className="w-full flex flex-col items-center bg-dark-1000 h-screen" id="ideaInfo">
 				<div className="w-full max-w-[1920px] py-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-					<EnterProjectInfo
-						projectInfo={projectInfo}
+					<EnterIdeaInfo
+						ideaInfo={ideaInfo}
 						onFieldChange={onFieldChange}
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
 						setCardsAvailable={setCardsAvailable}
 					/>
 				</div>
@@ -97,8 +97,8 @@ const Generate = () => {
 					<Decks
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
-						projectInfo={projectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
+						ideaInfo={ideaInfo}
 						cardsAvailable={cardsAvailable}
 						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
 					/>
@@ -106,8 +106,8 @@ const Generate = () => {
 					<Pitches
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
-						projectInfo={projectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
+						ideaInfo={ideaInfo}
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
@@ -118,8 +118,8 @@ const Generate = () => {
 					<UnderstandingPotentialUsers
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
-						projectInfo={projectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
+						ideaInfo={ideaInfo}
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
@@ -130,8 +130,8 @@ const Generate = () => {
 					<SocialMediaStrategy
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
-						projectInfo={projectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
+						ideaInfo={ideaInfo}
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
@@ -142,8 +142,8 @@ const Generate = () => {
 					<AdviceFromBooks
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
-						projectInfo={projectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
+						ideaInfo={ideaInfo}
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
@@ -154,8 +154,8 @@ const Generate = () => {
 					<InvestorMeetingPrep
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
-						projectInfo={projectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
+						ideaInfo={ideaInfo}
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}
@@ -166,8 +166,8 @@ const Generate = () => {
 					<BonusContent
 						isGenerating={isGenerating}
 						setIsGenerating={setIsGenerating}
-						promptEnterProjectInfo={promptEnterProjectInfo}
-						projectInfo={projectInfo}
+						promptEnterIdeaInfo={promptEnterIdeaInfo}
+						ideaInfo={ideaInfo}
 						cardsAvailable={cardsAvailable}
 						setModalText={setModalText}
 						setContentModalOpen={setContentModalOpen}

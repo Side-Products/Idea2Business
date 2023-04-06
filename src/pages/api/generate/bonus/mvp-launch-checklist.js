@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const pitchDeckPromptPrefix = `Generate a list of actionable items to launch the MVP of the following project:
+const pitchDeckPromptPrefix = `Generate a list of actionable items to launch the MVP of the following idea:
 `;
 
 const generateAction = async (req, res) => {

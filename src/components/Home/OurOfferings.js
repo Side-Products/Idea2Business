@@ -38,7 +38,7 @@ export default function OurOfferings() {
 							</div>
 							<div className="title text-lg md:text-xl text-center lg:text-2xl font-bold">Professional Pitch Deck</div>
 							<div className="description text-light-400 text-center px-8">
-								Get a polished and professional pitch deck to showcase your project and secure funding or partnerships.
+								Get a polished and professional pitch deck to showcase your business and secure funding or partnerships.
 							</div>
 						</div>
 						<div className="card w-full h-full sm:w-[calc(50%-18px)] lg:w-[calc(33%-21px)] flex items-center flex-col gap-[15px]">
@@ -56,7 +56,7 @@ export default function OurOfferings() {
 							</div>
 							<div className="title text-lg md:text-xl text-center lg:text-2xl font-bold">Social Media Strategy</div>
 							<div className="description text-light-400 text-center px-8">
-								Get a comprehensive social media strategy to promote your project and reach a wider audience.
+								Get a comprehensive social media strategy to promote your business and reach a wider audience.
 							</div>
 						</div>
 						<div className="card w-full h-full sm:w-[calc(50%-18px)] lg:w-[calc(33%-21px)] flex items-center flex-col gap-[15px]">
@@ -137,7 +137,7 @@ export default function OurOfferings() {
 
 					<div className="w-full flex flex-col items-center justify-center lg:text-center bg-gradient-quad-tr sm:py-16 sm:px-14 md:px-16 lg:px-24 xl:px-32 py-8 px-8 rounded-3xl">
 						<span className="text-4xl sm:text-5xl lg:text-[54px] xl:text-6xl font-bold sm:tracking-[-2.5px] tracking-[-1.5px]">
-							Kickstart your funding with a custom pitch deck template for your project
+							Kickstart your funding with a custom pitch deck template for your business
 						</span>
 
 						<div className="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 sm:mt-16 mt-10">

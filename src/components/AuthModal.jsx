@@ -133,15 +133,15 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex justify-center items-center h-full w-full fixed">
-						<div className="max-w-[26rem] w-11/12 p-4 pl-9 pb-12 bg-dark-600 rounded-lg">
+						<div className="max-w-[26rem] w-11/12 p-4 pl-9 pb-12 bg-dark-700 rounded-lg">
 							<div className="w-full flex justify-start">
 								<div className="w-full flex flex-col justify-center items-center mt-4">
 									{!forgotPassword && (
-										<div className="w-full flex justify-between sm:px-12 mb-8">
+										<div className="w-full flex justify-between sm:px-12 px-6 mb-8">
 											<button
 												onClick={() => setAuthState("signup")}
 												className={
-													"py-2 px-8 hover:bg-dark-600 rounded text-sm font-semibold " +
+													"py-2 px-8 hover:bg-dark-800 rounded text-sm font-semibold " +
 													(authState === "signup" && "border-2 border-transparent border-b-primary-500")
 												}
 											>
@@ -150,7 +150,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											<button
 												onClick={() => setAuthState("login")}
 												className={
-													"py-2 px-8 hover:bg-dark-600 rounded text-sm font-semibold " +
+													"py-2 px-8 hover:bg-dark-800 rounded text-sm font-semibold " +
 													(authState === "login" && "border-2 border-transparent border-b-primary-500")
 												}
 											>
@@ -158,7 +158,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											</button>
 										</div>
 									)}
-									<Image src={logo} alt="MXV Logo" width="60" height="60" className="rounded-md" />
+									<Image src={logo} alt="Logo" width="60" height="60" className="rounded-full" />
 								</div>
 								<div
 									onClick={() => closeModal()}
@@ -186,7 +186,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 										<div className="text-xl font-semibold font-primary">
 											{authState === "signup" ? "Get Started" : "Welcome Back"}&nbsp;&nbsp;&nbsp;
 										</div>
-										<p className="text-sm mt-4">Let us help you make your dream of creating a profitable product a reality!</p>
+										<p className="text-sm mt-4">Let us help you make your dream of creating a profitable business a reality!</p>
 									</div>
 									<div className="mt-8">
 										<div className="w-full space-y-4">
@@ -199,7 +199,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											>
 												{authState === "signup" && (
 													<div className="flex flex-col">
-														<label htmlFor="email_field" className="text-sm text-light-500">
+														<label htmlFor="name_field" className="text-sm text-light-500">
 															Name
 														</label>
 														<input
@@ -268,7 +268,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 														setLoading({ status: true });
 														signIn("google");
 													}}
-													className=" flex justify-center items-center bg-dark-800 hover:bg-[#000] rounded-full p-4 text-sm"
+													className=" flex justify-center items-center bg-dark-900 hover:bg-[#000] rounded-full p-4 text-sm"
 												>
 													<Image src="/auth/google.png" alt="Google Logo" width="28" height="28" />
 												</button>
@@ -277,7 +277,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 														setLoading({ status: true });
 														signIn("github");
 													}}
-													className=" flex justify-center items-center bg-dark-800 hover:bg-[#000] rounded-full p-4 text-sm"
+													className=" flex justify-center items-center bg-dark-900 hover:bg-[#000] rounded-full p-4 text-sm"
 												>
 													<Image src="/auth/github.png" alt="GitHub Logo" width="28" height="28" />
 												</button>

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const projectSearchSchema = new mongoose.Schema({
+const ideaSearchSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: [true, "Please enter a name"],
@@ -23,4 +23,4 @@ const projectSearchSchema = new mongoose.Schema({
 	},
 });
 
-export default mongoose.models.ProjectSearch || mongoose.model("ProjectSearch", projectSearchSchema);
+export default mongoose.models.IdeaSearch || mongoose.model("IdeaSearch", ideaSearchSchema);

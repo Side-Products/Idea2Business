@@ -60,7 +60,7 @@ const Pricing = () => {
 				<div className="mx-auto max-w-screen-md text-center">
 					<h2 className="mb-4 text-4xl tracking-tight font-extrabold text-light-300">Made for driven people like you</h2>
 					<p className="mb-5 font-light sm:text-xl text-gray-400">
-						Everything you need to convert your side-project into a profitable product.
+						Everything you need to convert your idea into a profitable business.
 						<br />
 						Choose a plan that suits you. Grow business fast.
 					</p>
@@ -159,7 +159,7 @@ const Pricing = () => {
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
 							<h3 className="mb-4 text-2xl font-semibold">Standard</h3>
-							<p className="font-light sm:text-lg text-gray-400">Begin transforming your projects into real-world products.</p>
+							<p className="font-light sm:text-lg text-gray-400">Begin transforming your ideas into real-world products.</p>
 							<div className="flex justify-center items-baseline my-8">
 								<span className="mr-2 text-5xl font-extrabold">$5</span>
 								<span className="text-gray-400">for a week</span>
@@ -259,7 +259,7 @@ const Pricing = () => {
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
 							<h3 className="mb-4 text-2xl font-semibold">Pro Plus</h3>
-							<p className="font-light sm:text-lg text-gray-400">Get all the power you need to build profitable products.</p>
+							<p className="font-light sm:text-lg text-gray-400">Get all the power you need to build a profitable business.</p>
 							<div className="flex justify-center items-baseline my-8">
 								<span className="mr-2 text-5xl font-extrabold">$10</span>
 								<span className="text-gray-400">for a month</span>
