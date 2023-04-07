@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { StatusContext } from "@/store/StatusContextProvider";
@@ -7,6 +7,7 @@ import Pager from "@/components/ui/Pagination/Pager";
 import Button from "@/components/ui/Button";
 import IdeaCard from "./IdeaCard";
 import Search from "./Search";
+import DeleteIdeaSearchModal from "@/components/Admin/Modals/DeleteIdeaSearchModal";
 
 export const Ideas = ({ ideas, resultsPerPage, ideasCount, filteredIdeasCount, error, adminView }) => {
 	const { setError } = useContext(StatusContext);
@@ -49,6 +50,9 @@ export const Ideas = ({ ideas, resultsPerPage, ideasCount, filteredIdeasCount, e
 		count = filteredIdeasCount;
 	}
 
+	const [isDeleteIdeaSearchModalOpen, setDeleteIdeaSearchModalOpen] = useState(false);
+	const [ideaSearchToDelete, setIdeaSearchToDelete] = useState("");
+
 	return (
 		<>
 			<div className="flex flex-col xl:w-1/3 lg:w-9/12 md:w-1/2 mt-8">
@@ -59,7 +63,7 @@ export const Ideas = ({ ideas, resultsPerPage, ideasCount, filteredIdeasCount, e
 			<div className="w-full flex flex-col items-center justify-center mt-10">
 				{ideas && ideas.length === 0 ? (
 					<div>
-						<p className="text-2xl font-medium text-light-400 text-center mt-10">No idea searches yet</p>
+						<p className="text-2xl font-medium text-light-400 text-center mt-10">No searches yet</p>
 						<div className="mt-8">
 							<Button
 								variant={"primary"}
@@ -81,16 +85,29 @@ export const Ideas = ({ ideas, resultsPerPage, ideasCount, filteredIdeasCount, e
 					</div>
 				) : (
 					<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-						{ideas && ideas.map((idea) => <IdeaCard key={idea._id} idea={idea} adminView={adminView} />)}
+						{ideas &&
+							ideas.map((idea) => (
+								<IdeaCard
+									key={idea._id}
+									idea={idea}
+									adminView={adminView}
+									setIdeaSearchToDelete={setIdeaSearchToDelete}
+									setDeleteIdeaSearchModalOpen={setDeleteIdeaSearchModalOpen}
+								/>
+							))}
 					</div>
 				)}
 			</div>
 
 			<div className="mt-12">
 				{resultsPerPage < count && (
-					<Pager activePage={page} onPageChange={handlePagination} itemsCountPerPage={resultsPerPage} totalItemsCount={count} />
+					<Pager activePage={page} onPageChange={handlePagination} itemsCountPerPage={resultsPerPage} totalPagesCount={count} />
 				)}
 			</div>
+
+			{adminView && <div className="mt-16 font-semibold text-2xl text-light-400">Total Count: {ideasCount}</div>}
+
+			<DeleteIdeaSearchModal isOpen={isDeleteIdeaSearchModalOpen} setOpen={setDeleteIdeaSearchModalOpen} ideaSearchToDelete={ideaSearchToDelete} />
 		</>
 	);
 };

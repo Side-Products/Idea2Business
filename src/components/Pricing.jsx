@@ -9,7 +9,7 @@ import { StatusContext } from "@/store/StatusContextProvider";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
-import { pitches, understandingPotentialUsers, socialMediaStrategy, adviceFromBooks, investorMeetingPrep, bonusContent, decks } from "@/config/constants";
+import { generateCategories } from "@/config/constants";
 
 const Pricing = () => {
 	const { setLoading } = useContext(LoadingContext);
@@ -79,65 +79,17 @@ const Pricing = () => {
 							<div className="mb-8 font-bold text-lg text-light-600">WHAT YOU CAN DO</div>
 
 							<ul role="list" className="mb-8 space-y-4 text-left">
-								{pitches.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Free" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{understandingPotentialUsers.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Free" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{socialMediaStrategy.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Free" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{adviceFromBooks.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Free" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{investorMeetingPrep.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Free" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{bonusContent.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Free" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
+								{Object.keys(generateCategories).map((key, index) => {
+									return generateCategories[key].map((item, idx) => {
+										return (
+											item.subscriptionPlanRequired == "Free" && (
+												<li className="flex items-center text-sm space-x-3" key={idx}>
+													<Tick />
+													<span>{item.cardText}</span>
+												</li>
+											)
+										);
+									});
 								})}
 							</ul>
 						</div>
@@ -168,65 +120,17 @@ const Pricing = () => {
 							<div className="mb-8 font-bold text-lg text-light-600">ALL OF FREE PLUS</div>
 
 							<ul role="list" className="mb-8 space-y-4 text-left">
-								{pitches.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Standard" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{understandingPotentialUsers.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Standard" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{socialMediaStrategy.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Standard" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{adviceFromBooks.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Standard" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{investorMeetingPrep.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Standard" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{bonusContent.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Standard" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
+								{Object.keys(generateCategories).map((key, index) => {
+									return generateCategories[key].map((item, idx) => {
+										return (
+											item.subscriptionPlanRequired == "Standard" && (
+												<li className="flex items-center text-sm space-x-3" key={idx}>
+													<Tick />
+													<span>{item.cardText}</span>
+												</li>
+											)
+										);
+									});
 								})}
 							</ul>
 						</div>
@@ -268,75 +172,17 @@ const Pricing = () => {
 							<div className="mb-8 font-bold text-lg text-light-600">ALL OF STANDARD PLUS</div>
 
 							<ul role="list" className="mb-8 space-y-4 text-left">
-								{decks.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Pro Plus" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{pitches.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Pro Plus" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{understandingPotentialUsers.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Pro Plus" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{socialMediaStrategy.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Pro Plus" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{adviceFromBooks.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Pro Plus" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{investorMeetingPrep.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Pro Plus" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
-								})}
-								{bonusContent.map((item, index) => {
-									return (
-										item.subscriptionPlanRequired == "Pro Plus" && (
-											<li className="flex items-center text-sm space-x-3" key={index}>
-												<Tick />
-												<span>{item.cardText}</span>
-											</li>
-										)
-									);
+								{Object.keys(generateCategories).map((key, index) => {
+									return generateCategories[key].map((item, idx) => {
+										return (
+											item.subscriptionPlanRequired == "Pro Plus" && (
+												<li className="flex items-center text-sm space-x-3" key={idx}>
+													<Tick />
+													<span>{item.cardText}</span>
+												</li>
+											)
+										);
+									});
 								})}
 							</ul>
 						</div>

@@ -1,35 +1,26 @@
 import { useState, useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
 import pptxgen from "pptxgenjs";
-import redBG from "../../../../public/themes/redbg";
+import redBG from "../../../public/themes/redbg";
 import { LoadingContext } from "@/store/LoadingContextProvider";
-import SectionHeading from "../SectionHeading";
+import SectionHeading from "./SectionHeading";
 import Button from "@/components/ui/Button";
 import { useSession } from "next-auth/react";
 
-export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaInfo, ideaInfo, cardsAvailable, setSubscriptionRequiredModalOpen }) {
+export default function Decks({
+	title,
+	items,
+	category,
+	sectionStyle,
+	isGenerating,
+	setIsGenerating,
+	promptEnterIdeaInfo,
+	ideaInfo,
+	cardsAvailable,
+	setSubscriptionRequiredModalOpen,
+}) {
 	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
-
-	const callGenerateEndpoint = async () => {
-		if (ideaName.length > 0 && ideaDescription.length > 0) {
-			// Getting pitch deck content from OpenAI
-			const response = await fetch("/api/generate/decks/pitchdeck", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ userInput: `${ideaName}: ${ideaDescription}` }),
-			});
-			const data = await response.json();
-			const { output } = data;
-			let outputArray = output.text.split(/\r?\n/);
-
-			return outputArray;
-		} else {
-			promptEnterIdeaInfo();
-		}
-	};
 
 	function splitFirstOccurrence(str, separator) {
 		try {
@@ -55,7 +46,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide1 = pptx.addSlide();
 		slide1.background = { data: redBG };
 
-		const result1 = splitFirstOccurrence(apiOutput[1], ":");
+		const result1 = splitFirstOccurrence(apiOutput[0], ":");
 		slide1.addText(
 			[
 				{ text: result1.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -80,7 +71,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide2 = pptx.addSlide();
 		slide2.background = { data: redBG };
 
-		const result2 = splitFirstOccurrence(apiOutput[3], ":");
+		const result2 = splitFirstOccurrence(apiOutput[2], ":");
 		slide2.addText(
 			[
 				{ text: result2.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -105,7 +96,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide3 = pptx.addSlide();
 		slide3.background = { data: redBG };
 
-		const result3 = splitFirstOccurrence(apiOutput[5], ":");
+		const result3 = splitFirstOccurrence(apiOutput[4], ":");
 		slide3.addText(
 			[
 				{ text: result3.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -130,7 +121,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide4 = pptx.addSlide();
 		slide4.background = { data: redBG };
 
-		const result4 = splitFirstOccurrence(apiOutput[7], ":");
+		const result4 = splitFirstOccurrence(apiOutput[6], ":");
 		slide4.addText(
 			[
 				{ text: result4.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -155,7 +146,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide5 = pptx.addSlide();
 		slide5.background = { data: redBG };
 
-		const result5 = splitFirstOccurrence(apiOutput[9], ":");
+		const result5 = splitFirstOccurrence(apiOutput[8], ":");
 		slide5.addText(
 			[
 				{ text: result5.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -180,7 +171,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide6 = pptx.addSlide();
 		slide6.background = { data: redBG };
 
-		const result6 = splitFirstOccurrence(apiOutput[11], ":");
+		const result6 = splitFirstOccurrence(apiOutput[10], ":");
 		slide6.addText(
 			[
 				{ text: result6.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -205,7 +196,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide7 = pptx.addSlide();
 		slide7.background = { data: redBG };
 
-		const result7 = splitFirstOccurrence(apiOutput[13], ":");
+		const result7 = splitFirstOccurrence(apiOutput[12], ":");
 		slide7.addText(
 			[
 				{ text: result7.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -230,7 +221,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide8 = pptx.addSlide();
 		slide8.background = { data: redBG };
 
-		const result8 = splitFirstOccurrence(apiOutput[15], ":");
+		const result8 = splitFirstOccurrence(apiOutput[14], ":");
 		slide8.addText(
 			[
 				{ text: result8.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -255,7 +246,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide9 = pptx.addSlide();
 		slide9.background = { data: redBG };
 
-		const result9 = splitFirstOccurrence(apiOutput[17], ":");
+		const result9 = splitFirstOccurrence(apiOutput[16], ":");
 		slide9.addText(
 			[
 				{ text: result9.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -280,7 +271,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide10 = pptx.addSlide();
 		slide10.background = { data: redBG };
 
-		const result10 = splitFirstOccurrence(apiOutput[19], ":");
+		const result10 = splitFirstOccurrence(apiOutput[18], ":");
 		slide10.addText(
 			[
 				{ text: result10.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -305,7 +296,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide11 = pptx.addSlide();
 		slide11.background = { data: redBG };
 
-		const result11 = splitFirstOccurrence(apiOutput[21], ":");
+		const result11 = splitFirstOccurrence(apiOutput[20], ":");
 		slide11.addText(
 			[
 				{ text: result11.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -330,7 +321,7 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 		const slide12 = pptx.addSlide();
 		slide12.background = { data: redBG };
 
-		const result12 = splitFirstOccurrence(apiOutput[23], ":");
+		const result12 = splitFirstOccurrence(apiOutput[22], ":");
 		slide12.addText(
 			[
 				{ text: result12.first, options: { y: 1, align: "center", fontSize: 40, bold: true, underline: true, color: "ffffff", isTextBox: true } },
@@ -350,6 +341,44 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 
 		pptx.writeFile({ fileName: `${ideaName}.pptx` });
 	}
+
+	const callGenerateEndpoint = async (item, category, index) => {
+		if (ideaName.length > 0 && ideaDescription.length > 0) {
+			setLoading({
+				status: true,
+				title: "Hang on for a moment",
+				message: item.loadingMessage,
+				waitMessage: "It may take up to 30 seconds to generate the response...",
+			});
+
+			const response = await fetch("/api/generate", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					ideaName: ideaName,
+					ideaDescription: ideaDescription,
+					identifier: item.identifier,
+					category: category,
+					index: index,
+				}),
+			});
+			const data = await response.json();
+			const { output } = data;
+
+			const outputArray = output.split(/\r?\n/);
+			await generatePitchdeck(outputArray);
+
+			setLoading({
+				status: false,
+				title: "",
+				message: "",
+			});
+		} else {
+			promptEnterIdeaInfo();
+		}
+	};
 
 	// Subscription state
 	const { subscription } = useSelector((state) => state.subscription);
@@ -377,45 +406,38 @@ export default function Decks({ isGenerating, setIsGenerating, promptEnterIdeaIn
 
 	return (
 		<>
-			<SectionHeading>Decks</SectionHeading>
+			<SectionHeading sectionStyle={sectionStyle}>{title}</SectionHeading>
 
 			<div className="w-full flex items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
-				<div className="w-full sm:w-1/2 md:w-1/3">
-					<Button
-						type="button"
-						variant={"primary"}
-						outline={true}
-						onClick={async (_ev) => {
-							if (cardsAvailable) {
-								if (canAccess) {
-									setLoading({
-										status: true,
-										title: "Hang on for a moment",
-										message: "Pitchdeck for your idea is being generated",
-										waitMessage: "It may take up to 30 seconds to generate the response...",
-									});
-									setIsGenerating("pitchdeck");
-									const _apiOutput = await callGenerateEndpoint();
-									setIsGenerating(false);
-									generatePitchdeck(_apiOutput);
-									setLoading({
-										status: false,
-										title: "",
-										message: "",
-									});
-								} else {
-									setSubscriptionRequiredModalOpen(true);
-								}
-							} else {
-								promptEnterIdeaInfo();
-							}
-						}}
-						isLoading={isGenerating === "pitchdeck"}
-						innerClasses="py-3"
-					>
-						Download PitchDeck
-					</Button>
-				</div>
+				{items &&
+					items.map((item, index) => {
+						return (
+							<div className="w-full sm:w-1/2 md:w-1/3" key={item.identifier}>
+								<Button
+									type="button"
+									variant={"primary"}
+									outline={true}
+									onClick={async (_ev) => {
+										if (cardsAvailable) {
+											if (canAccess) {
+												setIsGenerating("pitchdeck");
+												await callGenerateEndpoint(item, category, index);
+												setIsGenerating(false);
+											} else {
+												setSubscriptionRequiredModalOpen(true);
+											}
+										} else {
+											promptEnterIdeaInfo();
+										}
+									}}
+									isLoading={isGenerating === item.identifier}
+									innerClasses="py-3"
+								>
+									{item.cardText}
+								</Button>
+							</div>
+						);
+					})}
 			</div>
 		</>
 	);

@@ -228,6 +228,18 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 
 													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 														<Link
+															href={`/admin/generated-response`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Generated Responses
+															</span>
+														</Link>
+													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
 															href={`/admin/bug-reports`}
 															className="ham_menu_link ham_menu_hover_effect text-center"
 															passHref={true}

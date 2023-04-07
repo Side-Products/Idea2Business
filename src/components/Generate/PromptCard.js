@@ -52,7 +52,7 @@ export default function PromptCard({
 				return;
 			}
 			if (cardsAvailable && canAccess) {
-				handleCardClick(cardText);
+				handleCardClick();
 				return;
 			}
 		} else {
@@ -122,6 +122,10 @@ export default function PromptCard({
 					? "prompt-card-5"
 					: sectionStyle == 6
 					? "prompt-card-6"
+					: sectionStyle == 7
+					? "prompt-card-7"
+					: sectionStyle == 8
+					? "prompt-card-8"
 					: "prompt-card-default")
 			}
 			onSubmit={(e) => {

@@ -1,5 +1,6 @@
 import IdeaSearch from "../models/ideaSearch";
 import User from "../models/user";
+import GenerateResponse from "../models/generateResponse";
 import Subscription from "../models/subscription";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import APIFeatures from "@/backend/utils/apiFeatures";
@@ -57,7 +58,7 @@ const mySearches = catchAsyncErrors(async (req, res) => {
 
 // add to db => /api/ideas
 const newIdeaSearch = catchAsyncErrors(async (req, res, next) => {
-	const user = await User.findOne({ email: req.user.email });
+	const user = await User.findOne({ _id: req.user._id });
 	if (user) {
 		if (user.credits > 0) {
 			user.credits -= 1;
@@ -132,6 +133,9 @@ const deleteSearchedIdea = catchAsyncErrors(async (req, res, next) => {
 	if (!ideaSearch) {
 		return next(new ErrorHandler("No idea found with this ID", 404));
 	}
+
+	// Delete all generated responses related to the searched idea
+	await GenerateResponse.deleteMany({ ideaSearch: ideaSearch._id });
 
 	await ideaSearch.remove();
 	res.status(200).json({ success: true, message: "Deleted successfully" });

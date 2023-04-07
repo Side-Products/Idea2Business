@@ -191,6 +191,14 @@ const Navbar = ({ setAuthModalOpen }) => {
 															</li>
 
 															<li>
+																<Link href={`/admin/generated-response`} passHref={true}>
+																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
+																		All Generated Responses
+																	</div>
+																</Link>
+															</li>
+
+															<li>
 																<Link href={`/admin/bug-reports`} passHref={true}>
 																	<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-dark-600">
 																		All Bug Reports

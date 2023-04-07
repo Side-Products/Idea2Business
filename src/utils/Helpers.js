@@ -22,3 +22,11 @@ export const padZeros = (num, width) => {
 	num = num + "";
 	return num.length >= width ? num : new Array(width - num.length + 1).join("0") + num;
 };
+
+export const findByMatchingProperties = (set, properties) => {
+	return set.filter(function (entry) {
+		return Object.keys(properties).every(function (key) {
+			return entry[key] === properties[key];
+		});
+	});
+};
