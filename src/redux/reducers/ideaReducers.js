@@ -8,6 +8,10 @@ import {
 	MY_IDEAS_FAIL,
 	IDEA_DETAILS_SUCCESS,
 	IDEA_DETAILS_FAIL,
+	ADMIN_DELETE_IDEA_SEARCH_REQUEST,
+	ADMIN_DELETE_IDEA_SEARCH_SUCCESS,
+	ADMIN_DELETE_IDEA_SEARCH_RESET,
+	ADMIN_DELETE_IDEA_SEARCH_FAIL,
 	CLEAR_ERRORS,
 } from "../constants/ideaConstants";
 
@@ -97,6 +101,38 @@ export const ideaDetailsReducer = (state = { idea: {} }, action) => {
 			};
 		case IDEA_DETAILS_FAIL:
 			return {
+				error: action.payload,
+			};
+		case CLEAR_ERRORS:
+			return {
+				...state,
+				error: null,
+			};
+		default:
+			return state;
+	}
+};
+
+// Admin delete idea search reducer
+export const adminDeleteIdeaSearchReducer = (state = {}, action) => {
+	switch (action.type) {
+		case ADMIN_DELETE_IDEA_SEARCH_REQUEST:
+			return {
+				loading: true,
+			};
+		case ADMIN_DELETE_IDEA_SEARCH_SUCCESS:
+			return {
+				loading: false,
+				isDeleted: action.payload,
+			};
+		case ADMIN_DELETE_IDEA_SEARCH_RESET:
+			return {
+				loading: false,
+				isDeleted: false,
+			};
+		case ADMIN_DELETE_IDEA_SEARCH_FAIL:
+			return {
+				loading: false,
 				error: action.payload,
 			};
 		case CLEAR_ERRORS:

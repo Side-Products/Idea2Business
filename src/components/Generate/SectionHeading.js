@@ -15,6 +15,10 @@ const SectionHeading = ({ sectionStyle, children }) => {
 					? "section-heading-5"
 					: sectionStyle == 6
 					? "section-heading-6"
+					: sectionStyle == 7
+					? "section-heading-7"
+					: sectionStyle == 8
+					? "section-heading-8"
 					: "section-heading-default")
 			}
 		>

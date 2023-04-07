@@ -1,5 +1,7 @@
 import crypto from "crypto";
 import User from "../models/user";
+import IdeaSearch from "../models/ideaSearch";
+import GenerateResponse from "../models/generateResponse";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import absoluteUrl from "next-absolute-url";
@@ -168,6 +170,12 @@ const deleteAdminUser = catchAsyncErrors(async (req, res) => {
 	if (!user) {
 		return next(new ErrorHandler("User not found with this ID", 400));
 	}
+
+	// Delete all searched ideas related to the user
+	await IdeaSearch.deleteMany({ user: user._id });
+
+	// Delete all generated responses related to the user
+	await GenerateResponse.deleteMany({ user: user._id });
 
 	await user.remove();
 

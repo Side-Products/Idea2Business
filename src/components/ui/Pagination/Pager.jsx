@@ -7,7 +7,7 @@ export default function Pager(props) {
 
 	const inputRef = useRef(1);
 
-	const maxPages = Math.ceil(props.totalItemsCount / props.itemsCountPerPage);
+	const maxPages = Math.ceil(props.totalPagesCount / props.itemsCountPerPage);
 
 	const handlePageDecrement = () => {
 		if (currPage === 1) return;

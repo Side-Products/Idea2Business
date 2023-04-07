@@ -44,6 +44,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			return;
 		}
 		handleChange();
+		router.replace("/", undefined, { shallow: true });
 		onClose();
 	};
 
@@ -57,10 +58,8 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const { data: session } = useSession();
 	useEffect(() => {
 		if (success) {
-			if (session && session.user) {
-				router.push("/generate");
-				closeModal();
-			} else setAuthState("login");
+			router.push("/generate");
+			closeModal();
 		}
 		if (error) {
 			setError({

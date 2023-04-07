@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { removeAllWhiteSpaces } from "@/utils/Helpers";
 
-const ContentModal = ({ isOpen, setOpen, heading, content }) => {
+const ContentModal = ({ isOpen, setOpen, heading, content, adminGeneratedResponseView = false }) => {
 	const downloadContent = () => {
 		// Downloading a text file
 		var a = window.document.createElement("a");
@@ -47,19 +47,21 @@ const ContentModal = ({ isOpen, setOpen, heading, content }) => {
 						>
 							<i className="fa-solid fa-download"></i>&nbsp;Download
 						</Button>
-						<Button
-							type="button"
-							variant={"primary"}
-							onClick={() => {
-								document.getElementById(removeAllWhiteSpaces(heading)).click();
-							}}
-							rounded={true}
-							classes="md:w-1/2 w-full text-md px-8 py-2"
-						>
-							<i className="fa-solid fa-arrow-rotate-left"></i>&nbsp;
-							<span className="sm:hidden md:block block">Generate another</span>
-							<span className="md:hidden sm:block hidden">Regenerate</span>
-						</Button>
+						{!adminGeneratedResponseView && (
+							<Button
+								type="button"
+								variant={"primary"}
+								onClick={() => {
+									document.getElementById(removeAllWhiteSpaces(heading)).click();
+								}}
+								rounded={true}
+								classes="md:w-1/2 w-full text-md px-8 py-2"
+							>
+								<i className="fa-solid fa-arrow-rotate-left"></i>&nbsp;
+								<span className="sm:hidden md:block block">Generate another</span>
+								<span className="md:hidden sm:block hidden">Regenerate</span>
+							</Button>
+						)}
 						<Button
 							type="button"
 							variant={"default"}

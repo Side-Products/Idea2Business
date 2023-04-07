@@ -5,18 +5,14 @@ import { getSession } from "next-auth/react";
 import { wrapper } from "@/redux/redux-store";
 import { mySubscription } from "@/redux/actions/subscriptionActions";
 import { StatusContext } from "@/store/StatusContextProvider";
-import ContentModal from "@/components/Generate/ContentModal";
-import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
-import SectionHeading from "@/components/Generate/SectionHeading";
+import { generateCategories } from "@/config/constants";
 // Import sections
 import EnterIdeaInfo from "@/components/Generate/EnterIdeaInfo";
-import Decks from "@/components/Generate/Sections/Decks";
-import Pitches from "@/components/Generate/Sections/Pitches";
-import UnderstandingPotentialUsers from "@/components/Generate/Sections/UnderstandingPotentialUsers";
-import SocialMediaStrategy from "@/components/Generate/Sections/SocialMediaStrategy";
-import AdviceFromBooks from "@/components/Generate/Sections/AdviceFromBooks";
-import InvestorMeetingPrep from "@/components/Generate/Sections/InvestorMeetingPrep";
-import BonusContent from "@/components/Generate/Sections/BonusContent";
+import Decks from "@/components/Generate/Decks";
+import Section from "@/components/Generate/Section";
+import SectionHeading from "@/components/Generate/SectionHeading";
+import ContentModal from "@/components/Generate/ContentModal";
+import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
 	const session = await getSession({ req: req });
@@ -77,6 +73,19 @@ const Generate = () => {
 		}
 	}, [cardsAvailable]);
 
+	const { decks, pitches, understandingPotentialUsers, socialMediaStrategy, adviceFromBooks, investorMeetingPrep, bonusContent } = generateCategories;
+
+	const sectionOptions = {
+		isGenerating,
+		setIsGenerating,
+		promptEnterIdeaInfo,
+		ideaInfo,
+		cardsAvailable,
+		setSubscriptionRequiredModalOpen,
+		setModalText,
+		setContentModalOpen,
+	};
+
 	return (
 		<PageWrapper useDefaultContainer={false}>
 			<div className="w-full flex flex-col items-center bg-dark-1000 h-screen" id="ideaInfo">
@@ -94,86 +103,25 @@ const Generate = () => {
 
 			<div className="w-full flex justify-center items-center pt-10 pb-32 bg-dark-1000" id="cardContainer">
 				<div className="w-full md:w-11/12 xl:w-9/12 flex flex-col justify-center items-center md:p-0 p-4">
-					<Decks
-						isGenerating={isGenerating}
-						setIsGenerating={setIsGenerating}
-						promptEnterIdeaInfo={promptEnterIdeaInfo}
-						ideaInfo={ideaInfo}
-						cardsAvailable={cardsAvailable}
-						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
-					/>
+					<Decks title="Decks" items={decks} category={"decks"} sectionStyle={1} {...sectionOptions} />
 
-					<Pitches
-						isGenerating={isGenerating}
-						setIsGenerating={setIsGenerating}
-						promptEnterIdeaInfo={promptEnterIdeaInfo}
-						ideaInfo={ideaInfo}
-						cardsAvailable={cardsAvailable}
-						setModalText={setModalText}
-						setContentModalOpen={setContentModalOpen}
-						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
-						sectionStyle={1}
-					/>
+					<Section title="Pitches" items={pitches} category={"pitches"} sectionStyle={2} {...sectionOptions} />
 
-					<UnderstandingPotentialUsers
-						isGenerating={isGenerating}
-						setIsGenerating={setIsGenerating}
-						promptEnterIdeaInfo={promptEnterIdeaInfo}
-						ideaInfo={ideaInfo}
-						cardsAvailable={cardsAvailable}
-						setModalText={setModalText}
-						setContentModalOpen={setContentModalOpen}
-						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
-						sectionStyle={2}
-					/>
-
-					<SocialMediaStrategy
-						isGenerating={isGenerating}
-						setIsGenerating={setIsGenerating}
-						promptEnterIdeaInfo={promptEnterIdeaInfo}
-						ideaInfo={ideaInfo}
-						cardsAvailable={cardsAvailable}
-						setModalText={setModalText}
-						setContentModalOpen={setContentModalOpen}
-						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+					<Section
+						title="Understanding Potential Users"
+						items={understandingPotentialUsers}
+						category={"understandingPotentialUsers"}
 						sectionStyle={3}
+						{...sectionOptions}
 					/>
 
-					<AdviceFromBooks
-						isGenerating={isGenerating}
-						setIsGenerating={setIsGenerating}
-						promptEnterIdeaInfo={promptEnterIdeaInfo}
-						ideaInfo={ideaInfo}
-						cardsAvailable={cardsAvailable}
-						setModalText={setModalText}
-						setContentModalOpen={setContentModalOpen}
-						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
-						sectionStyle={4}
-					/>
+					<Section title="Social Media Strategy" items={socialMediaStrategy} category={"socialMediaStrategy"} sectionStyle={4} {...sectionOptions} />
 
-					<InvestorMeetingPrep
-						isGenerating={isGenerating}
-						setIsGenerating={setIsGenerating}
-						promptEnterIdeaInfo={promptEnterIdeaInfo}
-						ideaInfo={ideaInfo}
-						cardsAvailable={cardsAvailable}
-						setModalText={setModalText}
-						setContentModalOpen={setContentModalOpen}
-						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
-						sectionStyle={5}
-					/>
+					<Section title="Advice from Books" items={adviceFromBooks} category={"adviceFromBooks"} sectionStyle={5} {...sectionOptions} />
 
-					<BonusContent
-						isGenerating={isGenerating}
-						setIsGenerating={setIsGenerating}
-						promptEnterIdeaInfo={promptEnterIdeaInfo}
-						ideaInfo={ideaInfo}
-						cardsAvailable={cardsAvailable}
-						setModalText={setModalText}
-						setContentModalOpen={setContentModalOpen}
-						setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
-						sectionStyle={6}
-					/>
+					<Section title="Investor Meeting Prep" items={investorMeetingPrep} category={"investorMeetingPrep"} sectionStyle={6} {...sectionOptions} />
+
+					<Section title="Bonus" items={bonusContent} category={"bonusContent"} sectionStyle={7} {...sectionOptions} />
 
 					<SectionHeading>More coming soon...</SectionHeading>
 				</div>

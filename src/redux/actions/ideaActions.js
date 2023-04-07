@@ -10,6 +10,9 @@ import {
 	MY_IDEAS_FAIL,
 	IDEA_DETAILS_SUCCESS,
 	IDEA_DETAILS_FAIL,
+	ADMIN_DELETE_IDEA_SEARCH_REQUEST,
+	ADMIN_DELETE_IDEA_SEARCH_SUCCESS,
+	ADMIN_DELETE_IDEA_SEARCH_FAIL,
 	CLEAR_ERRORS,
 } from "../constants/ideaConstants";
 
@@ -93,6 +96,25 @@ export const getIdeaDetails = (req, id) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: IDEA_DETAILS_FAIL,
+			payload: error.response.data.message,
+		});
+	}
+};
+
+// Admin delete idea search
+export const adminDeleteIdeaSearch = (id) => async (dispatch) => {
+	try {
+		dispatch({ type: ADMIN_DELETE_IDEA_SEARCH_REQUEST });
+
+		const { data } = await axios.delete(`/api/ideas/${id}`);
+
+		dispatch({
+			type: ADMIN_DELETE_IDEA_SEARCH_SUCCESS,
+			payload: data.success,
+		});
+	} catch (error) {
+		dispatch({
+			type: ADMIN_DELETE_IDEA_SEARCH_FAIL,
 			payload: error.response.data.message,
 		});
 	}
