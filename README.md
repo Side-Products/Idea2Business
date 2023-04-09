@@ -1,5 +1,8 @@
 # Idea2Business
 
+Transform your idea into a profitable business. Just enter your idea, and Idea2Business will help you turn it into a successful venture.
+
+
 <img src="./public/product_image_1.png" alt="Product Image" />
 
 <br />
@@ -64,5 +67,9 @@ Prod: https://cloud.mongodb.com/v2/635b891062c3be1fa5989dad#/metrics/replicaSet/
 
 ### ReCAPTCHA
 
-Analytics: https://www.google.com/u/7/recaptcha/admin/site/628283073
+https://www.google.com/u/7/recaptcha/admin/site/628283073
 
+
+### Google Analytics
+
+https://analytics.google.com/analytics/web/?authuser=7#/a263373608p363795173/admin/streams/table/4891232010
