@@ -47,6 +47,10 @@ export default function UserDetails({ ideasCount }) {
 			setLoading({ status: false });
 			dispatch({ type: UPDATE_PROFILE_RESET });
 		}
+		if (router.query && "paymentsuccess" in router.query) {
+			router.replace("/profile", undefined, { shallow: true });
+			router.reload();
+		}
 	}, [dispatch, isUpdated, error, loadedUser, session]);
 
 	const submitHandler = () => {

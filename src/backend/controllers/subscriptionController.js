@@ -1,11 +1,19 @@
 import Subscription from "../models/subscription";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import ErrorHandler from "../utils/errorHandler";
+import { getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
 
 // create new subscription => /api/subscriptions
 const newSubscription = catchAsyncErrors(async (req, res) => {
 	const { amountPaid, paymentInfo, paidOn, subscriptionValidUntil } = req.body;
-	const subscription = await Subscription.create({ user: req.user._id || req.user.id, amountPaid, paymentInfo, paidOn, subscriptionValidUntil });
+	const subscription = await Subscription.create({
+		user: req.user._id || req.user.id,
+		version: getLatestSubscriptionPlansVersion(),
+		amountPaid,
+		paymentInfo,
+		paidOn,
+		subscriptionValidUntil,
+	});
 
 	res.status(200).json({
 		success: true,
