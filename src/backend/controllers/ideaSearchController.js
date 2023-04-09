@@ -5,6 +5,8 @@ import Subscription from "../models/subscription";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import APIFeatures from "@/backend/utils/apiFeatures";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
+import { freePlan } from "@/config/constants";
+import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 const allSearches = catchAsyncErrors(async (req, res) => {
 	const resultsPerPage = 4;
@@ -75,14 +77,9 @@ const newIdeaSearch = catchAsyncErrors(async (req, res, next) => {
 
 			if (subscription) {
 				// Check for which plan the user is subscribed to
-				const subscriptionPlan =
-					subscription && subscription.amountPaid == 10 && new Date(subscription.subscriptionValidUntil) > Date.now()
-						? "Pro Plus"
-						: subscription && subscription.amountPaid == 5 && new Date(subscription.subscriptionValidUntil) > Date.now()
-						? "Standard"
-						: "Free";
+				const subscriptionPlan = getCurrentSubscriptionTier(subscription);
 
-				if (subscriptionPlan !== "Free") {
+				if (subscriptionPlan !== freePlan) {
 					// Do nothing
 				} else {
 					return next(new ErrorHandler("You do not have a subscription or enough credits to generate results", 400));

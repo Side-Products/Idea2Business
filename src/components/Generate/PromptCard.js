@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { removeAllWhiteSpaces } from "@/utils/Helpers";
+import { freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 export default function PromptCard({
 	cardsAvailable,
@@ -17,23 +19,18 @@ export default function PromptCard({
 	// Subscription state
 	const { subscription } = useSelector((state) => state.subscription);
 	// Check for which plan the user is subscribed to
-	const subscriptionPlan =
-		subscription && subscription.amountPaid == 10 && new Date(subscription.subscriptionValidUntil) > Date.now()
-			? "Pro Plus"
-			: subscription && subscription.amountPaid == 5 && new Date(subscription.subscriptionValidUntil) > Date.now()
-			? "Standard"
-			: "Free";
+	const subscriptionPlan = getCurrentSubscriptionTier(subscription);
 
 	const { data: session, status } = useSession();
 	const [canAccess, setCanAccess] = useState(false);
 	useEffect(() => {
 		if (session && session.user && (session.user.role == "admin" || session.user.role == "allAccess")) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == "Pro Plus") {
+		} else if (subscriptionPlan == proPlusPlan) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == "Standard" && subscriptionPlanRequired == "Standard") {
+		} else if (subscriptionPlan == standardPlan && subscriptionPlanRequired == standardPlan) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == "Free" && subscriptionPlanRequired == "Free") {
+		} else if (subscriptionPlan == freePlan && subscriptionPlanRequired == freePlan) {
 			setCanAccess(true);
 		} else {
 			setCanAccess(false);

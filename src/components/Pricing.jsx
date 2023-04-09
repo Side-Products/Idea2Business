@@ -9,7 +9,8 @@ import { StatusContext } from "@/store/StatusContextProvider";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
-import { generateCategories } from "@/config/constants";
+import { generateCategories, freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { getCurrentSubscriptionTier, getSubscriptionPlanName, getSubscriptionPlanPrice } from "@/utils/Helpers";
 
 const Pricing = () => {
 	const { setLoading } = useContext(LoadingContext);
@@ -18,12 +19,7 @@ const Pricing = () => {
 
 	const { subscription } = useSelector((state) => state.subscription);
 	// Check for which plan the user is subscribed to
-	const subscriptionPlan =
-		subscription && subscription.amountPaid == 10 && new Date(subscription.subscriptionValidUntil) > Date.now()
-			? "Pro Plus"
-			: subscription && subscription.amountPaid == 5 && new Date(subscription.subscriptionValidUntil) > Date.now()
-			? "Standard"
-			: "Free";
+	const subscriptionPlan = getCurrentSubscriptionTier(subscription);
 
 	const { data: session, status } = useSession();
 	const { setAuthModalOpen } = useContext(AuthModalContext);
@@ -69,10 +65,10 @@ const Pricing = () => {
 				<div className="mt-10 lg:mt-14 space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
 					<div className="flex flex-col justify-between  p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
-							<h3 className="mb-4 text-2xl font-semibold">Free</h3>
+							<h3 className="mb-4 text-2xl font-semibold">{getSubscriptionPlanName(freePlan)}</h3>
 							<p className="font-light sm:text-lg text-gray-400">Best option to get started and try things out.</p>
 							<div className="flex justify-center items-baseline my-8">
-								<span className="mr-2 text-5xl font-extrabold">$0</span>
+								<span className="mr-2 text-5xl font-extrabold">${getSubscriptionPlanPrice(freePlan)}</span>
 								<span className="text-gray-400">forever</span>
 							</div>
 
@@ -82,7 +78,7 @@ const Pricing = () => {
 								{Object.keys(generateCategories).map((key, index) => {
 									return generateCategories[key].map((item, idx) => {
 										return (
-											item.subscriptionPlanRequired == "Free" && (
+											item.subscriptionPlanRequired == getSubscriptionPlanName(freePlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
 													<span>{item.cardText}</span>
@@ -94,7 +90,7 @@ const Pricing = () => {
 							</ul>
 						</div>
 
-						{subscriptionPlan == "Free" ? (
+						{subscriptionPlan == getSubscriptionPlanName(freePlan) ? (
 							<Button
 								type="button"
 								variant={"secondary"}
@@ -110,10 +106,10 @@ const Pricing = () => {
 
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
-							<h3 className="mb-4 text-2xl font-semibold">Standard</h3>
+							<h3 className="mb-4 text-2xl font-semibold">{getSubscriptionPlanName(standardPlan)}</h3>
 							<p className="font-light sm:text-lg text-gray-400">Begin transforming your ideas into real-world products.</p>
 							<div className="flex justify-center items-baseline my-8">
-								<span className="mr-2 text-5xl font-extrabold">$5</span>
+								<span className="mr-2 text-5xl font-extrabold">${getSubscriptionPlanPrice(standardPlan)}</span>
 								<span className="text-gray-400">for a week</span>
 							</div>
 
@@ -123,7 +119,7 @@ const Pricing = () => {
 								{Object.keys(generateCategories).map((key, index) => {
 									return generateCategories[key].map((item, idx) => {
 										return (
-											item.subscriptionPlanRequired == "Standard" && (
+											item.subscriptionPlanRequired == getSubscriptionPlanName(standardPlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
 													<span>{item.cardText}</span>
@@ -135,7 +131,7 @@ const Pricing = () => {
 							</ul>
 						</div>
 
-						{subscriptionPlan == "Standard" ? (
+						{subscriptionPlan == getSubscriptionPlanName(standardPlan) ? (
 							<Button
 								type="button"
 								variant={"secondary"}
@@ -146,12 +142,12 @@ const Pricing = () => {
 							>
 								Current Plan
 							</Button>
-						) : subscriptionPlan && subscriptionPlan === "Free" ? (
+						) : subscriptionPlan && subscriptionPlan == getSubscriptionPlanName(freePlan) ? (
 							<Button
 								type="button"
 								variant={"primary"}
 								onClick={() => {
-									buySubscription(5);
+									buySubscription(getSubscriptionPlanPrice(standardPlan));
 								}}
 								classes="text-lg px-8 py-3"
 							>
@@ -162,10 +158,10 @@ const Pricing = () => {
 
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
-							<h3 className="mb-4 text-2xl font-semibold">Pro Plus</h3>
+							<h3 className="mb-4 text-2xl font-semibold">{getSubscriptionPlanName(proPlusPlan)}</h3>
 							<p className="font-light sm:text-lg text-gray-400">Get all the power you need to build a profitable business.</p>
 							<div className="flex justify-center items-baseline my-8">
-								<span className="mr-2 text-5xl font-extrabold">$10</span>
+								<span className="mr-2 text-5xl font-extrabold">${getSubscriptionPlanPrice(proPlusPlan)}</span>
 								<span className="text-gray-400">for a month</span>
 							</div>
 
@@ -175,7 +171,7 @@ const Pricing = () => {
 								{Object.keys(generateCategories).map((key, index) => {
 									return generateCategories[key].map((item, idx) => {
 										return (
-											item.subscriptionPlanRequired == "Pro Plus" && (
+											item.subscriptionPlanRequired == getSubscriptionPlanName(proPlusPlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
 													<span>{item.cardText}</span>
@@ -187,7 +183,7 @@ const Pricing = () => {
 							</ul>
 						</div>
 
-						{subscriptionPlan == "Pro Plus" ? (
+						{subscriptionPlan == getSubscriptionPlanName(proPlusPlan) ? (
 							<Button
 								type="button"
 								variant={"secondary"}
@@ -203,7 +199,7 @@ const Pricing = () => {
 								type="button"
 								variant={"primary"}
 								onClick={() => {
-									buySubscription(10);
+									buySubscription(getSubscriptionPlanPrice(proPlusPlan));
 								}}
 								classes="text-lg px-8 py-3"
 							>

@@ -58,8 +58,11 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const { data: session } = useSession();
 	useEffect(() => {
 		if (success) {
-			router.push("/generate");
-			closeModal();
+			setLoading({ status: false });
+			if (session && session.user) {
+				router.push("/generate");
+				closeModal();
+			} else setAuthState("login");
 		}
 		if (error) {
 			setError({
@@ -73,6 +76,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	}, [dispatch, success, error]);
 
 	const registerHandler = () => {
+		setLoading({ status: true });
 		const userData = {
 			name,
 			email,
@@ -99,6 +103,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			});
 			setLoading({ status: false });
 		} else {
+			onClose();
 			router.push("/generate");
 			setLoading({ status: false });
 		}

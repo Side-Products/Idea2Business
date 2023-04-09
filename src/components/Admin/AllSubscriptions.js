@@ -6,6 +6,7 @@ import { StatusContext } from "@/store/StatusContextProvider";
 import { LoadingContext } from "@/store/LoadingContextProvider";
 import Loader from "@/components/ui/Loader";
 import DeleteSubscriptionConfirmModal from "./Modals/DeleteSubscriptionConfirmModal";
+import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 export default function AllSubscriptions() {
 	const dispatch = useDispatch();
@@ -70,11 +71,15 @@ export default function AllSubscriptions() {
 				<div key={subscription.paymentInfo.id} className="relative group px-8 py-7 rounded-xl bg-dark-700">
 					<div className="flex items-start justify-between">
 						<p className="text-2xl font-semibold text-light-300">{subscription.user.name}</p>
-						<span className="text-3xl font-bold text-gradient-primary-tr">
-							{subscription.amountPaid == 5 ? "$5" : subscription.amountPaid == 10 ? "$10" : ""}
-						</span>
+						<span className="text-3xl font-bold text-gradient-primary-tr">${subscription.amountPaid}</span>
 					</div>
-					<p className="text-sm text-light-600">{subscription.user.email}</p>
+
+					<div className="flex items-start justify-between">
+						<p className="text-sm text-light-600">{subscription.user.email}</p>
+						<p className="text-sm text-light-600">v{subscription.version}</p>
+					</div>
+
+					<p className="mt-2 text-xl font-semibold text-gradient-secondary-tr">{getCurrentSubscriptionTier(subscription)}</p>
 
 					<p className="text-light-500 text-sm mt-4">
 						<span className="font-medium">Started On:</span>&nbsp;

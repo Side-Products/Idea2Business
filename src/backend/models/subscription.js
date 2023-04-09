@@ -6,6 +6,11 @@ const subscriptionSchema = new mongoose.Schema({
 		ref: "User",
 		required: true,
 	},
+	version: {
+		type: Number,
+		default: 1,
+		required: true,
+	},
 	amountPaid: {
 		type: Number,
 		default: 0,

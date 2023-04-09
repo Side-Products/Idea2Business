@@ -26,6 +26,29 @@ export const privacy_meta_description =
 	"This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can update, manage, export, and delete your information.";
 
 /**************************************************************************/
+/**************************    Subscription   *****************************/
+/**************************************************************************/
+// Replace these values with the values of the latest subscription object
+export const freePlan = "Free";
+export const standardPlan = "Standard";
+export const proPlusPlan = "Pro Plus";
+
+// version: {<obj>}
+// Do not remove any new version object, only add new ones
+export const subscriptionPlans = {
+	1: {
+		freeSubscription: { text: "Free", price: 0 },
+		standardSubscription: { text: "Standard", price: 5, validForDays: 7 },
+		proPlusSubscription: { text: "Pro Plus", price: 10, validForDays: 30 },
+	},
+	// 2: {
+	// 	freeSubscription: { text: freePlan, price: 0 },
+	// 	standardSubscription: { text: standardPlan, price: 2, validForDays: 7 },
+	// 	proPlusSubscription: { text: proPlusPlan, price: 5, validForDays: 30 },
+	// },
+};
+
+/**************************************************************************/
 /******************************    FAQs   *********************************/
 /**************************************************************************/
 import Link from "next/link";
@@ -97,28 +120,28 @@ export const pitches = [
 	{
 		cardText: "Pitch to Onboard Potential Co-Founder",
 		identifier: "coFounderPitch",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Write me a pitch to a potential future co-founder if they would be interested in joining me on a startup journey. Write a comprehensive answer to convince them. Following is my startup:`,
 		loadingMessage: "Co-Founder pitch for your idea is being generated",
 	},
 	{
 		cardText: "Pitch to Get Yourself a Mentor",
 		identifier: "mentorPitch",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Write me a pitch to get a mentor if they would be interested in joining my startup to mentor me. Write a comprehensive answer to convince them. Following is my startup:`,
 		loadingMessage: "Pitch to Mentor for your idea is being generated",
 	},
 	{
 		cardText: "Email Pitch to VC",
 		identifier: "emailPitchToVc",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Write me a email pitch to a VC for the following startup that includes the problem it's solving, the solution, market size, and the business plan:`,
 		loadingMessage: "VC Pitch for your idea is being generated",
 	},
 	{
 		cardText: "Pitch to Onboard Potential Advisor (Marketing)",
 		identifier: "marketingAdvisorPitch",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Write me a pitch to a potential future advisor if they would be interested in joining my startup to advise us on the marketing and strategy front. Write a comprehensive answer to convince them. Following is my startup:`,
 		loadingMessage: "Pitch to Marketing Advisor for your idea is being generated",
 	},
@@ -128,14 +151,14 @@ export const understandingPotentialUsers = [
 	{
 		cardText: "User Persona",
 		identifier: "userPersona",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Generate 10 user personas for the following startup:`,
 		loadingMessage: "User Personas for your idea is being generated",
 	},
 	{
 		cardText: "Mom Test: How to talk to initial customers",
 		identifier: "momTest",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `The Mom Test: The Mom Test is a set of simple rules for crafting good questions that even your mom can't lie to you about.
 		They are collectively called The Mom Test:
 		1. Talk about their life instead of your idea.
@@ -148,14 +171,14 @@ export const understandingPotentialUsers = [
 	{
 		cardText: "Type of Potential Customers",
 		identifier: "typeOfPotentialCustomers",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate the types of potential customers a startup founder should target for the following startup:`,
 		loadingMessage: "List of Potential Customers for your idea is being generated",
 	},
 	{
 		cardText: "Customer Pain Points",
 		identifier: "customerPainPoints",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Generate the pain points that a potential customer could have for the following startup:`,
 		loadingMessage: "List of Customer Pain Points for your idea is being generated",
 	},
@@ -165,28 +188,28 @@ export const socialMediaStrategy = [
 	{
 		cardText: "Twitter Strategy",
 		identifier: "twitterStrategy",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Generate the Twitter strategy for initial growth for the following product:`,
 		loadingMessage: "Twitter Strategy for your idea is being generated",
 	},
 	{
 		cardText: "Instagram Strategy",
 		identifier: "instagramStrategy",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate the Instagram strategy for initial growth for the following product:`,
 		loadingMessage: "Instagram Strategy for your idea is being generated",
 	},
 	{
 		cardText: "LinkedIn Strategy",
 		identifier: "linkedinStrategy",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate the LinkedIn strategy for initial growth for the following product:`,
 		loadingMessage: "LinkedIn Strategy for your idea is being generated",
 	},
 	{
 		cardText: "TikTok/Reels/Shorts Strategy",
 		identifier: "tiktokReelsShortsStrategy",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Generate the TikTok strategy for initial growth for the following product:`,
 		loadingMessage: "TikTok/Reels/Shorts Strategy for your idea is being generated",
 	},
@@ -196,28 +219,28 @@ export const adviceFromBooks = [
 	{
 		cardText: "Advice from the book: The Lean Startup",
 		identifier: "adviceFromBookTheLeanStartup",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Generate advice from the book "The  Lean Startup" specifically for the following startup:`,
 		loadingMessage: "Advice from The Lean Startup for your idea is being generated",
 	},
 	{
 		cardText: "Advice from the book: Hooked",
 		identifier: "adviceFromBookHooked",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Generate advice from the book “Hooked” specifically for the following startup:`,
 		loadingMessage: "Advice from Hooked for your idea is being generated",
 	},
 	{
 		cardText: "Advice from the book: The Hard Thing About Hard Things",
 		identifier: "adviceFromBookTheHardThingAboutHardThings",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Generate advice from the book “The Hard Thing About Hard Things” specifically for the following startup:`,
 		loadingMessage: "Advice from The Hard Thing About Hard Things for your idea is being generated",
 	},
 	{
 		cardText: "Advice from the book: The Startup Owner’s Manual",
 		identifier: "adviceFromBookTheStartupOwnersManual",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Generate advice from the book “The Startup Owner’s Manual” specifically for the following startup:`,
 		loadingMessage: "Advice from The Startup Owner's Manual for your idea is being generated",
 	},
@@ -233,28 +256,28 @@ export const investorMeetingPrep = [
 			</>
 		),
 		identifier: "15expectedInvestorQuestions",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Write me 15 questions that an investor can ask me during a pitch. Also write comprehensive answers to convince them. Following is my startup:`,
 		loadingMessage: "Expected Investor Questions for your idea are being generated",
 	},
 	{
 		cardText: "10 personal tips & tricks to nail your pitch",
 		identifier: "10personalTipsAndTricksToNailYourPitch",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Write me 10 tips and tricks to nail a pitch about my idea in front of an investor. Write comprehensive text. Following is my startup:`,
 		loadingMessage: "Tips & Tricks to nail the pitch for your idea are being generated",
 	},
 	{
 		cardText: "What is your revenue model and how do you plan to generate sustainable revenue over the long term?",
 		identifier: "revenueModel",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Write revenue models for my startup and how can I plan to generate sustainable revenue over the long term? I have to give the answer to an investor. Write comprehensive answers to convince them. Following is my startup:`,
 		loadingMessage: "Revenue Model for your idea is being generated",
 	},
 	{
 		cardText: "What is your exit strategy, and how do you plan to create value for investors?",
 		identifier: "exitStrategy",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Write an exit strategy for my startup and how can I create value for investors? I have to give the answer to an investor. Write comprehensive answers to convince them. Following is my startup:`,
 		loadingMessage: "Exit Strategy for your idea is being generated",
 	},
@@ -264,7 +287,7 @@ export const bonusContent = [
 	{
 		cardText: "SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs",
 		identifier: "spme",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `SPME (Strategy, Positioning, Messaging, Experimentations): Marketing for solopreneurs.
 		Strategy: the way toward your first position, the way from position to the next position, like a staircase up and to the right.
 		Positioning: A position is a context, an environment in which your product appears. Your future customers put your product into such a mental position. This happens in their own minds.
@@ -276,49 +299,49 @@ export const bonusContent = [
 	{
 		cardText: "MVP Launch Checklist",
 		identifier: "mvpLaunchChecklist",
-		subscriptionPlanRequired: "Free",
+		subscriptionPlanRequired: freePlan,
 		prompt: `Generate a list of actionable items to launch the MVP of the following idea:`,
 		loadingMessage: "MVP Launch checklist for your idea is being generated",
 	},
 	{
 		cardText: "How to build a team",
 		identifier: "howToBuildATeam",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate a guide for how to build a team for the following idea:`,
 		loadingMessage: "How to build a team for your idea is being generated",
 	},
 	{
 		cardText: "Product Roadmap",
 		identifier: "productRoadmap",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate a product roadmap for the following idea:`,
 		loadingMessage: "Product Roadmap for your idea is being generated",
 	},
 	{
 		cardText: "Social Media Calendar",
 		identifier: "socialMediaCalendar",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate social media calendar for 30 days for the following idea:`,
 		loadingMessage: "Social Media Calendar for your idea is being generated",
 	},
 	{
 		cardText: "Ideal Customer Profile (ICP)",
 		identifier: "idealCustomerProfile",
-		subscriptionPlanRequired: "Standard",
+		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate ideal customer profile for the following idea:`,
 		loadingMessage: "Ideal Customer Profile for your idea is being generated",
 	},
 	{
 		cardText: "Grant Proposal",
 		identifier: "grantProposal",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Generate a grant proposal for the following startup:`,
 		loadingMessage: "Grant Proposal for your idea is being generated",
 	},
 	{
 		cardText: "Legal Advice",
 		identifier: "legalAdvice",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Generate legal advice specifically for the following startup:`,
 		loadingMessage: "Legal Advice for your idea is being generated",
 	},
@@ -328,7 +351,7 @@ export const decks = [
 	{
 		cardText: "Download PitchDeck",
 		identifier: "pitchDeck",
-		subscriptionPlanRequired: "Pro Plus",
+		subscriptionPlanRequired: proPlusPlan,
 		prompt: `Reference: https://www.ycombinator.com/library/4T-how-to-design-a-better-pitch-deck
 		Write 1 comprehensive paragraph for each of the following topics, following the guidelines provided by YCombinator (see above reference): Problem, Solution, Market Opportunity, Product, Business Model, Competition, Traction, Financials, Team, Ask, Unique Selling Point, Target Audience for the following product:`,
 		loadingMessage: "Pitchdeck for your idea is being generated",

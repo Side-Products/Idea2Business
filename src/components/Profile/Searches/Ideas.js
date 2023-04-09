@@ -60,7 +60,7 @@ export const Ideas = ({ ideas, resultsPerPage, ideasCount, filteredIdeasCount, e
 				{search && <div className="text-sm mt-2 ml-2">Showing results for: {search}</div>}
 			</div>
 
-			<div className="w-full flex flex-col items-center justify-center mt-10">
+			<div className="w-full flex flex-col items-center justify-center mt-16">
 				{ideas && ideas.length === 0 ? (
 					<div>
 						<p className="text-2xl font-medium text-light-400 text-center mt-10">No searches yet</p>

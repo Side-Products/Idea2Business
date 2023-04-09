@@ -6,6 +6,8 @@ import { LoadingContext } from "@/store/LoadingContextProvider";
 import SectionHeading from "./SectionHeading";
 import Button from "@/components/ui/Button";
 import { useSession } from "next-auth/react";
+import { standardPlan, proPlusPlan } from "@/config/constants";
+import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 export default function Decks({
 	title,
@@ -383,21 +385,16 @@ export default function Decks({
 	// Subscription state
 	const { subscription } = useSelector((state) => state.subscription);
 	// Check for which plan the user is subscribed to
-	const subscriptionPlan =
-		subscription && subscription.amountPaid == 10 && new Date(subscription.subscriptionValidUntil) > Date.now()
-			? "Pro Plus"
-			: subscription && subscription.amountPaid == 5 && new Date(subscription.subscriptionValidUntil) > Date.now()
-			? "Standard"
-			: "Free";
+	const subscriptionPlan = getCurrentSubscriptionTier(subscription);
 
 	const { data: session } = useSession();
 	const [canAccess, setCanAccess] = useState(false);
 	useEffect(() => {
 		if (session && session.user && (session.user.role == "admin" || session.user.role == "allAccess")) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == "Pro Plus") {
+		} else if (subscriptionPlan == proPlusPlan) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == "Standard") {
+		} else if (subscriptionPlan == standardPlan) {
 			setCanAccess(false);
 		} else {
 			setCanAccess(false);

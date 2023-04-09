@@ -4,6 +4,8 @@ import Subscription from "../models/subscription";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import getRawBody from "raw-body";
 import { product_name, domain } from "@/config/constants";
+import { standardPlan, proPlusPlan } from "@/config/constants";
+import { getSubscriptionPlanName, getSubscriptionPlanPrice, getSubscriptionPlanValidDays, getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
 
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
@@ -14,7 +16,7 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 
 	// Create stripe checkout session
 	const session = await stripe.checkout.sessions.create({
-		success_url: `${origin}/profile`,
+		success_url: `${origin}/profile?paymentsuccess=true`,
 		cancel_url: `${origin}/pricing`,
 		customer_email: req.user.email,
 		client_reference_id: req.user._id || req.user.id,
@@ -23,7 +25,12 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 				price_data: {
 					currency: "usd",
 					product_data: {
-						name: parseInt(req.query.amount) == 5 ? "Standard Subscription" : parseInt(req.query.amount) == 10 ? "Pro Plus Subscription" : "",
+						name:
+							parseInt(req.query.amount) == getSubscriptionPlanPrice(standardPlan)
+								? getSubscriptionPlanName(standardPlan) + " Subscription"
+								: parseInt(req.query.amount) == getSubscriptionPlanPrice(proPlusPlan)
+								? getSubscriptionPlanName(proPlusPlan) + " Subscription"
+								: "",
 						description: "Subscription to " + product_name,
 						// TODO: change this to a custom image
 						// images: ["https://public.easyinvoice.cloud/img/logo_en_original.png"],
@@ -56,13 +63,22 @@ const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res) 
 
 			const subscription = await Subscription.create({
 				user: user._id,
+				version: getLatestSubscriptionPlansVersion(),
 				amountPaid: session.amount_total / 100,
 				paymentInfo: {
 					id: session.payment_intent,
 					status: session.payment_status,
 				},
 				paidOn: Date.now(),
-				subscriptionValidUntil: Date.now() + (session.amount_total / 100 == 10 ? 30 : 7) * 24 * 60 * 60 * 1000,
+				subscriptionValidUntil:
+					Date.now() +
+					(session.amount_total / 100 == getSubscriptionPlanPrice(proPlusPlan)
+						? getSubscriptionPlanValidDays(proPlusPlan)
+						: getSubscriptionPlanValidDays(standardPlan)) *
+						24 *
+						60 *
+						60 *
+						1000,
 			});
 			await subscription.save();
 
