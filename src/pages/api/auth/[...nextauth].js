@@ -14,15 +14,15 @@ export default NextAuth({
 	},
 	providers: [
 		GoogleProvider({
-			clientId: process.env.GOOGLE_CLIENT_ID,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+			clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
 			httpOptions: {
 				timeout: 80000,
 			},
 		}),
 		GithubProvider({
-			clientId: process.env.GITHUB_ID,
-			clientSecret: process.env.GITHUB_SECRET,
+			clientId: process.env.GITHUB_OAUTH_CLIENT_ID,
+			clientSecret: process.env.GITHUB_OAUTH_CLIENT_SECRET,
 		}),
 		CredentialsProvider({
 			name: "Credentials",
