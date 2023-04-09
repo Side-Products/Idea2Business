@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import easyinvoice from "easyinvoice";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { LoadingContext } from "@/store/LoadingContextProvider";
-import { product_name, domain } from "@/config/constants";
+import { product_name, domain, freePlan } from "@/config/constants";
 import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 export default function MySubscription() {
@@ -92,17 +92,21 @@ export default function MySubscription() {
 				<>
 					<p className="mt-1 text-3xl font-bold text-gradient-primary-tr">
 						{getCurrentSubscriptionTier(subscription)}
-						<span
-							className="ml-2 text-lg cursor-pointer text-light-300 hover:text-light-600 transition duration-300"
-							onClick={() => downloadInvoice(subscription)}
-						>
-							<i className="fa-solid fa-download"></i>
-						</span>
+						{getCurrentSubscriptionTier(subscription) !== freePlan && (
+							<span
+								className="ml-2 text-lg cursor-pointer text-light-300 hover:text-light-600 transition duration-300"
+								onClick={() => downloadInvoice(subscription)}
+							>
+								<i className="fa-solid fa-download"></i>
+							</span>
+						)}
 					</p>
-					<p className="text-light-400 text-sm mt-2">
-						<span className="font-medium">Valid Until:</span>&nbsp;
-						{new Date(subscription.subscriptionValidUntil).toDateString()}
-					</p>
+					{getCurrentSubscriptionTier(subscription) !== freePlan && (
+						<p className="text-light-400 text-sm mt-2">
+							<span className="font-medium">Valid Until:</span>&nbsp;
+							{new Date(subscription.subscriptionValidUntil).toDateString()}
+						</p>
+					)}
 				</>
 			) : (
 				<>

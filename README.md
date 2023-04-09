@@ -57,5 +57,12 @@ docker-compose up
 
 ### MongoDB
 
-`https://cloud.mongodb.com/v2/6412a28af4469f464b79439a#/metrics/replicaSet/6412a30a91bfdb60b1d488a9/explorer/project2product/users/find`
+Dev: https://cloud.mongodb.com/v2/635b891062c3be1fa5989dad#/metrics/replicaSet/635b899be6beb75252ef0fe1/explorer/idea2business/users/find
+
+Prod: https://cloud.mongodb.com/v2/635b891062c3be1fa5989dad#/metrics/replicaSet/637643184127cd4a35093686/explorer/idea2business/users/find
+
+
+### ReCAPTCHA
+
+Analytics: https://www.google.com/u/7/recaptcha/admin/site/628283073
 
