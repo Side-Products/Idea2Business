@@ -21,7 +21,7 @@ function App({ Component, pageProps, session, router }) {
 		};
 		router.events.on("routeChangeComplete", handleRouteChange);
 		return () => {
-			router.events.off("routeChangeComplete");
+			router.events.off("routeChangeComplete", handleRouteChange);
 		};
 	}, [router.events]);
 

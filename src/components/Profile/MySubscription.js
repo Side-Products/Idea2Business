@@ -45,9 +45,7 @@ export default function MySubscription() {
 				"due-date": "Valid Until", // Defaults to 'Due Date'
 				products: "Plan", // Defaults to 'Products'
 			},
-			// TODO: change logo url
 			images: {
-				// logo: "https://public.easyinvoice.cloud/img/logo_en_original.png",
 				logo: `https://${domain}/logo.png`,
 			},
 			sender: {

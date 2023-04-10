@@ -11,7 +11,8 @@ const ProtectedRoutes = ({ router, children }) => {
 	const { data: session, status } = useSession();
 
 	// Identify authenticated user
-	const isAuthenticated = session && status === "authenticated" && session.user;
+	const isAuthenticated = session && status == "authenticated" && session.user;
+	const isEmailVerified = session && status == "authenticated" && session.user && session.user.emailVerified;
 
 	// Three cases for users:
 	// 1. Unauthenticated
@@ -23,18 +24,22 @@ const ProtectedRoutes = ({ router, children }) => {
 	// 2. allAccess
 	// 3. admin
 
-	// session.user.role == "admin";
-	// session.user.role == "allAccess";
-
 	// @dev These routes are protected for unauthenticated users
-	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
+	const protectedRoutes = [appRoutes.ADMIN, appRoutes.PROFILE];
 	/**
 	 * @const pathIsProtected Checks if path exists in the protectedRoutes array
 	 */
 	const pathIsProtected = protectedRoutes.some((route) => router.pathname.includes(route));
 
+	// @dev These routes are protected for a logged in user
+	const protectedRoutesForAuthenticatedUser = [appRoutes.SIGNUP, appRoutes.LOGIN];
+	/**
+	 * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
+	 */
+	const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
+
 	// @dev These routes are protected until a user confirms their email
-	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
+	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.ADMIN];
 	/**
 	 * @const pathIsProtectedForAuthenticatedUserEmailUnverified Checks if path exists in the protectedRoutesForAuthenticatedUserEmailUnverified array
 	 */
@@ -42,21 +47,26 @@ const ProtectedRoutes = ({ router, children }) => {
 		router.pathname.includes(route)
 	);
 
-	// @dev These routes are protected for a logged in user who is not an artist
-	const protectedRoutesForCollectors = [appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
+	// @dev These routes are protected for authenticated users having role user
+	const protectedRoutesForRoleUser = [appRoutes.ADMIN];
 	/**
-	 * @const pathIsProtectedForCollector Checks if path exists in the protectedRoutesForCollectors array
+	 * @const pathIsProtectedForRoleUser Checks if path exists in the protectedRoutesForRoleUser array
 	 */
-	const pathIsProtectedForCollector = protectedRoutesForCollectors.some((route) => router.pathname.includes(route));
+	const pathIsProtectedForRoleUser = protectedRoutesForRoleUser.some((route) => router.pathname.includes(route));
 
-	// @dev These routes are protected for a logged in user
-	const protectedRoutesForAuthenticatedUser = [appRoutes.REGISTER];
+	// @dev These routes are protected for authenticated users having role allAccess
+	const protectedRoutesForRoleAllAccess = [appRoutes.ADMIN];
 	/**
-	 * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
+	 * @const pathIsProtectedForRoleAllAccess Checks if path exists in the protectedRoutesForRoleAllAccess array
 	 */
-	const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
+	const pathIsProtectedForRoleAllAccess = protectedRoutesForRoleAllAccess.some((route) => router.pathname.includes(route));
 
-	async function refetchUserData() {}
+	// @dev These routes are protected for authenticated users having role admin
+	const protectedRoutesForRoleAdmin = [];
+	/**
+	 * @const pathIsProtectedForRoleAdmin Checks if path exists in the protectedRoutesForRoleAdmin array
+	 */
+	const pathIsProtectedForRoleAdmin = protectedRoutesForRoleAdmin.some((route) => router.pathname.includes(route));
 
 	useEffect(() => {
 		function checkPath() {
@@ -68,22 +78,25 @@ const ProtectedRoutes = ({ router, children }) => {
 			}
 			// Authenticated
 			else {
-				refetchUserData();
-				// if (isBrowser() && (!user.attributes.email || !user.attributes.name)) {
-				// 	if (!router.pathname.startsWith(appRoutes.REGISTER)) router.push(appRoutes.REGISTER);
-				// } else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !user.attributes.emailVerified) {
-				// 	router.push(appRoutes.CONFIRM_EMAIL);
-				// } else if (isBrowser() && !user.attributes.isArtist && pathIsProtectedForCollector) {
-				// 	router.push(appRoutes.MARKETPLACE);
-				// } else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
-				// 	router.push(appRoutes.HOMEPAGE);
-				// }
+				if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
+					router.push(appRoutes.HOMEPAGE);
+				} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !isEmailVerified) {
+					router.push(appRoutes.PROFILE);
+				}
+				// isEmailVerified and route is protected for role
+				else if (isBrowser() && pathIsProtectedForRoleUser && session && session.user && session.user.role == "user") {
+					router.push(appRoutes.GENERATE);
+				} else if (isBrowser() && pathIsProtectedForRoleAllAccess && session && session.user && session.user.role == "allAccess") {
+					router.push(appRoutes.GENERATE);
+				} else if (isBrowser() && pathIsProtectedForRoleAdmin && session && session.user && session.user.role == "admin") {
+					router.push(appRoutes.PROFILE);
+				}
 			}
 
 			setLoading({ status: false });
 		}
 		checkPath();
-	}, [router.pathname, isAuthenticated]);
+	}, [router.pathname, isAuthenticated, isEmailVerified]);
 
 	return children;
 };

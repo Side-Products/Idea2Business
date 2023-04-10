@@ -32,8 +32,6 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 								? getSubscriptionPlanName(proPlusPlan) + " Subscription"
 								: "",
 						description: "Subscription to " + product_name,
-						// TODO: change this to a custom image
-						// images: ["https://public.easyinvoice.cloud/img/logo_en_original.png"],
 						images: [`https://${domain}/logo.png`],
 					},
 					unit_amount: parseInt(req.query.amount) * 100,
