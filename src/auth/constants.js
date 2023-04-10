@@ -1,9 +1,8 @@
 exports.appRoutes = {
-	REGISTER: "/register",
-	SETTINGS: "/settings",
-	CREATE_NFT: "/create-nft",
-	CREATE_BAND: "/create-band",
+	ADMIN: "/admin",
+	PROFILE: "/profile",
 	HOMEPAGE: "/",
-	CONFIRM_EMAIL: "/register/confirm-email",
-	MARKETPLACE: "/mxcatalog/new-releases",
+	SIGNUP: "/?signup",
+	LOGIN: "/?login",
+	GENERATE: "/generate",
 };

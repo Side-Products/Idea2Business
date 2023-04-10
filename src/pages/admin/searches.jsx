@@ -6,7 +6,7 @@ import { wrapper } from "@/redux/redux-store";
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
 	const session = await getSession({ req: req });
-	if (!session) {
+	if (!session || session.user.role !== "admin") {
 		return {
 			redirect: {
 				destination: "/?login",
