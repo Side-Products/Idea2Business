@@ -77,21 +77,21 @@ const ProtectedRoutes = ({ router, children }) => {
 				}
 			}
 			// Authenticated
-			else {
-				if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
-					router.push(appRoutes.HOMEPAGE);
-				} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !isEmailVerified) {
-					router.push(appRoutes.PROFILE);
-				}
-				// isEmailVerified and route is protected for role
-				else if (isBrowser() && pathIsProtectedForRoleUser && session && session.user && session.user.role == "user") {
-					router.push(appRoutes.GENERATE);
-				} else if (isBrowser() && pathIsProtectedForRoleAllAccess && session && session.user && session.user.role == "allAccess") {
-					router.push(appRoutes.GENERATE);
-				} else if (isBrowser() && pathIsProtectedForRoleAdmin && session && session.user && session.user.role == "admin") {
-					router.push(appRoutes.PROFILE);
-				}
-			}
+			// else {
+			// 	if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
+			// 		router.push(appRoutes.HOMEPAGE);
+			// 	} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !isEmailVerified) {
+			// 		router.push(appRoutes.PROFILE);
+			// 	}
+			// 	// isEmailVerified and route is protected for role
+			// 	else if (isBrowser() && pathIsProtectedForRoleUser && session && session.user && session.user.role == "user") {
+			// 		router.push(appRoutes.GENERATE);
+			// 	} else if (isBrowser() && pathIsProtectedForRoleAllAccess && session && session.user && session.user.role == "allAccess") {
+			// 		router.push(appRoutes.GENERATE);
+			// 	} else if (isBrowser() && pathIsProtectedForRoleAdmin && session && session.user && session.user.role == "admin") {
+			// 		router.push(appRoutes.PROFILE);
+			// 	}
+			// }
 
 			setLoading({ status: false });
 		}

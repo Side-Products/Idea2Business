@@ -5,4 +5,5 @@ exports.appRoutes = {
 	SIGNUP: "/?signup",
 	LOGIN: "/?login",
 	GENERATE: "/generate",
+	NOTES: "/notes",
 };
