@@ -44,7 +44,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			return;
 		}
 		handleChange();
-		router.replace("/", undefined, { shallow: true });
+		if (router.pathname == "/") router.replace("/", undefined, { shallow: true });
 		onClose();
 	};
 
