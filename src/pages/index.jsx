@@ -14,9 +14,9 @@ export default function HomePage() {
 			{/* <BuildingABusinessIsTough /> */}
 			<GuidedByAI />
 			<OurOfferings />
-			<Testimonials />
+			{/* <Testimonials /> */}
 			<WhyWeBuiltThis />
-			<Faq />
+			{/* <Faq /> */}
 		</PageWrapper>
 	);
 }

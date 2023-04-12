@@ -137,7 +137,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex justify-center items-center h-full w-full fixed">
-						<div className="max-w-[26rem] w-11/12 p-4 pl-9 pb-12 bg-dark-700 rounded-lg">
+						{/* <div className="max-w-[26rem] w-11/12 p-4 pl-9 pb-12 bg-dark-700 rounded-lg">
 							<div className="w-full flex justify-start">
 								<div className="w-full flex flex-col justify-center items-center mt-4">
 									{!forgotPassword && (
@@ -290,6 +290,20 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 									</div>
 								</div>
 							)}
+						</div> */}
+						<div className="max-w-[26rem] w-11/12 p-4 pl-9 pb-12 bg-dark-700 rounded-lg">
+							<div className="w-full flex justify-start">
+								<div className="w-full flex flex-col justify-center items-center mt-4">
+									<Image src={logo} alt="Logo" width="60" height="60" className="rounded-full" />
+								</div>
+								<div
+									onClick={() => closeModal()}
+									className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
+								>
+									<i className="fa-solid fa-xmark"></i>
+								</div>
+							</div>
+							<div className="text-lg font-semibold mt-16 text-center mr-6">Launching soon...</div>
 						</div>
 					</div>
 				</Transition.Child>
