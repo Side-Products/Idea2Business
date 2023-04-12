@@ -32,7 +32,7 @@ export default function Document() {
 				<link rel="mask-icon" href="/icon.png" color="#000000" />
 
 				{/* Tailwind Elements */}
-				<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+				<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
 
 				{/* Google Fonts */}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
