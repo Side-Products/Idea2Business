@@ -47,21 +47,7 @@ const ContentModal = ({ isOpen, setOpen, heading, content, adminGeneratedRespons
 						>
 							<i className="fa-solid fa-download"></i>&nbsp;Download
 						</Button>
-						{!adminGeneratedResponseView && (
-							<Button
-								type="button"
-								variant={"primary"}
-								onClick={() => {
-									document.getElementById(removeAllWhiteSpaces(heading)).click();
-								}}
-								rounded={true}
-								classes="md:w-1/2 w-full text-md px-8 py-2"
-							>
-								<i className="fa-solid fa-arrow-rotate-left"></i>&nbsp;
-								<span className="sm:hidden md:block block">Generate another</span>
-								<span className="md:hidden sm:block hidden">Regenerate</span>
-							</Button>
-						)}
+
 						<Button
 							type="button"
 							variant={"default"}
@@ -73,6 +59,22 @@ const ContentModal = ({ isOpen, setOpen, heading, content, adminGeneratedRespons
 						>
 							<i className="fa-solid fa-copy"></i>&nbsp;Copy
 						</Button>
+
+						{!adminGeneratedResponseView && (
+							<Button
+								type="button"
+								variant={"primary"}
+								onClick={() => {
+									document.getElementById(removeAllWhiteSpaces(heading)).click();
+								}}
+								rounded={true}
+								classes="md:w-1/2 w-full text-md px-8 py-2"
+							>
+								<i className="fa-solid fa-arrow-rotate-left"></i>&nbsp;
+								<span className="sm:hidden md:block block">Generate again</span>
+								<span className="md:hidden sm:block hidden">Regenerate</span>
+							</Button>
+						)}
 					</div>
 				</>
 			}

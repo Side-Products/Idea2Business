@@ -1,5 +1,6 @@
 import PageWrapper from "@/layout/PageWrapper";
 import HeroSection from "@/components/Home/HeroSection";
+import BuildingABusinessIsTough from "@/components/Home/BuildingABusinessIsTough";
 import GuidedByAI from "@/components/Home/GuidedByAI";
 import OurOfferings from "@/components/Home/OurOfferings";
 import Testimonials from "@/components/Home/Testimonials";
@@ -10,6 +11,7 @@ export default function HomePage() {
 	return (
 		<PageWrapper useDefaultContainer={false}>
 			<HeroSection />
+			{/* <BuildingABusinessIsTough /> */}
 			<GuidedByAI />
 			<OurOfferings />
 			<Testimonials />

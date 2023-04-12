@@ -1,12 +1,9 @@
 import IdeaSearch from "../models/ideaSearch";
 import User from "../models/user";
 import GenerateResponse from "../models/generateResponse";
-import Subscription from "../models/subscription";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import APIFeatures from "@/backend/utils/apiFeatures";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
-import { freePlan } from "@/config/constants";
-import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 const allSearches = catchAsyncErrors(async (req, res) => {
 	const resultsPerPage = 4;
@@ -61,35 +58,8 @@ const mySearches = catchAsyncErrors(async (req, res) => {
 // add to db => /api/ideas
 const newIdeaSearch = catchAsyncErrors(async (req, res, next) => {
 	const user = await User.findOne({ _id: req.user._id });
-	if (user) {
-		if (user.credits > 0) {
-			user.credits -= 1;
-			await user.save();
-		} else {
-			const _subscription = await Subscription.find({ user: req.user._id || req.user.id })
-				.sort({ paidOn: "desc" })
-				.populate({
-					path: "user",
-					select: "name email",
-				});
-			let subscription;
-			if (_subscription && _subscription[0]) subscription = _subscription[0];
-
-			if (subscription) {
-				// Check for which plan the user is subscribed to
-				const subscriptionPlan = getCurrentSubscriptionTier(subscription);
-
-				if (subscriptionPlan !== freePlan) {
-					// Do nothing
-				} else {
-					return next(new ErrorHandler("You do not have a subscription or enough credits to generate results", 400));
-				}
-			} else {
-				return next(new ErrorHandler("You do not have a subscription or enough credits to generate results", 400));
-			}
-		}
-	} else {
-		return next(new ErrorHandler("User not found with this email", 404));
+	if (!user) {
+		return next(new ErrorHandler("User not found", 404));
 	}
 
 	// save idea search to db

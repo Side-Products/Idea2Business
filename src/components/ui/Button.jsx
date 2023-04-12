@@ -26,7 +26,7 @@ export default function Button({ variant = "primary", outline = false, rounded, 
 							? isLoading
 								? `bg-gradient-default-tr-outline `
 								: `bg-gradient-default-tr-outline `
-							: (isLoading ? `bg-gradient-default-tr-loading ` : `bg-gradient-default-tr `) + `text-light-100 `) +
+							: (isLoading ? `bg-gradient-default-tr-loading ` : `bg-gradient-default-tr border border-[#30363d] `) + `text-light-200 `) +
 					  `font-primary font-semibold transition duration-300 `
 					: ` `) +
 				(rounded ? `rounded-full ` : `rounded-lg `) +

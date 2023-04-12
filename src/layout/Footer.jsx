@@ -4,7 +4,7 @@ import Link from "next/link";
 import logo from "../../public/logo.png";
 import { useSession } from "next-auth/react";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
-import { twitter_url, linkedin_url } from "@/config/constants";
+import { twitter_url, linkedin_url, personal_twitter_url } from "@/config/constants";
 
 const Footer = () => {
 	const { data: session } = useSession();
@@ -98,7 +98,17 @@ const Footer = () => {
 						</li>
 					</div>
 				</div>
+
 				<p className="font-primary text-xs max-w-sm text-center text-neutral-400 sm:text-left mx-auto sm:mx-0 mt-4">©2023 All Rights Reserved.</p>
+
+				<div className="relative">
+					<div className="mt-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-xs text-neutral-400">
+						built by{" "}
+						<a href={personal_twitter_url} target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 hover:underline">
+							@Pushpit07
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

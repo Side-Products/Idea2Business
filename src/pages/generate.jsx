@@ -86,7 +86,6 @@ const Generate = () => {
 		productLaunch,
 		marketing,
 		growth,
-		automation,
 		bonusContent,
 	} = generateCategories;
 
@@ -144,11 +143,9 @@ const Generate = () => {
 
 					<Section title="Marketing" items={marketing} category={"marketing"} sectionStyle={5} {...sectionOptions} />
 
-					<Section title="Growth" items={growth} category={"growth"} sectionStyle={2} {...sectionOptions} />
+					<Section title="Growth" items={growth} category={"growth"} sectionStyle={6} {...sectionOptions} />
 
-					<Section title="Investor Meeting Prep" items={investorMeetingPrep} category={"investorMeetingPrep"} sectionStyle={6} {...sectionOptions} />
-
-					<Section title="Automation" items={automation} category={"automation"} sectionStyle={1} {...sectionOptions} />
+					<Section title="Investor Meeting Prep" items={investorMeetingPrep} category={"investorMeetingPrep"} sectionStyle={1} {...sectionOptions} />
 
 					<Section title="Bonus" items={bonusContent} category={"bonusContent"} sectionStyle={7} {...sectionOptions} />
 

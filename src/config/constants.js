@@ -12,6 +12,8 @@ export const twitter_url = "https://twitter.com/_idea2business";
 export const twitter_handle = "@_idea2business";
 export const linkedin_url = "https://www.linkedin.com/company/idea-2-business";
 
+export const personal_twitter_url = "https://twitter.com/Pushpit07";
+
 /**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/
 /**************************************************************************/
@@ -54,6 +56,18 @@ export const subscriptionPlans = {
 import Link from "next/link";
 
 export const Faqs = [
+	{
+		heading: "How do I use the app?",
+		body: "To use the app, you simply need to provide a brief description of your idea. The app will then analyze the details and generate results. You can choose whatever you like best and use them as inspiration for your own creations.",
+		content_id: "collapseSix",
+		content_heading: "headingSix",
+	},
+	{
+		heading: "Is the app free?",
+		body: "The app has a free trial version with 10 credits having limited functionality, but you can take a paid subscription anytime to access full functionality.",
+		content_id: "collapseSeven",
+		content_heading: "headingSeven",
+	},
 	{
 		heading: "How can I pay?",
 		body:
@@ -382,9 +396,30 @@ export const marketValidation = [
 	{
 		cardText: "Validate the idea",
 		identifier: "validateTheIdea",
-		subscriptionPlanRequired: standardPlan,
+		subscriptionPlanRequired: freePlan,
 		prompt: `Validate the startup idea of the following startup according to the business model, revenue, and market opportunity in at least 3 paragraphs:`,
 		loadingMessage: "Idea validation result for your idea is being generated",
+	},
+	{
+		cardText: "Effective methods for conducting market research",
+		identifier: "effectiveMethodsForConductingMarketResearch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate some effective methods for conducting market research for the following startup idea:`,
+		loadingMessage: "Methods for conducting market research for your idea are being generated",
+	},
+	{
+		cardText: "Mistakes to avoid when conducting market validation",
+		identifier: "mistakesToAvoidWhenConductingMarketValidation",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 mistakes to avoid when conducting market validation for the following startup idea:`,
+		loadingMessage: "Mistakes to avoid when conducting market validation for your idea are being generated",
+	},
+	{
+		cardText: "Key metrics to track during market validation process",
+		identifier: "keyMetricsToTrackDuringMarketValidationProcess",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `What are 10 key metrics to track during market validation process for the following startup idea:`,
+		loadingMessage: "Key metrics to track during market validation process for your idea are being generated",
 	},
 ];
 
@@ -433,21 +468,96 @@ export const vision = [
 
 export const productLaunch = [
 	{
+		cardText: "How to execute a successful product launch?",
+		identifier: "howToExecuteASuccessfulProductLaunch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate a guide to execute a successful product launch online for the following startup idea:`,
+		loadingMessage: "Guide to execute a successful product launch of your business is being generated",
+	},
+	{
 		cardText: "Guide to launch on Product Hunt",
 		identifier: "guideToLaunchOnProductHunt",
 		subscriptionPlanRequired: standardPlan,
 		prompt: `Generate a guide to launch the following startup on Product Hunt:`,
 		loadingMessage: "Guide to launch your business on Product Hunt is being generated",
 	},
+	{
+		cardText: "Effective strategies for generating buzz leading up to a product launch",
+		identifier: "effectiveStrategiesForGeneratingBuzzLeadingUpToAProductLaunch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate some effective strategies for generating buzz and building anticipation leading up to a product launch for the following startup idea:`,
+		loadingMessage: "Effective strategies for generating buzz for your business are being generated",
+	},
+	{
+		cardText: "Mistakes to avoid during product launch",
+		identifier: "mistakesToAvoidDuringProductLaunch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `What are 10 mistakes to avoid during product launch for the following startup idea:`,
+		loadingMessage: "Mistakes to avoid during your product launch are being generated",
+	},
 ];
 
-export const marketing = [];
+export const marketing = [
+	{
+		cardText: "Effective marketing channels and strategies",
+		identifier: "effectiveMarketingChannelsAndStrategies",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate effective marketing channels and strategies for the following startup idea:`,
+		loadingMessage: "Effective marketing channels and strategies for your business are being generated",
+	},
+	{
+		cardText: "How to maintain momentum and sustain interest in your product after the initial launch period?",
+		identifier: "howDoYouMaintainMomentumAndSustainInterestInYourProductAfterTheInitialLaunchPeriod",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 detailed ways to maintain momentum and sustain interest after the initial launch period for the following startup idea:`,
+		loadingMessage: "Ways to maintain momentum for your business are being generated",
+	},
+	{
+		cardText: "How to create a strong brand identity?",
+		identifier: "howToCreateAStrongBrandIdentity",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 detailed tips to create a strong brand identity for the following startup idea:`,
+		loadingMessage: "Ways to create a strong brand identity for your business are being generated",
+	},
+	{
+		cardText: "How to use customer feedback to improve your marketing messaging and approach?",
+		identifier: "howToUseCustomerFeedbackToImproveYourMarketingMessagingAndApproach",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 detailed ways to use customer feedback to improve the marketing messaging and approach for the following startup idea:`,
+		loadingMessage: "Ways to improve marketing messaging for your business are being generated",
+	},
+];
 
-export const growth = [];
-
-export const automation = [];
-
-export const tipsAndTricks = [];
+export const growth = [
+	{
+		cardText: "Strategies for driving growth and scaling",
+		identifier: "strategiesForDrivingGrowthAndScaling",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate strategies for driving growth and scaling for the following startup idea:`,
+		loadingMessage: "Strategies for driving growth for your business are being generated",
+	},
+	{
+		cardText: "How to identify and prioritize growth opportunities?",
+		identifier: "howToIdentifyAndPrioritizeGrowthOpportunities",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `How to identify and prioritize growth opportunities for the following startup idea:`,
+		loadingMessage: "Plan to identify growth opportunities for your business is being generated",
+	},
+	{
+		cardText: "How to leverage technology and automation to streamline operations and fuel growth?",
+		identifier: "howToLeverageTechnologyAndAutomationToStreamlineOperationsAndFuelGrowth",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate a detailed plan on how to leverage technology and automation to streamline operations and fuel growth for the following startup idea:`,
+		loadingMessage: "A detailed plan for your business is being generated",
+	},
+	{
+		cardText: "How to build and maintain strong relationships with customers to drive repeat business and referrals?",
+		identifier: "howToBuildAndMaintainStrongRelationshipsWithCustomersToDriveRepeatBusinessAndReferrals",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate a detailed plan on how to build and maintain strong relationships with customers to drive repeat business and referrals for the following startup idea:`,
+		loadingMessage: "A detailed plan for your business is being generated",
+	},
+];
 
 export const decks = [
 	{
@@ -474,7 +584,6 @@ export const generateCategories = {
 	productLaunch,
 	marketing,
 	growth,
-	automation,
 	bonusContent,
 };
 
