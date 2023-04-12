@@ -1,11 +1,13 @@
 import GenerateResponse from "../models/generateResponse";
 import User from "../models/user";
 import IdeaSearch from "../models/ideaSearch";
+import Subscription from "../models/subscription";
 import APIFeatures from "@/backend/utils/apiFeatures";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import { Configuration, OpenAIApi } from "openai";
-import { generateCategories } from "@/config/constants";
+import { generateCategories, freePlan } from "@/config/constants";
+import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 const configuration = new Configuration({
 	apiKey: process.env.OPENAI_API_KEY,
@@ -13,7 +15,41 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 // add to db => /api/generate
-const generateNewResponse = catchAsyncErrors(async (req, res) => {
+const generateNewResponse = catchAsyncErrors(async (req, res, next) => {
+	// check user
+	const user = await User.findOne({ _id: req.user._id });
+
+	if (user) {
+		if (user.credits > 0) {
+			user.credits -= 1;
+			await user.save();
+		} else {
+			const _subscription = await Subscription.find({ user: req.user._id || req.user.id })
+				.sort({ paidOn: "desc" })
+				.populate({
+					path: "user",
+					select: "name email",
+				});
+			let subscription;
+			if (_subscription && _subscription[0]) subscription = _subscription[0];
+
+			if (subscription) {
+				// Check for which plan the user is subscribed to
+				const subscriptionPlan = getCurrentSubscriptionTier(subscription);
+
+				if (subscriptionPlan !== freePlan) {
+					// Do nothing
+				} else {
+					return next(new ErrorHandler("You do not have a subscription or enough credits to generate results", 400));
+				}
+			} else {
+				return next(new ErrorHandler("You do not have a subscription or enough credits to generate results", 400));
+			}
+		}
+	} else {
+		return next(new ErrorHandler("User not found", 404));
+	}
+
 	const { identifier, ideaName, ideaDescription, category, index } = req.body;
 	const userInput = `${ideaName}: ${ideaDescription}`;
 
@@ -33,12 +69,6 @@ const generateNewResponse = catchAsyncErrors(async (req, res) => {
 	});
 	const basePromptOutput = baseCompletion.data.choices.pop();
 	const output = basePromptOutput.text.trim();
-
-	// check user
-	const user = await User.findOne({ _id: req.user._id });
-	if (!user) {
-		return next(new ErrorHandler("User not found", 404));
-	}
 
 	// get latest matching ideaSearch that is related and store it's id
 	const ideaSearch = await IdeaSearch.findOne({ name: ideaName.trim(), description: ideaDescription.trim() }).sort({ createdAt: "desc" });

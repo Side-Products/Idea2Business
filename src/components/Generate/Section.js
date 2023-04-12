@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { LoadingContext } from "@/store/LoadingContextProvider";
+import { StatusContext } from "@/store/StatusContextProvider";
 import PromptCard from "./PromptCard";
 import SectionHeading from "./SectionHeading";
 import SectionGrid from "./SectionGrid";
@@ -20,6 +21,7 @@ export default function Section({
 }) {
 	const { ideaName, ideaDescription } = ideaInfo;
 	const { setLoading } = useContext(LoadingContext);
+	const { setError } = useContext(StatusContext);
 
 	const callGenerateEndpoint = async (item, category, index) => {
 		setLoading({
@@ -29,18 +31,31 @@ export default function Section({
 			waitMessage: "It may take up to 30 seconds to generate the response...",
 		});
 
-		const response = await fetch("/api/generate", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ ideaName: ideaName, ideaDescription: ideaDescription, identifier: item.identifier, category: category, index: index }),
-		});
-		const data = await response.json();
-		const { output } = data;
+		try {
+			const response = await fetch("/api/generate", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ ideaName: ideaName, ideaDescription: ideaDescription, identifier: item.identifier, category: category, index: index }),
+			});
+			const data = await response.json();
+			// Not enough credits to generate
+			if (!data.success && data.error) {
+				throw data.message;
+			}
+			const { output } = data;
 
-		setModalText({ heading: item.cardText, content: output });
-		setContentModalOpen(true);
+			setModalText({ heading: item.cardText, content: output });
+			setContentModalOpen(true);
+		} catch (err) {
+			setError({
+				title: "Something went wrong",
+				message: err || "Please try again later.",
+				showErrorBox: true,
+			});
+			setContentModalOpen(false);
+		}
 
 		setLoading({
 			status: false,

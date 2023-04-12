@@ -45,7 +45,7 @@ function App({ Component, pageProps, session, router }) {
 			</Script>
 
 			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
-			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
+			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></Script>
 
 			<SessionProvider session={session}>
 				<ProtectedRoutes router={router}>

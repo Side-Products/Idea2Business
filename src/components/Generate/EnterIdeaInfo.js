@@ -60,7 +60,7 @@ const EnterIdeaInfo = ({ ideaInfo, onFieldChange, isGenerating, promptEnterIdeaI
 	return (
 		<div className="w-full flex flex-col items-center justify-center">
 			<div className="flex flex-col">
-				<h1 className="mt-8 text-center text-[44px] sm:text-[80px] md:text-[110px] tracking-[-2.5px] font-bold text-gradient-primary-tr leading-[1.2em]">
+				<h1 className="mt-8 text-center text-[44px] sm:text-[80px] md:text-[110px] xl:text-[120px] tracking-[-2.5px] font-bold text-gradient-primary-tr leading-[1.2em]">
 					Idea~Business
 				</h1>
 				<h3 className="mt-4 px-4 text-center text-sm sm:text-lg leading-[1.4em] text-light-500">

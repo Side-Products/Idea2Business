@@ -12,6 +12,8 @@ export const twitter_url = "https://twitter.com/_idea2business";
 export const twitter_handle = "@_idea2business";
 export const linkedin_url = "https://www.linkedin.com/company/idea-2-business";
 
+export const personal_twitter_url = "https://twitter.com/Pushpit07";
+
 /**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/
 /**************************************************************************/
@@ -54,6 +56,18 @@ export const subscriptionPlans = {
 import Link from "next/link";
 
 export const Faqs = [
+	{
+		heading: "How do I use the app?",
+		body: "To use the app, you simply need to provide a brief description of your idea. The app will then analyze the details and generate results. You can choose whatever you like best and use them as inspiration for your own creations.",
+		content_id: "collapseSix",
+		content_heading: "headingSix",
+	},
+	{
+		heading: "Is the app free?",
+		body: "The app has a free trial version with 10 credits having limited functionality, but you can take a paid subscription anytime to access full functionality.",
+		content_id: "collapseSeven",
+		content_heading: "headingSeven",
+	},
 	{
 		heading: "How can I pay?",
 		body:
@@ -153,7 +167,7 @@ export const understandingPotentialUsers = [
 		identifier: "userPersona",
 		subscriptionPlanRequired: freePlan,
 		prompt: `Generate 10 user personas for the following startup:`,
-		loadingMessage: "User Personas for your idea is being generated",
+		loadingMessage: "User Personas for your idea are being generated",
 	},
 	{
 		cardText: "Mom Test: How to talk to initial customers",
@@ -347,6 +361,204 @@ export const bonusContent = [
 	},
 ];
 
+export const design = [
+	{
+		cardText: "Website Design Theme",
+		identifier: "designTheme",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 design theme suggestions of a website for the following startup:`,
+		loadingMessage: "Design themes for your idea are being generated",
+	},
+	{
+		cardText: "Logo Ideas",
+		identifier: "logoIdeas",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 logo ideas for a website for the following startup:`,
+		loadingMessage: "Logo ideas for your business are being generated",
+	},
+	{
+		cardText: "Brand Color Scheme",
+		identifier: "brandColorScheme",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 5 brand color schemes (with explanation) that can be used in creating a website for the following business idea:`,
+		loadingMessage: "Brand Color Scheme for your business is being generated",
+	},
+	{
+		cardText: "Mistakes to avoid in design",
+		identifier: "mistakesToAvoidInDesign",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 graphic design language mistakes to avoid for the following startup idea:`,
+		loadingMessage: "Mistakes to avoid in design for your business are being generated",
+	},
+];
+
+export const marketValidation = [
+	{
+		cardText: "Validate the idea",
+		identifier: "validateTheIdea",
+		subscriptionPlanRequired: freePlan,
+		prompt: `Validate the startup idea of the following startup according to the business model, revenue, and market opportunity in at least 3 paragraphs:`,
+		loadingMessage: "Idea validation result for your idea is being generated",
+	},
+	{
+		cardText: "Effective methods for conducting market research",
+		identifier: "effectiveMethodsForConductingMarketResearch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate some effective methods for conducting market research for the following startup idea:`,
+		loadingMessage: "Methods for conducting market research for your idea are being generated",
+	},
+	{
+		cardText: "Mistakes to avoid when conducting market validation",
+		identifier: "mistakesToAvoidWhenConductingMarketValidation",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 mistakes to avoid when conducting market validation for the following startup idea:`,
+		loadingMessage: "Mistakes to avoid when conducting market validation for your idea are being generated",
+	},
+	{
+		cardText: "Key metrics to track during market validation process",
+		identifier: "keyMetricsToTrackDuringMarketValidationProcess",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `What are 10 key metrics to track during market validation process for the following startup idea:`,
+		loadingMessage: "Key metrics to track during market validation process for your idea are being generated",
+	},
+];
+
+export const vision = [
+	{
+		cardText: "Value Proposition",
+		identifier: "valueProposition",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `A value proposition is a short statement that communicates why buyers should choose your products or services. It’s more than just a product or service description — it's the specific solution that your business provides and the promise of value that a customer can expect you to deliver.
+		
+		Reference: https://blog.hubspot.com/marketing/write-value-proposition#value-proposition-vs-mission-statement
+		Write 5 possible value propositions (see above reference) for the following startup idea:`,
+		loadingMessage: "Value Proposition for your business is being generated",
+	},
+	{
+		cardText: "Mission Statement",
+		identifier: "missionStatement",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `A mission statement details your objective as an organization. While the two can have points in common, a value prop is more product- and service-oriented while a mission statement is more goal-oriented.
+		
+		Reference: https://blog.hubspot.com/marketing/write-value-proposition#value-proposition-vs-mission-statement
+		Write 5 possible mission statements (see above reference) for the following startup idea:`,
+		loadingMessage: "Mission Statement for your business is being generated",
+	},
+	{
+		cardText: "Slogan",
+		identifier: "slogan",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `A slogan is a short, catchy statement that brands use in marketing campaigns to sell a specific product. While your value proposition wouldn’t necessarily go in an ad (at least, not usually), a slogan would. The most important thing to note is that a company can have different slogans for different campaigns or products.
+		
+		Reference: https://blog.hubspot.com/marketing/write-value-proposition#value-proposition-vs-mission-statement
+		Write 5 possible slogans (see above reference) for the following startup idea:`,
+		loadingMessage: "Slogan for your business is being generated",
+	},
+	{
+		cardText: "Tagline",
+		identifier: "tagline",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `A tagline is a short statement that embodies a certain aspect of your brand or business. While a value proposition is more concrete, a tagline can represent a concept or idea that your business stands for.
+		
+		Reference: https://blog.hubspot.com/marketing/write-value-proposition#value-proposition-vs-mission-statement
+		Write 5 possible taglines (see above reference) for the following startup idea:`,
+		loadingMessage: "Tagline for your business is being generated",
+	},
+];
+
+export const productLaunch = [
+	{
+		cardText: "How to execute a successful product launch?",
+		identifier: "howToExecuteASuccessfulProductLaunch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate a guide to execute a successful product launch online for the following startup idea:`,
+		loadingMessage: "Guide to execute a successful product launch of your business is being generated",
+	},
+	{
+		cardText: "Guide to launch on Product Hunt",
+		identifier: "guideToLaunchOnProductHunt",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate a guide to launch the following startup on Product Hunt:`,
+		loadingMessage: "Guide to launch your business on Product Hunt is being generated",
+	},
+	{
+		cardText: "Effective strategies for generating buzz leading up to a product launch",
+		identifier: "effectiveStrategiesForGeneratingBuzzLeadingUpToAProductLaunch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate some effective strategies for generating buzz and building anticipation leading up to a product launch for the following startup idea:`,
+		loadingMessage: "Effective strategies for generating buzz for your business are being generated",
+	},
+	{
+		cardText: "Mistakes to avoid during product launch",
+		identifier: "mistakesToAvoidDuringProductLaunch",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `What are 10 mistakes to avoid during product launch for the following startup idea:`,
+		loadingMessage: "Mistakes to avoid during your product launch are being generated",
+	},
+];
+
+export const marketing = [
+	{
+		cardText: "Effective marketing channels and strategies",
+		identifier: "effectiveMarketingChannelsAndStrategies",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate effective marketing channels and strategies for the following startup idea:`,
+		loadingMessage: "Effective marketing channels and strategies for your business are being generated",
+	},
+	{
+		cardText: "How to maintain momentum and sustain interest in your product after the initial launch period?",
+		identifier: "howDoYouMaintainMomentumAndSustainInterestInYourProductAfterTheInitialLaunchPeriod",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 detailed ways to maintain momentum and sustain interest after the initial launch period for the following startup idea:`,
+		loadingMessage: "Ways to maintain momentum for your business are being generated",
+	},
+	{
+		cardText: "How to create a strong brand identity?",
+		identifier: "howToCreateAStrongBrandIdentity",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 detailed tips to create a strong brand identity for the following startup idea:`,
+		loadingMessage: "Ways to create a strong brand identity for your business are being generated",
+	},
+	{
+		cardText: "How to use customer feedback to improve your marketing messaging and approach?",
+		identifier: "howToUseCustomerFeedbackToImproveYourMarketingMessagingAndApproach",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate 10 detailed ways to use customer feedback to improve the marketing messaging and approach for the following startup idea:`,
+		loadingMessage: "Ways to improve marketing messaging for your business are being generated",
+	},
+];
+
+export const growth = [
+	{
+		cardText: "Strategies for driving growth and scaling",
+		identifier: "strategiesForDrivingGrowthAndScaling",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate strategies for driving growth and scaling for the following startup idea:`,
+		loadingMessage: "Strategies for driving growth for your business are being generated",
+	},
+	{
+		cardText: "How to identify and prioritize growth opportunities?",
+		identifier: "howToIdentifyAndPrioritizeGrowthOpportunities",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `How to identify and prioritize growth opportunities for the following startup idea:`,
+		loadingMessage: "Plan to identify growth opportunities for your business is being generated",
+	},
+	{
+		cardText: "How to leverage technology and automation to streamline operations and fuel growth?",
+		identifier: "howToLeverageTechnologyAndAutomationToStreamlineOperationsAndFuelGrowth",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate a detailed plan on how to leverage technology and automation to streamline operations and fuel growth for the following startup idea:`,
+		loadingMessage: "A detailed plan for your business is being generated",
+	},
+	{
+		cardText: "How to build and maintain strong relationships with customers to drive repeat business and referrals?",
+		identifier: "howToBuildAndMaintainStrongRelationshipsWithCustomersToDriveRepeatBusinessAndReferrals",
+		subscriptionPlanRequired: standardPlan,
+		prompt: `Generate a detailed plan on how to build and maintain strong relationships with customers to drive repeat business and referrals for the following startup idea:`,
+		loadingMessage: "A detailed plan for your business is being generated",
+	},
+];
+
 export const decks = [
 	{
 		cardText: "Download PitchDeck",
@@ -366,5 +578,37 @@ export const generateCategories = {
 	socialMediaStrategy,
 	adviceFromBooks,
 	investorMeetingPrep,
+	design,
+	marketValidation,
+	vision,
+	productLaunch,
+	marketing,
+	growth,
 	bonusContent,
+};
+
+export const resources = {
+	images: [
+		{
+			name: "Lexica",
+			url: "https://lexica.art",
+			logo: "",
+		},
+	],
+	text: [
+		{
+			name: "Speedwrite",
+			description: "Write faster and better. Unique writing, every time.",
+			url: "https://speedwrite.com",
+			logo: "",
+		},
+	],
+	presentations: [
+		{
+			name: "beautiful.ai",
+			description: "Create beautiful presentations in minutes",
+			url: "https://www.beautiful.ai",
+			logo: "",
+		},
+	],
 };

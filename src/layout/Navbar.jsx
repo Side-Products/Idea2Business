@@ -5,6 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import logo from "../../public/logo_removedbg.png";
 import HamburgerMenu from "./HamburgerMenu";
+import { motion } from "framer-motion";
 
 const Navbar = ({ setAuthModalOpen }) => {
 	const { data: session, status } = useSession();
@@ -45,17 +46,36 @@ const Navbar = ({ setAuthModalOpen }) => {
 		<div className="absolute flex justify-center w-screen">
 			<div className="w-full fixed z-40 max-w-[1920px]">
 				{showStrip && session && session.user && session.user.credits > 0 && (
-					<div
-						onClick={() => router.push("/generate")}
-						className="p-1 w-full flex items-center justify-center cursor-pointer text-center text-sm text-light-400 bg-gradient-tertiary-r"
+					<motion.div
+						className="p-[14px] group relative w-full flex items-center justify-center cursor-pointer text-center text-sm text-light-400 bg-gradient-tertiary-r"
+						initial={{ opacity: 0, scale: 0.6 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.1 }}
+						exit={{ opacity: 0 }}
+						whileHover={{
+							scale: 1.04,
+							transition: { duration: 0.2 },
+						}}
 					>
-						You have {session && session.user && session.user.credits} free{" "}
-						{session && session.user && (session.user.credits == 1 ? "credit" : "credits")}. Use{" "}
-						{session && session.user && (session.user.credits == 1 ? "it" : "them")} now!
-						<span className="absolute right-4 cursor-pointer" onClick={() => setShowStrip(false)}>
-							<i className="fa-solid fa-xmark text-sm"></i>
-						</span>
-					</div>
+						<motion.div onClick={() => router.push("/generate")} className="absolute w-full">
+							You have {session && session.user && session.user.credits} free{" "}
+							{session && session.user && (session.user.credits == 1 ? "credit" : "credits")}. Use{" "}
+							{session && session.user && (session.user.credits == 1 ? "it" : "them")} now!
+						</motion.div>
+
+						<motion.span
+							whileHover={{
+								scale: 1.2,
+								transition: { duration: 0.2 },
+							}}
+							onClick={() => setShowStrip(false)}
+							className="absolute group-hover:right-12 group-hover:transiton group-hover:duration-300 transiton duration-300 right-4 cursor-pointer"
+						>
+							<span>
+								<i className="fa-solid fa-xmark text-sm"></i>
+							</span>
+						</motion.span>
+					</motion.div>
 				)}
 				<div className="w-full lg:px-16 xl:px-20 2xl:px-36">
 					<nav className={"navbar duration-500 ease-in mx-auto border-[0.5px] border-gray-600 " + customStyles}>
@@ -66,7 +86,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 								</span>
 							</Link>
 
-							{/* Internal links */}
+							{/* 							
 							<div className="hidden ml-10 lg:block">
 								<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-10 md:mt-0 sm:text-sm">
 									<li
@@ -90,7 +110,6 @@ const Navbar = ({ setAuthModalOpen }) => {
 
 							<div className="ml-auto hidden md:block">
 								<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
-									{/* Dropdown Menu */}
 									<li className="hidden md:block">
 										<ul className="relative group dropdown">
 											<a
@@ -224,7 +243,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 														</>
 													)}
 
-													{/* Logout Button */}
+													
 													<li>
 														{status === "authenticated" ? (
 															<button
@@ -244,11 +263,11 @@ const Navbar = ({ setAuthModalOpen }) => {
 								</ul>
 							</div>
 
-							{/* Hamburger Menu */}
+							
 							<HamburgerMenu
 								avatarUrl={session && session.user && session.user.image}
 								truncatedName={session && session.user && session.user.name}
-							/>
+							/> */}
 						</div>
 					</nav>
 				</div>

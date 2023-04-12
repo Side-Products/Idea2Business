@@ -73,7 +73,21 @@ const Generate = () => {
 		}
 	}, [cardsAvailable]);
 
-	const { decks, pitches, understandingPotentialUsers, socialMediaStrategy, adviceFromBooks, investorMeetingPrep, bonusContent } = generateCategories;
+	const {
+		decks,
+		pitches,
+		understandingPotentialUsers,
+		socialMediaStrategy,
+		adviceFromBooks,
+		investorMeetingPrep,
+		design,
+		marketValidation,
+		vision,
+		productLaunch,
+		marketing,
+		growth,
+		bonusContent,
+	} = generateCategories;
 
 	const sectionOptions = {
 		isGenerating,
@@ -119,7 +133,19 @@ const Generate = () => {
 
 					<Section title="Advice from Books" items={adviceFromBooks} category={"adviceFromBooks"} sectionStyle={5} {...sectionOptions} />
 
-					<Section title="Investor Meeting Prep" items={investorMeetingPrep} category={"investorMeetingPrep"} sectionStyle={6} {...sectionOptions} />
+					<Section title="Market Validation" items={marketValidation} category={"marketValidation"} sectionStyle={6} {...sectionOptions} />
+
+					<Section title="Vision" items={vision} category={"vision"} sectionStyle={2} {...sectionOptions} />
+
+					<Section title="Design" items={design} category={"design"} sectionStyle={8} {...sectionOptions} />
+
+					<Section title="Product Launch" items={productLaunch} category={"productLaunch"} sectionStyle={3} {...sectionOptions} />
+
+					<Section title="Marketing" items={marketing} category={"marketing"} sectionStyle={5} {...sectionOptions} />
+
+					<Section title="Growth" items={growth} category={"growth"} sectionStyle={6} {...sectionOptions} />
+
+					<Section title="Investor Meeting Prep" items={investorMeetingPrep} category={"investorMeetingPrep"} sectionStyle={1} {...sectionOptions} />
 
 					<Section title="Bonus" items={bonusContent} category={"bonusContent"} sectionStyle={7} {...sectionOptions} />
 

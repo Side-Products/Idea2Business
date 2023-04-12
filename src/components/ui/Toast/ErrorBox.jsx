@@ -35,7 +35,7 @@ const ErrorBox = () => {
 				leaveTo="opacity-0 scale-75 translate-x-full"
 			>
 				<div
-					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 sm:w-3/4 w-11/12 px-5 py-4 text-light-200 -translate-x-4 -translate-y-4 bg-error-600/80 border-error-700 border-2 backdrop-blur-[40px] backdrop-brightness-200 rounded-lg shadow-2xl break-words"
+					className="fixed bottom-0 right-0 z-[60] xl:w-4/12 lg:w-5/12 md:w-8/12 sm:w-3/4 w-11/12 px-5 py-4 text-light-200 -translate-x-4 -translate-y-4 bg-error-600/80 border-error-700 border-2 backdrop-blur-[40px] backdrop-brightness-200 rounded-lg shadow-2xl break-words"
 					role="alert"
 				>
 					<strong className="font-semibold">{error.title}</strong>

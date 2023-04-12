@@ -72,7 +72,8 @@ export default NextAuth({
 				throw new Error("Invalid email or password");
 			}
 			user.role = "user";
-			user.credits = 3;
+			// Default credits
+			user.credits = 10;
 			await user.save();
 		},
 	},

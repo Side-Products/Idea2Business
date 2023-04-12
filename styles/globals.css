@@ -74,7 +74,7 @@ a {
 }
 
 .bg-gradient-default-tr {
-	@apply bg-gradient-to-tr from-gray-500 via-gray-400 to-gray-600 animate-bg opacity-100 hover:opacity-90 transition duration-300;
+	@apply bg-gradient-to-tr from-neutral-950 via-gray-800 to-black animate-bg opacity-100 hover:opacity-90 transition duration-300;
 }
 .bg-gradient-default-tr-loading {
 	@apply bg-gradient-to-tr from-gray-600 via-gray-600 to-gray-600 animate-bg;
