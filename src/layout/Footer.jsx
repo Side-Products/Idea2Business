@@ -17,7 +17,7 @@ const Footer = () => {
 					<Image src={logo} alt="logo" width="60" className="rounded-full" />
 					<p className="font-primary sm:text-lg text-base font-medium text-gradient-primary-tr">Idea~Business</p>
 				</div>
-				{/* 
+
 				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-dark-600  w-full py-8 mt-5">
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Quick Links</p>
@@ -99,7 +99,7 @@ const Footer = () => {
 					</div>
 				</div>
 
-				<p className="font-primary text-xs max-w-sm text-center text-neutral-400 sm:text-left mx-auto sm:mx-0 mt-4">©2023 All Rights Reserved.</p> */}
+				<p className="font-primary text-xs max-w-sm text-center text-neutral-400 sm:text-left mx-auto sm:mx-0 mt-4">©2023 All Rights Reserved.</p>
 
 				<div className="relative">
 					<div className="mt-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-xs text-neutral-400">

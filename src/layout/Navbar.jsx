@@ -84,9 +84,11 @@ const Navbar = ({ setAuthModalOpen }) => {
 								<span className="flex">
 									<Image src={logo} alt="MXV Logo" width="50" className="rounded-full" />
 								</span>
+								{/* TODO: Remove this */}
+								<span className="absolute text-xs text-light-400 left-[108px] top-[36px]">Beta</span>
 							</Link>
 
-							{/* 							
+							{/* Internal links */}
 							<div className="hidden ml-10 lg:block">
 								<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-10 md:mt-0 sm:text-sm">
 									<li
@@ -110,6 +112,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 
 							<div className="ml-auto hidden md:block">
 								<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
+									{/* Dropdown Menu */}
 									<li className="hidden md:block">
 										<ul className="relative group dropdown">
 											<a
@@ -243,7 +246,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 														</>
 													)}
 
-													
+													{/* Logout Button */}
 													<li>
 														{status === "authenticated" ? (
 															<button
@@ -263,11 +266,11 @@ const Navbar = ({ setAuthModalOpen }) => {
 								</ul>
 							</div>
 
-							
+							{/* Hamburger Menu */}
 							<HamburgerMenu
 								avatarUrl={session && session.user && session.user.image}
 								truncatedName={session && session.user && session.user.name}
-							/> */}
+							/>
 						</div>
 					</nav>
 				</div>
