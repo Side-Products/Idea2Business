@@ -15,8 +15,8 @@ export default function HomePage() {
 			<GuidedByAI />
 			<OurOfferings />
 			{/* <Testimonials /> */}
+			<Faq />
 			<WhyWeBuiltThis />
-			{/* <Faq /> */}
 		</PageWrapper>
 	);
 }
