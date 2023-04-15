@@ -20,6 +20,14 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 		cancel_url: `${origin}/pricing`,
 		customer_email: req.user.email,
 		client_reference_id: req.user._id || req.user.id,
+		metadata: {
+			plan:
+				parseInt(req.query.amount) == getSubscriptionPlanPrice(standardPlan)
+					? getSubscriptionPlanName(standardPlan) + " Subscription"
+					: parseInt(req.query.amount) == getSubscriptionPlanPrice(proPlusPlan)
+					? getSubscriptionPlanName(proPlusPlan) + " Subscription"
+					: "",
+		},
 		line_items: [
 			{
 				price_data: {
@@ -47,6 +55,7 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 });
 
 // Update user with subscription after payment => /api/stripe/webhook/checkout-session-completed
+// https://idea2business.xyz/api/stripe/webhook/checkout-session-completed
 const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res) => {
 	// Get raw body
 	const rawBody = await getRawBody(req);
