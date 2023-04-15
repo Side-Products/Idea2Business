@@ -40,8 +40,8 @@ export const proPlusPlan = "Pro Plus";
 export const subscriptionPlans = {
 	1: {
 		freeSubscription: { text: "Free", price: 0 },
-		standardSubscription: { text: "Standard", price: 5, validForDays: 7 },
-		proPlusSubscription: { text: "Pro Plus", price: 10, validForDays: 30 },
+		standardSubscription: { text: "Standard", price: 2, validForDays: 7 },
+		proPlusSubscription: { text: "Pro Plus", price: 5, validForDays: 30 },
 	},
 	// 2: {
 	// 	freeSubscription: { text: freePlan, price: 0 },
