@@ -37,16 +37,17 @@ export const proPlusPlan = "Pro Plus";
 
 // version: {<obj>}
 // Do not remove any new version object, only add new ones
+// Prices are in USD
 export const subscriptionPlans = {
 	1: {
-		freeSubscription: { text: "Free", price: 0 },
-		standardSubscription: { text: "Standard", price: 5, validForDays: 7 },
-		proPlusSubscription: { text: "Pro Plus", price: 10, validForDays: 30 },
+		freeSubscription: { name: "Free", price: 0 },
+		standardSubscription: { name: "Standard", price: 2, validForDays: 7, usdToInrExchangeRate: 80 },
+		proPlusSubscription: { name: "Pro Plus", price: 5, validForDays: 30, usdToInrExchangeRate: 80 },
 	},
 	// 2: {
-	// 	freeSubscription: { text: freePlan, price: 0 },
-	// 	standardSubscription: { text: standardPlan, price: 2, validForDays: 7 },
-	// 	proPlusSubscription: { text: proPlusPlan, price: 5, validForDays: 30 },
+	// 	freeSubscription: { name: freePlan, price: 0 },
+	// 	standardSubscription: { name: standardPlan, price: 2, validForDays: 7 },
+	// 	proPlusSubscription: { name: proPlusPlan, price: 5, validForDays: 30 },
 	// },
 };
 

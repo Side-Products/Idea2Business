@@ -11,6 +11,18 @@ const subscriptionSchema = new mongoose.Schema({
 		default: 1,
 		required: true,
 	},
+	plan: {
+		type: String,
+		required: [true, "Please enter a plan name"],
+		default: "",
+		trim: true,
+	},
+	country: {
+		type: String,
+		required: [true, "Please enter a country name"],
+		default: "",
+		trim: true,
+	},
 	amountPaid: {
 		type: Number,
 		default: 0,
