@@ -64,11 +64,11 @@ export const getLatestSubscriptionPlansVersion = () => {
 
 export const getSubscriptionPlanName = (plan) => {
 	return plan == freePlan
-		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.text
+		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.name
 		: plan == standardPlan
-		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.text
+		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.name
 		: plan == proPlusPlan
-		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.text
+		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.name
 		: "";
 };
 
@@ -90,15 +90,23 @@ export const getSubscriptionPlanValidDays = (plan) => {
 		: "";
 };
 
+export const getUsdToInrExchangeRate = (plan) => {
+	return plan == standardPlan
+		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.usdToInrExchangeRate
+		: plan == proPlusPlan
+		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.usdToInrExchangeRate
+		: "";
+};
+
 export const getCurrentSubscriptionTier = (subscription) => {
 	return subscription &&
 		subscriptionPlans[subscription.version] &&
-		subscription.amountPaid == subscriptionPlans[subscription.version].proPlusSubscription.price &&
+		subscription.plan == subscriptionPlans[subscription.version].proPlusSubscription.name &&
 		new Date(subscription.subscriptionValidUntil) > Date.now()
 		? proPlusPlan
 		: subscription &&
 		  subscriptionPlans[subscription.version] &&
-		  subscription.amountPaid == subscriptionPlans[subscription.version].standardSubscription.price &&
+		  subscription.plan == subscriptionPlans[subscription.version].standardSubscription.name &&
 		  new Date(subscription.subscriptionValidUntil) > Date.now()
 		? standardPlan
 		: freePlan;

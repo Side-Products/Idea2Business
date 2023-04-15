@@ -25,7 +25,7 @@ const Pricing = () => {
 	const { setAuthModalOpen } = useContext(AuthModalContext);
 	const buySubscription = async (_planChosen) => {
 		if (status === "authenticated" && session && session.user) {
-			setLoading({ status: true });
+			setLoading({ status: true, title: "Please wait for a moment..." });
 
 			const amount = _planChosen;
 			try {

@@ -5,7 +5,13 @@ import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import getRawBody from "raw-body";
 import { product_name, domain } from "@/config/constants";
 import { standardPlan, proPlusPlan } from "@/config/constants";
-import { getSubscriptionPlanName, getSubscriptionPlanPrice, getSubscriptionPlanValidDays, getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
+import {
+	getSubscriptionPlanName,
+	getSubscriptionPlanPrice,
+	getSubscriptionPlanValidDays,
+	getUsdToInrExchangeRate,
+	getLatestSubscriptionPlansVersion,
+} from "@/utils/Helpers";
 
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
@@ -13,6 +19,20 @@ const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 	// Get origin
 	const { origin } = absoluteUrl(req);
+
+	// Get country from where user is accessing the website
+	const data = await fetch("https://api.ipify.org?format=json")
+		.then((response) => response.json())
+		.then((data) => {
+			return data;
+		});
+	const ipAddress = data?.ip;
+	const ipData = await fetch(`https://ipapi.co/${ipAddress}/json`)
+		.then((response) => response.json())
+		.then((data) => {
+			return data;
+		});
+	const countryName = ipData?.country_name;
 
 	// Create stripe checkout session
 	const session = await stripe.checkout.sessions.create({
@@ -23,15 +43,16 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 		metadata: {
 			plan:
 				parseInt(req.query.amount) == getSubscriptionPlanPrice(standardPlan)
-					? getSubscriptionPlanName(standardPlan) + " Subscription"
+					? getSubscriptionPlanName(standardPlan)
 					: parseInt(req.query.amount) == getSubscriptionPlanPrice(proPlusPlan)
-					? getSubscriptionPlanName(proPlusPlan) + " Subscription"
+					? getSubscriptionPlanName(proPlusPlan)
 					: "",
+			country: countryName == "India" ? "India" : countryName,
 		},
 		line_items: [
 			{
 				price_data: {
-					currency: "usd",
+					currency: countryName == "India" ? "inr" : "usd",
 					product_data: {
 						name:
 							parseInt(req.query.amount) == getSubscriptionPlanPrice(standardPlan)
@@ -42,7 +63,15 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 						description: "Subscription to " + product_name,
 						images: [`https://${domain}/logo.png`],
 					},
-					unit_amount: parseInt(req.query.amount) * 100,
+					unit_amount:
+						(countryName == "India"
+							? parseInt(req.query.amount) *
+							  (parseInt(req.query.amount) == getSubscriptionPlanPrice(standardPlan)
+									? getUsdToInrExchangeRate(standardPlan)
+									: parseInt(req.query.amount) == getSubscriptionPlanPrice(proPlusPlan)
+									? getUsdToInrExchangeRate(proPlusPlan)
+									: 0)
+							: parseInt(req.query.amount)) * 100,
 				},
 				quantity: 1,
 			},
@@ -71,6 +100,8 @@ const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res) 
 			const subscription = await Subscription.create({
 				user: user._id,
 				version: getLatestSubscriptionPlansVersion(),
+				plan: session.metadata.plan,
+				country: session.metadata.country,
 				amountPaid: session.amount_total / 100,
 				paymentInfo: {
 					id: session.payment_intent,
@@ -79,7 +110,7 @@ const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res) 
 				paidOn: Date.now(),
 				subscriptionValidUntil:
 					Date.now() +
-					(session.amount_total / 100 == getSubscriptionPlanPrice(proPlusPlan)
+					(session.metadata.plan == getSubscriptionPlanName(proPlusPlan)
 						? getSubscriptionPlanValidDays(proPlusPlan)
 						: getSubscriptionPlanValidDays(standardPlan)) *
 						24 *
