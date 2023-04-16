@@ -31,7 +31,7 @@ export default function MySubscription() {
 		setLoading({ status: true });
 		const data = {
 			settings: {
-				currency: "USD",
+				currency: subscription.country == "India" ? "INR" : "USD",
 				"tax-notation": "vat",
 				"margin-top": 50,
 				"margin-right": 50,
