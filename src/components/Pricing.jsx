@@ -29,8 +29,17 @@ const Pricing = () => {
 
 			const amount = _planChosen;
 			try {
+				// Get country from where user is accessing the website
+				const ipData = await fetch("https://api.ipify.org?format=json")
+					.then((response) => response.json())
+					.then((data) => {
+						console.log(data);
+						return data;
+					});
+				const ipAddress = ipData?.ip;
+
 				const link = `/api/stripe/checkout-session`;
-				const { data } = await axios.get(link, { params: { amount: amount } });
+				const { data } = await axios.get(link, { params: { amount: amount, ipAddress: ipAddress } });
 
 				const stripe = await getStripe();
 
@@ -38,6 +47,7 @@ const Pricing = () => {
 				await stripe.redirectToCheckout({ sessionId: data.id });
 				setLoading({ status: false });
 			} catch (error) {
+				console.error("Error:", error);
 				setLoading({ status: false });
 				setError({
 					title: "Something went wrong",

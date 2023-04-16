@@ -20,13 +20,7 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 	// Get origin
 	const { origin } = absoluteUrl(req);
 
-	// Get country from where user is accessing the website
-	const data = await fetch("https://api.ipify.org?format=json")
-		.then((response) => response.json())
-		.then((data) => {
-			return data;
-		});
-	const ipAddress = data?.ip;
+	const ipAddress = req.query.ipAddress;
 	const ipData = await fetch(`https://ipapi.co/${ipAddress}/json`)
 		.then((response) => response.json())
 		.then((data) => {
