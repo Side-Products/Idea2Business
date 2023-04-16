@@ -45,8 +45,8 @@ const Layout = ({ children }) => {
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			{children}
 			<Loading />
-			<ErrorBox />
-			<SuccessBox />
+			<ErrorBox style={2} />
+			<SuccessBox style={2} />
 			{router.pathname !== "/404" && router.pathname !== "/_offline" && <Footer />}
 		</>
 	);
