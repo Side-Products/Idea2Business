@@ -73,7 +73,7 @@ export default NextAuth({
 			}
 			user.role = "user";
 			// Default credits
-			user.credits = 10;
+			user.credits = 5;
 			await user.save();
 		},
 	},
