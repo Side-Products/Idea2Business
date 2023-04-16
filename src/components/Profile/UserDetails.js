@@ -49,7 +49,6 @@ export default function UserDetails({ ideasCount }) {
 		}
 		if (router.query && "paymentsuccess" in router.query) {
 			router.replace("/profile", undefined, { shallow: true });
-			router.reload();
 		}
 	}, [dispatch, isUpdated, error, loadedUser, session]);
 
