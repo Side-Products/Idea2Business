@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Tick from "@/components/ui/Tick";
@@ -7,6 +7,7 @@ import getStripe from "@/utils/getStripe";
 import { LoadingContext } from "@/store/LoadingContextProvider";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
+import SelectCountryModal from "@/components/SelectCountryModal";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { generateCategories, freePlan, standardPlan, proPlusPlan } from "@/config/constants";
@@ -23,26 +24,28 @@ const Pricing = () => {
 
 	const { data: session, status } = useSession();
 	const { setAuthModalOpen } = useContext(AuthModalContext);
+	const [chosenPlanPrice, setChosenPlanPrice] = useState(getSubscriptionPlanPrice(standardPlan));
+	// Country selection modal
+	const [isCountryModalOpen, setCountryModalOpen] = useState(false);
+	const [country, setCountry] = useState("India");
+
 	const buySubscription = async (_planChosen) => {
 		if (status === "authenticated" && session && session.user) {
+			setChosenPlanPrice(_planChosen);
+			setCountryModalOpen(true);
+		} else {
+			setAuthModalOpen(true);
+		}
+	};
+
+	const redirectToCheckout = async () => {
+		if (status === "authenticated" && session && session.user) {
 			setLoading({ status: true, title: "Please wait for a moment..." });
-
-			const amount = _planChosen;
+			const amount = chosenPlanPrice;
 			try {
-				// Get country from where user is accessing the website
-				const ipData = await fetch("https://api.ipify.org?format=json")
-					.then((response) => response.json())
-					.then((data) => {
-						console.log(data);
-						return data;
-					});
-				const ipAddress = ipData?.ip;
-
 				const link = `/api/stripe/checkout-session`;
-				const { data } = await axios.get(link, { params: { amount: amount, ipAddress: ipAddress } });
-
+				const { data } = await axios.get(link, { params: { amount: amount, country: country } });
 				const stripe = await getStripe();
-
 				// Redirect to Stripe Checkout
 				await stripe.redirectToCheckout({ sessionId: data.id });
 				setLoading({ status: false });
@@ -223,6 +226,14 @@ const Pricing = () => {
 					One-time payment. No subscription. Clicking the buy button will redirect you to a secure Stripe hosted checkout page.
 				</p>
 			</div>
+
+			<SelectCountryModal
+				isOpen={isCountryModalOpen}
+				setOpen={setCountryModalOpen}
+				country={country}
+				setCountry={setCountry}
+				redirectToCheckout={redirectToCheckout}
+			/>
 		</section>
 	);
 };

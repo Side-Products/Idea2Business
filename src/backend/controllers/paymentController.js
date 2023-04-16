@@ -20,13 +20,7 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 	// Get origin
 	const { origin } = absoluteUrl(req);
 
-	const ipAddress = req.query.ipAddress;
-	const ipData = await fetch(`https://ipapi.co/${ipAddress}/json`)
-		.then((response) => response.json())
-		.then((data) => {
-			return data;
-		});
-	const countryName = ipData?.country_name;
+	const countryName = req.query.country;
 
 	// Create stripe checkout session
 	const session = await stripe.checkout.sessions.create({
