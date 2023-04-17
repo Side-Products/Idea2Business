@@ -71,7 +71,10 @@ export default function AllSubscriptions() {
 				<div key={subscription.paymentInfo.id} className="relative group px-8 py-7 rounded-xl bg-dark-700">
 					<div className="flex items-start justify-between">
 						<p className="text-2xl font-semibold text-light-300">{subscription.user.name}</p>
-						<span className="text-3xl font-bold text-gradient-primary-tr">${subscription.amountPaid}</span>
+						<span className="text-3xl font-bold text-gradient-primary-tr">
+							{subscription.country == "India" ? "₹" : "$"}
+							{subscription.amountPaid}
+						</span>
 					</div>
 
 					<div className="flex items-start justify-between">
