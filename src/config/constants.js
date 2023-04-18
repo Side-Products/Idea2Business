@@ -65,7 +65,7 @@ export const Faqs = [
 	},
 	{
 		heading: "Is the app free?",
-		body: "The app has a free trial version with 10 credits having limited functionality, but you can take a paid subscription anytime to access full functionality.",
+		body: "The app has a free trial version with 5 credits having limited functionality, but you can take a paid subscription anytime to access full functionality.",
 		content_id: "collapseSeven",
 		content_heading: "headingSeven",
 	},
@@ -94,7 +94,7 @@ export const Faqs = [
 	},
 	{
 		heading: "Are the offerings created with a template?",
-		body: "Nope! The pitch deck templates, investor questions, and tips & tricks are written by AI and they are 100% original. That means that the content of every PDF we generate and deliver is unique and tailored specifically for you and the startup you are building. You can use this content any way you want.",
+		body: "Nope! The pitch deck templates, investor questions, and tips & tricks are written by AI and they are 100% original. That means that all the content we generate and deliver is unique and tailored specifically for you and the startup you are building. You can use this content any way you want.",
 		content_id: "collapseThree",
 		content_heading: "headingThree",
 	},

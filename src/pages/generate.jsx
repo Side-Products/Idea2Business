@@ -102,7 +102,7 @@ const Generate = () => {
 
 	return (
 		<PageWrapper useDefaultContainer={false}>
-			<div className="w-full flex flex-col items-center bg-dark-1000 h-screen" id="ideaInfo">
+			<div className="w-full flex flex-col items-center bg-dark-1000 min-h-screen" id="ideaInfo">
 				<div className="w-full max-w-[1920px] py-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<EnterIdeaInfo
 						ideaInfo={ideaInfo}
@@ -115,7 +115,7 @@ const Generate = () => {
 				</div>
 			</div>
 
-			<div className="w-full flex justify-center items-center pt-10 pb-32 bg-dark-1000" id="cardContainer">
+			<div className="w-full flex justify-center items-center pt-6 pb-32 bg-dark-1000" id="cardContainer">
 				<div className="w-full md:w-11/12 xl:w-9/12 flex flex-col justify-center items-center md:p-0 p-4">
 					<Decks title="Decks" items={decks} category={"decks"} sectionStyle={1} {...sectionOptions} />
 
