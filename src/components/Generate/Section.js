@@ -66,7 +66,9 @@ export default function Section({
 
 	return (
 		<>
-			<SectionHeading sectionStyle={sectionStyle}>{title}</SectionHeading>
+			<SectionHeading sectionStyle={sectionStyle} sectionId={category}>
+				{title}
+			</SectionHeading>
 			<SectionGrid>
 				{items &&
 					items.map((item, index) => {

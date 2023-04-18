@@ -13,6 +13,7 @@ import Section from "@/components/Generate/Section";
 import SectionHeading from "@/components/Generate/SectionHeading";
 import ContentModal from "@/components/Generate/ContentModal";
 import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
+import GoToSectionCarousel from "@/components/Generate/GoToSectionCarousel";
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
 	const session = await getSession({ req: req });
@@ -68,8 +69,8 @@ const Generate = () => {
 	// Scroll to cards when they are available
 	useEffect(() => {
 		if (cardsAvailable) {
-			const cardContainer = document.getElementById("cardContainer");
-			cardContainer.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+			const categoriesSlider = document.getElementById("categoriesSlider");
+			categoriesSlider.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 		}
 	}, [cardsAvailable]);
 
@@ -112,6 +113,13 @@ const Generate = () => {
 						promptEnterIdeaInfo={promptEnterIdeaInfo}
 						setCardsAvailable={setCardsAvailable}
 					/>
+				</div>
+			</div>
+
+			<div className="w-full flex justify-center items-center pt-32 bg-dark-1000">
+				<div className="relative w-full max-w-[1920px] px-2 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+					<span id="categoriesSlider" className="absolute -top-52"></span>
+					<GoToSectionCarousel />
 				</div>
 			</div>
 

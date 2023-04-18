@@ -130,6 +130,7 @@ export const Faqs = [
 /**************************************************************************/
 // Do not change identifier property of the objects in these arrays
 // Do not remove any object from these arrays. Only add `hidden: true` to the object to hide it from the generate & pricing page
+// Update the generateCategories object and goToSectionCarouselOptions array if you add or remove any category
 export const pitches = [
 	{
 		cardText: "Pitch to Onboard Potential Co-Founder",
@@ -587,6 +588,22 @@ export const generateCategories = {
 	investorMeetingPrep,
 	bonusContent,
 };
+
+export const goToSectionCarouselOptions = [
+	{ name: "Decks", id: "decks", icon: "fa-solid fa-file-powerpoint" },
+	{ name: "Pitches", id: "pitches", icon: "fa-solid fa-person-chalkboard" },
+	{ name: "Potential Users", id: "understandingPotentialUsers", icon: "fa-solid fa-users" },
+	{ name: "Social Media", id: "socialMediaStrategy", icon: "fa-solid fa-hashtag" },
+	{ name: "Advice From Books", id: "adviceFromBooks", icon: "fa-solid fa-book" },
+	{ name: "Market Validation", id: "marketValidation", icon: "fa-solid fa-check-double" },
+	{ name: "Vision", id: "vision", icon: "fa-solid fa-lightbulb" },
+	{ name: "Design", id: "design", icon: "fa-solid fa-paintbrush" },
+	{ name: "Product Launch", id: "productLaunch", icon: "fa-solid fa-rocket" },
+	{ name: "Marketing", id: "marketing", icon: "fa-solid fa-bullhorn" },
+	{ name: "Growth", id: "growth", icon: "fa-solid fa-arrow-up-right-dots" },
+	{ name: "Investor Meeting Prep", id: "investorMeetingPrep", icon: "fa-solid fa-handshake" },
+	{ name: "Bonus", id: "bonusContent", icon: "fa-solid fa-money-bill-trend-up" },
+];
 
 export const resources = {
 	images: [

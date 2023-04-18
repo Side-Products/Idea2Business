@@ -403,7 +403,9 @@ export default function Decks({
 
 	return (
 		<>
-			<SectionHeading sectionStyle={sectionStyle}>{title}</SectionHeading>
+			<SectionHeading sectionStyle={sectionStyle} sectionId={category}>
+				{title}
+			</SectionHeading>
 
 			<div className="w-full flex items-center justify-center justify-items-center place-content-center gap-y-6 gap-x-10 md:gap-x-16 lg:gap-x-26 2xl:gap-x-18">
 				{items &&

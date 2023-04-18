@@ -1,8 +1,8 @@
-const SectionHeading = ({ sectionStyle, children }) => {
+const SectionHeading = ({ sectionStyle, sectionId, children }) => {
 	return (
-		<h2
+		<div
 			className={
-				"text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10 " +
+				"relative text-center text-[25px] sm:text-[40px] tracking-[-1.5px] font-semibold leading-[1.2em] mt-20 mb-10 " +
 				(sectionStyle == 1
 					? "section-heading-1"
 					: sectionStyle == 2
@@ -22,8 +22,9 @@ const SectionHeading = ({ sectionStyle, children }) => {
 					: "section-heading-default")
 			}
 		>
+			<span id={sectionId} className="absolute -top-32"></span>
 			{children}
-		</h2>
+		</div>
 	);
 };
 
