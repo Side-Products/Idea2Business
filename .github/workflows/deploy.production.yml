@@ -1,0 +1,18 @@
+name: Exclude Vercel.json
+
+on:
+    pull_request:
+        branches:
+            - production
+
+jobs:
+    exclude-vercel-json:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.event.pull_request.head.ref }}
+            - name: Exclude Vercel.json
+              run: |
+                  git rm --cached vercel.json
+                  git commit -m "Exclude vercel.json from pull request"
