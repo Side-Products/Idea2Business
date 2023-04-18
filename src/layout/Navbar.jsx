@@ -84,8 +84,6 @@ const Navbar = ({ setAuthModalOpen }) => {
 								<span className="flex">
 									<Image src={logo} alt="MXV Logo" width="50" className="rounded-full" />
 								</span>
-								{/* TODO: Remove this */}
-								<span className="absolute text-xs text-light-400 left-[72px] sm:left-[78px] lg:left-[108px] top-[36px]">Beta</span>
 							</Link>
 
 							{/* Internal links */}

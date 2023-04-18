@@ -9,6 +9,7 @@ import ErrorBox from "@/components/ui/Toast/ErrorBox";
 import SuccessBox from "@/components/ui/Toast/SuccessBox";
 import Loading from "@/components/ui/Loading";
 import AuthModal from "@/components/AuthModal";
+import BackToTopButton from "@/components/ui/BackToTopButton";
 
 const Layout = ({ children }) => {
 	const { setLoading } = useContext(LoadingContext);
@@ -47,6 +48,7 @@ const Layout = ({ children }) => {
 			<Loading />
 			<ErrorBox style={2} />
 			<SuccessBox style={2} />
+			<BackToTopButton />
 			{router.pathname !== "/404" && router.pathname !== "/_offline" && <Footer />}
 		</>
 	);

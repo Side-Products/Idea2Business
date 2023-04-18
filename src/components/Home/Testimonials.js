@@ -71,10 +71,10 @@ export default function Testimonials() {
 									/>
 
 									<TestimonialCard
-										name={"Rakshit"}
+										name={"Deepak"}
 										position={"Blockchain Developer"}
-										username={"@rakshit087"}
-										avatar={"/testimonials/rakshit.jpg"}
+										username={"@0xdeepak_eth"}
+										avatar={"/testimonials/deepak.jpg"}
 										text={`I was dumbfounded when I received the final result. What an insanely powerful tool! I now have a brilliant foundation for my product expansion. This is a no-brainer for startups.`}
 										daysAgo={"1 day ago"}
 									/>
@@ -116,10 +116,10 @@ export default function Testimonials() {
 									/>
 
 									<TestimonialCard
-										name={"Raghav"}
-										position={"Product Lead"}
-										username={"@RaghavSaraf17"}
-										avatar={"/testimonials/raghav.jpg"}
+										name={"Ayush"}
+										position={"Product Manager"}
+										username={"@ayushgupta0110"}
+										avatar={"/testimonials/ayush.jpg"}
 										text={`I was blown away by the quality of services that Idea2Business provided me. It was so easy to use and the results were amazing!`}
 										daysAgo={"1 day ago"}
 									/>
