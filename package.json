@@ -47,6 +47,7 @@
 		"redux-devtools-extension": "^2.13.9",
 		"redux-thunk": "^2.4.2",
 		"stripe": "^11.14.0",
+		"swiper": "^9.2.3",
 		"validator": "^13.9.0"
 	},
 	"devDependencies": {

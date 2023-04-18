@@ -65,7 +65,7 @@ const EnterIdeaInfo = ({ ideaInfo, onFieldChange, isGenerating, promptEnterIdeaI
 				</h1>
 				<h3 className="mt-4 px-4 text-center text-sm sm:text-lg leading-[1.4em] text-light-500">
 					Transform your idea into a profitable business. <br />
-					Just enter your idea, and Idea2Business will help you turn it into a successful venture.
+					Enter your idea, and Idea2Business will help you turn it into a successful venture.
 				</h3>
 			</div>
 

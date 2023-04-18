@@ -20,7 +20,7 @@ export default function HeroSection() {
 			</h1>
 
 			<p className="px-8 mt-16 sm:mt-24 text-center text-sm font-medium text-dark-100">
-				Just enter your idea and we will help you turn it into a successful venture
+				Enter your idea and we will help you turn it into a successful venture
 			</p>
 
 			<div className="w-2/3 sm:w-1/4 md:w-1/5 xl:w-1/6 mt-8">
