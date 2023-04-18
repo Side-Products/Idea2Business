@@ -71,21 +71,23 @@ export default function Section({
 				{items &&
 					items.map((item, index) => {
 						return (
-							<PromptCard
-								key={item.identifier}
-								cardText={item.cardText}
-								handleCardClick={async () => {
-									setIsGenerating(item.identifier);
-									await callGenerateEndpoint(item, category, index);
-									setIsGenerating(false);
-								}}
-								isLoading={isGenerating === item.identifier}
-								subscriptionPlanRequired={item.subscriptionPlanRequired}
-								sectionStyle={sectionStyle}
-								cardsAvailable={cardsAvailable}
-								promptEnterIdeaInfo={promptEnterIdeaInfo}
-								setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
-							/>
+							!item.hidden && (
+								<PromptCard
+									key={item.identifier}
+									cardText={item.cardText}
+									handleCardClick={async () => {
+										setIsGenerating(item.identifier);
+										await callGenerateEndpoint(item, category, index);
+										setIsGenerating(false);
+									}}
+									isLoading={isGenerating === item.identifier}
+									subscriptionPlanRequired={item.subscriptionPlanRequired}
+									sectionStyle={sectionStyle}
+									cardsAvailable={cardsAvailable}
+									promptEnterIdeaInfo={promptEnterIdeaInfo}
+									setSubscriptionRequiredModalOpen={setSubscriptionRequiredModalOpen}
+								/>
+							)
 						);
 					})}
 			</SectionGrid>

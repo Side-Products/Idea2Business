@@ -128,9 +128,8 @@ export const Faqs = [
 /**************************************************************************/
 /************************    Card Information   ***************************/
 /**************************************************************************/
-// Changing the order of the objects in these arrays will affect their functioning on generate page
-// Do not change the order of the objects in these arrays
 // Do not change identifier property of the objects in these arrays
+// Do not remove any object from these arrays. Only add `hidden: true` to the object to hide it from the generate & pricing page
 export const pitches = [
 	{
 		cardText: "Pitch to Onboard Potential Co-Founder",
@@ -515,6 +514,7 @@ export const bonusContent = [
 		subscriptionPlanRequired: freePlan,
 		prompt: `Generate a list of actionable items to launch the MVP of the following idea:`,
 		loadingMessage: "MVP Launch checklist for your idea is being generated",
+		// hidden: true,
 	},
 	{
 		cardText: "How to build a team",

@@ -91,6 +91,7 @@ const Pricing = () => {
 								{Object.keys(generateCategories).map((key, index) => {
 									return generateCategories[key].map((item, idx) => {
 										return (
+											!item.hidden &&
 											item.subscriptionPlanRequired == getSubscriptionPlanName(freePlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
@@ -132,6 +133,7 @@ const Pricing = () => {
 								{Object.keys(generateCategories).map((key, index) => {
 									return generateCategories[key].map((item, idx) => {
 										return (
+											!item.hidden &&
 											item.subscriptionPlanRequired == getSubscriptionPlanName(standardPlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
@@ -184,6 +186,7 @@ const Pricing = () => {
 								{Object.keys(generateCategories).map((key, index) => {
 									return generateCategories[key].map((item, idx) => {
 										return (
+											!item.hidden &&
 											item.subscriptionPlanRequired == getSubscriptionPlanName(proPlusPlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
