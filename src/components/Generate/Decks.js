@@ -42,6 +42,24 @@ export default function Decks({
 		pptx.layout = "LAYOUT_16x9";
 
 		// -----------------------------------------------------------------------------------
+		// SLIDE: 0
+		// -----------------------------------------------------------------------------------
+
+		const slide0 = pptx.addSlide();
+		slide0.background = { data: redBG };
+
+		slide0.addText([{ text: ideaName, options: { y: 1, align: "center", fontSize: 50, bold: true, color: "ffffff", isTextBox: true } }], {
+			x: 0.7,
+			y: 1.2,
+			w: 8.5,
+			h: 2.5,
+			color: "000000",
+			valign: "middle",
+			align: "center",
+			isTextBox: true,
+		});
+
+		// -----------------------------------------------------------------------------------
 		// SLIDE: 1
 		// -----------------------------------------------------------------------------------
 
