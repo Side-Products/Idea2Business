@@ -65,8 +65,8 @@ function Parallax({ projects, baseVelocity = 100 }) {
 export default function ParallaxText() {
 	return (
 		<section className="w-screen text-dark-200">
-			<Parallax baseVelocity={-3} projects={["Konjer", "Pandora", "Add2Kart", "Edden", "DevKit", "BrideMeUp"]}></Parallax>
-			<Parallax baseVelocity={3} projects={["Musixverse", "Cluso", "SoundBetter", "Link3", "MiGuru", "ColabLand"]}></Parallax>
+			<Parallax baseVelocity={-2} projects={["Konjer", "Pandora", "Add2Kart", "Edden", "DevKit", "BrideMeUp"]}></Parallax>
+			<Parallax baseVelocity={2} projects={["Musixverse", "Cluso", "SoundBetter", "Link3", "MiGuru", "ColabLand"]}></Parallax>
 		</section>
 	);
 }
