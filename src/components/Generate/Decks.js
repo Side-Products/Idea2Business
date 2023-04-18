@@ -46,7 +46,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide0 = pptx.addSlide();
-		slide0.background = { data: redBG };
+		slide0.background = { path: "https://idea2business.xyz/themes/blue.png" };
 
 		slide0.addText([{ text: ideaName, options: { y: 1, align: "center", fontSize: 50, bold: true, color: "ffffff", isTextBox: true } }], {
 			x: 0.7,
