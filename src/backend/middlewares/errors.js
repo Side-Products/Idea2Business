@@ -20,6 +20,12 @@ export default (err, req, res, next) => {
 		error = new ErrorHandler(message[0], 400);
 	}
 
+	// OpenAI API error
+	if (err.message === "Request failed with status code 429") {
+		const message = `Our servers are at capacity. Please try again later.`;
+		error = new ErrorHandler(message, 400);
+	}
+
 	res.status(err.statusCode).json({
 		success: false,
 		error,
