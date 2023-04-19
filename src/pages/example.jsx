@@ -36,7 +36,7 @@ export default function Example() {
 
 			<div className="mt-10 flex flex-col items-center justify-center w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] xl:h-[600px] 2xl:px-48 xl:px-40 lg:px-20 md:px-16 sm:px-4 px-2">
 				<iframe
-					src="https://view.officeapps.live.com/op/embed.aspx?src=https://docs.google.com/presentation/d/1dCMPbgtdG7ZPvTO47B_o6B4R6UDz-6Qg/edit?usp=sharing&ouid=100683860382676570556&rtpof=true&sd=true"
+					src="https://view.officeapps.live.com/op/embed.aspx?src=https://idea2business.xyz/example-items/deck.pptx"
 					width="100%"
 					height="100%"
 					frameborder="0"
