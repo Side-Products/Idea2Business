@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
 	return (
 		<div className="w-full flex flex-col justify-center items-center pb-20 text-light-400">
 			<div className="w-full relative text-base max-w-[1500px]">
-				<div className="text-primary-400 text-sm pt-1">(Effective as of Mar 31, 2023)</div>
+				<div className="text-primary-400 text-sm pt-1">(Effective as of Apr 15, 2023)</div>
 
 				<div className="mt-5 font-secondary text-[1em] tracking-[0.5px]">
 					Protecting your private information is our priority. This Statement of Privacy applies to{" "}
@@ -224,7 +224,7 @@ export default function PrivacyPolicy() {
 					<br />
 					Email Address:
 					<br />
-					<a href={`mailto:` + contact_email} target="_blank" rel="noopener noreferrer" className="font-primary font-semibold dark:text-[#afafaf]">
+					<a href={`mailto:` + contact_email} target="_blank" rel="noopener noreferrer" className="font-primary font-semibold text-[#afafaf]">
 						{contact_email}
 					</a>
 				</div>

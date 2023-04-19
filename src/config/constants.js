@@ -26,6 +26,8 @@ export const contactus_meta_description =
 	"Just send us your questions or concerns by filling out the shortest contact form you've ever seen and we will give you the help you need. Start Here.";
 export const privacy_meta_description =
 	"This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can update, manage, export, and delete your information.";
+export const cancellation_and_refund_meta_description =
+	"This Cancellation and Refund Policy is meant to help you understand the procedure for refunds and cancellation of subscriptions.";
 
 /**************************************************************************/
 /**************************    Subscription   *****************************/

@@ -94,6 +94,9 @@ const Footer = () => {
 							<Link href="/privacy-policy">Privacy Policy</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
+							<Link href="/cancellation-and-refund">Cancellation & Refund</Link>
+						</li>
+						<li className="text-xs text-neutral-400 list-none sm:block hidden">
 							<Link href="/contact-us">Contact Us</Link>
 						</li>
 					</div>
