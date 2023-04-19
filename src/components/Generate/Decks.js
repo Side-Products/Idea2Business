@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
 import pptxgen from "pptxgenjs";
-import redBG from "../../../public/themes/redbg";
+// import redBG from "../../../public/themes/redbg";
 import { LoadingContext } from "@/store/LoadingContextProvider";
 import SectionHeading from "./SectionHeading";
 import Button from "@/components/ui/Button";
@@ -37,6 +37,7 @@ export default function Decks({
 	async function generatePitchdeck(apiOutput) {
 		// Initialization
 		const pptx = new pptxgen();
+		const backgroundImageUrl = "https://idea2business.xyz/themes/blue.png";
 
 		// Layout of the whole slide
 		pptx.layout = "LAYOUT_16x9";
@@ -46,7 +47,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide0 = pptx.addSlide();
-		slide0.background = { path: "https://idea2business.xyz/themes/blue.png" };
+		slide0.background = { path: backgroundImageUrl };
 
 		slide0.addText([{ text: ideaName, options: { y: 1, align: "center", fontSize: 50, bold: true, color: "ffffff", isTextBox: true } }], {
 			x: 0.7,
@@ -64,7 +65,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide1 = pptx.addSlide();
-		slide1.background = { data: redBG };
+		slide1.background = { path: backgroundImageUrl };
 
 		const result1 = splitFirstOccurrence(apiOutput[0], ":");
 		slide1.addText(
@@ -89,7 +90,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide2 = pptx.addSlide();
-		slide2.background = { data: redBG };
+		slide2.background = { path: backgroundImageUrl };
 
 		const result2 = splitFirstOccurrence(apiOutput[2], ":");
 		slide2.addText(
@@ -114,7 +115,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide3 = pptx.addSlide();
-		slide3.background = { data: redBG };
+		slide3.background = { path: backgroundImageUrl };
 
 		const result3 = splitFirstOccurrence(apiOutput[4], ":");
 		slide3.addText(
@@ -139,7 +140,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide4 = pptx.addSlide();
-		slide4.background = { data: redBG };
+		slide4.background = { path: backgroundImageUrl };
 
 		const result4 = splitFirstOccurrence(apiOutput[6], ":");
 		slide4.addText(
@@ -164,7 +165,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide5 = pptx.addSlide();
-		slide5.background = { data: redBG };
+		slide5.background = { path: backgroundImageUrl };
 
 		const result5 = splitFirstOccurrence(apiOutput[8], ":");
 		slide5.addText(
@@ -189,7 +190,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide6 = pptx.addSlide();
-		slide6.background = { data: redBG };
+		slide6.background = { path: backgroundImageUrl };
 
 		const result6 = splitFirstOccurrence(apiOutput[10], ":");
 		slide6.addText(
@@ -214,7 +215,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide7 = pptx.addSlide();
-		slide7.background = { data: redBG };
+		slide7.background = { path: backgroundImageUrl };
 
 		const result7 = splitFirstOccurrence(apiOutput[12], ":");
 		slide7.addText(
@@ -239,7 +240,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide8 = pptx.addSlide();
-		slide8.background = { data: redBG };
+		slide8.background = { path: backgroundImageUrl };
 
 		const result8 = splitFirstOccurrence(apiOutput[14], ":");
 		slide8.addText(
@@ -264,7 +265,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide9 = pptx.addSlide();
-		slide9.background = { data: redBG };
+		slide9.background = { path: backgroundImageUrl };
 
 		const result9 = splitFirstOccurrence(apiOutput[16], ":");
 		slide9.addText(
@@ -289,7 +290,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide10 = pptx.addSlide();
-		slide10.background = { data: redBG };
+		slide10.background = { path: backgroundImageUrl };
 
 		const result10 = splitFirstOccurrence(apiOutput[18], ":");
 		slide10.addText(
@@ -314,7 +315,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide11 = pptx.addSlide();
-		slide11.background = { data: redBG };
+		slide11.background = { path: backgroundImageUrl };
 
 		const result11 = splitFirstOccurrence(apiOutput[20], ":");
 		slide11.addText(
@@ -339,7 +340,7 @@ export default function Decks({
 		// -----------------------------------------------------------------------------------
 
 		const slide12 = pptx.addSlide();
-		slide12.background = { data: redBG };
+		slide12.background = { path: backgroundImageUrl };
 
 		const result12 = splitFirstOccurrence(apiOutput[22], ":");
 		slide12.addText(
@@ -388,7 +389,12 @@ export default function Decks({
 			const { output } = data;
 
 			const outputArray = output.split(/\r?\n/);
-			await generatePitchdeck(outputArray);
+			try {
+				await generatePitchdeck(outputArray);
+			} catch (error) {
+				console.log("Error:", error);
+				await generatePitchdeck(outputArray);
+			}
 
 			setLoading({
 				status: false,

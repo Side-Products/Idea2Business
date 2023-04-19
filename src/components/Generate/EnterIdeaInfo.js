@@ -81,7 +81,7 @@ const EnterIdeaInfo = ({ ideaInfo, onFieldChange, isGenerating, promptEnterIdeaI
 				<br />
 				<textarea
 					className="w-full bg-dark-600/40 border border-light-900 focus:border-light-700 transform duration-300 outline-0 rounded-xl h-60 p-4 normal-case resize-none"
-					placeholder="Idea Description"
+					placeholder={`Idea Description\n\nPlease describe your idea in as much detail as possible`}
 					name="ideaDescription"
 					value={ideaDescription}
 					onChange={onFieldChange}
