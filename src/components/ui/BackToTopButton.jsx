@@ -26,7 +26,7 @@ const BackToTopButton = () => {
 			onClick={() => scrollToTop()}
 			id="back-to-up"
 		>
-			<i class="fa fa-chevron-up" aria-hidden="true"></i>
+			<i className="fa fa-chevron-up" aria-hidden="true"></i>
 		</button>
 	);
 };
