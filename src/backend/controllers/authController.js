@@ -1,12 +1,14 @@
 import crypto from "crypto";
 import User from "../models/user";
+import Subscription from "../models/subscription";
 import IdeaSearch from "../models/ideaSearch";
 import GenerateResponse from "../models/generateResponse";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import absoluteUrl from "next-absolute-url";
 import sendEmail from "@/backend/utils/sendEmail";
-import { product_name } from "@/config/constants";
+import { product_name, standardPlan, proPlusPlan } from "@/config/constants";
+import { getSubscriptionPlanName, getSubscriptionPlanValidDays, getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
 
 // register user => /api/auth/register
 const registerUser = catchAsyncErrors(async (req, res) => {
@@ -114,13 +116,15 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 // get all users => /api/admin/users
 const getAdminAllUsers = catchAsyncErrors(async (req, res) => {
-	const users = await User.find();
-	const admins = await User.find({ role: "admin" });
-	const allAccessUsers = await User.find({ role: "allAccess" });
+	const users = await User.find().sort({ createdAt: "desc" });
+	const usersCount = await User.countDocuments();
+	const admins = await User.find({ role: "admin" }).sort({ createdAt: "desc" });
+	const allAccessUsers = await User.find({ role: "allAccess" }).sort({ createdAt: "desc" });
 
 	res.status(200).json({
 		success: true,
 		users,
+		usersCount,
 		admins,
 		allAccessUsers,
 	});
@@ -153,6 +157,31 @@ const updateAdminUserDetails = catchAsyncErrors(async (req, res) => {
 		runValidators: true,
 		useFindAndModify: false,
 	});
+
+	if (req.body.subscription) {
+		const subscription = await Subscription.create({
+			user: req.query.id,
+			version: getLatestSubscriptionPlansVersion(),
+			plan: req.body.subscription,
+			country: "giveaway",
+			amountPaid: 0,
+			paymentInfo: { id: "giveaway", status: "giveaway" },
+			paidOn: Date.now(),
+			subscriptionValidUntil:
+				Date.now() +
+				(req.body.subscription == getSubscriptionPlanName(proPlusPlan)
+					? // ? getSubscriptionPlanValidDays(proPlusPlan)
+					  // : getSubscriptionPlanValidDays(standardPlan)) *
+					  7
+					: 7) *
+					24 *
+					60 *
+					60 *
+					1000,
+		});
+
+		console.log(subscription);
+	}
 
 	if (!user) {
 		return next(new ErrorHandler("User not found with this ID", 400));

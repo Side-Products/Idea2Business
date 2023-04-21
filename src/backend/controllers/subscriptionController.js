@@ -9,6 +9,7 @@ const newSubscription = catchAsyncErrors(async (req, res) => {
 	const subscription = await Subscription.create({
 		user: req.user._id || req.user.id,
 		version: getLatestSubscriptionPlansVersion(),
+		plan: "Standard",
 		amountPaid,
 		paymentInfo,
 		paidOn,
@@ -38,10 +39,12 @@ const mySubscription = catchAsyncErrors(async (req, res) => {
 
 // get all subscriptions - ADMIN => /api/admin/subscriptions
 const allAdminSubscriptions = catchAsyncErrors(async (req, res) => {
-	const subscriptions = await Subscription.find().populate({
-		path: "user",
-		select: "name email",
-	});
+	const subscriptions = await Subscription.find()
+		.populate({
+			path: "user",
+			select: "name email",
+		})
+		.sort({ paidOn: "desc" });
 
 	res.status(200).json({
 		success: true,
