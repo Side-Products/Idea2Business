@@ -10,7 +10,7 @@ import DeleteUserConfirmModal from "./Modals/DeleteUserConfirmModal";
 
 export default function AllUsers() {
 	const dispatch = useDispatch();
-	const { users, admins, allAccessUsers, error, loading } = useSelector((state) => state.allUsers);
+	const { users, usersCount, admins, allAccessUsers, error, loading } = useSelector((state) => state.allUsers);
 
 	const { setSuccess, setError } = useContext(StatusContext);
 
@@ -46,56 +46,60 @@ export default function AllUsers() {
 		<Loader />
 	) : users && users.length > 0 ? (
 		<div className="grid w-full mt-10 overflow-scroll">
-			<ul className="items-start nav nav-tabs flex flex-row flex-wrap list-none border-b-0 pl-0 mb-4" id="tabs-tables" role="tablist">
-				<li className="nav-item" role="presentation" onClick={() => setActiveTable("allUsersTable")}>
-					<span
-						className={
-							"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 parent hover:bg-dark-600 transition duration-300 rounded-t " +
-							(activeTable == "allUsersTable" && "border-primary-400 text-primary-400")
-						}
-						id="tabs-all-users-table"
-						data-bs-toggle="pill"
-						data-bs-target="#tabs-all-users"
-						role="tab"
-						aria-controls="tabs-all-users"
-						aria-selected="true"
-					>
-						All Users
-					</span>
-				</li>
-				<li className="nav-item" role="presentation" onClick={() => setActiveTable("adminsTable")}>
-					<span
-						className={
-							"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:bg-dark-600 transition duration-300 rounded-t " +
-							(activeTable == "adminsTable" && "border-primary-400 text-primary-400")
-						}
-						id="tabs-admins-table"
-						data-bs-toggle="pill"
-						data-bs-target="#tabs-admins"
-						role="tab"
-						aria-controls="tabs-admins"
-						aria-selected="false"
-					>
-						Admins
-					</span>
-				</li>
-				<li className="nav-item" role="presentation" onClick={() => setActiveTable("allAccessUsersTable")}>
-					<span
-						className={
-							"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:bg-dark-600 transition duration-300 rounded-t " +
-							(activeTable == "allAccessUsersTable" && "border-primary-400 text-primary-400")
-						}
-						id="tabs-all-access-users-table"
-						data-bs-toggle="pill"
-						data-bs-target="#tabs-all-access-users"
-						role="tab"
-						aria-controls="tabs-all-access-users"
-						aria-selected="false"
-					>
-						All Access Users
-					</span>
-				</li>
-			</ul>
+			<div className="flex justify-between w-full">
+				<ul className="items-start nav nav-tabs flex flex-row flex-wrap list-none border-b-0 pl-0 mb-4" id="tabs-tables" role="tablist">
+					<li className="nav-item" role="presentation" onClick={() => setActiveTable("allUsersTable")}>
+						<span
+							className={
+								"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 parent hover:bg-dark-600 transition duration-300 rounded-t " +
+								(activeTable == "allUsersTable" && "border-primary-400 text-primary-400")
+							}
+							id="tabs-all-users-table"
+							data-bs-toggle="pill"
+							data-bs-target="#tabs-all-users"
+							role="tab"
+							aria-controls="tabs-all-users"
+							aria-selected="true"
+						>
+							All Users
+						</span>
+					</li>
+					<li className="nav-item" role="presentation" onClick={() => setActiveTable("adminsTable")}>
+						<span
+							className={
+								"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:bg-dark-600 transition duration-300 rounded-t " +
+								(activeTable == "adminsTable" && "border-primary-400 text-primary-400")
+							}
+							id="tabs-admins-table"
+							data-bs-toggle="pill"
+							data-bs-target="#tabs-admins"
+							role="tab"
+							aria-controls="tabs-admins"
+							aria-selected="false"
+						>
+							Admins
+						</span>
+					</li>
+					<li className="nav-item" role="presentation" onClick={() => setActiveTable("allAccessUsersTable")}>
+						<span
+							className={
+								"cursor-pointer nav-link w-full block font-medium text-xs leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:bg-dark-600 transition duration-300 rounded-t " +
+								(activeTable == "allAccessUsersTable" && "border-primary-400 text-primary-400")
+							}
+							id="tabs-all-access-users-table"
+							data-bs-toggle="pill"
+							data-bs-target="#tabs-all-access-users"
+							role="tab"
+							aria-controls="tabs-all-access-users"
+							aria-selected="false"
+						>
+							All Access Users
+						</span>
+					</li>
+				</ul>
+
+				<div className="font-semibold text-lg text-light-400">Total Count: {usersCount}</div>
+			</div>
 
 			<div className="tab-content" id="tabs-tabContent3">
 				{/* All Users Table */}

@@ -28,7 +28,7 @@ export default function PromptCard({
 			setCanAccess(true);
 		} else if (subscriptionPlan == proPlusPlan) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == standardPlan && subscriptionPlanRequired == standardPlan) {
+		} else if (subscriptionPlan == standardPlan && (subscriptionPlanRequired == standardPlan || subscriptionPlanRequired == freePlan)) {
 			setCanAccess(true);
 		} else if (subscriptionPlan == freePlan && subscriptionPlanRequired == freePlan) {
 			setCanAccess(true);

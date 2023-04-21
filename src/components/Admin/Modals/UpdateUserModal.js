@@ -8,12 +8,14 @@ import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import Button from "@/components/ui/Button";
 import { sleep } from "@/utils/Sleep";
+import { standardPlan, proPlusPlan } from "@/config/constants";
 
 const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [role, setRole] = useState("");
 	const [credits, setCredits] = useState("");
+	const [subscription, setSubscription] = useState("");
 
 	const { setSuccess, setError } = useContext(StatusContext);
 
@@ -59,6 +61,7 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 			email,
 			credits,
 			role,
+			subscription,
 		};
 		dispatch(adminUpdateUserDetails(userToUpdate._id, userData));
 		setOpen(false);
@@ -142,6 +145,23 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 								<option value="user">user</option>
 								<option value="admin">admin</option>
 								<option value="allAccess">allAccess</option>
+							</select>
+						</div>
+
+						<div className="flex flex-col mt-2">
+							<label htmlFor="subscription_field" className="text-sm text-start font-semibold text-light-500">
+								Subscription
+							</label>
+							<select
+								id="subscription_field"
+								name="subscription"
+								value={subscription}
+								onChange={(e) => setSubscription(e.target.value)}
+								className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
+							>
+								<option value="">-</option>
+								<option value={standardPlan}>{standardPlan}</option>
+								<option value={proPlusPlan}>{proPlusPlan}</option>
 							</select>
 						</div>
 

@@ -190,6 +190,7 @@ export const adminGetAllUsersReducer = (state = { users: [] }, action) => {
 			return {
 				loading: false,
 				users: action.payload.users,
+				usersCount: action.payload.usersCount,
 				admins: action.payload.admins,
 				allAccessUsers: action.payload.allAccessUsers,
 			};
