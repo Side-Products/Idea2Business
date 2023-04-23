@@ -17,7 +17,7 @@ export default function HowToFindUniqueIdeas() {
 				avatar={`https://miro.medium.com/v2/resize:fill:176:176/1*QF8ZkVw7TVFwkymlULXeNw.png`}
 				username={`Pushpit07`}
 				name={`Pushpit`}
-				lastUpdated={new Date(2023, 4, 5).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" })}
+				lastUpdated={new Date(2023, 3, 23).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" })}
 			/>
 			<BlogHeader tags={["Ideas", "StartUp", "Entrepreneurship", "SaaS"]}>How to find unique ideas?</BlogHeader>
 

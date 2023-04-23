@@ -73,6 +73,9 @@ const Footer = () => {
 							<li className="text-light-500 hover:text-primary-400">
 								<Link href="/example">Example</Link>
 							</li>
+							<li className="text-light-500 hover:text-primary-400">
+								<Link href="/notes">Notes</Link>
+							</li>
 						</ul>
 					</div>
 				</div>

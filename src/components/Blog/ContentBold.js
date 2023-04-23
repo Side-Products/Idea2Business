@@ -1,5 +1,5 @@
 const ContentBold = ({ children }) => {
-	return <div className="font-bold">{children}</div>;
+	return <div className="font-bold inline">{children}</div>;
 };
 
 export default ContentBold;

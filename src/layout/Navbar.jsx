@@ -113,6 +113,14 @@ const Navbar = ({ setAuthModalOpen }) => {
 									>
 										<Link href="/example">Example</Link>
 									</li>
+									<li
+										className={
+											"font-semibold block py-2 pl-2 pr-3 text-gray-400 hover:text-light-200 transition duration-300 " +
+											(router.pathname == "/notes" ? "text-gradient-primary-tr" : "")
+										}
+									>
+										<Link href="/notes">Notes</Link>
+									</li>
 								</ul>
 							</div>
 
