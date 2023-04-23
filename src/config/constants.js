@@ -366,7 +366,7 @@ export const pitches = [
 		cardText: "Pitch to Onboard Potential Co-Founder",
 		identifier: "coFounderPitch",
 		subscriptionPlanRequired: freePlan,
-		prompt: `Write me a pitch to a potential future co-founder if they would be interested in joining me on a startup journey. Write a comprehensive answer to convince them. Following is my startup:`,
+		prompt: `Write me a pitch to a potential future co-founder if they would be interested in joining me on a startup journey. Write a comprehensive answer to convince them. Make it crisp and a bit funny. Following is my startup:`,
 		loadingMessage: "Co-Founder pitch for your idea is being generated",
 	},
 	{
