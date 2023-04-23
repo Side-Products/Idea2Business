@@ -3,11 +3,8 @@ import BlogAuthor from "@/components/Blog/BlogAuthor";
 import BlogHeader from "@/components/Blog/BlogHeader";
 import BlogImage from "@/components/Blog/BlogImage";
 import BlogContent from "@/components/Blog/BlogContent";
-import BlogSubHeading from "@/components/Blog/BlogSubHeading";
-import BlogSubHeading2 from "@/components/Blog/BlogSubHeading2";
 import BlogNoteContent from "@/components/Blog/BlogNoteContent";
 import BlogLink from "@/components/Blog/BlogLink";
-import BlogSectionBreak from "@/components/Blog/BlogSectionBreak";
 import AboutUs from "@/components/Blog/AboutUs";
 
 export default function HowToFindUniqueIdeas() {
@@ -17,11 +14,11 @@ export default function HowToFindUniqueIdeas() {
 				avatar={`https://miro.medium.com/v2/resize:fill:176:176/1*QF8ZkVw7TVFwkymlULXeNw.png`}
 				username={`Pushpit07`}
 				name={`Pushpit`}
-				lastUpdated={new Date(2023, 4, 5).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" })}
+				lastUpdated={new Date(2023, 3, 23).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" })}
 			/>
 			<BlogHeader tags={["Early Stage", "Talking to Users", "Growth", "Product Market Fit"]}>Essential YC Advice: A Pocket Guide</BlogHeader>
 
-			<BlogImage src={"/notes/essential-yc-advice.jpeg"} alt={"note display image"} width={768} height={400} />
+			<BlogImage src={"/notes/essential-yc-advice.jpg"} alt={"note display image"} width={768} height={400} />
 
 			<BlogContent>
 				<ul className="list-disc list-inside gap-y-4 flex flex-col">

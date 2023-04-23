@@ -860,3 +860,26 @@ export const resources = {
 		},
 	],
 };
+
+export const notes = [
+	{
+		name: "The StoryBrand Framework",
+		image: "/notes/the-storybrand-framework.jpg",
+		link: "/notes/the-storybrand-framework",
+	},
+	{
+		name: "How to write a Great Value Proposition?",
+		image: "/notes/how-to-write-a-great-value-proposition.jpg",
+		link: "/notes/how-to-write-a-great-value-proposition",
+	},
+	{
+		name: "Essential YC Advice: A Pocket Guide",
+		image: "/notes/essential-yc-advice.jpg",
+		link: "/notes/essential-yc-advice",
+	},
+	{
+		name: "How to find unique ideas?",
+		image: "/notes/idea-bulb.jpg",
+		link: "/notes/how-to-find-unique-ideas",
+	},
+];
