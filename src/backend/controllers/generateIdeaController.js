@@ -28,8 +28,11 @@ const generateIdea = catchAsyncErrors(async (req, res, next) => {
 
 	const output = basePromptOutput.text.trim();
 
-	const result = JSON.parse(output);
-	const { name, description } = result;
+	const result = JSON.parse(JSON.parse(JSON.stringify(output)));
+	const name = result["name"];
+	const description = result["description"];
+
+	console.log("result:", result);
 
 	// save to db
 	const ideaSwipe = await IdeaSwipe.create({ name, description });
@@ -59,9 +62,41 @@ const voteIdea = catchAsyncErrors(async (req, res) => {
 	}
 
 	const { id, type } = req.body;
+	const newVote = type == "upvote" ? 1 : -1;
+
+	// check if the user already voted
+	const ideaSwipeVote = await IdeaSwipeVotes.findOne({ user: req.user._id || req.user.id, ideaSwipe: id });
+	if (ideaSwipeVote) {
+		const oldVote = ideaSwipeVote.vote;
+
+		if (oldVote == newVote) {
+			res.status(200).json({
+				success: true,
+				vote: ideaSwipeVote,
+			});
+			return;
+		}
+
+		ideaSwipeVote.vote = newVote;
+		const vote = await ideaSwipeVote.save();
+
+		const ideaSwipe = await IdeaSwipe.findById(id);
+		ideaSwipe.votes = ideaSwipe.votes + newVote + newVote;
+		await ideaSwipe.save();
+
+		res.status(200).json({
+			success: true,
+			vote: vote,
+		});
+		return;
+	}
 
 	// save to db
-	const vote = await IdeaSwipeVotes.create({ user: req.user._id || req.user.id, ideaSwipe: id, vote: type == "upvote" ? 1 : -1 });
+	const vote = await IdeaSwipeVotes.create({ user: req.user._id || req.user.id, ideaSwipe: id, vote: newVote });
+
+	const ideaSwipe = await IdeaSwipe.findById(id);
+	ideaSwipe.votes = ideaSwipe.votes + newVote;
+	await ideaSwipe.save();
 
 	res.status(200).json({
 		success: true,

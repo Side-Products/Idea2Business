@@ -1,11 +1,11 @@
 import PageWrapper from "@/layout/PageWrapper";
-import { getTimestamp } from "@/utils/Helpers";
 import { useState, useEffect, useContext } from "react";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { useSession } from "next-auth/react";
-import { newIdeaSwipeSearch, voteIdea } from "@/redux/actions/ideaSwipeActions";
+import { newIdeaSwipeSearch, newIdeaSearch, voteIdea, clearErrors } from "@/redux/actions/ideaSwipeActions";
 import { wrapper } from "@/redux/redux-store";
 import { useSelector, useDispatch } from "react-redux";
+import Swiper from "@/components/IdeaSwipe/Swiper";
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
 	await store.dispatch(newIdeaSwipeSearch(req));
@@ -66,11 +66,21 @@ export default function IdeaSwipe({}) {
 	};
 
 	useEffect(() => {
+		if (ideaSwipe) {
+			setIdeaName(ideaSwipe.name);
+			setIdeaDescription(ideaSwipe.description);
+		}
+	}, [ideaSwipe]);
+
+	useEffect(() => {
 		if (voteSuccess) {
-			// dispatch(newIdeaSwipeSearch());
+			dispatch(clearErrors());
+			// dispatch(newIdeaSearch());
 			console.log("voted");
 		}
 	}, [vote, voteSuccess, loadingVote]);
+
+	const props = { ideaName, ideaDescription, voteCurrentIdea };
 
 	return (
 		<PageWrapper>
@@ -79,30 +89,11 @@ export default function IdeaSwipe({}) {
 			<div className="w-full flex flex-col items-center justify-center">
 				<div className="w-full max-w-[600px]">
 					<p className="text-[20px] leading-[30px] text-center text-light-500 mt-2">
-						Idea Swipe is a simple, yet powerful tool that generates ideas. It&apos;s a great way to get your creative juices flowing.
+						Get a new idea on each swipe and let your creative juices flow!
 					</p>
 				</div>
 
-				<div className="relative max-w-[400px] bg-[#FFF8C9] text-lg text-dark-900 font-semibold rounded-xl pt-6 pb-9 px-6 mt-20 shadow-xl">
-					<div className="w-full flex justify-center text-center font-bold text-[22px]">{ideaName}</div>
-					<div className="mt-6 text-center">{ideaDescription}</div>
-					<div className="flex justify-between items-center px-16 mt-10">
-						<label
-							onClick={() => voteCurrentIdea("downvote")}
-							className="flex group justify-center items-center w-14 h-14 rounded-full border-2 border-dark-900 hover:bg-dark-900 transition duration-300 cursor-pointer"
-						>
-							<i className="fa-solid fa-xmark text-2xl text-dark-900 group-hover:text-[#FFF8C9]"></i>
-						</label>
-						<span className="text-dark-900 font-bold">32</span>
-						<label
-							onClick={() => voteCurrentIdea("upvote")}
-							className="flex group justify-center items-center w-14 h-14 rounded-full border-2 border-rose-500 hover:bg-rose-500 transition duration-300 cursor-pointer"
-						>
-							<i className="fa-solid fa-heart text-2xl text-rose-500 group-hover:text-[#FFF8C9]"></i>
-						</label>
-					</div>
-					<span className={"right-3 bottom-2 absolute text-xs text-light-600"}>{getTimestamp(Date.now()).slice(0, 10)}</span>
-				</div>
+				<Swiper {...props} />
 			</div>
 		</PageWrapper>
 	);

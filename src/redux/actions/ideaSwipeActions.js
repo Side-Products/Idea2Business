@@ -23,7 +23,22 @@ export const newIdeaSwipeSearch = (req) => async (dispatch) => {
 
 		dispatch({ type: NEW_IDEA_SWIPE_SUCCESS, payload: data });
 	} catch (error) {
-		console.log(error);
+		dispatch({
+			type: NEW_IDEA_SWIPE_FAIL,
+			payload: error.response.data.message,
+		});
+	}
+};
+
+// Add new idea search
+export const newIdeaSearch = () => async (dispatch) => {
+	try {
+		dispatch({ type: NEW_IDEA_SWIPE_REQUEST });
+
+		const { data } = await axios.post(`/api/idea-swipe/generate-idea`);
+
+		dispatch({ type: NEW_IDEA_SWIPE_SUCCESS, payload: data });
+	} catch (error) {
 		dispatch({
 			type: NEW_IDEA_SWIPE_FAIL,
 			payload: error.response.data.message,
