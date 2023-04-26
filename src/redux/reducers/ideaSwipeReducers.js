@@ -7,6 +7,9 @@ import {
 	VOTE_IDEA_REQUEST,
 	VOTE_IDEA_SUCCESS,
 	VOTE_IDEA_FAIL,
+	VOTE_SECTION_IDEA_REQUEST,
+	VOTE_SECTION_IDEA_SUCCESS,
+	VOTE_SECTION_IDEA_FAIL,
 	CLEAR_ERRORS,
 } from "../constants/ideaSwipeConstants";
 
@@ -70,9 +73,37 @@ export const voteIdeaReducer = (state = {}, action) => {
 			return {
 				loading: false,
 				success: true,
-				vote: action.payload.vote,
+				ideaSwipeVote: action.payload.ideaSwipeVote,
 			};
 		case VOTE_IDEA_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		case CLEAR_ERRORS:
+			return {
+				...state,
+				error: null,
+			};
+		default:
+			return state;
+	}
+};
+
+// Vote section idea reducer
+export const voteSectionIdeaReducer = (state = {}, action) => {
+	switch (action.type) {
+		case VOTE_SECTION_IDEA_REQUEST:
+			return {
+				loading: true,
+			};
+		case VOTE_SECTION_IDEA_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				ideaSwipeVote: action.payload.ideaSwipeVote,
+			};
+		case VOTE_SECTION_IDEA_FAIL:
 			return {
 				loading: false,
 				error: action.payload,

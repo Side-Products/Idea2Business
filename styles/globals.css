@@ -496,6 +496,17 @@ a:hover {
 	}
 }
 
+.ideaSwipe-loader {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: inline-block;
+	border-top: 4px solid #111;
+	border-right: 4px solid transparent;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+}
+
 /**************************************************************************/
 /****************************    Parallax   *******************************/
 /**************************************************************************/
