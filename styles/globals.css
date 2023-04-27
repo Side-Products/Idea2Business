@@ -45,8 +45,24 @@ a {
 	@apply bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 animate-bg;
 }
 
+.bg-gradient-tertiary-r-outline {
+	@apply bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 animate-bg;
+}
+
 .bg-gradient-quad-tr {
 	@apply bg-gradient-to-tr from-blue-700 via-blue-800 to-gray-900 animate-bg;
+}
+
+.text-gradient-pricing-free {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-br from-amber-700 via-orange-300 to-rose-700;
+}
+
+.text-gradient-pricing-standard {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-br from-gray-200 via-gray-400 to-gray-500;
+}
+
+.text-gradient-pricing-pro {
+	@apply text-transparent bg-clip-text animate-text bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-700;
 }
 
 /**************************************************************************/

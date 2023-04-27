@@ -12,6 +12,10 @@ const ideaSwipeSchema = new mongoose.Schema({
 		required: [true, "Please enter a description"],
 		trim: true,
 	},
+	category: {
+		type: String,
+		default: "",
+	},
 	emoji: {
 		type: String,
 		default: "💡",

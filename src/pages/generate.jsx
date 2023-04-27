@@ -15,20 +15,20 @@ import ContentModal from "@/components/Generate/ContentModal";
 import SubscriptionRequiredModal from "@/components/Generate/SubscriptionRequiredModal";
 import GoToSectionCarousel from "@/components/Generate/GoToSectionCarousel";
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
-	const session = await getSession({ req: req });
-	if (!session) {
-		return {
-			props: {},
-		};
-	}
+// export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
+// 	const session = await getSession({ req: req });
+// 	if (!session) {
+// 		return {
+// 			props: {},
+// 		};
+// 	}
 
-	await store.dispatch(mySubscription(req));
+// 	await store.dispatch(mySubscription(req));
 
-	return {
-		props: { session },
-	};
-});
+// 	return {
+// 		props: { session },
+// 	};
+// });
 
 const Generate = () => {
 	const { setError } = useContext(StatusContext);
@@ -64,7 +64,7 @@ const Generate = () => {
 	// Modal states
 	const [modalText, setModalText] = useState({ heading: "", content: "" });
 	const [isContentModalOpen, setContentModalOpen] = useState(false);
-	const [isSubscriptionRequiredModalOpen, setSubscriptionRequiredModalOpen] = useState(false);
+	const [isSubscriptionRequiredModalOpen, setSubscriptionRequiredModalOpen] = useState({ subscriptionPlanRequired: "Free", isOpen: false });
 
 	// Scroll to cards when they are available
 	useEffect(() => {

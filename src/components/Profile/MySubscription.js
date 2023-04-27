@@ -6,13 +6,15 @@ import Button from "@/components/ui/Button";
 import easyinvoice from "easyinvoice";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { LoadingContext } from "@/store/LoadingContextProvider";
-import { product_name, domain, freePlan } from "@/config/constants";
-import { getCurrentSubscriptionTier } from "@/utils/Helpers";
+import { product_name, domain, freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { getCurrentSubscriptionTier, getSubscriptionPlanName } from "@/utils/Helpers";
 
 export default function MySubscription() {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const { subscription, error } = useSelector((state) => state.subscription);
+	// Check for which plan the user is subscribed to
+	const subscriptionPlan = getCurrentSubscriptionTier(subscription);
 	const { setError } = useContext(StatusContext);
 	const { setLoading } = useContext(LoadingContext);
 
@@ -70,7 +72,7 @@ export default function MySubscription() {
 			products: [
 				{
 					quantity: `1`,
-					description: `${getCurrentSubscriptionTier(subscription)}`,
+					description: `${subscriptionPlan}`,
 					"tax-rate": 0,
 					price: `${subscription.amountPaid}`,
 				},
@@ -88,18 +90,31 @@ export default function MySubscription() {
 			<p className="text-3xl font-semibold text-light-300">Current Plan</p>
 			{subscription && new Date(subscription.subscriptionValidUntil) > Date.now() ? (
 				<>
-					<p className="mt-1 text-3xl font-bold text-gradient-primary-tr">
-						{getCurrentSubscriptionTier(subscription)}
-						{getCurrentSubscriptionTier(subscription) !== freePlan && (
-							<span
-								className="ml-2 text-lg cursor-pointer text-light-300 hover:text-light-600 transition duration-300"
-								onClick={() => downloadInvoice(subscription)}
-							>
-								<i className="fa-solid fa-download"></i>
+					<div className="text-3xl">
+						{subscriptionPlan !== getSubscriptionPlanName(freePlan) && (
+							<span className="mr-3">
+								{subscriptionPlan == getSubscriptionPlanName(standardPlan) ? (
+									<i className="fa-solid fa-crown text-gradient-pricing-standard"></i>
+								) : subscriptionPlan == getSubscriptionPlanName(proPlusPlan) ? (
+									<i className="fa-solid fa-crown text-gradient-pricing-pro"></i>
+								) : (
+									<></>
+								)}
 							</span>
 						)}
-					</p>
-					{getCurrentSubscriptionTier(subscription) !== freePlan && (
+						<span className="mt-[2px] font-bold text-gradient-primary-tr">
+							{subscriptionPlan}
+							{subscriptionPlan !== freePlan && (
+								<span
+									className="ml-2 text-lg cursor-pointer text-light-300 hover:text-light-600 transition duration-300"
+									onClick={() => downloadInvoice(subscription)}
+								>
+									<i className="fa-solid fa-download"></i>
+								</span>
+							)}
+						</span>
+					</div>
+					{subscriptionPlan !== freePlan && (
 						<p className="text-light-400 text-sm mt-2">
 							<span className="font-medium">Valid Until:</span>&nbsp;
 							{new Date(subscription.subscriptionValidUntil).toDateString()}

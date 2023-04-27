@@ -89,7 +89,11 @@ export default function UserDetails({ ideasCount }) {
 				<div className="w-full grid sm:grid-cols-2 gap-x-8 bg-dark-800 px-8 pt-6 pb-8 rounded-2xl">
 					<div className="flex flex-col items-end">
 						<p className="text-3xl font-semibold text-light-300">Total searches</p>
-						<p className="mt-1 text-3xl font-bold text-gradient-primary-tr">{ideasCount}</p>
+						<p className="mt-[2px] text-3xl font-bold text-gradient-primary-tr">{ideasCount}</p>
+						<p className="mt-[6px] font-semibold text-gradient-primary-tr">
+							{session && session.user && session.user.credits} {session && session.user && session.user.credits == 1 ? "credit" : "credits"}{" "}
+							remaining
+						</p>
 					</div>
 					<div className="flex flex-col items-end sm:mt-0 mt-8">
 						<MySubscription />

@@ -16,9 +16,9 @@ const openai = new OpenAIApi(configuration);
 const generateIdea = catchAsyncErrors(async (req, res, next) => {
 	const randomNumber = Math.floor(Math.random() * 10) + 1; // generates a random number between 1 to 10
 
-	if (randomNumber > 5) {
+	if (randomNumber > 0) {
 		const prompt =
-			"Generate a business/startup idea and give a name and short description of max 50 words for it. Also give an appropriate emoji in unicode for it. Return the result in JSON format only with the keys 'name', 'description', and 'emoji'.\n";
+			"Generate a business/startup idea and give a name and short description of max 50 words for it. Give it a category based on what kind of startup idea it is. Also give an appropriate emoji in unicode for it. Return the result in JSON format only with the keys 'name', 'description', 'category', and 'emoji'.\n";
 
 		let _temp = 0.8;
 
@@ -41,6 +41,7 @@ const generateIdea = catchAsyncErrors(async (req, res, next) => {
 			typeof result === "string" && (result = eval("(" + result + ")"));
 			const name = result.name;
 			const description = result.description;
+			const category = result.category;
 			const rawEmoji = result.emoji;
 			let emoji = rawEmoji;
 
@@ -50,7 +51,7 @@ const generateIdea = catchAsyncErrors(async (req, res, next) => {
 
 			try {
 				// save to db
-				const ideaSwipe = await IdeaSwipe.create({ name, description, emoji });
+				const ideaSwipe = await IdeaSwipe.create({ name, description, category, emoji });
 				const timeDifference = getTimeDifference(new Date(ideaSwipe.createdAt), new Date());
 
 				res.status(200).json({

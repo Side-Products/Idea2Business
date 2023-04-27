@@ -140,6 +140,16 @@ export const getSubscriptionPlanPrice = (plan) => {
 		: "";
 };
 
+export const getSubscriptionPlanCredits = (plan) => {
+	return plan == freePlan
+		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.credits
+		: plan == standardPlan
+		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.credits
+		: plan == proPlusPlan
+		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.credits
+		: "";
+};
+
 export const getSubscriptionPlanValidDays = (plan) => {
 	return plan == standardPlan
 		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.validForDays
