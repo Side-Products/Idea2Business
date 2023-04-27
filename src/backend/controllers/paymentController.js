@@ -8,6 +8,7 @@ import { standardPlan, proPlusPlan } from "@/config/constants";
 import {
 	getSubscriptionPlanName,
 	getSubscriptionPlanPrice,
+	getSubscriptionPlanCredits,
 	getSubscriptionPlanValidDays,
 	getUsdToInrExchangeRate,
 	getLatestSubscriptionPlansVersion,
@@ -44,11 +45,11 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 					product_data: {
 						name:
 							parseInt(req.query.amount) == getSubscriptionPlanPrice(standardPlan)
-								? getSubscriptionPlanName(standardPlan) + " Subscription"
+								? getSubscriptionPlanName(standardPlan) + " Plan"
 								: parseInt(req.query.amount) == getSubscriptionPlanPrice(proPlusPlan)
-								? getSubscriptionPlanName(proPlusPlan) + " Subscription"
+								? getSubscriptionPlanName(proPlusPlan) + " Plan"
 								: "",
-						description: "Subscription to " + product_name,
+						description: "Payment to " + product_name,
 						images: [`https://${domain}/logo.png`],
 					},
 					unit_amount:
@@ -107,6 +108,15 @@ const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res) 
 						1000,
 			});
 			await subscription.save();
+
+			user.credits =
+				user.credits +
+				(session.metadata.plan == getSubscriptionPlanName(proPlusPlan)
+					? getSubscriptionPlanCredits(proPlusPlan)
+					: session.metadata.plan == getSubscriptionPlanName(standardPlan)
+					? getSubscriptionPlanCredits(standardPlan)
+					: 0);
+			await user.save();
 
 			res.status(200).json({
 				success: true,

@@ -447,7 +447,7 @@ export default function Decks({
 												await callGenerateEndpoint(item, category, index);
 												setIsGenerating(false);
 											} else {
-												setSubscriptionRequiredModalOpen(true);
+												setSubscriptionRequiredModalOpen({ subscriptionPlanRequired: item.subscriptionPlanRequired, isOpen: true });
 											}
 										} else {
 											promptEnterIdeaInfo();

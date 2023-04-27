@@ -7,9 +7,13 @@ export default function SubscriptionRequiredModal({ isOpen, setOpen }) {
 
 	return (
 		<Modal
-			isOpen={isOpen}
+			isOpen={isOpen.isOpen}
 			classes="max-w-[36rem]"
-			title={<div className="w-full flex justify-center text-4xl font-semibold tracking-[-1.5px] text-gradient-primary-tr">Subscription required</div>}
+			title={
+				<div className="w-full flex justify-center text-4xl font-semibold tracking-[-1.5px] text-gradient-primary-tr">
+					{isOpen.subscriptionPlanRequired} Plan required
+				</div>
+			}
 			titleClasses="justify-start text-start"
 			content={
 				<>
@@ -35,7 +39,7 @@ export default function SubscriptionRequiredModal({ isOpen, setOpen }) {
 				</>
 			}
 			onClose={() => {
-				setOpen(false);
+				setOpen({ ...isOpen, isOpen: false });
 			}}
 		></Modal>
 	);

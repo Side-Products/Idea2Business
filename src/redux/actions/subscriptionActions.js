@@ -31,6 +31,19 @@ export const mySubscription = (req) => async (dispatch) => {
 	}
 };
 
+// Get my subscription
+export const getMySubscription = () => async (dispatch) => {
+	try {
+		const { data } = await axios.get(`/api/subscriptions/me`);
+		dispatch({ type: MY_SUBSCRIPTION_SUCCESS, payload: data.subscription[0] ?? null });
+	} catch (error) {
+		dispatch({
+			type: MY_SUBSCRIPTION_FAIL,
+			payload: error.response.data.message,
+		});
+	}
+};
+
 // Admin get subscriptions
 export const adminGetSubscriptions = () => async (dispatch) => {
 	try {

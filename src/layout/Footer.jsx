@@ -23,10 +23,10 @@ const Footer = () => {
 						<p className="font-semibold text">Quick Links</p>
 						<ul className="space-y-2">
 							<li className="text-light-500 hover:text-primary-400">
-								<Link href="/">Home</Link>
+								<Link href="/generate">Generate</Link>
 							</li>
 							<li className="text-light-500 hover:text-primary-400">
-								<Link href="/generate">Generate</Link>
+								<Link href="/idea-swipe">Idea Swipe</Link>
 							</li>
 							<li className="text-light-500 hover:text-primary-400">
 								<Link href="/pricing">Pricing</Link>

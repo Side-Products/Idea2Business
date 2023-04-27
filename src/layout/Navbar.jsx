@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import logo from "../../public/logo_removedbg.png";
 import HamburgerMenu from "./HamburgerMenu";
 import { motion } from "framer-motion";
+import { freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { getCurrentSubscriptionTier, getSubscriptionPlanName } from "@/utils/Helpers";
+import { getMySubscription } from "@/redux/actions/subscriptionActions";
 
 const Navbar = ({ setAuthModalOpen }) => {
 	const { data: session, status } = useSession();
@@ -42,10 +46,19 @@ const Navbar = ({ setAuthModalOpen }) => {
 	const router = useRouter();
 	const [showStrip, setShowStrip] = useState(true);
 
+	const dispatch = useDispatch();
+	const { subscription } = useSelector((state) => state.subscription);
+	// Check for which plan the user is subscribed to
+	const subscriptionPlan = getCurrentSubscriptionTier(subscription);
+
+	useEffect(() => {
+		if (session && session.user) dispatch(getMySubscription());
+	}, [session]);
+
 	return (
 		<div className="absolute flex justify-center w-screen">
 			<div className="w-full fixed z-40 max-w-[1920px]">
-				{showStrip && session && session.user && session.user.credits > 0 && (
+				{showStrip && session && session.user && session.user.credits > 0 && session.user.credits <= 5 && (
 					<motion.div
 						className="p-[14px] group relative w-full flex items-center justify-center cursor-pointer text-center text-sm text-light-400 bg-gradient-tertiary-r"
 						initial={{ opacity: 0, scale: 0.6 }}
@@ -58,7 +71,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 						}}
 					>
 						<motion.div onClick={() => router.push("/generate")} className="absolute w-full">
-							You have {session && session.user && session.user.credits} free{" "}
+							You have {session && session.user && session.user.credits}{" "}
 							{session && session.user && (session.user.credits == 1 ? "credit" : "credits")}. Use{" "}
 							{session && session.user && (session.user.credits == 1 ? "it" : "them")} now!
 						</motion.div>
@@ -100,6 +113,14 @@ const Navbar = ({ setAuthModalOpen }) => {
 									<li
 										className={
 											"font-semibold block py-2 pl-2 pr-3 text-gray-400 hover:text-light-200 transition duration-300 " +
+											(router.pathname == "/idea-swipe" ? "text-gradient-primary-tr" : "")
+										}
+									>
+										<Link href="/idea-swipe">Idea Swipe</Link>
+									</li>
+									<li
+										className={
+											"font-semibold block py-2 pl-2 pr-3 text-gray-400 hover:text-light-200 transition duration-300 " +
 											(router.pathname == "/pricing" ? "text-gradient-primary-tr" : "")
 										}
 									>
@@ -112,14 +133,6 @@ const Navbar = ({ setAuthModalOpen }) => {
 										}
 									>
 										<Link href="/example">Example</Link>
-									</li>
-									<li
-										className={
-											"font-semibold block py-2 pl-2 pr-3 text-gray-400 hover:text-light-200 transition duration-300 " +
-											(router.pathname == "/notes" ? "text-gradient-primary-tr" : "")
-										}
-									>
-										<Link href="/notes">Notes</Link>
 									</li>
 								</ul>
 							</div>
@@ -161,8 +174,8 @@ const Navbar = ({ setAuthModalOpen }) => {
 											bg-clip-padding group-hover:block"
 													aria-labelledby="dropdownMenuButton2"
 												>
-													<li>
-														{status === "authenticated" && (
+													{status === "authenticated" && (
+														<li>
 															<div className="flex flex-col px-4 py-3 rounded-t-xl">
 																<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:text-light-100">
 																	<div>
@@ -182,8 +195,37 @@ const Navbar = ({ setAuthModalOpen }) => {
 																	)}
 																</div>
 															</div>
-														)}
-													</li>
+														</li>
+													)}
+
+													{status === "authenticated" && (
+														<li>
+															<div className="flex flex-col px-4 pt-1 pb-3 rounded-t-xl">
+																<div className="flex items-center justify-between w-full bg-transparent text-light-600 rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:text-light-600">
+																	<div className="flex gap-x-4">
+																		<div>
+																			{subscriptionPlan !== getSubscriptionPlanName(freePlan) && (
+																				<span className="mr-2">
+																					{subscriptionPlan == getSubscriptionPlanName(standardPlan) ? (
+																						<i className="fa-solid fa-crown text-gradient-pricing-standard"></i>
+																					) : subscriptionPlan == getSubscriptionPlanName(proPlusPlan) ? (
+																						<i className="fa-solid fa-crown text-gradient-pricing-pro"></i>
+																					) : (
+																						<></>
+																					)}
+																				</span>
+																			)}
+																			<span>{subscriptionPlan} Plan</span>
+																		</div>
+																		<span className="text-gradient-primary-tr">
+																			{session && session.user && session.user.credits} credits
+																		</span>
+																	</div>
+																</div>
+															</div>
+														</li>
+													)}
+
 													{status === "authenticated" && (
 														<li>
 															<Link href={`/profile`} passHref={true}>

@@ -11,7 +11,7 @@ export const SEO = {
 		url: product_url,
 		title: product_name,
 		description: meta_description,
-		images: [{ url: "/logo.png", width: 640, height: 640, alt: "Logo" }],
+		images: [{ url: `${product_url}/logo.png`, width: 640, height: 640, alt: "Logo" }],
 	},
 	twitter: {
 		handle: twitter_handle,

@@ -45,7 +45,7 @@ export default function PromptCard({
 				return;
 			}
 			if (cardsAvailable && !canAccess) {
-				setSubscriptionRequiredModalOpen(true);
+				setSubscriptionRequiredModalOpen({ subscriptionPlanRequired: subscriptionPlanRequired, isOpen: true });
 				return;
 			}
 			if (cardsAvailable && canAccess) {
