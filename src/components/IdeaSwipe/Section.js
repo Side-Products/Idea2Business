@@ -19,31 +19,25 @@ export default function Section({ heading, cards, handleVote }) {
 									<label
 										onClick={() => handleVote(card, "downvote")}
 										className={
-											"flex group justify-center items-center w-14 h-14 rounded-full border-2 border-dark-900 hover:bg-dark-900 transition duration-300 cursor-pointer hover:opacity-100" +
-											(card.vote == -1 ? " bg-dark-900" : card.vote == 1 ? " opacity-30" : "")
+											"flex group justify-center items-center w-14 h-14 rounded-full border-2 border-dark-900 hover:bg-dark-900 transition duration-300 cursor-pointer hover:opacity-100 " +
+											(card.vote == -1 ? " bg-dark-900" : card.vote == 1 ? " opacity-20" : "")
 										}
 									>
-										<i
-											className={
-												"fa-solid fa-xmark text-2xl text-dark-900 group-hover:text-[#FFFDEE]" +
-												(card.vote == -1 ? " text-[#FFFDEE]" : "")
-											}
-										></i>
+										<span className={"text-2xl group-hover:text-[#FFFDEE] " + (card.vote == -1 ? " text-[#FFFDEE]" : "text-dark-900")}>
+											<i className="fa-solid fa-xmark"></i>
+										</span>
 									</label>
 									<span className="text-dark-900 font-bold">{card?.votes}</span>
 									<label
 										onClick={() => handleVote(card, "upvote")}
 										className={
-											"flex group justify-center items-center w-14 h-14 rounded-full border-2 border-rose-500 hover:bg-rose-500 transition duration-300 cursor-pointer hover:opacity-100" +
-											(card.vote == 1 ? " bg-rose-500" : card.vote == -1 ? " opacity-30" : "")
+											"flex group justify-center items-center w-14 h-14 rounded-full border-2 border-rose-500 hover:bg-rose-500 transition duration-300 cursor-pointer hover:opacity-100 " +
+											(card.vote == 1 ? " bg-rose-500" : card.vote == -1 ? " opacity-20" : "")
 										}
 									>
-										<i
-											className={
-												"fa-solid fa-heart text-2xl text-rose-500 group-hover:text-[#FFFDEE]" +
-												(card.vote == 1 ? " text-[#FFFDEE]" : "")
-											}
-										></i>
+										<span className={"text-2xl group-hover:text-[#FFFDEE] " + (card.vote == 1 ? " text-[#FFFDEE]" : "text-rose-500")}>
+											<i className="fa-solid fa-heart"></i>
+										</span>
 									</label>
 								</div>
 							)}
