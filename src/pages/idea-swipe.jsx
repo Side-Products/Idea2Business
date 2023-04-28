@@ -40,10 +40,10 @@ export default function IdeaSwipe({}) {
 				<Swiper />
 
 				<p className="text-dark-100 text-sm">
-					<i className="fa-solid fa-xmark"></i> Swipe left, or click your left arrow key to dislike
+					<i className="fa-solid fa-xmark"></i> Swipe left, or press left arrow key to dislike
 				</p>
 				<p className="text-dark-100 text-sm">
-					<i className="fa-solid fa-heart"></i> Swipe right, or click your right arrow key to like
+					<i className="fa-solid fa-heart"></i> Swipe right, or press right arrow key to like
 				</p>
 
 				<Sections />
