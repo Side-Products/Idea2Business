@@ -4,6 +4,7 @@ import { wrapper } from "@/redux/redux-store";
 import { getSession } from "next-auth/react";
 import Swiper from "@/components/IdeaSwipe/Swiper";
 import Sections from "@/components/IdeaSwipe/Sections";
+import Newsletter from "@/components/IdeaSwipe/Newsletter";
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
 	const session = await getSession({ req: req });
@@ -46,6 +47,8 @@ export default function IdeaSwipe({}) {
 				</p>
 
 				<Sections />
+
+				<Newsletter />
 			</div>
 		</PageWrapper>
 	);

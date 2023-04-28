@@ -7,6 +7,7 @@ import { newBugReportReducer, adminGetBugReportsReducer, adminDeleteBugReportRed
 import { newFeatureRequestReducer, adminGetFeatureRequestsReducer, adminDeleteFeatureRequestReducer } from "./featureRequestReducers";
 import { allGeneratedResponsesReducer, adminDeleteGeneratedResponseReducer } from "./generatedResponseReducers";
 import { newIdeaSwipeReducer, allIdeaSwipesReducer, voteIdeaReducer, voteSectionIdeaReducer } from "./ideaSwipeReducers";
+import { newNewsletterReducer, adminGetNewslettersReducer, adminDeleteNewsletterReducer } from "./newsletterReducers";
 
 const reducer = combineReducers({
 	newIdeaSearch: newIdeaSearchReducer,
@@ -38,6 +39,9 @@ const reducer = combineReducers({
 	allIdeaSwipes: allIdeaSwipesReducer,
 	voteIdea: voteIdeaReducer,
 	voteSectionIdea: voteSectionIdeaReducer,
+	newNewsletter: newNewsletterReducer,
+	adminGetNewsletters: adminGetNewslettersReducer,
+	adminDeleteNewsletter: adminDeleteNewsletterReducer,
 });
 
 export default reducer;

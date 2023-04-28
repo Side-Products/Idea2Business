@@ -280,6 +280,18 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 															</span>
 														</Link>
 													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
+															href={`/admin/newsletters`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Newsletter Entries
+															</span>
+														</Link>
+													</div>
 												</div>
 											)}
 										</div>

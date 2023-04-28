@@ -7,7 +7,7 @@ export default function Section({ heading, cards, handleVote }) {
 			<div className="pt-40 flex flex-col justify-center items-center">
 				<h2 className="font-semibold text-gradient-primary-tr leading-[40px] text-[28px] sm:text-[36px]">{heading}</h2>
 
-				<div className="grid grid-cols-4 gap-10 justify-center items-start mt-20">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 justify-center items-start mt-20">
 					{cards.map((card, index) => (
 						<div key={card._id} className={`relative bg-[#FFFDEE] px-6 py-4 shadow-xl rounded-2xl flex flex-col justify-center items-center`}>
 							<Emoji label={card?.name} emoji={card?.emoji} />

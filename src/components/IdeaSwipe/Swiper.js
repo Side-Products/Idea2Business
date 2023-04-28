@@ -36,7 +36,8 @@ const Swiper = () => {
 	useEffect(() => {
 		if (sectionIdeaVoteSuccess && sectionIdeaVote) {
 			updateAllIdeas(ideaSwipes, sectionIdeaVote);
-			dispatch(newIdeaSwipeSearch());
+			const matchingObj = cards.find((item) => item._id === sectionIdeaVote.ideaSwipe._id);
+			if (matchingObj) dispatch(newIdeaSwipeSearch());
 			dispatch(clearErrors());
 		}
 	}, [sectionIdeaVote, sectionIdeaVoteSuccess]);
