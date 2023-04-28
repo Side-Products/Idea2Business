@@ -30,8 +30,16 @@ export default function Sections({}) {
 		}
 	}, [ideaSwipeVote, ideaSwipeVoteSuccess]);
 
-	const voteCurrentIdea = async (id, type) => {
-		const voteInfo = { id: id, type: type };
+	const voteCurrentIdea = async (card, type) => {
+		// Updating results on client side for faster response
+		const newVote = type == "upvote" ? 1 : -1;
+		const oldVote = card.vote;
+		if (oldVote == 1 || oldVote == -1)
+			updateAllIdeas(ideaSwipes, { ideaSwipe: { _id: card._id, votes: card.votes + newVote + newVote }, vote: type == "upvote" ? 1 : -1 });
+		else updateAllIdeas(ideaSwipes, { ideaSwipe: { _id: card._id, votes: card.votes + newVote }, vote: type == "upvote" ? 1 : -1 });
+
+		// Sending to server
+		const voteInfo = { id: card._id, type: type };
 		dispatch(voteSectionIdea(voteInfo));
 	};
 
@@ -40,7 +48,7 @@ export default function Sections({}) {
 			if ((selectedCard.vote == -1 && type == "downvote") || (selectedCard.vote == 1 && type == "upvote")) {
 				// Don't vote
 			} else {
-				voteCurrentIdea(selectedCard._id, type);
+				voteCurrentIdea(selectedCard, type);
 			}
 		} else {
 			setAuthModalOpen(true);
