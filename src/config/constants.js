@@ -42,9 +42,9 @@ export const proPlusPlan = "Pro Plus";
 // Prices are in USD
 export const subscriptionPlans = {
 	1: {
-		freeSubscription: { name: "Free", price: 0 },
-		standardSubscription: { name: "Standard", price: 5, validForDays: 7, usdToInrExchangeRate: 80 },
-		proPlusSubscription: { name: "Pro Plus", price: 10, validForDays: 30, usdToInrExchangeRate: 80 },
+		freeSubscription: { name: "Free", price: 0, credits: 5 },
+		standardSubscription: { name: "Standard", price: 5, validForDays: 7, usdToInrExchangeRate: 80, credits: 200 },
+		proPlusSubscription: { name: "Pro Plus", price: 10, validForDays: 30, usdToInrExchangeRate: 80, credits: 500 },
 	},
 	// 2: {
 	// 	freeSubscription: { name: freePlan, price: 0 },

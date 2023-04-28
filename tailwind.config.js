@@ -150,6 +150,7 @@ module.exports = {
 					200: "#292929",
 					300: "#B2B2B2",
 				},
+				ideaSwipeCard: "#FFFDEE",
 			},
 			fontFamily: {
 				primary: ["Inter", "sans-serif"],

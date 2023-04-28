@@ -20,7 +20,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
 	}
 
 	await store.dispatch(getMyIdeas(req, query.page, query.search));
-	await store.dispatch(mySubscription(req));
+	// await store.dispatch(mySubscription(req));
 
 	return {
 		props: { session },

@@ -8,7 +8,7 @@ import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import absoluteUrl from "next-absolute-url";
 import sendEmail from "@/backend/utils/sendEmail";
 import { product_name, standardPlan, proPlusPlan } from "@/config/constants";
-import { getSubscriptionPlanName, getSubscriptionPlanValidDays, getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
+import { getSubscriptionPlanName, getSubscriptionPlanValidDays, getSubscriptionPlanCredits, getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
 
 // register user => /api/auth/register
 const registerUser = catchAsyncErrors(async (req, res) => {
@@ -179,8 +179,16 @@ const updateAdminUserDetails = catchAsyncErrors(async (req, res) => {
 					60 *
 					1000,
 		});
-
-		console.log(subscription);
+		// Update user credits
+		const user = await User.findOne({ _id: req.query.id });
+		user.credits =
+			user.credits +
+			(req.body.subscription == getSubscriptionPlanName(proPlusPlan)
+				? getSubscriptionPlanCredits(proPlusPlan)
+				: req.body.subscription == getSubscriptionPlanName(standardPlan)
+				? getSubscriptionPlanCredits(standardPlan)
+				: 0);
+		await user.save();
 	}
 
 	if (!user) {

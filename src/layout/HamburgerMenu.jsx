@@ -78,16 +78,16 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 											<div className="md:w-1/4 px-2 w-1/2 text-center">
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0  justify-center">Quick Links</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
-													<Link href={"/"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+													<Link href={"/generate"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
-															Home
+															Generate
 														</span>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-													<Link href={"/generate"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+													<Link href={"/idea-swipe"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
-															Generate
+															Idea Swipe
 														</span>
 													</Link>
 												</div>
@@ -277,6 +277,18 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														>
 															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
 																All Contact Us Messages
+															</span>
+														</Link>
+													</div>
+
+													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
+														<Link
+															href={`/admin/newsletters`}
+															className="ham_menu_link ham_menu_hover_effect text-center"
+															passHref={true}
+														>
+															<span className="text-white hover:text-primary-400" onClick={closeNavbar}>
+																All Newsletter Entries
 															</span>
 														</Link>
 													</div>

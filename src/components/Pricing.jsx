@@ -11,7 +11,8 @@ import SelectCountryModal from "@/components/SelectCountryModal";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { generateCategories, freePlan, standardPlan, proPlusPlan } from "@/config/constants";
-import { getCurrentSubscriptionTier, getSubscriptionPlanName, getSubscriptionPlanPrice } from "@/utils/Helpers";
+import { getCurrentSubscriptionTier, getSubscriptionPlanName, getSubscriptionPlanPrice, getSubscriptionPlanCredits } from "@/utils/Helpers";
+import Pill from "@/components/ui/Pill";
 
 const Pricing = () => {
 	const { setLoading } = useContext(LoadingContext);
@@ -50,7 +51,7 @@ const Pricing = () => {
 				await stripe.redirectToCheckout({ sessionId: data.id });
 				setLoading({ status: false });
 			} catch (error) {
-				console.error("Error:", error);
+				console.error("Checkout error:", error);
 				setLoading({ status: false });
 				setError({
 					title: "Something went wrong",
@@ -65,7 +66,7 @@ const Pricing = () => {
 
 	return (
 		<section>
-			<div className="py-8 mx-auto max-w-screen-xl lg:py-16">
+			<div className="py-8 mx-auto max-w-screen-xl lg:py-10">
 				<div className="mx-auto max-w-screen-md text-center">
 					<h2 className="mb-4 text-4xl tracking-tight font-extrabold text-light-300">Made for driven people like you</h2>
 					<p className="mb-5 font-light sm:text-xl text-gray-400">
@@ -78,14 +79,18 @@ const Pricing = () => {
 				<div className="mt-10 lg:mt-14 space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
 					<div className="flex flex-col justify-between  p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
-							<h3 className="mb-4 text-2xl font-semibold">{getSubscriptionPlanName(freePlan)}</h3>
+							<h3 className="mb-4 text-2xl font-semibold">
+								{/* <i className="fa-solid fa-crown text-gradient-pricing-free mr-2"></i>s */}
+								{getSubscriptionPlanName(freePlan)}
+							</h3>
 							<p className="font-light sm:text-lg text-gray-400">Best option to get started and try things out.</p>
-							<div className="flex justify-center items-baseline my-8">
+							<div className="flex justify-center items-baseline mt-8">
 								<span className="mr-2 text-5xl font-extrabold">${getSubscriptionPlanPrice(freePlan)}</span>
 								<span className="text-gray-400">forever</span>
 							</div>
+							<p className="text-gray-400 mt-1">You get {getSubscriptionPlanCredits(freePlan)} free credits</p>
 
-							<div className="mb-8 font-bold text-lg text-light-600">WHAT YOU CAN DO</div>
+							<div className="my-8 font-bold text-lg text-light-600">WHAT YOU CAN DO</div>
 
 							<ul role="list" className="mb-8 space-y-4 text-left">
 								{Object.keys(generateCategories).map((key, index) => {
@@ -120,14 +125,18 @@ const Pricing = () => {
 
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div>
-							<h3 className="mb-4 text-2xl font-semibold">{getSubscriptionPlanName(standardPlan)}</h3>
+							<h3 className="mb-4 text-2xl font-semibold">
+								<i className="fa-solid fa-crown text-gradient-pricing-standard mr-2"></i>
+								{getSubscriptionPlanName(standardPlan)}
+							</h3>
 							<p className="font-light sm:text-lg text-gray-400">Begin transforming your ideas into real-world products.</p>
-							<div className="flex justify-center items-baseline my-8">
+							<div className="flex justify-center items-baseline mt-8">
 								<span className="mr-2 text-5xl font-extrabold">${getSubscriptionPlanPrice(standardPlan)}</span>
 								<span className="text-gray-400">for a week</span>
 							</div>
+							<p className="text-gray-400 mt-1">You get {getSubscriptionPlanCredits(standardPlan)} credits</p>
 
-							<div className="mb-8 font-bold text-lg text-light-600">ALL OF FREE PLUS</div>
+							<div className="my-8 font-bold text-lg text-light-600">ALL OF FREE PLUS</div>
 
 							<ul role="list" className="mb-8 space-y-4 text-left">
 								{Object.keys(generateCategories).map((key, index) => {
@@ -137,7 +146,10 @@ const Pricing = () => {
 											item.subscriptionPlanRequired == getSubscriptionPlanName(standardPlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
-													<span>{item.cardText}</span>
+													<span>
+														{item.cardText}
+														<HotPill item={item} itemsArr={["Email Pitch to VC", "Value Proposition"]} />
+													</span>
 												</li>
 											)
 										);
@@ -172,15 +184,22 @@ const Pricing = () => {
 					</div>
 
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
-						<div>
-							<h3 className="mb-4 text-2xl font-semibold">{getSubscriptionPlanName(proPlusPlan)}</h3>
+						<div className="relative">
+							<Pill variant={"tertiary"} classes={"absolute -top-5 -right-6 text-xs"} rounded={true}>
+								Most Popular
+							</Pill>
+							<h3 className="mb-4 text-2xl font-semibold">
+								<i className="fa-solid fa-crown text-gradient-pricing-pro mr-2"></i>
+								{getSubscriptionPlanName(proPlusPlan)}
+							</h3>
 							<p className="font-light sm:text-lg text-gray-400">Get all the power you need to build a profitable business.</p>
-							<div className="flex justify-center items-baseline my-8">
+							<div className="flex justify-center items-baseline mt-8">
 								<span className="mr-2 text-5xl font-extrabold">${getSubscriptionPlanPrice(proPlusPlan)}</span>
 								<span className="text-gray-400">for a month</span>
 							</div>
+							<p className="text-gray-400 mt-1">You get {getSubscriptionPlanCredits(proPlusPlan)} credits</p>
 
-							<div className="mb-8 font-bold text-lg text-light-600">ALL OF STANDARD PLUS</div>
+							<div className="my-8 font-bold text-lg text-light-600">ALL OF STANDARD PLUS</div>
 
 							<ul role="list" className="mb-8 space-y-4 text-left">
 								{Object.keys(generateCategories).map((key, index) => {
@@ -190,7 +209,18 @@ const Pricing = () => {
 											item.subscriptionPlanRequired == getSubscriptionPlanName(proPlusPlan) && (
 												<li className="flex items-center text-sm space-x-3" key={idx}>
 													<Tick />
-													<span>{item.cardText}</span>
+													<span>
+														{item.cardText}
+														<HotPill
+															item={item}
+															itemsArr={[
+																"Download PitchDeck",
+																"Customer Pain Points",
+																"Guide to launch on Product Hunt",
+																"Grant Proposal",
+															]}
+														/>
+													</span>
 												</li>
 											)
 										);
@@ -242,3 +272,13 @@ const Pricing = () => {
 };
 
 export default Pricing;
+
+const HotPill = ({ item, itemsArr }) => {
+	return (
+		itemsArr.includes(item.cardText) && (
+			<Pill variant={"secondary"} classes={"text-xs py-[3px] ml-2"} rounded={true}>
+				<i className="fa-solid fa-fire mr-1"></i>Hot
+			</Pill>
+		)
+	);
+};
