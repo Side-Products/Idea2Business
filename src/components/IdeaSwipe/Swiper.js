@@ -37,7 +37,14 @@ const Swiper = () => {
 		if (sectionIdeaVoteSuccess && sectionIdeaVote) {
 			updateAllIdeas(ideaSwipes, sectionIdeaVote);
 			const matchingObj = cards.find((item) => item._id === sectionIdeaVote.ideaSwipe._id);
-			if (matchingObj) dispatch(newIdeaSwipeSearch());
+			if (matchingObj) {
+				setCards((current) =>
+					current.filter((card) => {
+						return card._id !== sectionIdeaVote.ideaSwipe._id;
+					})
+				);
+				dispatch(newIdeaSwipeSearch());
+			}
 			dispatch(clearErrors());
 		}
 	}, [sectionIdeaVote, sectionIdeaVoteSuccess]);
