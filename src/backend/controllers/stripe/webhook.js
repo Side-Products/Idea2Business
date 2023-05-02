@@ -122,7 +122,7 @@ const stripeCustomerSubscriptionUpdated = catchAsyncErrors(async (req, res, even
 		const currentTime = new Date().getTime();
 		const differenceInSeconds = Math.round((currentTime - lastUpdated) / 1000);
 
-		if (differenceInSeconds > 20) {
+		if (differenceInSeconds > 20 && session.total > getCreditsFromPlanName(premiumPlan) - getCreditsFromPlanName(proPlan)) {
 			const oldPlan = old_subscription.plan;
 			const newPlan = getPlanFromStripePriceId(session.plan.id);
 
@@ -173,10 +173,15 @@ const stripeInvoicePaid = catchAsyncErrors(async (req, res, eventData) => {
 		const differenceInSeconds = Math.round((currentTime - lastUpdated) / 1000);
 
 		if (differenceInSeconds > 20) {
-			const user = await User.findById(old_subscription.user);
-			if (user) {
-				user.credits = user.credits + getCreditsFromStripePriceId(stripeSubscription.plan.id);
-				await user.save();
+			const oldPlan = old_subscription.plan;
+			const newPlan = getPlanFromStripePriceId(session.plan.id);
+
+			if (oldPlan == newPlan) {
+				const user = await User.findById(old_subscription.user);
+				if (user) {
+					user.credits = user.credits + getCreditsFromStripePriceId(stripeSubscription.plan.id);
+					await user.save();
+				}
 			}
 		}
 
