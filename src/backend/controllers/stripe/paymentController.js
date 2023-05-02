@@ -17,9 +17,6 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 			cancel_url: `${origin}/pricing`,
 			customer_email: req.user.email,
 			client_reference_id: req.user._id || req.user.id,
-			metadata: {
-				plan: getPlanFromStripePriceId(req.query.stripePriceId),
-			},
 			line_items: [
 				{
 					price: req.query.stripePriceId,

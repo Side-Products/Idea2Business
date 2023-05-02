@@ -82,7 +82,7 @@ const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res, 
 		const subscription = await Subscription.create({
 			user: session.client_reference_id,
 			version: getLatestSubscriptionPlansVersion(),
-			plan: session.metadata.plan,
+			plan: getPlanFromStripePriceId(stripeSubscription.plan.id),
 			stripe_subscription: session.subscription,
 			stripe_subscription_status: stripeSubscription.status,
 			stripe_priceId: stripeSubscription.plan.id,
