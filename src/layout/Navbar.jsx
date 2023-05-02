@@ -53,7 +53,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 
 	useEffect(() => {
 		if (session && session.user) dispatch(getMySubscription());
-	}, [session]);
+	}, [session, router.pathname]);
 
 	return (
 		<div className="absolute flex justify-center w-screen">
