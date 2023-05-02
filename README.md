@@ -37,7 +37,7 @@ To turn on dev server-
 npm run dev
 ```
 
-#### Using Docker
+### Using Docker
 
 Build a docker container- 
 ```sh
