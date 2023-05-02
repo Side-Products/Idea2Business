@@ -1,8 +1,10 @@
+import mongoose from "mongoose";
 import Subscription from "../../models/subscription";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import getRawBody from "raw-body";
 import User from "../../models/user";
-import { getPlanFromStripePriceId, getLatestSubscriptionPlansVersion, getCreditsFromStripePriceId } from "@/utils/Helpers";
+import { getPlanFromStripePriceId, getLatestSubscriptionPlansVersion, getCreditsFromStripePriceId, getCreditsFromPlanName } from "@/utils/Helpers";
+import { proPlan, premiumPlan } from "@/config/constants";
 
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
@@ -80,7 +82,7 @@ const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res, 
 		}
 
 		const subscription = await Subscription.create({
-			user: session.client_reference_id,
+			user: mongoose.Types.ObjectId(session.client_reference_id),
 			version: getLatestSubscriptionPlansVersion(),
 			plan: getPlanFromStripePriceId(stripeSubscription.plan.id),
 			stripe_subscription: session.subscription,
@@ -116,6 +118,22 @@ const stripeCustomerSubscriptionUpdated = catchAsyncErrors(async (req, res, even
 		const old_subscription = await Subscription.findOne({ stripe_subscription: session.id }).sort({ createdAt: "desc" });
 		if (!old_subscription) return res.status(200).json({ success: true, message: "No matching subscription found" });
 
+		const lastUpdated = new Date(old_subscription.updatedAt).getTime();
+		const currentTime = new Date().getTime();
+		const differenceInSeconds = Math.round((currentTime - lastUpdated) / 1000);
+
+		if (differenceInSeconds > 20) {
+			const oldPlan = old_subscription.plan;
+			const newPlan = getPlanFromStripePriceId(session.plan.id);
+
+			const user = await User.findById(old_subscription.user);
+			if (user) {
+				user.credits =
+					user.credits + (oldPlan == proPlan && newPlan == premiumPlan ? getCreditsFromPlanName(premiumPlan) - getCreditsFromPlanName(proPlan) : 0);
+				await user.save();
+			}
+		}
+
 		old_subscription.stripe_subscription_status = session.status;
 		old_subscription.stripe_priceId = session.plan.id;
 		old_subscription.plan = getPlanFromStripePriceId(session.plan.id);
@@ -149,6 +167,23 @@ const stripeInvoicePaid = catchAsyncErrors(async (req, res, eventData) => {
 
 		const old_subscription = await Subscription.findOne({ stripe_subscription: session.subscription }).sort({ createdAt: "desc" });
 		if (!old_subscription) return res.status(200).json({ success: true, message: "No matching subscription found" });
+
+		const lastUpdated = new Date(old_subscription.updatedAt).getTime();
+		const currentTime = new Date().getTime();
+		const differenceInSeconds = Math.round((currentTime - lastUpdated) / 1000);
+
+		if (differenceInSeconds > 20) {
+			const oldPlan = old_subscription.plan;
+			const newPlan = getPlanFromStripePriceId(session.plan.id);
+
+			if (oldPlan == newPlan) {
+				const user = await User.findById(old_subscription.user);
+				if (user) {
+					user.credits = user.credits + getCreditsFromStripePriceId(stripeSubscription.plan.id);
+					await user.save();
+				}
+			}
+		}
 
 		old_subscription.stripe_subscription_status = stripeSubscription.status;
 		old_subscription.stripe_priceId = stripeSubscription.plan.id;

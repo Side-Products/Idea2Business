@@ -187,6 +187,16 @@ export const getCreditsFromStripePriceId = (stripePriceId) =>
 			: 0
 		: 0;
 
+export const getCreditsFromPlanName = (plan) => {
+	return plan == freePlan
+		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.credits
+		: plan == proPlan
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.credits
+		: plan == premiumPlan
+		? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.credits
+		: 0;
+};
+
 export const getCurrentSubscriptionTier = (subscription) => {
 	return subscription &&
 		subscriptionPlans[subscription.version] &&

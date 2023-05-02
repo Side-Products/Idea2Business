@@ -132,7 +132,7 @@ export default function MySubscription() {
 							)}
 						</span>
 					</div>
-					{subscriptionPlan !== freePlan && (
+					{/* {subscriptionPlan !== freePlan && (
 						<div className="text-light-400 text-end text-sm mt-2">
 							<span className="font-medium">Valid Until:</span>&nbsp;
 							{new Date(subscription.subscriptionValidUntil).toDateString()}
@@ -142,7 +142,7 @@ export default function MySubscription() {
 								</Button>
 							</div>
 						</div>
-					)}
+					)} */}
 				</>
 			) : (
 				<>
