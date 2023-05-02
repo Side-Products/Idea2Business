@@ -118,14 +118,20 @@ const stripeCustomerSubscriptionUpdated = catchAsyncErrors(async (req, res, even
 		const old_subscription = await Subscription.findOne({ stripe_subscription: session.id }).sort({ createdAt: "desc" });
 		if (!old_subscription) return res.status(200).json({ success: true, message: "No matching subscription found" });
 
-		const oldPlan = old_subscription.plan;
-		const newPlan = getPlanFromStripePriceId(session.plan.id);
+		const lastUpdated = new Date(old_subscription.updatedAt).getTime();
+		const currentTime = new Date().getTime();
+		const differenceInSeconds = Math.round((currentTime - lastUpdated) / 1000);
 
-		const user = await User.findById(old_subscription.user);
-		if (user) {
-			user.credits =
-				user.credits + (oldPlan == proPlan && newPlan == premiumPlan ? getCreditsFromPlanName(premiumPlan) - getCreditsFromPlanName(proPlan) : 0);
-			await user.save();
+		if (differenceInSeconds > 20) {
+			const oldPlan = old_subscription.plan;
+			const newPlan = getPlanFromStripePriceId(session.plan.id);
+
+			const user = await User.findById(old_subscription.user);
+			if (user) {
+				user.credits =
+					user.credits + (oldPlan == proPlan && newPlan == premiumPlan ? getCreditsFromPlanName(premiumPlan) - getCreditsFromPlanName(proPlan) : 0);
+				await user.save();
+			}
 		}
 
 		old_subscription.stripe_subscription_status = session.status;
@@ -162,10 +168,16 @@ const stripeInvoicePaid = catchAsyncErrors(async (req, res, eventData) => {
 		const old_subscription = await Subscription.findOne({ stripe_subscription: session.subscription }).sort({ createdAt: "desc" });
 		if (!old_subscription) return res.status(200).json({ success: true, message: "No matching subscription found" });
 
-		const user = await User.findById(old_subscription.user);
-		if (user) {
-			user.credits = user.credits + getCreditsFromStripePriceId(stripeSubscription.plan.id);
-			await user.save();
+		const lastUpdated = new Date(old_subscription.updatedAt).getTime();
+		const currentTime = new Date().getTime();
+		const differenceInSeconds = Math.round((currentTime - lastUpdated) / 1000);
+
+		if (differenceInSeconds > 20) {
+			const user = await User.findById(old_subscription.user);
+			if (user) {
+				user.credits = user.credits + getCreditsFromStripePriceId(stripeSubscription.plan.id);
+				await user.save();
+			}
 		}
 
 		old_subscription.stripe_subscription_status = stripeSubscription.status;
