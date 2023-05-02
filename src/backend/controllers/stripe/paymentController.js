@@ -11,29 +11,33 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 
 	console.log("req.query:", req.query);
 
-	// Create stripe checkout session
-	const session = await stripe.checkout.sessions.create({
-		mode: "subscription",
-		success_url: `${origin}/profile?paymentsuccess=true`,
-		cancel_url: `${origin}/pricing`,
-		customer_email: req.user.email,
-		client_reference_id: req.user._id || req.user.id,
-		metadata: {
-			plan: getPlanFromStripePriceId(req.query.stripePriceId),
-		},
-		line_items: [
-			{
-				price: req.query.stripePriceId,
-				quantity: 1,
+	try {
+		// Create stripe checkout session
+		const session = await stripe.checkout.sessions.create({
+			mode: "subscription",
+			success_url: `${origin}/profile?paymentsuccess=true`,
+			cancel_url: `${origin}/pricing`,
+			customer_email: req.user.email,
+			client_reference_id: req.user._id || req.user.id,
+			metadata: {
+				plan: getPlanFromStripePriceId(req.query.stripePriceId),
 			},
-		],
-		billing_address_collection: "auto",
-		allow_promotion_codes: true,
-	});
+			line_items: [
+				{
+					price: req.query.stripePriceId,
+					quantity: 1,
+				},
+			],
+			billing_address_collection: "auto",
+			allow_promotion_codes: true,
+		});
 
-	console.log("session:", session);
+		console.log("session:", session);
 
-	res.status(200).json(session);
+		res.status(200).json(session);
+	} catch (error) {
+		console.log("error:", error);
+	}
 });
 
 const stripeCreatePortalSession = catchAsyncErrors(async (req, res) => {
