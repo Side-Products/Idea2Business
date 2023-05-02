@@ -122,7 +122,7 @@ const stripeCustomerSubscriptionUpdated = catchAsyncErrors(async (req, res, even
 		const currentTime = new Date().getTime();
 		const differenceInSeconds = Math.round((currentTime - lastUpdated) / 1000);
 
-		if (differenceInSeconds > 20 && session.total > getCreditsFromPlanName(premiumPlan) - getCreditsFromPlanName(proPlan)) {
+		if (differenceInSeconds > 20) {
 			const oldPlan = old_subscription.plan;
 			const newPlan = getPlanFromStripePriceId(session.plan.id);
 
