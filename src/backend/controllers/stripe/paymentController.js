@@ -9,6 +9,8 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 	// Get origin
 	const { origin } = absoluteUrl(req);
 
+	console.log("req.query:", req.query);
+
 	// Create stripe checkout session
 	const session = await stripe.checkout.sessions.create({
 		mode: "subscription",
@@ -28,6 +30,8 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 		billing_address_collection: "auto",
 		allow_promotion_codes: true,
 	});
+
+	console.log("session:", session);
 
 	res.status(200).json(session);
 });

@@ -197,7 +197,7 @@ const Pricing = () => {
 							</div>
 							<p className="text-gray-400 mt-1">You get {getSubscriptionPlanCredits(premiumPlan)} credits</p>
 
-							<div className="my-8 font-bold text-lg text-light-600">ALL OF STANDARD PLUS</div>
+							<div className="my-8 font-bold text-lg text-light-600">ALL OF PRO PLUS</div>
 
 							<ul role="list" className="mb-8 space-y-4 text-left">
 								{Object.keys(generateCategories).map((key, index) => {

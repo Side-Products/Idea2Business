@@ -60,12 +60,12 @@ const stripeWebhook = catchAsyncErrors(async (req, res) => {
 			await stripeCustomerSubscriptionUpdated(req, res, eventData);
 			break;
 		default:
-			console.log("event type:", eventType);
+			console.log("stripe event:", eventType);
 		// Unhandled event type
 	}
 });
 
-// Store subscription after payment => /api/stripe/webhook/checkout-session-completed
+// Store subscription after payment => /api/stripe/webhook
 const stripeWebhookCheckoutSessionCompleted = catchAsyncErrors(async (req, res, eventData) => {
 	try {
 		const session = eventData.object;
