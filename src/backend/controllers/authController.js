@@ -7,8 +7,8 @@ import ErrorHandler from "@/backend/utils/errorHandler";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import absoluteUrl from "next-absolute-url";
 import sendEmail from "@/backend/utils/sendEmail";
-import { product_name, standardPlan, proPlusPlan } from "@/config/constants";
-import { getSubscriptionPlanName, getSubscriptionPlanValidDays, getSubscriptionPlanCredits, getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
+import { product_name, proPlan, premiumPlan } from "@/config/constants";
+import { getSubscriptionPlanName, getSubscriptionPlanCredits, getLatestSubscriptionPlansVersion, getSubscriptionPlanPriceId } from "@/utils/Helpers";
 
 // register user => /api/auth/register
 const registerUser = catchAsyncErrors(async (req, res) => {
@@ -163,30 +163,26 @@ const updateAdminUserDetails = catchAsyncErrors(async (req, res) => {
 			user: req.query.id,
 			version: getLatestSubscriptionPlansVersion(),
 			plan: req.body.subscription,
-			country: "giveaway",
-			amountPaid: 0,
+			stripe_subscription: "giveaway",
+			stripe_subscription_status: "active",
+			stripe_priceId: getSubscriptionPlanPriceId(req.body.subscription),
+			stripe_customer: req.query.id,
+			stripe_invoice: "",
+			stripe_hosted_invoice_url: "",
+			amount_total: 0,
+			currency: "usd",
 			paymentInfo: { id: "giveaway", status: "giveaway" },
-			paidOn: Date.now(),
-			subscriptionValidUntil:
-				Date.now() +
-				(req.body.subscription == getSubscriptionPlanName(proPlusPlan)
-					? // ? getSubscriptionPlanValidDays(proPlusPlan)
-					  // : getSubscriptionPlanValidDays(standardPlan)) *
-					  7
-					: 7) *
-					24 *
-					60 *
-					60 *
-					1000,
+			subscriptionValidUntil: Date.now() + (req.body.subscription == getSubscriptionPlanName(premiumPlan) ? 7 : 7) * 24 * 60 * 60 * 1000, // seconds to milliseconds
 		});
+		await subscription.save();
 		// Update user credits
 		const user = await User.findOne({ _id: req.query.id });
 		user.credits =
 			user.credits +
-			(req.body.subscription == getSubscriptionPlanName(proPlusPlan)
-				? getSubscriptionPlanCredits(proPlusPlan)
-				: req.body.subscription == getSubscriptionPlanName(standardPlan)
-				? getSubscriptionPlanCredits(standardPlan)
+			(req.body.subscription == getSubscriptionPlanName(premiumPlan)
+				? getSubscriptionPlanCredits(premiumPlan)
+				: req.body.subscription == getSubscriptionPlanName(proPlan)
+				? getSubscriptionPlanCredits(proPlan)
 				: 0);
 		await user.save();
 	}

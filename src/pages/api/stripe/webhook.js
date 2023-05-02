@@ -1,6 +1,6 @@
 import nc from "next-connect";
 import dbConnect from "@/lib/dbConnect";
-import { stripeWebhookCheckoutSessionCompleted } from "@/backend/controllers/paymentController";
+import { stripeWebhook } from "@/backend/controllers/stripe/webhook";
 import onError from "@/backend/middlewares/errors";
 
 const handler = nc({ onError });
@@ -12,6 +12,6 @@ export const config = {
 	},
 };
 
-handler.post(stripeWebhookCheckoutSessionCompleted);
+handler.post(stripeWebhook);
 
 export default handler;

@@ -69,15 +69,15 @@ export default function AllSubscriptions() {
 	) : subscriptions && subscriptions.length > 0 ? (
 		<div className="mt-16 w-full grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
 			{subscriptions.map((subscription) => (
-				<div key={subscription.paymentInfo.id} className="relative group px-8 py-7 rounded-xl bg-dark-700">
+				<div key={subscription._id} className="relative group px-8 py-7 rounded-xl bg-dark-700">
 					<div className="flex items-start justify-between">
 						<p className="text-2xl font-semibold text-light-300">{subscription.user.name}</p>
-						{subscription.amountPaid == 0 ? (
+						{subscription.amount_total == 0 ? (
 							<span className="text-3xl font-bold text-gradient-primary-tr">Giveaway</span>
 						) : (
 							<span className="text-3xl font-bold text-gradient-primary-tr">
-								{subscription.country == "India" ? "₹" : "$"}
-								{subscription.amountPaid}
+								{subscription.currency == "inr" ? "₹" : "$"}
+								{subscription.amount_total / 100}
 							</span>
 						)}
 					</div>
@@ -91,7 +91,7 @@ export default function AllSubscriptions() {
 
 					<p className="text-light-500 text-sm mt-4">
 						<span className="font-medium">Started On:</span>&nbsp;
-						{new Date(subscription.paidOn).toDateString()}
+						{new Date(subscription.createdAt).toDateString()}
 					</p>
 					<p className="text-light-500 text-sm mt-1">
 						<span className="font-medium">Valid Until:</span>&nbsp;
@@ -101,6 +101,16 @@ export default function AllSubscriptions() {
 					<p className="text-light-500 text-sm mt-1">
 						<span className="font-medium">Stripe Payment ID:</span>&nbsp;
 						{subscription.paymentInfo.id}
+					</p>
+
+					<p className="text-light-500 text-sm mt-1">
+						<span className="font-medium">Stripe Sub ID:</span>&nbsp;
+						{subscription.stripe_subscription}
+					</p>
+
+					<p className="text-light-500 text-sm mt-1">
+						<span className="font-medium">Stripe Subscription Status:</span>&nbsp;
+						{subscription.stripe_subscription_status}
 					</p>
 
 					<span

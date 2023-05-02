@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { removeAllWhiteSpaces } from "@/utils/Helpers";
-import { freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { freePlan, proPlan, premiumPlan } from "@/config/constants";
 import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 export default function PromptCard({
@@ -26,9 +26,9 @@ export default function PromptCard({
 	useEffect(() => {
 		if (session && session.user && (session.user.role == "admin" || session.user.role == "allAccess")) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == proPlusPlan) {
+		} else if (subscriptionPlan == premiumPlan) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == standardPlan && (subscriptionPlanRequired == standardPlan || subscriptionPlanRequired == freePlan)) {
+		} else if (subscriptionPlan == proPlan && (subscriptionPlanRequired == proPlan || subscriptionPlanRequired == freePlan)) {
 			setCanAccess(true);
 		} else if (subscriptionPlan == freePlan && subscriptionPlanRequired == freePlan) {
 			setCanAccess(true);

@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		default: "user",
 	},
+	stripe_customer_id: {
+		type: String,
+		default: "",
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now,

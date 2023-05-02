@@ -5,27 +5,16 @@ import { getLatestSubscriptionPlansVersion } from "@/utils/Helpers";
 
 // create new subscription => /api/subscriptions
 const newSubscription = catchAsyncErrors(async (req, res) => {
-	const { amountPaid, paymentInfo, paidOn, subscriptionValidUntil } = req.body;
-	const subscription = await Subscription.create({
-		user: req.user._id || req.user.id,
-		version: getLatestSubscriptionPlansVersion(),
-		plan: "Standard",
-		amountPaid,
-		paymentInfo,
-		paidOn,
-		subscriptionValidUntil,
-	});
-
+	// TODO
 	res.status(200).json({
-		success: true,
-		subscription,
+		success: false,
 	});
 });
 
 // get subscription status of current user => /api/subscriptions/me
 const mySubscription = catchAsyncErrors(async (req, res) => {
 	const subscription = await Subscription.find({ user: req.user._id || req.user.id })
-		.sort({ paidOn: "desc" })
+		.sort({ updatedAt: "desc" })
 		.populate({
 			path: "user",
 			select: "name email",
@@ -44,7 +33,7 @@ const allAdminSubscriptions = catchAsyncErrors(async (req, res) => {
 			path: "user",
 			select: "name email",
 		})
-		.sort({ paidOn: "desc" });
+		.sort({ updatedAt: "desc" });
 
 	res.status(200).json({
 		success: true,
