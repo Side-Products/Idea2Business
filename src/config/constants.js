@@ -46,13 +46,13 @@ export const subscriptionPlans = {
 		proSubscription: {
 			name: "Pro",
 			price: 5,
-			stripePriceId: process.env.PRO_STRIPE_PRICE_ID,
+			stripePriceId: process.env.NEXT_PUBLIC_PRO_STRIPE_PRICE_ID,
 			credits: 200,
 		},
 		premiumSubscription: {
 			name: "Premium",
 			price: 10,
-			stripePriceId: process.env.PREMIUM_STRIPE_PRICE_ID,
+			stripePriceId: process.env.NEXT_PUBLIC_PREMIUM_STRIPE_PRICE_ID,
 			credits: 500,
 		},
 	},

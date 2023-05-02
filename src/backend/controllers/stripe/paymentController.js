@@ -9,9 +9,6 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 	// Get origin
 	const { origin } = absoluteUrl(req);
 
-	console.log("req:", req);
-	console.log("req.query:", req.query);
-
 	try {
 		// Create stripe checkout session
 		const session = await stripe.checkout.sessions.create({
@@ -33,11 +30,9 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 			allow_promotion_codes: true,
 		});
 
-		console.log("session:", session);
-
 		res.status(200).json(session);
 	} catch (error) {
-		console.log("error:", error);
+		console.log("stripe checkout error:", error);
 	}
 });
 
