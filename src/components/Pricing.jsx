@@ -45,6 +45,7 @@ const Pricing = () => {
 			setLoading({ status: true, title: "Please wait for a moment..." });
 
 			try {
+				console.log("stripePriceId:", stripePriceId);
 				const link = `/api/stripe/checkout-session`;
 				const { data } = await axios.get(link, { params: { stripePriceId: stripePriceId } });
 				const stripe = await getStripe();

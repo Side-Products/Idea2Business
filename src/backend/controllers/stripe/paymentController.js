@@ -9,6 +9,7 @@ const stripeCheckoutSession = catchAsyncErrors(async (req, res) => {
 	// Get origin
 	const { origin } = absoluteUrl(req);
 
+	console.log("req:", req);
 	console.log("req.query:", req.query);
 
 	try {
