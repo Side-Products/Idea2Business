@@ -6,8 +6,9 @@ import Button from "@/components/ui/Button";
 import easyinvoice from "easyinvoice";
 import { StatusContext } from "@/store/StatusContextProvider";
 import { LoadingContext } from "@/store/LoadingContextProvider";
-import { product_name, domain, freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { product_name, domain, freePlan, proPlan, premiumPlan } from "@/config/constants";
 import { getCurrentSubscriptionTier, getSubscriptionPlanName } from "@/utils/Helpers";
+import axios from "axios";
 
 export default function MySubscription() {
 	const router = useRouter();
@@ -33,7 +34,7 @@ export default function MySubscription() {
 		setLoading({ status: true });
 		const data = {
 			settings: {
-				currency: subscription.country == "India" ? "INR" : "USD",
+				currency: subscription.currency == "inr" ? "INR" : subscription.currency == "usd" ? "USD" : subscription.currency == "eur" ? "EUR" : "",
 				"tax-notation": "vat",
 				"margin-top": 50,
 				"margin-right": 50,
@@ -74,7 +75,7 @@ export default function MySubscription() {
 					quantity: `1`,
 					description: `${subscriptionPlan}`,
 					"tax-rate": 0,
-					price: `${subscription.amountPaid}`,
+					price: `${subscription.amount_total / 100}`,
 				},
 			],
 			bottomNotice: "This is an auto generated invoice of your subscription on " + product_name,
@@ -85,6 +86,23 @@ export default function MySubscription() {
 		setLoading({ status: false });
 	};
 
+	const manageSubscription = async () => {
+		setLoading({ status: true, title: "Please wait for a moment..." });
+
+		try {
+			const { data } = await axios.post(`/api/stripe/create-portal-session`);
+			router.push(data.portalSessionUrl);
+		} catch (error) {
+			console.error("Portal session error:", error);
+			setLoading({ status: false });
+			setError({
+				title: "Something went wrong",
+				message: error.message,
+				showErrorBox: true,
+			});
+		}
+	};
+
 	return (
 		<>
 			<p className="text-3xl font-semibold text-light-300">Current Plan</p>
@@ -93,9 +111,9 @@ export default function MySubscription() {
 					<div className="text-3xl">
 						{subscriptionPlan !== getSubscriptionPlanName(freePlan) && (
 							<span className="mr-3">
-								{subscriptionPlan == getSubscriptionPlanName(standardPlan) ? (
+								{subscriptionPlan == getSubscriptionPlanName(proPlan) ? (
 									<i className="fa-solid fa-crown text-gradient-pricing-standard"></i>
-								) : subscriptionPlan == getSubscriptionPlanName(proPlusPlan) ? (
+								) : subscriptionPlan == getSubscriptionPlanName(premiumPlan) ? (
 									<i className="fa-solid fa-crown text-gradient-pricing-pro"></i>
 								) : (
 									<></>
@@ -115,10 +133,15 @@ export default function MySubscription() {
 						</span>
 					</div>
 					{subscriptionPlan !== freePlan && (
-						<p className="text-light-400 text-sm mt-2">
+						<div className="text-light-400 text-end text-sm mt-2">
 							<span className="font-medium">Valid Until:</span>&nbsp;
 							{new Date(subscription.subscriptionValidUntil).toDateString()}
-						</p>
+							<div className="flex">
+								<Button variant="secondary" type="button" rounded={true} onClick={manageSubscription} classes={"mt-2 text-sm py-1"}>
+									Manage Subscription
+								</Button>
+							</div>
+						</div>
 					)}
 				</>
 			) : (

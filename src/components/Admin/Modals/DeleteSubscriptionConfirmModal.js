@@ -23,14 +23,18 @@ const DeleteSubscriptionConfirmModal = ({ isOpen, setOpen, subscriptionToDelete,
 								<div className="flex justify-center items-center gap-x-4">
 									<p className="text-3xl font-semibold text-light-300">{subscriptionToDelete.user.name}</p>
 									<span className="text-3xl font-bold text-gradient-primary-tr">
-										{subscriptionToDelete.amountPaid == 5 ? "$5" : subscriptionToDelete.amountPaid == 10 ? "$10" : ""}
+										{subscriptionToDelete.currency == "usd"
+											? `$${subscriptionToDelete.amount_total / 100}`
+											: subscriptionToDelete.currency == "inr"
+											? `₹${subscriptionToDelete.amount_total / 100}`
+											: ""}
 									</span>
 								</div>
 								<p className="text-sm text-light-600">{subscriptionToDelete.user.email}</p>
 
 								<p className="text-light-500 text-sm mt-4">
 									<span className="font-medium">Started On:</span>&nbsp;
-									{new Date(subscriptionToDelete.paidOn).toDateString()}
+									{new Date(subscriptionToDelete.updatedAt).toDateString()}
 								</p>
 								<p className="text-light-500 text-sm mt-1">
 									<span className="font-medium">Valid Until:</span>&nbsp;
@@ -38,8 +42,13 @@ const DeleteSubscriptionConfirmModal = ({ isOpen, setOpen, subscriptionToDelete,
 								</p>
 
 								<p className="text-light-500 text-sm mt-1">
-									<span className="font-medium">Stripe Payment ID:</span>&nbsp;
-									{subscriptionToDelete.paymentInfo.id}
+									<span className="font-medium">Stripe Subscription ID:</span>&nbsp;
+									{subscriptionToDelete.stripe_subscription}
+								</p>
+
+								<p className="text-light-500 text-sm mt-1">
+									<span className="font-medium">Stripe Subscription Status:</span>&nbsp;
+									{subscriptionToDelete.stripe_subscription_status}
 								</p>
 							</div>
 

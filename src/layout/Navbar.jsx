@@ -7,7 +7,7 @@ import Image from "next/image";
 import logo from "../../public/logo_removedbg.png";
 import HamburgerMenu from "./HamburgerMenu";
 import { motion } from "framer-motion";
-import { freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { freePlan, proPlan, premiumPlan } from "@/config/constants";
 import { getCurrentSubscriptionTier, getSubscriptionPlanName } from "@/utils/Helpers";
 import { getMySubscription } from "@/redux/actions/subscriptionActions";
 
@@ -53,7 +53,7 @@ const Navbar = ({ setAuthModalOpen }) => {
 
 	useEffect(() => {
 		if (session && session.user) dispatch(getMySubscription());
-	}, [session]);
+	}, [session, router.pathname]);
 
 	return (
 		<div className="absolute flex justify-center w-screen">
@@ -206,9 +206,9 @@ const Navbar = ({ setAuthModalOpen }) => {
 																		<div>
 																			{subscriptionPlan !== getSubscriptionPlanName(freePlan) && (
 																				<span className="mr-2">
-																					{subscriptionPlan == getSubscriptionPlanName(standardPlan) ? (
+																					{subscriptionPlan == getSubscriptionPlanName(proPlan) ? (
 																						<i className="fa-solid fa-crown text-gradient-pricing-standard"></i>
-																					) : subscriptionPlan == getSubscriptionPlanName(proPlusPlan) ? (
+																					) : subscriptionPlan == getSubscriptionPlanName(premiumPlan) ? (
 																						<i className="fa-solid fa-crown text-gradient-pricing-pro"></i>
 																					) : (
 																						<></>

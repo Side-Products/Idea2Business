@@ -6,7 +6,7 @@ import APIFeatures from "@/backend/utils/apiFeatures";
 import ErrorHandler from "@/backend/utils/errorHandler";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
 import { Configuration, OpenAIApi } from "openai";
-import { generateCategories, freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { generateCategories, freePlan, proPlan, premiumPlan } from "@/config/constants";
 import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 const configuration = new Configuration({
@@ -25,7 +25,7 @@ const generateNewResponse = catchAsyncErrors(async (req, res, next) => {
 		if (user.credits > 0) {
 			if (generateCategories[category][index].subscriptionPlanRequired !== freePlan) {
 				// check if user has a subscription
-				const _subscription = await Subscription.find({ user: userId }).sort({ paidOn: "desc" }).populate({
+				const _subscription = await Subscription.find({ user: userId }).sort({ updatedAt: "desc" }).populate({
 					path: "user",
 					select: "name email",
 				});
@@ -37,8 +37,8 @@ const generateNewResponse = catchAsyncErrors(async (req, res, next) => {
 					const subscriptionPlan = getCurrentSubscriptionTier(subscription);
 
 					if (
-						subscriptionPlan == proPlusPlan ||
-						(subscriptionPlan == standardPlan && generateCategories[category][index].subscriptionPlanRequired == standardPlan) ||
+						subscriptionPlan == premiumPlan ||
+						(subscriptionPlan == proPlan && generateCategories[category][index].subscriptionPlanRequired == proPlan) ||
 						user.role == "admin" ||
 						user.role == "allAccess"
 					) {

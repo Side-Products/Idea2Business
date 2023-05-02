@@ -1,4 +1,4 @@
-import { subscriptionPlans, freePlan, standardPlan, proPlusPlan } from "@/config/constants";
+import { subscriptionPlans, freePlan, proPlan, premiumPlan } from "@/config/constants";
 
 const getUTCTimestamp = (blockTimestamp) => {
 	const pad = (n, s = 2) => `${new Array(s).fill(0)}${n}`.slice(-s);
@@ -123,60 +123,81 @@ export const getLatestSubscriptionPlansVersion = () => {
 export const getSubscriptionPlanName = (plan) => {
 	return plan == freePlan
 		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.name
-		: plan == standardPlan
-		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.name
-		: plan == proPlusPlan
-		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.name
+		: plan == proPlan
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.name
+		: plan == premiumPlan
+		? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.name
 		: "";
 };
 
 export const getSubscriptionPlanPrice = (plan) => {
 	return plan == freePlan
 		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.price
-		: plan == standardPlan
-		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.price
-		: plan == proPlusPlan
-		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.price
+		: plan == proPlan
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.price
+		: plan == premiumPlan
+		? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.price
 		: "";
 };
 
 export const getSubscriptionPlanCredits = (plan) => {
 	return plan == freePlan
 		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.credits
-		: plan == standardPlan
-		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.credits
-		: plan == proPlusPlan
-		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.credits
+		: plan == proPlan
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.credits
+		: plan == premiumPlan
+		? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.credits
 		: "";
 };
 
-export const getSubscriptionPlanValidDays = (plan) => {
-	return plan == standardPlan
-		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.validForDays
-		: plan == proPlusPlan
-		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.validForDays
+export const getSubscriptionPlanPriceId = (plan) => {
+	return plan == freePlan
+		? getObjectWithHighestKey(subscriptionPlans).freeSubscription.stripePriceId
+		: plan == proPlan
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.stripePriceId
+		: plan == premiumPlan
+		? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.stripePriceId
 		: "";
 };
 
-export const getUsdToInrExchangeRate = (plan) => {
-	return plan == standardPlan
-		? getObjectWithHighestKey(subscriptionPlans).standardSubscription.usdToInrExchangeRate
-		: plan == proPlusPlan
-		? getObjectWithHighestKey(subscriptionPlans).proPlusSubscription.usdToInrExchangeRate
-		: "";
-};
+export const getPriceFromStripePriceId = (stripePriceId) =>
+	stripePriceId
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.stripePriceId === stripePriceId
+			? getObjectWithHighestKey(subscriptionPlans).proSubscription.price
+			: getObjectWithHighestKey(subscriptionPlans).premiumSubscription.stripePriceId === stripePriceId
+			? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.price
+			: 0
+		: 0;
+
+export const getPlanFromStripePriceId = (stripePriceId) =>
+	stripePriceId
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.stripePriceId === stripePriceId
+			? getObjectWithHighestKey(subscriptionPlans).proSubscription.name
+			: getObjectWithHighestKey(subscriptionPlans).premiumSubscription.stripePriceId === stripePriceId
+			? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.name
+			: freePlan
+		: freePlan;
+
+export const getCreditsFromStripePriceId = (stripePriceId) =>
+	stripePriceId
+		? getObjectWithHighestKey(subscriptionPlans).proSubscription.stripePriceId === stripePriceId
+			? getObjectWithHighestKey(subscriptionPlans).proSubscription.credits
+			: getObjectWithHighestKey(subscriptionPlans).premiumSubscription.stripePriceId === stripePriceId
+			? getObjectWithHighestKey(subscriptionPlans).premiumSubscription.credits
+			: 0
+		: 0;
 
 export const getCurrentSubscriptionTier = (subscription) => {
 	return subscription &&
 		subscriptionPlans[subscription.version] &&
-		subscription.plan == subscriptionPlans[subscription.version].proPlusSubscription.name &&
+		subscription.stripe_priceId == subscriptionPlans[subscription.version].premiumSubscription.stripePriceId &&
 		new Date(subscription.subscriptionValidUntil) > Date.now()
-		? proPlusPlan
+		? premiumPlan
 		: subscription &&
 		  subscriptionPlans[subscription.version] &&
-		  subscription.plan == subscriptionPlans[subscription.version].standardSubscription.name &&
+		  subscription.stripe_priceId == subscriptionPlans[subscription.version].proSubscription.stripePriceId &&
 		  new Date(subscription.subscriptionValidUntil) > Date.now()
-		? standardPlan
+		? proPlan
 		: freePlan;
 };
 

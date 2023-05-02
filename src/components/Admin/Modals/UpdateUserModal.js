@@ -8,7 +8,7 @@ import { StatusContext } from "@/store/StatusContextProvider";
 import Loader from "@/components/ui/Loader";
 import Button from "@/components/ui/Button";
 import { sleep } from "@/utils/Sleep";
-import { standardPlan, proPlusPlan } from "@/config/constants";
+import { proPlan, premiumPlan } from "@/config/constants";
 
 const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 	const [name, setName] = useState("");
@@ -160,8 +160,8 @@ const UpdateUserModal = ({ isOpen, setOpen, userToUpdate }) => {
 								className="mt-1 w-full bg-dark-900 focus:border-light-500 transition duration-300 outline-0 rounded-md px-3 py-[10px] normal-case"
 							>
 								<option value="">-</option>
-								<option value={standardPlan}>{standardPlan}</option>
-								<option value={proPlusPlan}>{proPlusPlan}</option>
+								<option value={proPlan}>{proPlan}</option>
+								<option value={premiumPlan}>{premiumPlan}</option>
 							</select>
 						</div>
 

@@ -6,7 +6,7 @@ import { LoadingContext } from "@/store/LoadingContextProvider";
 import SectionHeading from "./SectionHeading";
 import Button from "@/components/ui/Button";
 import { useSession } from "next-auth/react";
-import { standardPlan, proPlusPlan } from "@/config/constants";
+import { proPlan, premiumPlan } from "@/config/constants";
 import { getCurrentSubscriptionTier } from "@/utils/Helpers";
 
 export default function Decks({
@@ -416,9 +416,9 @@ export default function Decks({
 	useEffect(() => {
 		if (session && session.user && (session.user.role == "admin" || session.user.role == "allAccess")) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == proPlusPlan) {
+		} else if (subscriptionPlan == premiumPlan) {
 			setCanAccess(true);
-		} else if (subscriptionPlan == standardPlan) {
+		} else if (subscriptionPlan == proPlan) {
 			setCanAccess(false);
 		} else {
 			setCanAccess(false);
