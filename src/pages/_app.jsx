@@ -44,6 +44,17 @@ function App({ Component, pageProps, session, router }) {
                 `}
 			</Script>
 
+			<Script
+				id="Adsense-id"
+				data-ad-client="ca-pub-6789303956511832"
+				async
+				strategy="afterInteractive"
+				onError={(e) => {
+					console.error("AdSense script failed to load", e);
+				}}
+				src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+			/>
+
 			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
 			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></Script>
 
