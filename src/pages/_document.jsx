@@ -54,7 +54,7 @@ export default function Document() {
 
 				<Script
 					id="Adsense-id"
-					data-ad-client="ca-pub-6789303956511832"
+					data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`}
 					async="true"
 					strategy="beforeInteractive"
 					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
