@@ -1,6 +1,5 @@
 import absoluteUrl from "next-absolute-url";
 import catchAsyncErrors from "@/backend/middlewares/catchAsyncErrors";
-import { getPlanFromStripePriceId } from "@/utils/Helpers";
 
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
