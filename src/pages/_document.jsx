@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 import { product_name, meta_description } from "@/config/constants";
 
 export default function Document() {
@@ -50,6 +51,14 @@ export default function Document() {
 				<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&display=swap" rel="stylesheet" />
 				{/* Font for Parallax Text */}
 				<link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet" />
+
+				<Script
+					id="Adsense-id"
+					data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`}
+					async="true"
+					strategy="beforeInteractive"
+					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+				/>
 			</Head>
 
 			<body>
