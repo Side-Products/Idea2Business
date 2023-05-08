@@ -122,7 +122,10 @@ const Pricing = () => {
 					</div>
 
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
-						<div>
+						<div className="relative">
+							<Pill variant={"tertiary"} classes={"absolute -top-5 -right-6 text-xs"} rounded={true}>
+								Most Popular
+							</Pill>
 							<h3 className="mb-4 text-2xl font-semibold">
 								<i className="fa-solid fa-crown text-gradient-pricing-standard mr-2"></i>
 								{getSubscriptionPlanName(proPlan)}
@@ -183,9 +186,6 @@ const Pricing = () => {
 
 					<div className="flex flex-col justify-between p-6 mx-auto max-w-lg text-center rounded-lg border shadow border-gray-600 xl:p-8 bg-dark-800 text-white">
 						<div className="relative">
-							<Pill variant={"tertiary"} classes={"absolute -top-5 -right-6 text-xs"} rounded={true}>
-								Most Popular
-							</Pill>
 							<h3 className="mb-4 text-2xl font-semibold">
 								<i className="fa-solid fa-crown text-gradient-pricing-pro mr-2"></i>
 								{getSubscriptionPlanName(premiumPlan)}
