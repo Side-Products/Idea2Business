@@ -2,6 +2,7 @@ import PageWrapper from "@/layout/PageWrapper";
 import HeroSection from "@/components/Home/HeroSection";
 import DontHaveAnIdeaYet from "@/components/Home/DontHaveAnIdeaYet";
 import GuidedByAI from "@/components/Home/GuidedByAI";
+import DevHubCollab from "@/components/Home/DevHubCollab";
 import OurOfferings from "@/components/Home/OurOfferings";
 import Testimonials from "@/components/Home/Testimonials";
 import WhyWeBuiltThis from "@/components/Home/WhyWeBuiltThis";
@@ -14,6 +15,7 @@ export default function HomePage() {
 			<HeroSection />
 			<DontHaveAnIdeaYet />
 			<GuidedByAI />
+			<DevHubCollab />
 			<OurOfferings />
 			<AdBanner />
 			<Testimonials />
