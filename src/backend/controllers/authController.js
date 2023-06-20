@@ -167,7 +167,7 @@ const updateAdminUserDetails = catchAsyncErrors(async (req, res) => {
 			stripe_subscription_status: "active",
 			stripe_priceId: getSubscriptionPlanPriceId(req.body.subscription),
 			stripe_customer: req.query.id,
-			stripe_invoice: "",
+			stripe_invoice: "giveaway",
 			stripe_hosted_invoice_url: "",
 			amount_total: 0,
 			currency: "usd",
