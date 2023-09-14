@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { freePlan, proPlan, premiumPlan } from "@/config/constants";
 import { getCurrentSubscriptionTier, getSubscriptionPlanName } from "@/utils/Helpers";
 import { getMySubscription } from "@/redux/actions/subscriptionActions";
+import Pill from "@/components/ui/Pill";
 
 const Navbar = ({ setAuthModalOpen }) => {
 	const { data: session, status } = useSession();
@@ -133,6 +134,19 @@ const Navbar = ({ setAuthModalOpen }) => {
 										}
 									>
 										<Link href="/example">Example</Link>
+									</li>
+									<li
+										className={
+											"font-semibold block py-2 pl-2 pr-3 text-gray-400 hover:text-light-200 transition duration-300 " +
+											(router.pathname == "/marketing-prompts.pdf" ? "text-gradient-primary-tr" : "")
+										}
+									>
+										<Link href="/marketing-prompts.pdf">
+											Marketing Prompts
+											<Pill variant={"tertiary"} classes={"text-xs py-[3px] ml-3"} rounded={true}>
+												<i className="fa-solid fa-fire mr-1"></i>Hot
+											</Pill>
+										</Link>
 									</li>
 								</ul>
 							</div>
