@@ -12,10 +12,10 @@ export default function HeroSection() {
 
 	return (
 		<div className="flex flex-col justify-center items-center bg-dark-1000 min-h-screen pt-44 pb-32">
-			<h1 className="px-2 sm:px-8 md:px-16 text-[48px] sm:text-[50px] md:text-[80px] lg:text-[100px] text-center font-extrabold tracking-[-2.5px] text-gradient-primary-tr">
+			<h1 className="px-2 sm:px-8 md:px-16 text-[48px] sm:text-[50px] md:text-[80px] lg:text-[100px] sm:leading-[100px] text-center font-extrabold tracking-[-2.5px] text-gradient-primary-tr">
 				Transform Your Idea
 			</h1>
-			<h1 className="px-2 sm:px-8 md:px-16 text-[48px] sm:text-[50px] md:text-[70px] lg:text-[90px] text-center font-extrabold tracking-[-2.5px] text-gradient-primary-bl">
+			<h1 className="px-2 sm:px-8 md:px-16 text-[48px] sm:text-[50px] md:text-[70px] lg:text-[90px] sm:leading-[100px] text-center font-extrabold tracking-[-2.5px] text-gradient-primary-bl">
 				Into a Profitable Business
 			</h1>
 

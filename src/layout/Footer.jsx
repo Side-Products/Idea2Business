@@ -5,6 +5,7 @@ import logo from "../../public/logo.png";
 import { useSession } from "next-auth/react";
 import { AuthModalContext } from "@/store/AuthModalContextProvider";
 import { twitter_url, linkedin_url, personal_twitter_url } from "@/config/constants";
+import Pill from "@/components/ui/Pill";
 
 const Footer = () => {
 	const { data: session } = useSession();
@@ -30,6 +31,14 @@ const Footer = () => {
 							</li>
 							<li className="text-light-500 hover:text-primary-400">
 								<Link href="/pricing">Pricing</Link>
+							</li>
+							<li className="text-light-500 hover:text-primary-400">
+								<Link href="/marketing-prompts.pdf">
+									Marketing Prompts
+									<Pill variant={"tertiary"} classes={"text-xs py-[3px] ml-3"} rounded={true}>
+										<i className="fa-solid fa-fire mr-1"></i>Hot
+									</Pill>
+								</Link>
 							</li>
 						</ul>
 					</div>

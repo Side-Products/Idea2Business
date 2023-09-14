@@ -2,7 +2,6 @@
 
 Transform your idea into a profitable business. Just enter your idea, and Idea2Business will help you turn it into a successful venture.
 
-
 <img src="./public/product_image_1.png" alt="Product Image" />
 
 <br />
